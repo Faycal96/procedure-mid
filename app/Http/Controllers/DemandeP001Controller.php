@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commune;
 use App\Models\DemandeP001;
-use App\Models\DemandePieceP001;
 use App\Models\Procedure;
-use App\Models\Usager;
 use Illuminate\Http\Request;
 use App\Repositories\DemandeP001Repository;
 use App\Repositories\DemandePieceP001Repository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
-use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -68,18 +64,6 @@ class DemandeP001Controller extends Controller
             $data['paiement']= 1;
 
             $data['procedure_id'] = Procedure::where(['code' => 'P001'])->first('uuid')->uuid;
-            //$data['usager_id']= Auth::user()->uuid;
-            // $user = $userRepository->getById(Auth::user()->uuid);
-            // $user->telephone = $request->telephone;
-            // $user->save();
-            //  dd($request->telephone);
-            // $userRepository->updateById(Auth::user()->uuid, array('telephone' => $request->telephone));
-
-            // $this->repository->create($data);
-            //   $pj = new DemandePieceP001();
-
-            // $dataFiles['piece_jointe_id'] =DemandePieceP001::all();
-            // dd($dataFiles['piece_jointe_id'] );
 
             $cheminFaisabilite =  $this->repository->uploadFile($dataFiles, 'avis_faisabilite');
             $cheminRccm =  $this->repository->uploadFile($dataFiles, 'rccm');
@@ -136,23 +120,6 @@ class DemandeP001Controller extends Controller
             $data['etat'] = 'D'; //code de procedure demande deposee
             // generation de code reference pour chaque demande
             $data['delai'] = Procedure::where(['code' => 'P001'])->first('delai')->delai;
-
-            // $data['procedure_id'] = Procedure::where(['code' => 'P001'])->first('uuid')->uuid;
-            //$data['usager_id']= Auth::user()->uuid;
-            // $user = $userRepository->getById(Auth::user()->uuid);
-            // $user->telephone = $request->telephone;
-            // $user->save();
-            //  dd($request->telephone);
-            // $userRepository->updateById(Auth::user()->uuid, array('telephone' => $request->telephone));
-
-            // $this->repository->create($data);
-            //   $pj = new DemandePieceP001();
-
-            // $dataFiles['piece_jointe_id'] =DemandePieceP001::all();
-            // dd($dataFiles['piece_jointe_id'] );
-
-
-
 
             unset($data['avis_faisabilite']);
             unset($data['rccm']);
