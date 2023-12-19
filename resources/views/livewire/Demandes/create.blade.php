@@ -162,7 +162,7 @@
                                         <div class="col">
                                             <label class="nom_societe fw-bold"> <strong>Type dalle</strong> <span
                                                     style="color: red">*</span></label>
-                                            <input type="text" class="border-success" value="{{ $name }}"
+                                            <input type="text" class="border-success" 
                                                 placeholder="Nom et prenom" />
                                         </div>
                                     <div class="row">
@@ -180,14 +180,14 @@
                                             </select>
                                         </div>
 
-                                        @if($name=='ZONGO Oliver')
+                                        {{-- @if($name=='ZONGO Oliver') --}}
                                             <div class="col">
                                                 <label class="siege_social fw-bold">Preciser l'usage<span style="color:red">
                                                         *</span></label>
 
                                                 <input type="text" class="border-success" name="autre_usage" placeholder="autre usage" />
                                             </div>
-                                        @endif
+                                        {{-- @endif --}}
                                     </div>
 
                                     <div class="row">
