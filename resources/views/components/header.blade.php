@@ -5,7 +5,7 @@
 
             <img src="{{ asset('img/logo_meea.jpg') }}" width="50px" height="70px" />
             <h1>
-                <a href="/">Portail des demandes des services en ligne du MEEA</a>
+                <a href="/">Portail des demandes des services en ligne du MID</a>
             </h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->

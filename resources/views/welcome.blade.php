@@ -16,7 +16,7 @@
 
                         <div class="row">
 
-                            @foreach($procedure->take(5) as $proc)
+                            @foreach($procedure as $proc)
                             {{-- {{ dd($procedure->baseJuridique )}} --}}
                             <div class="col-lg col-md mb20">
                                 <div class="mb-4">
@@ -34,28 +34,6 @@
                                             </a>
                                             <!-- </h6> -->
                                             {{-- <a href="" style="align-items:center;" class="btn btn-primary   btn-sm">voir plus</a> --}}
-
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-
-                        </div>
-                        <div class="row" id="mycard">
-                            @foreach($procedure->slice(-5) as $proc)
-                            <div class="col-lg col-md mb20">
-                                <div class="mb-4">
-
-                                    <div class="" style="width:14rem; border:none; text-align:left; display:inline">
-                                        <div style="height : 180px">
-                                            <img src="{{asset($proc->img)}}" class="" alt="..." width="100%" height="100%" >
-                                        </div>
-
-                                       <a title="" href="/{{$proc->code}}" class="">
-                                                <div class="proc_text rounded" style="background-color: {{$proc->code_color}}; height:70px; text-align:justify">
-                                                    {{ $proc->libelle_long }}
-                                                </div>
-                                            </a>
 
                                     </div>
                                 </div>
