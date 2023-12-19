@@ -24,7 +24,7 @@
                 <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                        <form id="msform"  method="POST" action="{{route('demandesp0012-store')}}" enctype="multipart/form-data">
+                        <form id="msform"  method="POST" action="{{route('demandesp001-store')}}" enctype="multipart/form-data">
                             @csrf
                             <!-- progressbar -->
                             <ul id="progressbar">
@@ -45,8 +45,8 @@
                                         <div class="col">
                                             <label class="nom_societe fw-bold"> <strong>identité</strong> <span
                                                     style="color: red">*</span></label>
-                                            <input type="text" class="border-success" value="{{ $name }}"
-                                                placeholder="Nom et prenom" />
+                                            {{-- <input type="text" class="border-success" value="{{ $name }}"
+                                                placeholder="Nom et prenom" /> --}}
                                         </div>
                                         <div class="col">
                                             <label class="siege_social fw-bold">Province de résidence<span style="color:red">
@@ -88,7 +88,7 @@
                                         <div class="col-6">
                                             <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                     *</span></label>
-                                            <input type="text" name="telephone" class="border-success"   placeholder="Telephone" value="{{ $telephone}}" />
+                                            {{-- <input type="text" name="telephone" class="border-success"   placeholder="Telephone" value="{{ $telephone}}" /> --}}
                                         </div>
                                     </div>
                                 </div>

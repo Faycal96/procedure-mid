@@ -56,7 +56,7 @@ class DemandeCompP002 extends Component
             "telephone" => Auth::user()->telephone,
             "communes" => Commune::all(),
             "pays" => Pays::all(),
-            "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
+            // "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
            // "default_pays" => Auth::user()->usager->pays,
             "domaines" => DemandeDomaineP002::all(),
             "categories" => DemandeCategorieP002::all(),
