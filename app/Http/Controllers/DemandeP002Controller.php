@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commune;
 use App\Models\DemandeP002;
-use App\Models\DemandePieceP002;
 use App\Models\Procedure;
-use App\Models\Usager;
 use Illuminate\Http\Request;
 use App\Repositories\DemandePieceP002Repository;
-use App\Repositories\UserRepository;
-use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\DemandeP002Repository;
 use Carbon\Carbon;
@@ -18,7 +13,6 @@ use App\Http\Requests\StoreDemandeP002Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DemandeCategorieP002;
 use App\Models\DemandeDomaineP002;
-use App\Models\DemandeSousDomaineP002;
 class DemandeP002Controller extends Controller {
 
     public $repository;

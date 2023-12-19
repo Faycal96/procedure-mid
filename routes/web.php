@@ -7,17 +7,8 @@ use App\Http\Controllers\BaseJuridiquesController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\ContactUsFormController;
-use App\Http\Controllers\DemandeP0011Controller;
-use App\Http\Controllers\DemandeP0012Controller;
 use App\Http\Controllers\DemandeP001Controller;
 use App\Http\Controllers\DemandeP002Controller;
-use App\Http\Controllers\DemandeP003Controller;
-use App\Http\Controllers\DemandeP004Controller;
-use App\Http\Controllers\DemandeP005Controller;
-use App\Http\Controllers\DemandeP006Controller;
-use App\Http\Controllers\DemandeP007Controller;
-use App\Http\Controllers\DemandeP008Controller;
-use App\Http\Controllers\DemandeP009Controller;
 use App\Http\Controllers\PieceJointeController;
 use App\Http\Controllers\PlainteController;
 use App\Http\Controllers\ProcedureController;
@@ -31,19 +22,7 @@ use App\Http\Controllers\StructureController;
 use App\Http\Controllers\TypeUsagerController;
 use App\Http\Controllers\UsagerController;
 use App\Livewire\DemandeComp;
-use App\Livewire\DemandeCompP0011;
-use App\Livewire\DemandeCompP0012;
 use App\Livewire\DemandeCompP002;
-use App\Livewire\DemandeCompP003;
-use App\Livewire\DemandeCompP004;
-use App\Livewire\DemandeCompP006;
-use App\Livewire\DemandeCompP009;
-use App\Livewire\DemandeP0012;
-use App\Livewire\DemandeP004;
-use App\Livewire\DemandeP005Comp;
-use App\Livewire\DemandeP007Comp;
-use App\Livewire\DemandeP008Comp;
-use App\Models\DemandeP005;
 use App\Models\Procedure;
 use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
@@ -68,10 +47,6 @@ Route::middleware(['mustreset'])->group(function () {
     });
 
     // routes des tests
-    Route::get('/test', [DemandeController::class, 'index']);
-    Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
-
-    Route::get('/testpj', [DemandeController::class, 'testpj']);
 
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -101,61 +76,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::post('/demandesp002-store', [DemandeP002Controller::class, 'store'])->name('demandesp002-store');
     Route::post('/demandesp002-update', [DemandeP002Controller::class, 'update'])->name('demandesp002-update');
 
-
      // Certificat d'exemption des emballages et sachets plastiques non biodégradables
-
-   Route::get("/P006", DemandeCompP006::class)->name("demandes-p006");
-   Route::post('/demandesp006-store', [DemandeP006Controller::class, 'store'])->name('demandesp006-store');
-   Route::post('/demandesp006-update', [DemandeP006Controller::class, 'update'])->name('demandesp006-update');
-
-
-    //   Demande poo4 certificat de detention d'un animal sauvage
-    Route::get('/P004', DemandeCompP004::class)->name('demandesp004-create');
-    Route::post('/demandesp004-store', [DemandeP004Controller::class, 'store'])->name('demandesp004-store');
-    Route::post('/demandesp004-update', [DemandeP004Controller::class, 'update'])->name('demandesp004-update');
-
-
-    //   Demande poo5 permis de circulation de bois et de charbon de bois
-    Route::get('/P005', DemandeP005Comp::class)->name('demandesp005-create');
-    Route::post('/demandesp005-store', [DemandeP005Controller::class, 'store'])->name('demandesp005-store');
-    Route::post('/demandesp005-update', [DemandeP005Controller::class, 'update'])->name('demandesp005-update');
-
-     //***************** DEMANDE P007 Homologations ********************************//
-    Route::get("/P007", DemandeP007Comp::class)->name("demandes-p007");
-    Route::post('/demandesp007-store', [DemandeP007Controller::class, 'store'])->name('demandesp007-store');
-    Route::post('/demandesp007-update', [DemandeP007Controller::class, 'update'])->name('demandesp007-update');
-
-
-    	// P008 Demande d'autorisation de gestion de dechets
-	Route::get("/P008", DemandeP008Comp::class)->name("demandep008");
-    Route::post("/demandesp008-store", [DemandeP008Controller::class, 'store'])->name("demandesp008-store");
-    Route::post("/demandesp008-update", [DemandeP008Controller::class, 'update'])->name("demandesp008-update");
-
-
-              // Permis de coupe de bois et charbon de bois
-    Route::get("/P0011", DemandeCompP0011::class)->name("demandesp0011");
-    Route::post("/demandesp0011-store", [DemandeP0011Controller::class, 'store'])->name("demandesp0011-store");
-    Route::post("/demandesp0011-update", [DemandeP0011Controller::class, 'update'])->name("demandesp0011-update");
-
-            // eco tourisme
-    Route::get("/P0012", DemandeCompP0012::class)->name("demandesp0012");
-    Route::post("/demandesp0012-store", [DemandeP0012Controller::class, 'store'])->name("demandesp0012-store");
-    Route::post("/demandesp0012-update", [DemandeP0012Controller::class, 'update'])->name("demandesp0012-update");
-    Route::post("/demandesp0012-payment", [DemandeP0012Controller::class, 'payment'])->name("demandesp0012-payment");
-
-
-
-    // Permis de chasse
-    Route::get("/P003", DemandeCompP003::class)->name("demandesp003");
-    Route::post("/demandesp003-store", [DemandeP003Controller::class, 'store'])->name("demandesp003-store");
-    Route::post("/demandesp003-update", [DemandeP003Controller::class, 'update'])->name("demandesp003-update");
-
-
-
-
-
-
-
     //administration
 
 // Route partie administration

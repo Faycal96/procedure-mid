@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('usagers', function (Blueprint $table) {
-            $table->uuid('user_id')->nullable('');
+            $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('uuid')->on('users')->onDelete('cascade');;
         });
     }

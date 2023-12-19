@@ -37,10 +37,15 @@ return new class extends Migration
 
             $table->uuid('type_demande_id')->nullable();
             $table->foreign('type_demande_id')->references('uuid')->on('type_demandes');
+            
+            $table->string("reference")->nullable();
+            $table->string("output_file")->nullable();
+
+            $table->boolean('paiement')->nullable();
+            $table->string("note_etude_file")->nullable();
 
             $table->uuid('commune_id')->nullable();
             $table->foreign('commune_id')->references('uuid')->on('communes');
-
         });
     }
 
