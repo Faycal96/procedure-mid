@@ -37,9 +37,10 @@
                                         @csrf
                                   <!-- progressbar -->
                                 <ul id="progressbar">
-                                    <li class="active" id="personal"><strong>Identité du demandeur</strong></li>
-                                    <li id="folder"><strong>Pieces Administratives</strong></li>
-                                    <li id="personal"><strong>Domaine et catégorie</strong></li>
+                                    <li class="active" id="personal"><strong>Fiche de renseignement administratif</strong></li>
+                                    <li id="folder"><strong>Personne habilitée à representer l'entreprise</strong></li>
+                                    <li id="personal"><strong>Réferences de l'entreprise</strong></li>
+                                    <li id="personal"><strong>Participation effective du candidat à l'agrément</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
                                     <li id="paiement"><strong>Paiement </strong></li>
 
@@ -49,34 +50,107 @@
 
                                 <fieldset>
                                     <div class="form-card">
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
+                                        <h4 class="fs-title">Fiche de renseignement Administratif <span style="color:red">
                                             *</span></h4>
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <label class="nom_societe fw-bold">Identité <span
+                                                    <label class="nom_societe fw-bold">Que voulez vous faire <span
                                                             style="color: red">*</span></label>
-                                                    <input type="text" class="border-success" name="identite" required placeholder="identité" value="{{ $identite }}" /><br /><br />
-                                                    @if($errors->has('identite'))
-                                                        <p class="alert alert-danger">{{ $errors->first('identite') }}</p>
-                                                    @endif
-
+                                                <div class="col-4">
+                                                    <input id="radio1" type="radio" value="Nouvel demande">
+                                                    <label for="radio1">Nouvel demande</label>
                                                 </div>
-                                                <div class="col-6">
-                                                    <label class="pays_residence fw-bold">Commune de Residence<span style="color:red">
-                                                            *</span></label>
-                                                    <select name="commune_id" id="commune_id" class="form-select border-success">
-                                                    <option >Veuillez choisir le lieu</option>
-                                                    @foreach($communes as $com)
-                                                        <option value="{{$com->uuid }}">{{utf8_decode($com->libelle)}}</option>
-                                                    @endforeach
-                                                    </select> <br /><br />
-                                                    @if($errors->has('commune_id'))
-                                                        <p class="alert alert-danger">{{ $errors->first('commune_id') }}</p>
-                                                    @endif
+                                                <div class="col-4">
+                                                    <input id="radio1" type="radio">
+                                                    <label for="radio1">Renouvellement</label>
+                                                </div>
+                                                <div class="col-4">
+                                                    <input id="radio1" type="radio">
+                                                    <label for="radio1">Changement de catégorie</label>
                                                 </div>
                                             </div>
 
-                                            <h4 class="fs-title">Beneficiaire <span style="color:red">
+                                            <div class="row">
+                                                <div class="col-6 form-group">
+                                                        <label>Type catégorie</label>
+                                                        <select id="categorie" class="form-select border-success">
+                                                            <option class="mb-3" value=""></option>
+                                                            {{-- @foreach($procedures as $proc)
+                                                                <option class="mb-3" value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
+                                                            @endforeach --}}
+                                                        </select>
+                                                </div>
+                                            </div> <br>
+
+                                            <div class="row">
+                                                <div class="col-6 mb-3 form-group">
+                                                    <label for="fullName" class="col-form-label">Nom de l'entreprise</label>
+                                                    <input name="name" type="text" class="form-control border-success" id="fullName">
+                                                </div>
+
+                                                <div class="col-6 mb-3 form-group">
+                                                    <label for="fullName" class="col-form-label">Raison sociale</label>
+                                                    <input name="name" type="text" class="form-control border-success" id="fullName">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6 form-group">
+                                                    <label class="col-form-label">Statut légalisée de la société<span style="color: red">*</span></label>
+                                                    <input type="file" class="form-control border-success" />
+                                                </div>
+
+                                                <div class="col-6 mb-3 form-group">
+                                                    <label for="fullName" class="col-form-label">Siège sociale</label>
+                                                    <input name="name" type="text" class="form-control border-success" id="fullName">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6 form-group">
+                                                    <label class="col-form-label">RCCM / RSCPM<span style="color: red">*</span></label>
+                                                    <input type="file" class="form-control border-success" />
+                                                </div>
+
+                                                <div class="col-6 form-group">
+                                                    <label class="col-form-label">IFU / Récipissé<span style="color: red">*</span></label>
+                                                    <input type="file" class="form-control border-success" />
+                                                </div>
+                                            </div> <br>
+
+                                            <div class="row">
+                                                <div class="col-6 form-group">
+                                                    <label class="col-form-label">Document chiffre d'affaire<span style="color: red">*</span></label>
+                                                    <input type="file" class="form-control border-success" />
+                                                </div>
+
+                                                <div class="col-6 mb-3 form-group">
+                                                    <label for="fullName" class="col-form-label">Boîte Postale</label>
+                                                    <input name="name" type="text" class="form-control border-success" id="fullName">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 form-group">
+                                                    <label class="col-form-label">Télephone<span style="color: red">*</span></label>
+                                                    <input type="text" class="form-control border-success" />
+                                                </div>
+
+                                                <div class="col-6 form-group">
+                                                    <label class="col-form-label">Fax<span style="color: red">*</span></label>
+                                                    <input type="text" class="form-control border-success" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 form-group">
+                                                    <label class="col-form-label">Email<span style="color: red">*</span></label>
+                                                    <input type="email" class="form-control border-success" />
+                                                </div>
+                                                <div class="col-6 form-group">
+                                                    <label class="col-form-label">Adresse Physique<span style="color: red">*</span></label>
+                                                    <input type="text" class="form-control border-success" />
+                                                </div>
+                                            </div>
+
+                                            {{-- <h4 class="fs-title">Beneficiaire <span style="color:red">
                                                 *</span></h4>
                                             <div class="row">
                                                 <div class="col-3">
@@ -90,7 +164,7 @@
                                                   @if($errors->has('beneficiaire'))
                                                       <p class="alert alert-danger">{{ $errors->first('beneficiaire') }}</p>
                                                   @endif
-                                            </div>
+                                            </div> --}}
 
                                     </div>
                                     <button type="button" name="next" class="next action-button btn btn-success"
@@ -101,41 +175,53 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card mb-3">
-                                        <h2 class="fs-title">Pièces Administratives à fournir </h2>
+                                        <h2 class="fs-title">Personne habilitée à representer l'entreprise</h2>
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="nom_societe fw-bold">Reçu d’achat du dossier de demande <span
+                                                <label class="nom_societe fw-bold">Nom <span
                                                         style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" required name="recu_achat_dossier" />
+                                                <input type="text" class="border-success form-control" />
                                             </div>
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Certificat IFU<span style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" required name="ifu" />
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                             <div class="col-6">
-                                                <label class="boite_postale">Attestation RCCM<span style="color:red">
-                                                        *</span></label>
-                                                <input type="file" name="rccm"  class="border-success form-control" required />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="adresse fw-bold">Attestation employeur CNSS<span style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" required name="cnss"/>
+                                                <label class="nom_societe fw-bold">Prénom(s) <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" class="border-success form-control" />
                                             </div>
                                         </div>
                                         <div class="row">
-                                             <div class="col-6">
-                                                <label class="boite_postale">Fiche Renseignement<span style="color:red">
-                                                        *</span></label>
-                                                <input type="file" name="fiche_renseignement" required class="border-success form-control" />
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Qualité <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" class="border-success form-control" />
                                             </div>
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informationsr<span style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" required name="declaration_honneur"
-                                                      />
+                                                <label class="nom_societe fw-bold">Adresse <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" class="border-success form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Ancient agrément <span
+                                                        style="color: red">*</span></label>
+                                                <input type="file" class="border-success form-control" />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">N° employeur <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" class="border-success form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Liste matériel <span
+                                                        style="color: red">*</span></label>
+                                                <input type="file" class="border-success form-control" />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="adresse fw-bold">Liste personnel<span style="color: red">*</span></label>
+                                                <input type="file" class="border-success form-control" />
                                             </div>
                                         </div>
 
@@ -147,43 +233,56 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
-                                        <h2 class="fs-title">Domaine et Catégorie</h2>
+                                        <h2 class="fs-title">Réferences de l'entreprise</h2>
                                         <div class="row">
                                             <div class="col-4">
-                                                <label for="domaine" class="siege_social">Domaine
+                                                <label for="domaine" class="siege_social">Localisation
                                                     <span style="color:red">*</span></label>
-                                                <select name="domaine" id="domaine" onchange="getSousDomaine()" class="form-select border-success">
-                                                    <option value="">Veuillez choisir le domaine</option>
-                                                    @foreach($domaines as $dom)
-                                                    <option value="{{ $dom->uuid}}">{{  $dom->libelle_long }}</option>
-                                                    @endforeach
-                                                </select>
-                                                 @if($errors->has('domaine'))
+                                                    <select name="domaine" id="domaine" class="form-select border-success">
+                                                        <option value="">Veuillez choisir la localisation</option>
+                                                        {{-- @foreach($domaines as $dom)
+                                                        <option value="{{ $dom->uuid}}">{{  $dom->libelle_long }}</option>
+                                                        @endforeach --}}
+                                                    </select>
+                                                 {{-- @if($errors->has('domaine'))
                                                         <p class="alert alert-danger">{{ $errors->first('domaine') }}</p>
-                                                 @endif
+                                                 @endif --}}
 
                                             </div>
                                             <div class="col-4">
-                                               <label for="categorie" class="siege_social">Catégorie
+                                               <label for="categorie" class="siege_social">Désignation de travaux
                                                     <span style="color:red">*</span></label>
-                                                <select name="categorie" id="categorie" onchange="getSousDomaine()" class="form-select border-success">
-                                                    <option value="">Veuillez choisir la catégorie</option>
-                                                     @foreach($categories as $cat)
+                                                <select name="categorie" id="categorie" class="form-select border-success">
+                                                    <option value="">Veuillez choisir la désignation des travaux</option>
+                                                     {{-- @foreach($categories as $cat)
                                                         <option value="{{  $cat->uuid}}">{{  $cat->libelle_long }}</option>
-                                                     @endforeach
+                                                     @endforeach --}}
                                                 </select>
-                                                 @if($errors->has('categorie'))
+                                                 {{-- @if($errors->has('categorie'))
                                                         <p class="alert alert-danger">{{ $errors->first('categorie') }}</p>
-                                                 @endif
+                                                 @endif --}}
                                             </div>
                                             <div class="col-4">
-                                               <label for="sousdomaine" class="nom_societe">Sous domaine
+                                               <label for="sousdomaine" class="nom_societe">Maitrise d'ouvrage
                                                     <span style="color: red">*</span></label>
+                                                <input type="text" class="border-success form-control" />
                                                 <!--input type="text" class="border-success" name="sous_domaine" id="sousdomaine" required /-->
-                                                <select name="sous_domaine[]" id="sousdomaine" class="form-select border-success"></select>
-                                                 @if($errors->has('sous_domaine'))
+                                                {{-- <select name="sous_domaine[]" id="sousdomaine" class="form-select border-success"></select> --}}
+                                                 {{-- @if($errors->has('sous_domaine'))
                                                         <p class="alert alert-danger">{{ $errors->first('sous_domaine') }}</p>
-                                                    @endif
+                                                    @endif --}}
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-6 form-group">
+                                                <label class="col-form-label">Date début<span style="color: red">*</span></label>
+                                                <input type="date" class="form-control border-success" />
+                                            </div>
+
+                                            <div class="col-6 mb-3 form-group">
+                                                <label for="fullName" class="col-form-label">Date fin</label>
+                                                <input type="date" class="form-control border-success" id="fullName">
                                             </div>
                                         </div>
 
@@ -191,13 +290,13 @@
                                         <h2 class="fs-title">Autres documents</h2>
                                         <div class="row">
                                             <div class="col-12">
-                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_autre_documents">
+                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_cv">
                                                     <thead class="dst-form-thead">
                                                         <tr>
-                                                            <th colspan="3" style="text-align: center">Liste Personnel</th>
+                                                            <th colspan="3" style="text-align: center">CV Personnel</th>
                                                         </tr>
                                                         <tr>
-                                                            <th>Nom du document <span style="color:red">*</span></th>
+                                                            <th>Sujet du document <span style="color:red">*</span></th>
                                                             <th>Fichier <span style="color:red">*</span></th>
                                                             <th></th>
                                                         </tr>
@@ -207,9 +306,9 @@
                                                     <tfoot>
                                                         <tr>
                                                             <td colspan="3" style="text-align: right;">
-                                                                <a class="btn btn-default" onclick="addRowAutreDocument()">
+                                                                <a class="btn btn-default" onclick="addRowCV()">
                                                                     <i class="fa fa-plus-circle text-success"></i>
-                                                                    <span>Ajouter personnel </span>
+                                                                    <span>Ajouter un CV </span>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -220,13 +319,13 @@
                                              <hr>
                                              
                                               <div class="col-12">
-                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_materiel_roulant">
+                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_diplome">
                                                     <thead class="dst-form-thead">
                                                         <tr>
-                                                            <th colspan="3" style="text-align: center">Materiels roulants</th>
+                                                            <th colspan="3" style="text-align: center">Diplôme du personnel</th>
                                                         </tr>
                                                         <tr>
-                                                            <th>Nom du document <span style="color:red">*</span></th>
+                                                            <th>Sujet du document <span style="color:red">*</span></th>
                                                             <th>Fichier <span style="color:red">*</span></th>
                                                             <th></th>
                                                         </tr>
@@ -236,38 +335,9 @@
                                                     <tfoot>
                                                         <tr>
                                                             <td colspan="3" style="text-align: right;">
-                                                                <a class="btn btn-default" onclick="addRowMaterielRoulant()">
+                                                                <a class="btn btn-default" onclick="addRowDiplome()">
                                                                     <i class="fa fa-plus-circle text-success"></i>
-                                                                    <span>Ajouter matériels roulants </span>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
-
-                                            </div>
-                                               <hr>
-                                               
-                                                <div class="col-12">
-                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_materiel_non_roulant">
-                                                    <thead class="dst-form-thead">
-                                                        <tr>
-                                                            <th colspan="3" style="text-align: center">Materiels non roualants</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Nom du document <span style="color:red">*</span></th>
-                                                            <th>Fichier <span style="color:red">*</span></th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <td colspan="3" style="text-align: right;">
-                                                                <a class="btn btn-default" onclick="addRowMaterielNonRoulant()">
-                                                                    <i class="fa fa-plus-circle text-success"></i>
-                                                                    <span>Ajouter matériel non document </span>
+                                                                    <span>Ajouter un diplôme </span>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -280,7 +350,40 @@
                                     <button type="button" name="previous" class="previous action-button-previous">Retour</button>
                                     <Button type="button" name="make_payment" id="next_domaine" class="next action-button">Suivant</button>
                                 </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Participation effective du candidat à l'agrément</h2>
 
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Nature<span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" class="border-success form-control" />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Pourcentage Montant total <span
+                                                        style="color: red">*</span></label>
+                                                <input type="number" class="border-success form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Condition <span
+                                                        style="color: red">*</span></label>
+                                                <textarea name="" id="" cols="30" rows="10" style="border: solid green 2px"></textarea>
+                                                {{-- <input type="text" class="border-success form-control" /> --}}
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Observation <span
+                                                        style="color: red">*</span></label>
+                                                <textarea name="" id="" cols="30" rows="10" style="border: solid green 2px"></textarea>
+                                                {{-- <input type="text" class="border-success form-control" /> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" name="previous" class="previous action-button-previous">Retour</button>
+                                    <Button type="button" name="make_payment" id="next_domaine" class="next action-button">Suivant</button>
+                                </fieldset>
 
                                 <fieldset>
 
@@ -388,7 +491,7 @@
     //intitialisation du tableau des autres documents
     $(function () {
         for (var i = 0; i < 1; i++) {
-            addRowAutreDocument();
+            addRowCV();
         }
      })
    /*  $(function () {
@@ -514,141 +617,31 @@ jQuery('input[name=moyen]:radio').click(function(){
       e.preventDefault();
   });
 
-function addRowAutreDocument() {
-   var listePersonnel = ["Contrôleur génie civil (Niveau CAP)",
-            "Technicien supérieur génie civil ou génie rural ou génie sanitaire (BAC+2)", 
-            "Animateur spécialisé ",
-            "Spécialiste en sciences humaines et sociales",
-            "Technicien supérieur en génie sanitaire",
-            "Ingénieur Génie Civil ou Génie Rural ou Assimilé",
-            "Technicien Supérieur Génie Rural ou Génie Civil ou assimilé",
-            "Comptable Gestionnaire",
-            "Agent de liaison",
-            "Ingénieur Topographe",
-            "Géotechnicien",
-            "Ingénieur hydrologue",
-            "Agro pédologue environnementaliste",
-            "Sociologue ou économiste",
-            "Ingénieur hydraulicien ou GR",
-            "T.S HER",
-            "Surveillant de chantier maçon ( CAP ou 5 ans d’expérience)",
-            "Technicien pompe",
-            "Technicien supérieur en génie civil",
-            "Technicien supérieur du Génie Rural ou forages",
-            "Ingénieur hydrogéologue ou GR",
-            "Opérateur BEPC ou CEPE + 5ans d’expérience",
-            "Technicien Supérieur en Génie Rural ou en Science de la terre",
-            "Sociologue ou géographe ou économiste",
-            "Opérateur géophysicien",
-            "Ingénieur GR",
-            "Sondeur, 5 ans d’expérience",
-            "Aide sondeur",
-            "Mécanicien 5 ans d’expérience ou CAP",
-            "Mécanicien BTS",
-            "Maçon",
-            "CAP Génie civil",
-            "DECISION DE LA CAAT",
-            "Surveillant de chantier CAP maçonnerie",
-            "Plombier",
-            "Technicien en maçonnerie (CAP minimum)",
-            "Chef d’équipe terrassement",
-            "Opérateur topographe (niveau CAP minimum)",
-            "Technicien de laboratoire géotechnique",
-            "Gestionnaire des Ressources Humaines",
-            "Opérateur topographe (niveau CAP minimum)",
-            "Electromécanicien",
-            "Chef mécanicien (diesel ou diéséliste)"];
-    var options = '<option value=""></option>';
-    for(var i = 0; i < listePersonnel.length; i++) {
-        var opt = listePersonnel[i];
-        options += '<option value="' + opt + '">' + opt + '</option>';
-    } 
-        $("#dt_autre_documents").append([
+function addRowCV() {
+        $("#dt_cv").append([
             '<tr class="">',
             '<td class="rs">'+
-               ' <select name="libelle_document[]" class="form-select border-success requis">' + options+
-                  
-               + '</select>'+
+               '<input type="text" name="libelle_document_CV[]" class="border-success form-control" />' +
              '</td>',
-            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document[]"> </td>',
-            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
+            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_CV[]"> </td>',
+            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
             '</tr>',
                 ].join()
                 );
     }
-   /* function addRowAutreDocument() {
-        $("#dt_autre_documents").append([
-            '<tr class="">',
-            '<td class="rs"><input type="text" class="border-success form-control requis" required name="libelle_document[]"></td>',
-            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document[]"> </td>',
-            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
-            '</tr>',
-                ].join()
-                );
-    }*/
 
-    function deleteRowAutreDocument(me) {
+    function deleteRowCV(me) {
          $(me).closest('tr').remove();
     }
     
-  function addRowMaterielRoulant() {
-   var listeMaterielRoulant = ["Véhicule de liaison",
-                                "Motocyclettes",
-                                "Moto",
-                                "Camionnette",
-                                "Camion benne basculante",
-                                "Servicing (véhicule porteur)",
-                                "Camion d’accompagnement avec grue",
-                                "Camion-citerne (eau, carburant)",
-                                "Grue motorisée",
-                                "Chargeuse de faible puissance 15/20 cv",
-                                "Moto basculeur inf. 2500 litres",
-                                "Compacteur de type à patin vibrant",
-                                "Citerne à gasoil d’au moins 10 000 litres",
-                                "Bulldozer 70 à 200 cv",
-                                "Pelle chargeuse de 200 à 250cv",
-                                "Pelle hydraulique 125 à 200 cv",
-                                "Niveleuse inf 150 cv",
-                                "Tracteur pour labour sup 80cv + accessoires",
-                                "Camion benne basculante d’au moins 6 m3",
-                                "Camion benne basculante d’au moins 12 m3",
-                                "Bétonnière de capacité minimum 350 litres",
-                                "Camion semi-remorque ou plateau au moins 10 T",
-                                "Camion atelier",
-                                "Camion-citerne à eau d’au moins 10 000 litres",
-                                "Camion-citerne à eau d’au moins 30 000 litres",
-                                "Citerne à gasoil d’au moins 10 000 litres",
-                                "Cuve à gasoil de 10 000 litres",
-                                "Compacteur à rouleau lisse au moins 100 cv",
-                                "Compacteur pied de mouton au moins 130 cv",
-                                "Tracteur pour labour sup 80cv + accessoires",
-                                "Bulldozer 200 à 250 cv",
-                                "Compacteur rouleau lisse type JV 100",
-                                "Pelle hydraulique 125  200 cv",
-                                "Compacteur type 815",
-                                "Compacteur pied de mouton type JV 100",
-                                "Bulldozer sup 200 cv",
-                                "Pelle chargeuse sup à 250cv",
-                                "Pelle hydraulique sup 250 cv",
-                                "Compacteur rouleau lisse type JV 100",
-                                "Niveleuse sup 150 cv",
-                                "Unité de concassag",
-                                "Tracteur pour labour sup 80cv + accessoires"
-                        ];
-    var options = '<option value=""></option>';
-    for(var i = 0; i < listeMaterielRoulant.length; i++) {
-        var opt = listeMaterielRoulant[i];
-        options += '<option value="' + opt + '">' + opt + '</option>';
-    } 
-        $("#dt_materiel_roulant").append([
+  function addRowDiplome() {
+        $("#dt_diplome").append([
             '<tr class="">',
             '<td class="rs">'+
-               ' <select name="libelle_document_roulant[]" class="form-select border-success requis">' + options+
-                  
-               + '</select>'+
+               '<input type="text" name="libelle_document_diplome[]" class="border-success form-control" />' +
              '</td>',
-            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_roulant[]"> </td>',
-            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
+            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_diplome[]"> </td>',
+            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
             '</tr>',
                 ].join()
                 );
@@ -723,7 +716,7 @@ function addRowAutreDocument() {
                + '</select>'+
              '</td>',
             '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_non_roulant[]"> </td>',
-            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
+            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
             '</tr>',
                 ].join()
                 );
