@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-    use \App\Http\Traits\UsesUuid;
+    use \Illuminate\Database\Eloquent\Concerns\HasUlids;
     use \Wildside\Userstamps\Userstamps;
     protected $primaryKey = 'uuid';
     protected $guarded = [];

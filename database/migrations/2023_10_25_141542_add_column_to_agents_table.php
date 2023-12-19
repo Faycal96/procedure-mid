@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('agents', function (Blueprint $table) {
-            $table->uuid('role_id')->nullable();
+            $table->ulid('role_id')->nullable();
             $table->foreign('role_id')->references('uuid')->on('roles');
             //
         });

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('structures', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle_court')->nullable();
             $table->string('libelle_long')->nullable();
             $table->string('type')->nullable();

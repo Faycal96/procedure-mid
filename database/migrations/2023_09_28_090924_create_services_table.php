@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle_court')->nullable();
             $table->string('libelle_long')->nullable();
             $table->string('type')->nullable();
             $table->integer('ordre')->unsigned()->nullable();
             $table->boolean('etat')->default(true);
-            $table->uuid('structure_id')->nullable();
+            $table->ulid('structure_id')->nullable();
             $table->foreign('structure_id')->references('uuid')->on('structures');
             $table->timestamps();
         });

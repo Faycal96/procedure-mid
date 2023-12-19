@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('affectations', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
-            $table->uuid('agent_id')->nullable();
+            $table->ulid('uuid')->primary();
+            $table->ulid('agent_id')->nullable();
             $table->foreign('agent_id')->references('uuid')->on('agents');
-            $table->uuid('demande_id')->nullable();
+            $table->ulid('demande_id')->nullable();
             $table->foreign('demande_id')->references('uuid')->on('demandes');
             $table->timestamps();
         });

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->uuid('commune_origine_id')->nullable();
+            $table->ulid('commune_origine_id')->nullable();
             $table->foreign('commune_origine_id')->references('uuid')->on('communes');
 
-            $table->uuid('commune_residence_id')->nullable();
+            $table->ulid('commune_residence_id')->nullable();
             $table->foreign('commune_residence_id')->references('uuid')->on('communes');
 
         });

@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('procedure_base_juridiques', function (Blueprint $table) {
-            $table->uuid("procedure_id")->nullable('procedures');
+            $table->ulid("procedure_id")->nullable();
             $table->foreign('procedure_id')->references('uuid')->on('procedures');
 
-            $table->uuid('base_juridique_id')->nullable('base_juridiques');
+            $table->ulid('base_juridique_id')->nullable();
             $table->foreign('base_juridique_id')->references('uuid')->on('base_juridiques');
 
         });

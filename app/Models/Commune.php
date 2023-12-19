@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Commune extends Model
 {
     use HasFactory;
-    use \App\Http\Traits\UsesUuid;
+    use \Illuminate\Database\Eloquent\Concerns\HasUlids;
     use \Wildside\Userstamps\Userstamps;
     protected $primaryKey = 'uuid';
     public $fillable = ['libelle', 'province_id','statut'];

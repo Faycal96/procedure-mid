@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tarifs', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string("libelle")->nullable();
             $table->bigInteger('cout')->default(0);
-            $table->uuid('demande_id')->nullable()->nullable('demandes');
+            $table->ulid('demande_id')->nullable()->nullable();
             $table->foreign('demande_id')->references('uuid')->on('demandes');
             $table->timestamps();
         });

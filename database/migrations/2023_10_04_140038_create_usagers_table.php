@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('usagers', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
 
@@ -30,19 +30,19 @@ return new class extends Migration
             $table->string('ref_identite')->nullable();
             $table->string('nom_entreprise')->nullable();
 
-            $table->uuid('type_usager_id')->nullable()->nullable('type_usagers');
+            $table->ulid('type_usager_id')->nullable()->nullable();
             $table->foreign('type_usager_id')->references('uuid')->on('type_usagers');
 
-            $table->uuid('type_identite_id')->nullable()->nullable('type_identites');
+            $table->ulid('type_identite_id')->nullable()->nullable();
             $table->foreign('type_identite_id')->references('uuid')->on('type_identites');
 
-            $table->uuid('commune_origine_id')->nullable();
+            $table->ulid('commune_origine_id')->nullable();
             $table->foreign('commune_origine_id')->references('uuid')->on('communes');
 
-            $table->uuid('commune_residence_id')->nullable();
+            $table->ulid('commune_residence_id')->nullable();
             $table->foreign('commune_residence_id')->references('uuid')->on('communes');
 
-            $table->uuid('user_id')->nullable('');
+            $table->ulid('user_id')->nullable();
             $table->foreign('user_id')->references('uuid')->on('users')->onDelete('cascade');;
 
             $table->timestamps();

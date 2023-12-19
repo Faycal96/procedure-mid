@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->uuid('agent_id')->nullable();
+            $table->ulid('agent_id')->nullable();
             $table->foreign('agent_id')->references('uuid')->on('agents')->onDelete('cascade');
-            $table->uuid('usager_id')->nullable();
+            $table->ulid('usager_id')->nullable();
             $table->foreign('usager_id')->references('uuid')->on('usagers')->onDelete('cascade');
         });
     }

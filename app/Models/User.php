@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use \App\Http\Traits\UsesUuid;
+    use \Illuminate\Database\Eloquent\Concerns\HasUlids;
     use \Wildside\Userstamps\Userstamps;
     use HasApiTokens, HasFactory, Notifiable;
 

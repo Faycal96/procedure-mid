@@ -14,10 +14,9 @@ class CreateProvincesTable extends Migration
     public function up()
     {
         Schema::create('provinces', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle');  
-            $table->uuid('region_id')->nullable();
-
+            $table->ulid('region_id')->nullable();
             $table->foreign('region_id')->references('uuid')->on('regions');
             $table->timestamps();
         });

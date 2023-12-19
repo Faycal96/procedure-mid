@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('demande_pieces', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string("libelle")->nullable();
             $table->string("chemin")->nullable();
-            $table->uuid('piece_jointe_id')->nullable();
+            $table->ulid('piece_jointe_id')->nullable();
             $table->foreign('piece_jointe_id')->references('uuid')->on('piece_jointes');
 
-            $table->uuid('demande_id')->nullable();
+            $table->ulid('demande_id')->nullable();
             $table->foreign('demande_id')->references('uuid')->on('demandes');
 
             $table->timestamps();

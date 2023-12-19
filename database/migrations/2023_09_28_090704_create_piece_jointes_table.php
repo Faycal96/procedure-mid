@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('piece_jointes', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle');
             $table->bigInteger('montant')->default(0);
             $table->timestamps();

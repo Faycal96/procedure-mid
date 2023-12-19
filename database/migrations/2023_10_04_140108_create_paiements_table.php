@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paiements', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string("ref_paiement")->nullable();
             $table->string("type_paiement")->nullable();
             $table->date("date_paiement")->nullable();
 
-            $table->uuid('mode_paiement_id')->nullable();
+            $table->ulid('mode_paiement_id')->nullable();
             $table->foreign('mode_paiement_id')->references('uuid')->on('mode_paiements');
 
-            $table->uuid('demande_id')->nullable();
-            $table->uuid('code_procedure')->nullable();
+            $table->ulid('demande_id')->nullable();
+            $table->ulid('code_procedure')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

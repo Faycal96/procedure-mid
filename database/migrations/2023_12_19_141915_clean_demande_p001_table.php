@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('demande_p001_s');
         Schema::create('demande_p001_s', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle_court');
             $table->string('libelle_long')->nullable();
 
@@ -26,10 +26,10 @@ return new class extends Migration
             $table->string("lot");
             $table->string("numero_parcelle");
 
-            $table->uuid('type_construction_id')->nullable();
+            $table->ulid('type_construction_id')->nullable();
             $table->foreign('type_construction_id')->references('uuid')->on('type_constructions');
 
-            $table->uuid('demande_id')->nullable();
+            $table->ulid('demande_id')->nullable();
             $table->foreign('demande_id')->references('uuid')->on('demandes');
 
             $table->string('created_by')->nullable();
@@ -60,7 +60,7 @@ return new class extends Migration
 
             $table->dropForeign('demandes_user_id_foreign');
             $table->dropColumn('user_id');
-            $table->uuid('usager_id')->nullable();
+            $table->ulid('usager_id')->nullable();
             $table->foreign('usager_id')->references('uuid')->on('usagers');
             $table->string('last_modified_by')->nullable();
             $table->boolean('is_certified')->default(false);
@@ -70,13 +70,13 @@ return new class extends Migration
             $table->boolean('confirmed')->default(false);
             $table->date('date_certif')->nullable();
 
-            $table->uuid('user_id')->nullable('');
+            $table->ulid('user_id')->nullable('');
             $table->foreign('user_id')->references('uuid')->on('users');
 
-            $table->uuid('procedure_id')->nullable('procedures');
+            $table->ulid('procedure_id')->nullable('procedures');
             $table->foreign('procedure_id')->references('uuid')->on('procedures');
 
-            $table->uuid('type_demande_id')->nullable();
+            $table->ulid('type_demande_id')->nullable();
             $table->foreign('type_demande_id')->references('uuid')->on('type_demandes');
             
             $table->string("reference")->nullable();
@@ -85,7 +85,7 @@ return new class extends Migration
             $table->boolean('paiement')->nullable();
             $table->string("note_etude_file")->nullable();
 
-            $table->uuid('commune_id')->nullable();
+            $table->ulid('commune_id')->nullable();
             $table->foreign('commune_id')->references('uuid')->on('communes');
 
             $table->string('province_id')->nullable();

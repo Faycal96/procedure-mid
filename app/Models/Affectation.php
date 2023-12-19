@@ -9,7 +9,7 @@ use Wildside\Userstamps\Userstamps;
 class Affectation extends Model
 {
     use HasFactory;
-    use \App\Http\Traits\UsesUuid;
+    use \Illuminate\Database\Eloquent\Concerns\HasUlids;
     use Userstamps;
     protected $primaryKey = 'uuid';
     protected $guarded = [];

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('agents', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('matricule', 10)->nullable();
             $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
@@ -22,10 +22,10 @@ return new class extends Migration
             $table->date('date_prise_service')->nullable();
             $table->string('lieu_naissance')->nullable();
 
-            $table->uuid('service_id')->nullable();
+            $table->ulid('service_id')->nullable();
             $table->foreign('service_id')->references('uuid')->on('services');
 
-            $table->uuid('user_id')->nullable();
+            $table->ulid('user_id')->nullable();
             $table->foreign('user_id')->references('uuid')->on('users')->onDelete('cascade');
 
             $table->timestamps();

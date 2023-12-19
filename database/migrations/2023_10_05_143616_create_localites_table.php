@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('localites', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle');  
-            $table->uuid('commune_id')->nullable();
+            $table->ulid('commune_id')->nullable();
             $table->foreign('commune_id')->references('uuid')->on('communes');
             $table->timestamps();
         });

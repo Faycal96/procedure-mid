@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dropColumn('email');
             $table->dropColumn('phone');
 
-            $table->uuid('usager_id')->nullable();
+            $table->ulid('usager_id')->nullable();
             $table->foreign('usager_id')->references('uuid')->on('usagers')->onDelete('cascade');
 
             $table->text('commentaire')->nullable();

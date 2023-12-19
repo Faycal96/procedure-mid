@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('demande_domaine_p002_s', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle_court');
             $table->string('libelle_long')->nullable();
              $table->string('created_by')->nullable();

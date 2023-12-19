@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('procedures', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle_court');
             $table->string('libelle_long')->nullable();
             $table->string('code')->nullable();
             $table->json('schemas')->nullable();
-            $table->uuid('service_id')->nullable();
+            $table->ulid('service_id')->nullable();
             $table->foreign('service_id')->references('uuid')->on('services');
             $table->timestamps();
         });

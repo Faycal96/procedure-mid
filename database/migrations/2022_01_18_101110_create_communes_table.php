@@ -14,9 +14,9 @@ class CreateCommunesTable extends Migration
     public function up()
     {
         Schema::create('communes', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle');  
-            $table->uuid('province_id')->nullable();
+            $table->ulid('province_id')->nullable();
             $table->foreign('province_id')->references('uuid')->on('provinces');
             $table->boolean('statut')->default(false);
             $table->timestamps();

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('demande_p002_s', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('libelle_court');
             $table->string('libelle_long')->nullable();
             $table->string('etat')->nullable();
@@ -26,16 +26,16 @@ return new class extends Migration
             $table->string('email')->nullable();
 
 
-            $table->uuid('user_id')->nullable('');
+            $table->ulid('user_id')->nullable();
             $table->foreign('user_id')->references('uuid')->on('users');
 
-            $table->uuid('procedure_id')->nullable('procedures');
+            $table->ulid('procedure_id')->nullable();
             $table->foreign('procedure_id')->references('uuid')->on('procedures');
 
-            $table->uuid('type_demande_id')->nullable();
+            $table->ulid('type_demande_id')->nullable();
             $table->foreign('type_demande_id')->references('uuid')->on('type_demandes');
 
-            $table->uuid('commune_id')->nullable();
+            $table->ulid('commune_id')->nullable();
             $table->foreign('commune_id')->references('uuid')->on('communes');
 
 

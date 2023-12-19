@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('statut_demandes', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->ulid('uuid')->primary();
             $table->string('etat')->nullable();
             $table->string('libelle')->nullable();
             $table->string('statut')->nullable();

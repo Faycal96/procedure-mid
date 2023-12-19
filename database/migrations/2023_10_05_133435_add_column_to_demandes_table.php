@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('demandes', function (Blueprint $table) {
             $table->dropForeign('demandes_user_id_foreign');
             $table->dropColumn('user_id');
-            $table->uuid('usager_id')->nullable();
+            $table->ulid('usager_id')->nullable();
             $table->foreign('usager_id')->references('uuid')->on('usagers');
             $table->string('last_modified_by')->nullable();
             $table->boolean('is_certified')->default(false);
@@ -24,7 +24,7 @@ return new class extends Migration
         Schema::table('demande_p001_s', function (Blueprint $table) {
             $table->dropForeign('demande_p001_s_user_id_foreign');
             $table->dropColumn('user_id');
-            $table->uuid('usager_id')->nullable();
+            $table->ulid('usager_id')->nullable();
             $table->foreign('usager_id')->references('uuid')->on('usagers');
             $table->string('last_modified_by')->nullable();
             $table->boolean('is_certified')->default(false);
@@ -34,7 +34,7 @@ return new class extends Migration
         Schema::table('demande_p002_s', function (Blueprint $table) {
             $table->dropForeign('demande_p002_s_user_id_foreign');
             $table->dropColumn('user_id');
-            $table->uuid('usager_id')->nullable();
+            $table->ulid('usager_id')->nullable();
             $table->foreign('usager_id')->references('uuid')->on('usagers');
             $table->string('last_modified_by')->nullable();
             $table->boolean('is_certified')->default(false);
@@ -49,19 +49,19 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('demandes', function (Blueprint $table) {
-            $table->uuid('user_id')->nullable();
+            $table->ulid('user_id')->nullable();
             $table->foreign('user_id')->references('uuid')->on('users');
             $table->boolean('confirmed')->default(false);
             $table->dropColumn('last_modified_by');
         });
         Schema::table('demande_p001_s', function (Blueprint $table) {
-            $table->uuid('user_id')->nullable();
+            $table->ulid('user_id')->nullable();
             $table->foreign('user_id')->references('uuid')->on('users');
             $table->boolean('confirmed')->default(false);
             $table->dropColumn('last_modified_by');
         });
         Schema::table('demande_p002_s', function (Blueprint $table) {
-            $table->uuid('user_id')->nullable();
+            $table->ulid('user_id')->nullable();
             $table->foreign('user_id')->references('uuid')->on('users');
             $table->boolean('confirmed')->default(false);
             $table->dropColumn('last_modified_by');

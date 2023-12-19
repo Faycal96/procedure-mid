@@ -17,15 +17,16 @@ class DatabaseSeeder extends Seeder
             StatutDemandeSeeder::class,
             ProcedureSeeder::class,
             PaysSeeder::class,
-            StatutDemandeSeeder::class,
             TypeUsagerSeeder::class,
             RoleSeeder::class,
+            TypeConstructionSeeder::class,
             //StructureSeeder::class
 
            //UsersTableSeeder::class
 
            // UsersTableSeeder::class
             AgremenTechniqueTableSeeder::class,
+            UsageConstructionSeeder::class
           // UsersTableSeeder::class
 
         ]);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('plaintes', function (Blueprint $table) {
             //
-            $table->uuid('user_id')->nullable();
+            $table->ulid('user_id')->nullable();
             $table->foreign('user_id')->references('uuid')->on('users');
         });
     }
