@@ -24,7 +24,7 @@
                 <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                        <form id="msform"  method="POST" action="{{route('demandesp0012-store')}}" enctype="multipart/form-data">
+                        <form id="msform"  method="POST" action="{{route('demandesp001-store')}}" enctype="multipart/form-data">
                             @csrf
                             <!-- progressbar -->
                             <ul id="progressbar">
