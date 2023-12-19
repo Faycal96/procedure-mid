@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
-use function Laravel\Prompts\select;
-
-
 
 class ProfileController extends Controller
 {
