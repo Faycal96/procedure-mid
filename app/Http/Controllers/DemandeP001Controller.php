@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\DemandeP001;
 use App\Models\Procedure;
 use Illuminate\Http\Request;
-use App\Repositories\DemandeP001Repository;
+use App\Repositories\DemandeRepository;
 use App\Repositories\DemandePieceP001Repository;
+use App\Repositories\DemandePieceRepository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class DemandeP001Controller extends Controller
 {
     public $repository;
-    public function __construct(DemandeP001Repository $repository)
+    public function __construct(DemandeRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -44,13 +45,16 @@ class DemandeP001Controller extends Controller
         //return view('livewire.Demandesp0012.create');
     }
 
-    public function store(Request $request, UserRepository $userRepository, DemandePieceP001Repository $demandePieceP001Repository, DemandeP001 $demande)
+    public function store(Request $request, UserRepository $userRepository, DemandePieceRepository $demandePieceP001Repository, DemandeP001 $demande)
     {
 
         $data =  $request->all();
         if ($this->payment($data["numero"], $data["otp"])) {
             $dataFiles = $request->all();
+            // dd($data);
 
+
+            unset($data['name']);
             unset($data['telephone']);
             unset($data['moyen']);
             unset($data["numero"]);
@@ -64,38 +68,40 @@ class DemandeP001Controller extends Controller
             $data['paiement']= 1;
 
             $data['procedure_id'] = Procedure::where(['code' => 'P001'])->first('uuid')->uuid;
+            // $data['type_construction_id'] = Type::where(['code' => 'P001'])->first('uuid')->uuid;
+            $dataFiles['procedure_id'] = Procedure::where(['code' => 'P001'])->first('uuid')->uuid;
 
-            $cheminFaisabilite =  $this->repository->uploadFile($dataFiles, 'avis_faisabilite');
-            $cheminRccm =  $this->repository->uploadFile($dataFiles, 'rccm');
-            $facture_pro_format =  $this->repository->uploadFile($dataFiles, 'facture_pro_format');
-            $cheminFicheSecurite =  $this->repository->uploadFile($dataFiles, 'fiche_securite');
-            $registre_tracabilite =  $this->repository->uploadFile($dataFiles, 'registre_tracabilite');
-            $registre_dechet =  $this->repository->uploadFile($dataFiles, 'registre_dechet');
-            $attestation_destination_finale =  $this->repository->uploadFile($dataFiles, 'attestation_destination_finale');
-            $list_produit =  $this->repository->uploadFile($dataFiles, 'list_produit');
+            $cnib =  $this->repository->uploadFile($dataFiles, 'cnib');
+            $puh =  $this->repository->uploadFile($dataFiles, 'puh');
+            $plan =  $this->repository->uploadFile($dataFiles, 'plan');
+            $coupe =  $this->repository->uploadFile($dataFiles, 'coupe');
+            // $registre_tracabilite =  $this->repository->uploadFile($dataFiles, 'registre_tracabilite');
+            // $registre_dechet =  $this->repository->uploadFile($dataFiles, 'registre_dechet');
+            // $attestation_destination_finale =  $this->repository->uploadFile($dataFiles, 'attestation_destination_finale');
+            // $list_produit =  $this->repository->uploadFile($dataFiles, 'list_produit');
             //    dd($cheminFaisabilite, $cheminRccm, $facture_pro_format);
-            unset($data['avis_faisabilite']);
-            unset($data['rccm']);
-            unset($data['facture_pro_format']);
-            unset($data['fiche_securite']);
-            unset($data['registre_tracabilite']);
-            unset($data['registre_dechet']);
-            unset($data['attestation_destination_finale']);
-            unset($data['list_produit']);
+            unset($data['cnib']);
+            unset($data['puh']);
+            unset($data['plan']);
+            unset($data['coupe']);
+            // unset($data['registre_tracabilite']);
+            // unset($data['registre_dechet']);
+            // unset($data['attestation_destination_finale']);
+            // unset($data['list_produit']);
 
             $demande = $this->repository->create($data);
             $demande->save();
             //    dd($demande->uuid);
 
             //    $this->repository->uuid();
-            $demandePieceP001Repository->setChemin($cheminFaisabilite, $demande->uuid, 'Avis Faisabilite');
-            $demandePieceP001Repository->setChemin($cheminRccm, $demande->uuid, 'Rccm');
-            $demandePieceP001Repository->setChemin($facture_pro_format, $demande->uuid, 'Facture Pro-Format');
-            $demandePieceP001Repository->setChemin($cheminFicheSecurite, $demande->uuid, 'Fiche Securite');
-            $demandePieceP001Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de Tracabilite');
-            $demandePieceP001Repository->setChemin($registre_dechet, $demande->uuid, 'Registre Dechet');
-            $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
-            $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
+            $demandePieceP001Repository->setChemin($cnib, $demande->uuid, 'CNIB');
+            $demandePieceP001Repository->setChemin($puh, $demande->uuid, 'PUH');
+            $demandePieceP001Repository->setChemin($plan, $demande->uuid, 'PLAN');
+            $demandePieceP001Repository->setChemin($coupe, $demande->uuid, 'COUPE');
+            // $demandePieceP001Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de Tracabilite');
+            // $demandePieceP001Repository->setChemin($registre_dechet, $demande->uuid, 'Registre Dechet');
+            // $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
+            // $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
 
             return redirect('/demandes-lists?procedure=DATIPC')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
         } else {
@@ -107,7 +113,7 @@ class DemandeP001Controller extends Controller
 
     // partie update
 
-    public function update(Request $request, UserRepository $userRepository, DemandePieceP001Repository $demandePieceP001Repository, DemandeP001 $demande)
+    public function update(Request $request, UserRepository $userRepository, DemandePieceRepository $demandePieceP001Repository, DemandeP001 $demande)
     {
 
         $data =  $request->all();

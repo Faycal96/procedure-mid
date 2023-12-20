@@ -7,6 +7,8 @@ use App\Models\Demande;
 use App\Models\Procedure;
 use App\Models\Pays;
 use App\Models\Province;
+use App\Models\TypeConstruction;
+use App\Models\UsageConstruction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -52,12 +54,14 @@ class DemandeComp extends Component
         $data = [
             "procedure" => $procedure,
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
-            // "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+            "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
             "email" => Auth::user()->email,
             "provinces" => Province::all(),
             "communes" => Commune::all(),
-            // "telephone" => Auth::user()->usager->telephone,
+            "telephone" => Auth::user()->usager->telephone,
             "pays" => Pays::all(),
+            "typeConstructions" => TypeConstruction::all(),
+            "usages" => UsageConstruction::all(),
         ];
         
         $startDate = Carbon::parse($procedure->session_debut);

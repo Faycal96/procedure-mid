@@ -1,3 +1,5 @@
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -19,7 +21,7 @@
                         }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
                     </script>
                 @endif</div>
-                <p style="color: red">Les champs suivis d'étoile rouge sont obligatoires</p>
+                <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
                         <form id="msform"  method="POST" action="{{route('demandesp001-store')}}" enctype="multipart/form-data">
@@ -57,6 +59,8 @@
                                                  <option value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
 
                                                 @endforeach
+
+
                                             </select>
 
 
@@ -110,8 +114,7 @@
                                                 *</span></label>
                                             <input type="file" name="puh" class="form-control border-success" required>
                                         </div>
-                                    </div>
-                                    <br>
+                                    </div><br>
 
                                     <div class="row">
                                         <div class="col-6">
@@ -142,44 +145,38 @@
                                         <div class="col">
                                             <label class="siege_social fw-bold">Type de construction<span style="color:red">
                                                     *</span></label>
-                                            <select name="type_construction_id" id="typeConstruction" class="form-select border-success" required>
+
+                                            <select name="type_construction" class="form-select border-success" required>
                                                 {{-- <input type="text" placeholder="filtrer ici"> --}}
-                                                <option value="">Veuillez choisir le type de construction</option>
-                                                @foreach ( $typeConstructions as  $type)
-                                                 <option value="{{ $type->uuid }}" >{{ $type->libelle }}</option>
+                                                <option value="">Veuillez choisir un type</option>
+                                                <option value="RDC" >RDC</option>
+                                                <option value="R+1" >R+1</option>
+                                                <option value="R+2" >R+2</option>
+                                                <option value="R+3" >R+3</option>
+                                                <option value="R+4" >R+4</option>
 
-                                                @endforeach
                                             </select>
-                                        </div>
 
-                                        <div class="col-6">
-                                            <label class="boite_postale fw-bold">Y'a-t-il un sous sol ?<span style="color:red">
-                                                    *</span></label>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <span>Oui</span>
-                                                        <input type="radio" name="is_underground" class="border-success"   value="Oui" />
-                                                    </div>
-                                                    <div class="col">
-                                                        <span>Non</span>
-                                                        <input type="radio" name="is_underground" class="border-success"   value="Non" />
-                                                    </div>
-                                                </div>
+
                                         </div>
-                                    </div>
-                                        
+                                        <div class="col">
+                                            <label class="nom_societe fw-bold"> <strong>Type dalle</strong> <span
+                                                    style="color: red">*</span></label>
+                                            <input type="text" class="border-success" 
+                                                placeholder="Nom et prenom" />
+                                        </div>
                                     <div class="row">
                                         <div class="col">
                                             <label class="siege_social fw-bold">Usage<span style="color:red">
                                                     *</span></label>
 
-                                            <select name="autre_usage_construction" class="form-select border-success" required>
+                                            <select name="usage" class="form-select border-success" required>
                                                 {{-- <input type="text" placeholder="filtrer ici"> --}}
-                                                <option value="">Veuillez choisir le type d'usage'</option>
-                                                @foreach ( $usages as  $usage)
-                                                 <option value="{{ $usage->uuid }}" >{{ $usage->libelle }}</option>
-
-                                                @endforeach
+                                                <option value="">Veuillez choisir un usage</option>
+                                                <option value="Habitation" >Habitation</option>
+                                                <option value="Commercial" >Commercial</option>
+                                                <option value="Mixte" >Mixte</option>
+                                                <option value="autre_usage_construction" >Autre</option>
                                             </select>
                                         </div>
 
@@ -188,7 +185,7 @@
                                                 <label class="siege_social fw-bold">Preciser l'usage<span style="color:red">
                                                         *</span></label>
 
-                                                <input type="text" class="border-success" name="autre_usage_construction" placeholder="autre usage a préciser" />
+                                                <input type="text" class="border-success" name="autre_usage_construction" placeholder="autre usage" />
                                             </div>
                                         {{-- @endif --}}
                                     </div>
@@ -253,7 +250,20 @@
                                                 </div>
                                         </div>
 
-                                        
+                                        <div class="col-6">
+                                            <label class="boite_postale fw-bold">Y'a-t-il un sous sol ?<span style="color:red">
+                                                    *</span></label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <span>Oui</span>
+                                                        <input type="radio" name="is_underground" class="border-success"   value="Oui" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <span>Non</span>
+                                                        <input type="radio" name="is_underground" class="border-success"   value="Non" />
+                                                    </div>
+                                                </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -288,7 +298,7 @@
                             </fieldset>
 
                             <fieldset>
-                                {{-- <form action=""> --}}
+                                <form action="">
                                 <div class="form-card">
                                     <h4 class="fs-title">Paiement <span style="color:red">
                                         *</span></h4>
@@ -303,8 +313,64 @@
                                             <label class="siege_social fw-bold ">MOOV</label>
                                             <input id="radio2" type="radio" value="0"  name="moyen"/>
                                         </div>
+
+                                        <div class="col-6">
+                                            <label for="demande timbre" class="fw-bold">Vue en plan et coupe du batiment<span style="color:red">
+                                                *</span></label>
+                                            <input type="file" name="coupe" class="form-control border-success" required>
+                                        </div>
                                     </div>
-                                    
+
+                                </div>
+                                <input type="button"   class="previous action-button-previous"
+                                    value="Retour" />
+                                <input type="button"   class="next action-button"
+                                    value="Suivant" />
+                            </fieldset>
+
+                            <fieldset>
+
+                                <div class="form-card">
+                                    <h2 class="fs-title">  </h2>
+
+                                    <div class="row">
+                                        <input type="checkbox" id="confirmationBox" name="confirmed"
+                                            class="required-checkbox   checkbox" value="1" required>
+                                        <label for="confirmationBox" class="checkbox-label">
+                                            En cochant cette case, je certifie sur mon honneur que les informations
+                                            renseignées sont correctes.
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <input type="button"  class="previous action-button-previous"
+                                    value="Retour" />
+                                    <input type="button"  class="next action-button btn btn-success"
+                                    value="Suivant" />
+                            </fieldset>
+
+                            <fieldset>
+                                <form action="">
+                                <div class="form-card">
+                                    <h4 class="fs-title">Paiement <span style="color:red">
+                                        *</span></h4>
+                                        <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
+                                                *</span></label>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <label class="nom_societe fw-bold" >ORANGE</label>
+                                            <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="siege_social fw-bold ">MOOV</label>
+                                            <input id="radio2" type="radio" value="0"  name="moyen"/>
+                                        </div>
+
+                                    </div>
+                                    <br>
+
+
                                     <div class="row">
                                         <div id="moyenP1">
                                             <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
@@ -314,7 +380,7 @@
                                             <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
 
                                         </div>
-                                        <div class="col-6">
+                                    <div class="col-6">
                                             <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                     *</span></label>
                                             <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
@@ -326,12 +392,18 @@
                                         </div>
                                     </div>
 
+
+
                                 </div>
-                                <input type="button"   class="previous action-button-previous"
+                                <input type="button"  class="previous action-button-previous"
                                     value="Retour" />
                                 <input type="submit"   class="next action-button"
                                     value="Valider" />
+                                <!-- Ajoutez ceci dans la première étape du formulaire -->
+                                <div class="error-message" style="color: red;"></div>
+                                </form>
                             </fieldset>
+
 
                         </form>
                     </div>
@@ -497,4 +569,8 @@ var myLink = document.querySelector('a[href="#"]');
 myLink.addEventListener('click', function(e) {
   e.preventDefault();
 });
+
+
+
+
 </script>
