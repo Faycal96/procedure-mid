@@ -35,12 +35,12 @@ class Demande extends Model
     }
     public function demandePiece()
     {
-        return $this->hasMany(DemandePiece::class, 'demande_p002_id');
+        return $this->hasMany(DemandePiece::class, 'demande_id');
     }
 
     public function demandeCommentaire()
     {
-        return $this->hasMany(Commentaire::class, 'demande_p002_id');
+        return $this->hasMany(Commentaire::class, 'demande_id');
     }
     //   Function recuperation des status demandes
     public function statut()

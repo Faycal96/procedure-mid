@@ -13,7 +13,6 @@ class DemandeP001 extends Demande
     use \Wildside\Userstamps\Userstamps;
     protected $guarded = [];
     protected $primaryKey = 'uuid';
-    protected $with = ['demandePiece'];
 
     public function demande(){
         return $this->belongsTo(Demande::class, 'demande_id', 'uuid');

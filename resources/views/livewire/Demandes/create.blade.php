@@ -142,7 +142,7 @@
                                         <div class="col">
                                             <label class="siege_social fw-bold">Type de construction<span style="color:red">
                                                     *</span></label>
-                                            <select name="type_construction_id" id="typeConstruction" class="form-select border-success" required>
+                                            <select name="type_construction_id" id="typeConstructions" class="form-select border-success" required>
                                                 {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                 <option value="">Veuillez choisir le type de construction</option>
                                                 @foreach ( $typeConstructions as  $type)
@@ -271,7 +271,7 @@
                                     <h2 class="fs-title">  </h2>
 
                                     <div class="row">
-                                        <input type="checkbox" id="confirmationBox" name="confirmed"
+                                        <input type="checkbox" id="confirmationBox" name="is_certified"
                                             class="required-checkbox   checkbox" value="1" required>
                                         <label for="confirmationBox" class="checkbox-label">
                                             En cochant cette case, je certifie sur mon honneur que les informations

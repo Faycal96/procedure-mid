@@ -21,33 +21,6 @@ class DemandeRepository extends AppRepository
     }
 
 
-    // public function uploadFile(array $data, $file){
-
-    //     //dd($data['file']->getClientOriginalName().  $data['file']->getClientOriginalExtension());die;
-    //     $this->unsetClauses();
-    //     // dd($data);
-    //     $fileName = time().'.'.$data['procedure_id']. $data[$file]->getClientOriginalExtension(); 
-    //     //$fileName = time().'.'.$data->file->extension(); 
-        
-    //     //creer un repertoire avec matricule comme nom 
-    //     //on enregistre tous les fichiers du personnel concerné
-    //     //$libelle = $data->libelle;
-    //    // echo $data;
-    //     // $libelle = $data['libelle_court'];
-    //     // echo $libelle;
-    //     // $url = 'public/'.$libelle;
-    //     $url = 'public/'.$fileName;
-    //     Storage::makeDirectory($url);
-        
-    //     //deplacer la photo dans le dossier créé
-    //     //$data['file']->Storage::copy('app/public/'.$libelle, $fileName);
-
-    //     $path = $data['procedure_id']->storeAs('public/'.$libelle, $fileName);
-    //     //ajouter lutilisateur connecté et le filename pour la création de personnel 
-    //     //$request->merge(['Utilisateurs_id' => auth()->user()->id, 'photo' => $fileName]);
-    //     return $path;
-    // }
-
     
     public function uploadFile(array $data, string $name){
 

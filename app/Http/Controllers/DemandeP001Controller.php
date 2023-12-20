@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\DemandeP001;
 use App\Models\Procedure;
+use App\Repositories\DemandeP001Repository;
 use Illuminate\Http\Request;
 use App\Repositories\DemandeRepository;
-use App\Repositories\DemandePieceP001Repository;
 use App\Repositories\DemandePieceRepository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\DB;
 class DemandeP001Controller extends Controller
 {
     public $repository;
-    public function __construct(DemandeRepository $repository)
+    public $demandeRepositoryP001;
+    public function __construct(DemandeRepository $repository, DemandeP001Repository $demandeRepositoryP001)
     {
         $this->repository = $repository;
+        $this->demandeRepositoryP001 = $demandeRepositoryP001;
+        
     }
 
 
@@ -45,7 +48,7 @@ class DemandeP001Controller extends Controller
         //return view('livewire.Demandesp0012.create');
     }
 
-    public function store(Request $request, UserRepository $userRepository, DemandePieceRepository $demandePieceP001Repository, DemandeP001 $demande)
+    public function store(Request $request, UserRepository $userRepository, DemandePieceRepository $demandePieceRepository, DemandeP001 $demande)
     {
 
         $data =  $request->all();
@@ -89,15 +92,16 @@ class DemandeP001Controller extends Controller
             // unset($data['attestation_destination_finale']);
             // unset($data['list_produit']);
 
-            $demande = $this->repository->create($data);
+            $demande = $this->demandeRepositoryP001->create($data);
+            dd($demande);
             $demande->save();
             //    dd($demande->uuid);
-
+           //  $demande->demandePiece()->attach( $piece_jointe_id, ['chemin'=>cnib])
             //    $this->repository->uuid();
-            $demandePieceP001Repository->setChemin($cnib, $demande->uuid, 'CNIB');
-            $demandePieceP001Repository->setChemin($puh, $demande->uuid, 'PUH');
-            $demandePieceP001Repository->setChemin($plan, $demande->uuid, 'PLAN');
-            $demandePieceP001Repository->setChemin($coupe, $demande->uuid, 'COUPE');
+            $demandePieceRepository->setChemin($cnib, $demande->uuid, 'CNIB');
+            $demandePieceRepository->setChemin($puh, $demande->uuid, 'PUH');
+            $demandePieceRepository->setChemin($plan, $demande->uuid, 'PLAN');
+            $demandePieceRepository->setChemin($coupe, $demande->uuid, 'COUPE');
             // $demandePieceP001Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de Tracabilite');
             // $demandePieceP001Repository->setChemin($registre_dechet, $demande->uuid, 'Registre Dechet');
             // $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
