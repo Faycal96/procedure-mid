@@ -25,8 +25,11 @@ class DatabaseSeeder extends Seeder
            //UsersTableSeeder::class
 
            // UsersTableSeeder::class
-            AgremenTechniqueTableSeeder::class,
-            UsageConstructionSeeder::class
+            //AgremenTechniqueTableSeeder::class,
+            UsageConstructionSeeder::class,
+            CategorieDemandeSeeder::class,
+            PieceJointeSeeder::class,
+            ProcedurePieceJointeSeeder::class
           // UsersTableSeeder::class
 
         ]);
