@@ -64,7 +64,7 @@ class Demande extends Model
     public function scopeDemande($query)
     {
         return $query
-                ->when($this->procedure->code == "P001",function($q){
+                ->when($this->procedure->code === "P001",function($q){
                     return $q->with('demandeP001');
                 },function($q){
                     return $q->with('demandeP002');

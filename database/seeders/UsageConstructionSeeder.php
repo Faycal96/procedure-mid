@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Demande;
 use App\Models\UsageConstruction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -32,5 +33,6 @@ class UsageConstructionSeeder extends Seeder
             'code' => "AUT",
             'libelle' => "AUTRES"
         ]);
+        
     }
 }

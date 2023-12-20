@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ProcedurePieceJointeSeeder::class
           // UsersTableSeeder::class
 
+
         ]);
         // \App\Models\User::factory(10)->create();
 

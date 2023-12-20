@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Demande;
 use App\Models\PieceJointe;
 use App\Models\Procedure;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
