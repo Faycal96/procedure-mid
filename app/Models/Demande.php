@@ -14,6 +14,9 @@ class Demande extends Model
     protected $guarded = [];protected $primaryKey = 'uuid';
     protected $with = ['demandePiece'];
 
+    public function categorie(){
+        return $this->belongsTo(CategorieDemande::class, 'categorie_id', 'uuid');
+    }
     public function usager(){
         return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
     }
