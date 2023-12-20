@@ -27,6 +27,9 @@ class Demande extends Model
         return $randomString;
     }
 
+    public function categorie(){
+        return $this->belongsTo(CategorieDemande::class, 'categorie_id', 'uuid');
+    }
     public function usager(){
         return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
     }
