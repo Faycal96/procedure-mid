@@ -19,8 +19,11 @@ class DemandeP001 extends Demande
         return $this->belongsTo(Demande::class, 'demande_id', 'uuid');
     }
 
-    public function usager(){
-        return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
+    public function typeConstruction() {
+        return $this->belongsTo(TypeConstruction::class, "type_construction_id", "uuid");
     }
-    
+
+    public function usageConstruction() {
+        return $this->belongsTo(UsageConstruction::class, "usage_construction_id", "uuid");
+    }
 }
