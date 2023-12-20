@@ -39,7 +39,7 @@
                                 <ul id="progressbar">
                                     <li class="active" id="personal"><strong>Fiche de renseignement administratif</strong></li>
                                     <li id="folder"><strong>Personne habilitée à representer l'entreprise</strong></li>
-                                    <li id="personal"><strong>Réferences de l'entreprise</strong></li>
+                                    <li id="personal"><strong>Pièces jointes</strong></li>
                                     <li id="personal"><strong>Participation effective du candidat à l'agrément</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
                                     <li id="paiement"><strong>Paiement </strong></li>
@@ -94,33 +94,9 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-6 form-group">
-                                                    <label class="col-form-label">Statut légalisée de la société<span style="color: red">*</span></label>
-                                                    <input type="file" class="form-control border-success" />
-                                                </div>
-
                                                 <div class="col-6 mb-3 form-group">
                                                     <label for="fullName" class="col-form-label">Siège sociale</label>
                                                     <input name="name" type="text" class="form-control border-success" id="fullName">
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-6 form-group">
-                                                    <label class="col-form-label">RCCM / RSCPM<span style="color: red">*</span></label>
-                                                    <input type="file" class="form-control border-success" />
-                                                </div>
-
-                                                <div class="col-6 form-group">
-                                                    <label class="col-form-label">IFU / Récipissé<span style="color: red">*</span></label>
-                                                    <input type="file" class="form-control border-success" />
-                                                </div>
-                                            </div> <br>
-
-                                            <div class="row">
-                                                <div class="col-6 form-group">
-                                                    <label class="col-form-label">Document chiffre d'affaire<span style="color: red">*</span></label>
-                                                    <input type="file" class="form-control border-success" />
                                                 </div>
 
                                                 <div class="col-6 mb-3 form-group">
@@ -128,6 +104,7 @@
                                                     <input name="name" type="text" class="form-control border-success" id="fullName">
                                                 </div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-6 form-group">
                                                     <label class="col-form-label">Télephone<span style="color: red">*</span></label>
@@ -203,25 +180,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="nom_societe fw-bold">Ancient agrément <span
-                                                        style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold">N° employeur <span
+                                                <label class="nom_societe fw-bold">N° employeur (CNSS)<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold">Liste matériel <span
-                                                        style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="adresse fw-bold">Liste personnel<span style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" />
                                             </div>
                                         </div>
 
@@ -233,56 +194,49 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
-                                        <h2 class="fs-title">Réferences de l'entreprise</h2>
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <label for="domaine" class="siege_social">Localisation
-                                                    <span style="color:red">*</span></label>
-                                                    <select name="domaine" id="domaine" class="form-select border-success">
-                                                        <option value="">Veuillez choisir la localisation</option>
-                                                        {{-- @foreach($domaines as $dom)
-                                                        <option value="{{ $dom->uuid}}">{{  $dom->libelle_long }}</option>
-                                                        @endforeach --}}
-                                                    </select>
-                                                 {{-- @if($errors->has('domaine'))
-                                                        <p class="alert alert-danger">{{ $errors->first('domaine') }}</p>
-                                                 @endif --}}
+                                        <h2 class="fs-title">Pièces jointes</h2>
 
+                                        <div class="row">
+                                            <div class="col-6 form-group">
+                                                <label class="col-form-label fw-bold">Statut légalisée de la société<span style="color: red">*</span></label>
+                                                <input type="file" class="form-control border-success" />
                                             </div>
-                                            <div class="col-4">
-                                               <label for="categorie" class="siege_social">Désignation de travaux
-                                                    <span style="color:red">*</span></label>
-                                                <select name="categorie" id="categorie" class="form-select border-success">
-                                                    <option value="">Veuillez choisir la désignation des travaux</option>
-                                                     {{-- @foreach($categories as $cat)
-                                                        <option value="{{  $cat->uuid}}">{{  $cat->libelle_long }}</option>
-                                                     @endforeach --}}
-                                                </select>
-                                                 {{-- @if($errors->has('categorie'))
-                                                        <p class="alert alert-danger">{{ $errors->first('categorie') }}</p>
-                                                 @endif --}}
-                                            </div>
-                                            <div class="col-4">
-                                               <label for="sousdomaine" class="nom_societe">Maitrise d'ouvrage
-                                                    <span style="color: red">*</span></label>
-                                                <input type="text" class="border-success form-control" />
-                                                <!--input type="text" class="border-success" name="sous_domaine" id="sousdomaine" required /-->
-                                                {{-- <select name="sous_domaine[]" id="sousdomaine" class="form-select border-success"></select> --}}
-                                                 {{-- @if($errors->has('sous_domaine'))
-                                                        <p class="alert alert-danger">{{ $errors->first('sous_domaine') }}</p>
-                                                    @endif --}}
+
+                                            <div class="col-6 form-group">
+                                                <label class="col-form-label fw-bold">RCCM / RSCPM<span style="color: red">*</span></label>
+                                                <input type="file" class="form-control border-success" />
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-6 form-group">
-                                                <label class="col-form-label">Date début<span style="color: red">*</span></label>
-                                                <input type="date" class="form-control border-success" />
+                                                <label class="col-form-label fw-bold">IFU / Récipissé<span style="color: red">*</span></label>
+                                                <input type="file" class="form-control border-success" />
                                             </div>
 
-                                            <div class="col-6 mb-3 form-group">
-                                                <label for="fullName" class="col-form-label">Date fin</label>
-                                                <input type="date" class="form-control border-success" id="fullName">
+                                            <div class="col-6 form-group">
+                                                <label class="col-form-label fw-bold">Document chiffre d'affaire<span style="color: red">*</span></label>
+                                                <input type="file" class="form-control border-success" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Ancient agrément <span
+                                                        style="color: red">*</span></label>
+                                                <input type="file" class="border-success form-control" />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="nom_societe fw-bold">Liste matériel <span
+                                                        style="color: red">*</span></label>
+                                                <input type="file" class="border-success form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="adresse fw-bold">Liste personnel<span style="color: red">*</span></label>
+                                                <input type="file" class="border-success form-control" />
                                             </div>
                                         </div>
 
@@ -353,6 +307,41 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title">Participation effective du candidat à l'agrément</h2>
+
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label for="domaine" class="siege_social">Localisation
+                                                    <span style="color:red">*</span></label>
+                                                    <select name="domaine" id="domaine" class="form-select border-success">
+                                                        <option value="">Veuillez choisir la localisation</option>
+                                                    </select>
+
+                                            </div>
+                                            <div class="col-4">
+                                               <label for="categorie" class="siege_social">Désignation de travaux
+                                                    <span style="color:red">*</span></label>
+                                                <select name="categorie" id="categorie" class="form-select border-success">
+                                                    <option value="">Veuillez choisir la désignation des travaux</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                               <label for="sousdomaine" class="nom_societe">Maitrise d'ouvrage
+                                                    <span style="color: red">*</span></label>
+                                                <input type="text" class="border-success form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-6 form-group">
+                                                <label class="col-form-label">Date début<span style="color: red">*</span></label>
+                                                <input type="date" class="form-control border-success" />
+                                            </div>
+
+                                            <div class="col-6 mb-3 form-group">
+                                                <label for="fullName" class="col-form-label">Date fin</label>
+                                                <input type="date" class="form-control border-success" id="fullName">
+                                            </div>
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-6">
