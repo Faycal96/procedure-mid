@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-class DemandeP002  extends Demande
+
+//class DemandeP002  extends Demande
+class DemandeP002 extends Model
 {
     use HasFactory;
     use \Illuminate\Database\Eloquent\Concerns\HasUlids;
     use \Wildside\Userstamps\Userstamps;
+
+    protected $table = 'demandes';
+
     protected $guarded = [];
     protected $primaryKey = 'uuid';
 

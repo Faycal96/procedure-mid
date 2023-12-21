@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Commune;
 use App\Models\Pays;
 use App\Models\Demande;
+use App\Models\CategorieDemande;
 use App\Models\DemandeCategorieP002;
 use App\Models\DemandeDomaineP002;
 use App\Models\DemandeSousDomaineP002;
@@ -43,24 +44,22 @@ class DemandeCompP002 extends Component
 
     public function render()
     {
-
-
-
         Carbon::setLocale("fr");
 
         $searchCriteria = "%".$this->search."%";
         $procedure = Procedure::where("code", request()->segment(1))->first();
         $data = [
             "procedure" => $procedure,
-            "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
+            //"demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->telephone,
             "communes" => Commune::all(),
             "pays" => Pays::all(),
-            // "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
+            "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
            // "default_pays" => Auth::user()->usager->pays,
-            "domaines" => DemandeDomaineP002::all(),
-            "categories" => DemandeCategorieP002::all(),
-            "sousDomianes" => DemandeSousDomaineP002::all(),
+            //"domaines" => DemandeDomaineP002::all(),
+            //"categories" => DemandeCategorieP002::all(),
+            "categories" => CategorieDemande::all(),
+            // "sousDomianes" => DemandeSousDomaineP002::all(),
         ];
 
         $startDate = Carbon::parse($procedure->session_debut);
@@ -78,7 +77,7 @@ class DemandeCompP002 extends Component
             ->section("contenu");
     }
 
-    protected   $rules = [
+    protected $rules = [
             'libelle_court' => 'required',
             'libelle_long' => 'required',
 

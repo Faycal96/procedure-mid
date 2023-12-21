@@ -25,7 +25,7 @@
          <div class="row justify-content-center mt-0">
              <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                  <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
-                     <h5><strong>Octroie d'agrement techniques en Eau et Assainissement</strong></h5>
+                     <h5><strong> Délivrance et suspension de l’agrément technique </strong></h5>
                      <p>
                          @if (session('success'))
                              <div class="alert alert-success">
@@ -61,45 +61,61 @@
                                                  style="color:red">
                                                  *</span></h4>
                                          <div class="row">
+
+                                            <label class="nom_societe fw-bold">Identité du demandeur <span style="color: red">*</span></label>
+                                            <input type="text" class="border-success" name="identite" required placeholder="identité" value="{{ $identite }}" /><br /><br />
+                                       
+
                                              <label class="nom_societe fw-bold">Que voulez vous faire <span
                                                      style="color: red">*</span></label>
                                              <div class="col-4">
-                                                 <input id="radio1" type="radio" value="Nouvel demande">
+                                                 <input id="radio1" type="radio" value="Nouvel demande" name="objectif_demande" checked>
                                                  <label for="radio1">Nouvel demande</label>
                                              </div>
                                              <div class="col-4">
-                                                 <input id="radio1" type="radio">
-                                                 <label for="radio1">Renouvellement</label>
+                                                 <input id="radio2" type="radio" value="Renouvellement" name="objectif_demande">
+                                                 <label for="radio2">Renouvellement</label>
                                              </div>
                                              <div class="col-4">
-                                                 <input id="radio1" type="radio">
-                                                 <label for="radio1">Changement de catégorie</label>
+                                                 <input id="radio3" type="radio" value="Changement de catégorie" name="objectif_demande">
+                                                 <label for="radio3">Changement de catégorie</label>
                                              </div>
                                          </div>
 
                                          <div class="row">
                                              <div class="col-6 form-group">
                                                  <label>Type catégorie</label>
-                                                 <select id="categorie" class="form-select border-success">
+                                                 <select id="categorie" name="categorie" class="form-select border-success">
                                                      <option class="mb-3" value=""></option>
-                                                     {{-- @foreach ($procedures as $proc)
-                                                                <option class="mb-3" value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
-                                                            @endforeach --}}
+                                                       @foreach ($categories as $cat)
+                                                                <option class="mb-3" value="{{$cat->uuid}}">{{$cat->libelle}}</option>
+                                                         @endforeach 
                                                  </select>
                                              </div>
+
+                                             <div class="col-6 form-group">
+                                                <label class="pays_residence fw-bold">Commune de Residence<span style="color:red"> *</span></label>
+                                                <select name="commune_id" id="commune_id" class="form-select border-success">
+                                                <option >Veuillez choisir le lieu</option>
+                                                @foreach($communes as $com)
+                                                    <option value="{{$com->uuid }}">{{utf8_decode($com->libelle)}}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+
                                          </div> <br>
 
                                          <div class="row">
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Nom de
                                                      l'entreprise</label>
-                                                 <input name="name" type="text"
+                                                 <input name="beneficiaire" type="text"
                                                      class="form-control border-success" id="fullName">
                                              </div>
 
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Raison sociale</label>
-                                                 <input name="name" type="text"
+                                                 <input name="raison_social" type="text"
                                                      class="form-control border-success" id="fullName">
                                              </div>
                                          </div>
@@ -107,12 +123,12 @@
                                          <div class="row">
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Siège sociale</label>
-                                                 <input name="name" type="text"
+                                                 <input name="siege_social" type="text"
                                                      class="form-control border-success" id="fullName">
                                              </div>
 
                                              <div class="col-6 mb-3 form-group">
-                                                 <label for="fullName" class="col-form-label">Boîte Postale</label>
+                                                 <label for="boite_postale" class="col-form-label">Boîte Postale</label>
                                                  <input name="name" type="text"
                                                      class="form-control border-success" id="fullName">
                                              </div>
@@ -122,25 +138,25 @@
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Télephone<span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="form-control border-success" />
+                                                 <input type="text" name="tel_1" class="form-control border-success" />
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Fax<span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="form-control border-success" />
+                                                 <input type="text" name="fax" class="form-control border-success" />
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Email<span
                                                          style="color: red">*</span></label>
-                                                 <input type="email" class="form-control border-success" />
+                                                 <input type="email" name="email_entreprise" class="form-control border-success" />
                                              </div>
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Adresse Physique<span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="form-control border-success" />
+                                                 <input type="text" name="adresse_physique" class="form-control border-success" />
                                              </div>
                                          </div>
 
@@ -176,24 +192,24 @@
                                              <div class="col-6">
                                                  <label class="nom_societe fw-bold">Nom <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
+                                                 <input type="text" name="nom_representant" class="border-success form-control" />
                                              </div>
                                              <div class="col-6">
                                                  <label class="nom_societe fw-bold">Prénom(s) <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
+                                                 <input type="text" name="prenom_representant" class="border-success form-control" />
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6">
                                                  <label class="nom_societe fw-bold">Qualité <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
+                                                 <input type="text" name="fonction_representant" class="border-success form-control" />
                                              </div>
                                              <div class="col-6">
                                                  <label class="nom_societe fw-bold">Adresse <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
+                                                 <input type="text" name="adresse_representant" class="border-success form-control" />
                                              </div>
                                          </div>
                                          <div class="row">
@@ -532,7 +548,9 @@
                                          <input type="button" name="previous"
                                              class="previous action-button-previous" value="Retour" />
 
-                                         <button type="submit" class="action-button" id="btn_send">Valider</button>
+                                         <!-- <button type="submit" class="action-button" id="btn_send">Valider</button> -->
+
+                                         <input type="submit" class="next action-button" value="Valider22" />
 
                                          <!-- Ajoutez ceci dans la première étape du formulaire -->
                                          <div class="error-message" style="color: red;"></div>

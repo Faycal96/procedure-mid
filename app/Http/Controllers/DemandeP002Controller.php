@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Demande;
 use App\Models\DemandeP002;
 use App\Models\Procedure;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use App\Http\Requests\StoreDemandeP002Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DemandeCategorieP002;
 use App\Models\DemandeDomaineP002;
+use App\Models\CategorieDemande;
 class DemandeP002Controller extends Controller {
 
     public $repository;
@@ -21,35 +23,69 @@ class DemandeP002Controller extends Controller {
         $this->repository = $repository;
     }
 
-    public function store(StoreDemandeP002Request $request,
-            DemandePieceP002Repository $demandePieceP002Repository,
-            DemandeP002 $demande) {
-        $dataDemande = ['etat' => 'D',
+
+
+    public function store(StoreDemandeP002Request $request, DemandePieceP002Repository $demandePieceP002Repository, /*DemandeP002*/ Demande $demande) {
+
+       
+        //dd($demande);
+
+        $dataDemande = [
             'date_demande' => Carbon::parse(Carbon::now())->format('Ymd'),
+            'etat' => 'D',
+            'libelle_court' => "DSAT", 
             'identite' => $request->identite,
-            'commune_id' => $request->commune_id,
-            'beneficiaire' => $request->beneficiaire,
+            'commune_id' => $request->commune_id, //$request->commune_id,
+            'beneficiaire' => "Ali", //$request->beneficiaire,
             'procedure_id' => Procedure::where(['code' => 'P002'])->first('uuid')->uuid,
+            'reference' => $this->repository->generateReference('P002'),
             'delai' => Procedure::where(['code' => 'P002'])->first('delai')->delai,
-            'paiement' => 1,
+            'montant' => 1,
             'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
             'usager_id' => Auth::user()->usager_id,
             'last_modified_by' => Auth::user()->usager_id,
             'is_certified' => true,
-            'reference' => $this->repository->generateReference('P002'),
-            'domaine' => DemandeDomaineP002::where(['uuid' => $request->domaine])->first('libelle_long')->libelle_long,
-            'categorie' => DemandeCategorieP002::where(['uuid' => $request->categorie])->first('libelle_long')->libelle_long];
+            
+             // infos sur le type de demande
+            'objectif_demande' => $request->objectif_demande,
+            'categorie_id' =>  $request->categorie, //CategorieDemande::where(['code' => $request->categorie ])->first('uuid')->uuid,
+
+            // infos sur l'entreprise
+            'beneficiaire' =>  $request->beneficiaire, 
+            'raison_social' =>  $request->raison_social, 
+            'siege_social' =>  $request->siege_social, 
+            'boite_postale' =>  $request->boite_postale, 
+            'fax' =>  $request->fax, 
+            'tel_1' =>  $request->tel_1, 
+            'email_entreprise' =>  $request->email_entreprise, 
+            'adresse_physique' =>  $request->adresse_physique, 
+
+            // infos sur le representant de l'entrepise
+            'nom_representant' =>  $request->nom_representant, 
+            'prenom_representant' =>  $request->prenom_representant, 
+            'fonction_representant' =>  $request->fonction_representant, 
+            'adresse_representant' =>  $request->adresse_representant, 
+            //'no_employeur_CNSS)' =>  $request->no_employeur_CNSS, // champs non dispo dans la table
+        ];
+            
+
+
+        //dd($dataDemande);
+            /*
             if($request->sous_domaine && sizeof($request->sous_domaine)>0){
                 if(strlen($request->sous_domaine[0]> 0)){
                     $sousdomaine = implode(", ", $request->sous_domaine);
                     $dataDemande['sous_domaine'] =$sousdomaine;
                 }
             }
-
+            */
         // Sauvegarde de la demande
 
         $demande = $this->repository->create($dataDemande);
         $demande->save();
+
+
+        /*
         //Recuperation du chemin des fichiers joint
             $cheminRecuAchat = $this->repository->uploadFile($request->file('recu_achat_dossier'));
             $cheminifu = $this->repository->uploadFile($request->file('ifu'));
@@ -91,10 +127,19 @@ class DemandeP002Controller extends Controller {
                 }
             }
           // return json_encode(array('status' => 'success'));
-        return redirect('/demandes-lists?procedure=OATEA')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        */
+        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
         //return json_encode(array('status' => 'fail'));
     }
     
+
+
+
+
+
+
+
+
     public function update(Request $request,
             DemandePieceP002Repository $demandePieceP002Repository,
             DemandeP002 $demande) {

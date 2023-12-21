@@ -23,6 +23,7 @@ class StoreDemandeP002Request extends FormRequest
 
     public function rules(){
         $baseRules = [
+            /*
            'identite' => 'required',
             'commune_id' => 'required',
             'beneficiaire' => 'required',
@@ -36,12 +37,14 @@ class StoreDemandeP002Request extends FormRequest
            'categorie' => 'required',
            'sous_domaine' => 'required',
            'confirmed'  => 'required'
+           */
         ];
         return $baseRules;
     }
     public function messages(){
 
       $message = [
+        /*
         'identite.required' =>'Identité : est obligtoire',
         'commune_id.required' =>'Lieu de Residence : est obligatoire',
         'beneficiaire.required' => 'Bénéficiaire : est obligatoire',
@@ -55,6 +58,7 @@ class StoreDemandeP002Request extends FormRequest
         'categorie.required' => 'Catégorie : est obligatoire',
         'sous_domaine.required' => 'Sous domaine : est obligatoire',
         'confirmed.required' => 'Cocher la case de certification : est obligatoire',
+        */
         ];
         return $message;
     }
