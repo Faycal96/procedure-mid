@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dropColumn('confirmed');
             $table->string('adresse_beneficiaire')->nullable();
         });
+        
         Schema::table('demande_p001_s', function (Blueprint $table) {
             $table->dropForeign('demande_p001_s_user_id_foreign');
             $table->dropColumn('user_id');
