@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Agent;
 use App\Models\Commentaire;
 use App\Models\Demande;
 use App\Models\Procedure;
@@ -68,11 +68,11 @@ class BackendController extends Controller
 
 
     // Recuperation de la list des demande concernant p001 Produi chimique
-    public function listDemande(DemandeRepository $demandeRepository)
+    public function listDemande(DemandeRepository $demandeRepository,  Demande $demandeTest)
     {
         // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
-        /* $data = [
-            "demandes" => $demandeRepository->all()->sortByDesc('uuid'),
+        $data = [
+            "demandes" => $demandeRepository->all()->sortByDesc('created_at'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -81,16 +81,15 @@ class BackendController extends Controller
             "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
             "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
             //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
-            "demandeEnCours" => $demandeRepository->nombre('demande_p001_s', array('etat' => 'en cours')),
-            //"demandeEtat" => $demandeTest->statut(),
-            "demandeEtat" => null,
+            "demandeEnCours" => $demandeRepository->nombre('demandes', array('etat' => 'en cours')),
+            "demandeEtat" => $demandeTest->statut(),
             "agents" => Agent::all(),
         ];
 
-        //   dd($data['demandes'][0]->demandePiece); */
+        //   dd($data['demandes'][0]->demandePiece);
 
 
-        return view('backend.list_demande', /* $data */);
+        return view('backend.list_demande', $data);
     }
 
 
