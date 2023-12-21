@@ -62,15 +62,14 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-
                                                 <th scope="col">Date Démande</th>
                                                 <th scope="col">Réference</th>
                                                 <th scope="col">etat de mes Démandes</th>
                                                 <th scope="col">Délai de traitement</th>
                                                 <th scope="col">Déposé</th>
                                                 <th scope="col">Paiement</th>
+                                                <th scope="col">Type</th>
                                                 <th scope="col">Action</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -153,6 +152,10 @@
                                                     @else
                                                     <td><b><span class="text-warning">Non Payée</span></b></td>
                                                     @endif
+
+                                                    <td>
+                                                        {{ $demande->procedure->libelle_long}}
+                                                    </td>
 
                                                     <td>
                                                         <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i> Voir </button>

@@ -55,39 +55,6 @@ class AppRepository extends BaseRepository
                 $de = new DemandeP002();
                 $libelle = 'demandeP002';
                 break;
-            case 'demande_p003_s':
-                $de = new DemandeP003();
-                $libelle = 'demandeP003';
-                break;
-            case 'demande_p004_s':
-                $de = new DemandeP004();
-                $libelle = 'demandeP004';
-                 break;
-            case 'demande_p005_s':
-                $de = new DemandeP005();
-                $libelle = 'demandeP005';
-                 break;
-            case 'demande_p006_s':
-                $de = new DemandeP006();
-                $libelle = 'demandeP006';
-                break;
-
-            case 'demande_p007_s':
-                $de = new DemandeP007();
-                $libelle = 'demandeP007';
-                 break;
-            case 'demande_p008_s':
-                 $de = new DemandeP008();
-                 $libelle = 'demandeP008';
-                 break;
-            case 'demande_p0011_s':
-                 $de = new DemandeP0011();
-                 $libelle = 'demandeP0011';
-               break;
-            case 'demande_p0012_s':
-                $de = new DemandeP0012();
-                $libelle = 'demandeP0012';
-                break;
             default:
                 break;
         }
@@ -117,39 +84,6 @@ class AppRepository extends BaseRepository
             case 'demande_p002_s':
                 $de = new DemandeP002();
                 $libelle = 'demandeP002';
-                break;
-            case 'demande_p003_s':
-                $de = new DemandeP003();
-                $libelle = 'demandeP003';
-                break;
-            case 'demande_p004_s':
-                $de = new DemandeP004();
-                $libelle = 'demandeP004';
-                 break;
-            case 'demande_p005_s':
-                $de = new DemandeP005();
-                $libelle = 'demandeP005';
-                 break;
-            case 'demande_p006_s':
-                $de = new DemandeP006();
-                $libelle = 'demandeP006';
-                break;
-
-            case 'demande_p007_s':
-                $de = new DemandeP007();
-                $libelle = 'demandeP007';
-                 break;
-            case 'demande_p008_s':
-                 $de = new DemandeP008();
-                 $libelle = 'demandeP008';
-                 break;
-            case 'demande_p0011_s':
-                 $de = new DemandeP0011();
-                 $libelle = 'demandeP0011';
-               break;
-            case 'demande_p0012_s':
-                $de = new DemandeP0012();
-                $libelle = 'demandeP0012';
                 break;
             default:
                 break;

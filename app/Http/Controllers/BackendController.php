@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agent;
 use App\Models\Commentaire;
 use App\Models\Demande;
-use App\Models\DemandeP001;
-use App\Models\DemandeP002;
 use App\Models\Procedure;
 use App\Models\StatutDemande;
 use App\Repositories\BackendRepository;
-use App\Repositories\DemandeP001Repository;
-use App\Repositories\DemandeP002Repository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -284,8 +279,8 @@ class BackendController extends Controller
         //dd($demandes);
         $demandes = null;
         $data = [];
-        $demandes = $demandeRepository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
-        dd($demandes);
+        $demandes = Demande::where(['usager_id' => Auth::user()->usager->uuid])->get();
+        //dd($demandes);
         $data = [
             "demandes" => $demandes,
             "procedures" => Procedure::all(),
