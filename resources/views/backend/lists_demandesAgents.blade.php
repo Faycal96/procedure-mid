@@ -164,7 +164,7 @@
                                                         <!--button title="Modifier" type="button" class="btn btn-info "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
                                                     class="bi bi-pencil-square text-white">Modifier </i> </button-->
-                                                        <a title="Modifier" class="btn btn-info" href="{{ route('editer-demande', ['id' =>$demande->uuid, 'procedure' => $selectedProcedure] ) }}"> <i class="bi bi-pencil-square text-white">Modifier </i> </a>
+                                                        <a title="Modifier" class="btn btn-info" href="{{ route('editer-demande', ['id' =>$demande->uuid/*, 'procedure' => $selectedProcedure*/] ) }}"> <i class="bi bi-pencil-square text-white">Modifier </i> </a>
                                                         @endif
 
 
