@@ -13,7 +13,7 @@ class DemandeP002 extends Model
     use \Illuminate\Database\Eloquent\Concerns\HasUlids;
     use \Wildside\Userstamps\Userstamps;
 
-    protected $table = 'demandes';
+    //protected $table = 'demandes';
 
     protected $guarded = [];
     protected $primaryKey = 'uuid';
