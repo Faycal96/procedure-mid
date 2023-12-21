@@ -38,7 +38,11 @@ use App\Models\DemandePieceP007;
 use App\Models\DemandePieceP008;
 use App\Models\DemandeCategorieP002;
 use App\Models\DemandeDomaineP002;
+use App\Models\DemandePiece;
 use App\Models\DemandeSousDomaineP002;
+use App\Models\Province;
+use App\Models\TypeConstruction;
+use App\Models\UsageConstruction;
 
 class DemandeFontController extends Component
 {
@@ -66,145 +70,24 @@ class DemandeFontController extends Component
         $data = [];
         $view ='';
         $documents = null;
-        if (isset($procedure) && strlen($procedure) > 0) {
-            switch ($procedure) {
-                case 'PETE':
-                    $demande = DemandeP0012::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP0012::where(['demande_p0012_id' => $id])->get();
-                    $view ='livewire.Demandesp0012.edit';
-                    $data = [
-                        "demande" =>$demande,
-                        "documents" =>$documents,
-                        "telephone" => Auth::user()->usager->telephone,
-                        "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-                        "communes" => Commune::all(),
-                    ];
-                    break;
-                case 'DATIPC':
-                    $demande = DemandeP001::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP001::where(['demande_p001_id' => $id])->get();
-                    $view ='livewire.Demandes.edit';
-                    $data = [
-                        "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
-                        "demande" => $demande,
-                        "documents"  => $documents,
-                        "telephone" => Auth::user()->usager->telephone,
-                        "communes" => Commune::all(),
-                        "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
-                        "default_pays" => Auth::user()->usager->pays,
-                        "pays" => Pays::all(),
-                    ];
-                    break;
-                case 'ADDMC':
-                    $demande = DemandeP003::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP003::where(['demande_p003_id' => $id])->get();
-                    $view ='livewire.Demandesp003.edit';
-                    $data = [
-                        "demande" =>$demande,
-                        "documents" =>$documents,
-                        "telephone" => Auth::user()->usager->telephone,
-                        "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-                        "communes" => Commune::all(),
+        $demande = Demande::where(['uuid' => $id])->first();
+        $documents = DemandePiece::where(['demande_id' => $id])->get();
+      
+        $view ='livewire.Demandes.edit';
+        $data = [
+            "procedure" => $procedure,
+            "demande" => Demande::where(['uuid' => $id])->first(),
+            "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
+            "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+            "email" => Auth::user()->email,
+            "provinces" => Province::all(),
+            "communes" => Commune::all(),
+            "telephone" => Auth::user()->usager->telephone,
+            "pays" => Pays::all(),
+            "typeConstructions" => TypeConstruction::all(),
+            "usages" => UsageConstruction::all(),
 
-                    ];
-                    break;
-                case 'AGDS':
-                    $demande = DemandeP008::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP008::where(['demande_p008_id' => $id])->get();
-                    $view ='livewire.Demandesp008.edit';
-                    $data = [
-                        "demande" => $demande,
-                        "documents" => $documents,
-                        "telephone" => Auth::user()->telephone,
-                        "communes" => Commune::all(),
-                    ];
-                    break;
-                case 'CEESPNB':
-                    $demande = DemandeP006::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP006::where(['demande_p006_id' => $id])->get();
-                    $view ='livewire.Demandesp006.edit';
-                    $data = [
-                        "demande" => $demande,
-                        "documents" => $documents,
-                        "telephone" => Auth::user()->usager->telephone,
-                        "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-                        "communes" => Commune::all(),
-
-                    ];
-                    break;
-                case 'CDAS':
-                    $demande = DemandeP004::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP004::where(['demande_p004_id' => $id])->get();
-                    $view ='livewire.DemandesP004.edit';
-                    $data = [
-                        "demande" => $demande,
-                        "documents" => $documents,
-                        "telephone" => Auth::user()->usager->telephone,
-                        "communes" => Commune::all(),
-                        "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-                        "pays" => Pays::all(),
-                    ];
-                    break;
-                case 'PCBCB':
-                    $demande = DemandeP0011::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP0011::where(['demande_p0011_id' => $id])->get();
-                    $view ='livewire.Demandesp0011.edit';
-                    $data = [
-                            "demande" => $demande,
-                            "documents" => $documents,
-                            "telephone" => Auth::user()->usager->telephone,
-                            "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-                            "communes" => Commune::all(),
-                        ];
-                    break;
-
-                    case 'PCBCB2':
-                        $demande = DemandeP005::where(['uuid' => $id])->first();
-                        $documents = DemandePieceP005::where(['demande_p005_id' => $id])->get();
-                        $view ='livewire.Demandep005.edit';
-                        $data = [
-                                "demande" => $demande,
-                                "telephone" => Auth::user()->usager->telephone,
-                                "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-                                "communes" => Commune::all(),
-                            ];
-                        break;
-                case 'OATEA':
-                    $demande = DemandeP002::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP002::where(['demande_p002_id' => $id])->get();
-                    $view ='livewire.Demandes-p002.edit';
-                    $data = [
-                        "demande" => $demande,
-                        "documents" => $documents,
-                        "telephone" => Auth::user()->telephone,
-                        "communes" => Commune::all(),
-                        "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
-                        "domaines" => DemandeDomaineP002::all(),
-                        "categories" => DemandeCategorieP002::all(),
-                        "sousDomianes" => DemandeSousDomaineP002::all(),
-                    ];
-                    break;
-                case 'CHESPB':
-                    $demande = DemandeP007::where(['uuid' => $id])->first();
-                    $documents = DemandePieceP007::where(['demande_p007_id' => $id])->get();
-                    $view ='livewire.DemandesP007.edit';
-                    $data = [
-                        "demande" => $demande,
-                        "documents" => $documents,
-                        "telephone" => Auth::user()->usager->telephone,
-                        "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-                        "communes" => Commune::all(),
-                        "pays" => Pays::all(),
-                    ];
-                    break;
-
-                default:
-                    # code...
-                    break;
-            }
-
-        }
-
+        ];
 
         return view($view, $data)
             ->extends("layouts.template")

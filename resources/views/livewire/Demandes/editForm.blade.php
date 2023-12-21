@@ -11,7 +11,7 @@
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
-                    <h5><strong>Délivrance d'avis technique d'importation de produits chimiques insdustriels </strong></h5>
+                    <h5><strong>Demande d'étude de sols et de fondations </strong></h5>
                    <p> @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -22,472 +22,251 @@
 
                         <div class="col-md-12 mx-0">
                                     <form id="msform" method="POST" action="{{ route('demandesp001-update') }}" enctype="multipart/form-data" >
-                                        <input type="hidden" class="border-success" name="uuid" value='{{$demande->uuid}}'/>
+                                        <input type="hidden" class="border-success" name="uuid" value="{{ $demande }}"/>
                                         @csrf
 
                                 <!-- progressbar -->
                                 <ul id="progressbar" >
                                     <li class="active" id="personal"><strong>Identité du demandeur</strong></li>
-                                    <li id="personal"><strong>Identité du fournisseur</strong></li>
-                                    <li id="caracteristik"><strong>Pièces jointes</strong></li>
-                                    <li id="stockage"><strong>Information relative au stockage</strong></li>
-                                    <li id="engagement"><strong>Engagement </strong></li>
+                                <li id="caracteristik"><strong>Pièces Jointes</strong></li>
+                                <li id="personal"><strong>Information du terrain</strong></li>
+                                <li id="engagement"><strong>Engagement </strong></li>
+                                <li id="paiement"><strong>Paiement </strong></li>
                                     {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
                                     {{-- <li id="confirm"><strong>Validation</strong></li> --}}
                                 </ul>
                                 <!-- fieldsets -->
                                 <fieldset>
-                                    <div class="form-card ">
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
-                                                *</span></h4>
-
-                                                <div class="wish_payment_type">
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <span class="checkbox payment-radio">
-                                                            <label for="wish_payment_type_1"  class="fw-bold">
-                                                                <input class="checkbox check_boxes required" id="wish_payment_type_1" {{ intval($demande->is_producteur)==1 ? 'checked' : ''}}   name="is_producteur" type="checkbox" value="1">Producteur
-                                                            </label>
-                                                            </span>
-                                                        </div>
-
-                                                        <div class="col-3">
-
-                                                            <span class="checkbox payment-radio">
-                                                            <label for="wish_payment_type_2" class="fw-bold">
-                                                                <input class="checkbox check_boxes required" id="wish_payment_type_2"  {{ intval($demande->is_importateur)==1 ? 'checked' : ''}} name="is_importateur" type="checkbox" value="1">Importateur
-                                                            </label>
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-3">
-
-                                                            <span class="checkbox payment-radio">
-                                                              <label for="wish_payment_type_3" class="fw-bold">
-                                                                <input class="checkbox check_boxes required" id="wish_payment_type_3"  {{ intval($demande->is_distributeur)==1 ? 'checked' : ''}} name="is_distributeur" type="checkbox" value="1">Distributeur
-                                                              </label>
-                                                            </span>
-                                                        </div>
-
-
-                                                        <div class="col-3">
-
-                                                            <span class="checkbox payment-radio">
-                                                                <label for="wish_payment_type_4" class="fw-bold">
-                                                                  <input class="checkbox check_boxes required" id="wish_payment_type_4" {{ intval($demande->is_utilisateur)==1 ? 'checked' : ''}} name="is_utilisateur" type="checkbox" value="1">Utilisateur
-                                                                </label>
-                                                              </span>
-                                                        </div>
-
-
-                                                      <input id='submit1' type="hidden" value="Submit">
-                                                  </div>
-                                             </div><br>
-
-
-
+                                    <div class="form-card">
+                                        {{-- <h4 class="fs-title">Identité du demandeur <span style="color:red">
+                                            *</span></h4> --}}
+    
                                         <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold"> <strong>Dénomination
-                                                        Sociale</strong> <span style="color: red">*</span></label>
-                                                <input type="text" class="border-success"
-                                                    name="denomination_sociale_demandeur"
-                                                    placeholder="Dénomination Sociale" value="{{ $demande->denomination_sociale_demandeur }}" required />
+                                            <div class="col">
+                                                <label class="nom_societe fw-bold"> <strong>identité</strong> <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" class="border-success" name="name" value="{{ $name }}"
+                                                    placeholder="Nom et prenom" />
                                             </div>
-                                            <div class="col-6">
-                                                <label class="siege_social fw-bold">Lieu de résidence/siège<span
-                                                        style="color:red">
+                                            <div class="col">
+                                                <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                         *</span></label>
-
-                                                <select name="commune_id" required id="selectMultiple"
-                                                    class="form-select border-success">
+    
+                                                <select name="province_id" id="provinces" class="form-select border-success" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
-                                                    <option class="border-success" value="">Veuillez choisir une ville
-                                                    </option>
-                                                    @foreach ( $communes as $com)
-                                                    <option {{ $demande->commune_id == $com->uuid ? 'selected' : ''}} value="{{ $com->uuid }}">{{ $com->libelle }}</option>
+                                                    <option value="">Veuillez choisir une Province</option>
+                                                    @foreach ( $provinces as  $prov)
+                                                     <option value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
+    
                                                     @endforeach
-
-
+                                                </select>
+    
+    
+                                            </div>
+    
+                                            <div class="col">
+                                                <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
+                                                        *</span></label>
+    
+                                                <select name="commune_id"  id="communes" class="form-select border-success" required>
+                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
+    
                                                 </select>
                                             </div>
                                         </div>
-
+    
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Adresse Postale </label>
-                                                <input type="text" class="border-success"
-                                                    name="adresse_postale_demandeur"
-                                                    placeholder="Adresse ou numero de telephone" value="{{ $demande->adresse_postale_demandeur }}" required />
+                                                <label class="adresse fw-bold">Adresse email<span style="color: red">*</span></label>
+                                                <input type="text" class="border-success" name="email" value="{{ $email }}"
+                                                    placeholder="Adresse postal" required />
+                                                {{-- <input type="email" class="border-success" name="email" value="{{ $email }}"
+                                                    placeholder="adresse email" required/> --}}
                                             </div>
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="telephone" class="border-success"
-                                                    placeholder="Telephone" value="{{ $telephone}}"  />
+                                                <input type="text" name="telephone" class="border-success"   placeholder="Telephone" value="{{ $telephone}}" />
                                             </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="adresse fw-bold">Quantité totale à importer en KG</label>
-                                                <input type="text" class="border-success" value="{{ $demande->quantite }}" name="quantite"
-                                                    placeholder="Quantite à importer" />
-                                            </div>
-                                            {{-- <div class="col-6">
-                                                <label class="boite_postale">Telephone<span style="color:red">
-                                                        *</span></label>
-                                                <input type="text" name="telephone" placeholder="Telephone" />
-                                            </div> --}}
-                                        </div><br>
-
-
-                                        <div class="wish_payment_typeD">
-                                            <label class="adresse fw-bold">Dangers liées à la substance<span
-                                                style="color: red">*</span></label>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <span class="checkboxD payment-radio">
-                                                    <label for="wish_payment_type_0"  class="fw-bold">
-                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_0"  {{ intval($demande->is_corrosif)==1 ? 'checked' : ''}}  name="is_corrosif" type="checkbox" value="1">Corrosif
-                                                    </label>
-                                                    </span>
-                                                </div>
-
-                                                <div class="col">
-                                                    <span class="checkboxD payment-radio">
-                                                    <label for="wish_payment_type_20" class="fw-bold">
-                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_20" {{ intval($demande->is_iritant)==1 ? 'checked' : ''}}   name="is_iritant" type="checkbox" value="1">Irritant
-                                                    </label>
-                                                    </span>
-                                                </div>
-                                                <div class="col">
-
-                                                    <span class="checkboxD payment-radio">
-                                                      <label for="wish_payment_type_30" class="fw-bold">
-                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_30" {{ intval($demande->is_toxic)==1 ? 'checked' : ''}} name="is_toxic" type="checkbox" value="1">Toxique
-                                                      </label>
-                                                    </span>
-                                                </div>
-
-
-                                                <div class="col">
-                                                    <span class="checkboxD payment-radio">
-                                                        <label for="wish_payment_type_40" class="fw-bold">
-                                                          <input class="checkbox check_boxes2 required" id="wish_payment_type_40" {{ intval($demande->is_inflammable)==1 ? 'checked' : ''}} name="is_inflammable" type="checkbox" value="1">Inflammable
-                                                        </label>
-                                                      </span>
-                                                </div>
-                                                <div class="col">
-
-                                                    <span class="checkboxD payment-radio">
-                                                        <label for="wish_payment_type_50" class="fw-bold">
-                                                          <input class="checkbox check_boxes2 required" id="wish_payment_type_50" {{ intval($demande->is_danger_env)==1 ? 'checked' : ''}} name="is_danger_env" type="checkbox" value="1">Environnemental
-                                                        </label>
-                                                      </span>
-                                                </div>
-
-
-                                              <input id='submit2' type="hidden" value="Submit">
-                                          </div>
-                                     </div>
-
-                                     <br>
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="adresse fw-bold">Autre à préciser</label>
-                                                <input type="text" class="border-success" value="{{ $demande->autre_danger }}" name="autre_danger"
-                                                    placeholder="Autre à préciser " />
-                                            </div>
-                                            {{-- <div class="col-6">
-                                                <label class="boite_postale">Telephone<span style="color:red">
-                                                        *</span></label>
-                                                <input type="text" name="telephone" placeholder="Telephone" />
-                                            </div> --}}
                                         </div>
                                     </div>
-
-                                    <input type="button" name="next" id="sumit1"
-                                        class="next action-button btn btn-success" value="Suivant" />
+                                    <input type="button"  class="next action-button btn btn-success"
+                                        value="Suivant" />
                                     <!-- Ajoutez ceci dans la première étape du formulaire -->
                                     <div class="error-message" style="color: red;"></div>
-
+    
                                 </fieldset>
+    
                                 <fieldset>
                                     <div class="form-card">
-                                        <h2 class="fs-title">Identité du fournisseur</h2>
-
+                                        <h2 class="fs-title">Pièces à Fournir</h2>
+                                        <div class="row">
+    
+                                            <div class="col-6">
+                                                <label for="demande timbre" class="fw-bold">CNIB ou Passport<span style="color:red">
+                                                    *</span></label>
+                                                <input type="file" name="cnib" class="form-control border-success" required>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="demande timbre" class="fw-bold">PUH ou attestation d'attribution<span style="color:red">
+                                                    *</span></label>
+                                                <input type="file" name="puh" class="form-control border-success" required>
+                                            </div>
+                                        </div>
+                                        <br>
+    
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="demande timbre" class="fw-bold">Plan de masse ou d'implantion du batiment<span style="color:red">
+                                                    *</span></label>
+                                                <input type="file" name="plan" class="form-control border-success" required>
+                                            </div>
+    
+                                            <div class="col-6">
+                                                <label for="demande timbre" class="fw-bold">Vue en plan et coupe du batiment<span style="color:red">
+                                                    *</span></label>
+                                                <input type="file" name="coupe" class="form-control border-success" required>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+                                    <input type="button"   class="previous action-button-previous"
+                                        value="Retour" />
+                                    <input type="button"   class="next action-button"
+                                        value="Suivant" />
+                                </fieldset>
+    
+                                <!-- fieldsets -->
+                                <fieldset>
+                                    <div class="form-card">
+    
                                         <div class="row">
                                             <div class="col">
-                                                <label class="nom_societe fw-bold">Dénomination Sociale<span
-                                                        style="color: red">*</span></label>
-                                                <input type="text" class="border-success"
-                                                    name="denomination_sociale_fournisseur"
-                                                    placeholder="Dénomination Sociale" value="{{ $demande->denomination_sociale_fournisseur }}" required />
-                                            </div><br>
-                                            <div class="col">
-                                                <label class="siege_social fw-bold">Pays de résidence<span
-                                                        style="color:red">
+                                                <label class="siege_social fw-bold">Type de construction<span style="color:red">
                                                         *</span></label>
-                                                        <select name="pays_fournisseur" required id="selectMultiplePays"
-                                                    class="form-select border-success ">
+                                                <select name="type_construction_id" id="typeConstructions" class="form-select border-success" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
-                                                    <option class="border-success" value="">Veuillez choisir un Pays
-                                                    </option>
-                                                    @foreach ( $pays as $pay)
-                                                    <option {{ $demande->pays_fournisseur==$pay->uuid ? 'selected' : ''}}  value="{{ $pay->uuid }}">{{utf8_decode($pay->libelle) }}</option>
+                                                    <option value="">Veuillez choisir le type de construction</option>
+                                                    @foreach ( $typeConstructions as  $type)
+                                                     <option value="{{ $type->uuid }}" >{{ $type->libelle }}</option>
+    
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
+    
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Adresse<span
-                                                        style="color: red">*</span></label>
-                                                <input type="text" class="border-success" name="adresse_fournisseur"
-                                                    placeholder="Adresse ou numero de telephone" value="{{ $demande->adresse_fournisseur }}" required />
-                                            </div>
-                                            {{-- <div class="col-6">
-                                                <label class="boite_postale">Telephone<span style="color:red">
+                                                <label class="boite_postale fw-bold">Y'a-t-il un sous sol ?<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="telephone" placeholder="Telephone" />
-                                            </div> --}}
-                                        </div>
-
-                                    </div>
-                                    <input type="button" class="previous action-button-previous" value="Retour" />
-                                    <input type="button" class="next action-button" value="Suivant" />
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title">Pièces à fournir</h2>
-                                        <?php
-                                        $pathFaisabilite ='';
-                                        $pathRccm='';
-                                        $pathFacture ='';
-                                        $pathSecurite='';
-                                        $pathTracabilite ='';
-                                        $pathDechet='';
-                                        $pathDechetAttestation='';
-                                        $pathProduit='';
-                                        foreach ( $documents as $doc){
-                                            if($doc->libelle =="Avis Faisabilite")
-                                                $pathFaisabilite = $doc->chemin;
-                                            elseif($doc->libelle == "Rccm")
-                                                $pathRccm = $doc->chemin;
-                                            elseif($doc->libelle == "Facture Pro-Format")
-                                                $pathFacture = $doc->chemin;
-                                            elseif($doc->libelle == "Fiche Securite")
-                                                $pathSecurite = $doc->chemin;
-                                            elseif($doc->libelle == "Registre de Tracabilite")
-                                                $pathTracabilite = $doc->chemin;
-                                            elseif($doc->libelle == "Registre Dechet")
-                                                $pathDechet = $doc->chemin;
-                                            elseif($doc->libelle == "Attestation destination Finale")
-                                                $pathDechetAttestation = $doc->chemin;
-                                            elseif($doc->libelle == "Liste des poduits")
-                                                $pathProduit = $doc->chemin;
-                                           ?>
-                                            <a  class="text-success" target="_blank" href="{{ Storage::url($doc->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$doc->libelle}}</b></a>
-                                             <br>
-                                           <?php }?>
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe  fw-bold">Une copie de l’avis de faisabilité
-                                                    <span style="color: red">*</span></label>
-                                                <input type="file" class="form-control border-success"
-                                                    name="avis_faisabilite"/>
-                                                    <input type="hidden" value="{{$pathFaisabilite  }}" class="form-control border-success"
-                                                    name="current_faisabilite" />
-
-
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="pays_residence fw-bold">Une copie de RCCM<span
-                                                        style="color:red">
-                                                        *</span></label>
-                                                <input type="file" name="rccm" class="form-control border-success"  />
-                                                <input type="hidden" value="{{$pathRccm  }}" name="current_rccm" class="form-control border-success"  />
-                                            </div>
-                                        </div><br>
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold">Une facture pro-forma datant de moins
-                                                    de six (06) mois<span style="color:red">
-                                                        *</span> </label>
-                                                <input type="file" class="border-success form-control"
-                                                    name="facture_pro_format"   />
-                                                    <input type="hidden" value="{{ $pathFacture }}" class="border-success form-control"
-                                                    name="current_facture_pro_format"   />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="pays_residence fw-bold">Une fiche de données de sécurité
-                                                    ou fiche technique de chaque produit<span style="color:red">
-                                                        *</span></label>
-                                                <input type="file" name="fiche_securite"
-                                                    class="border-success form-control"   />
-
-                                                    <input type="hidden" value="{{$pathSecurite  }}" name="current_fiche_securite"
-                                                    class="border-success form-control"   />
-                                            </div>
-                                        </div><br>
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold">Un registre de traçabilité des
-                                                    produits ou substances chimiques <span
-                                                        style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control"
-                                                    name="registre_tracabilite"   />
-
-                                                    <input type="hidden" value="{{ $pathTracabilite  }}" class="border-success form-control"
-                                                    name="current_registre_tracabilite"   />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="pays_residence fw-bold">Un registre des déchets issus de
-                                                    leur utilisation <span style="color:red">
-                                                        *</span></label>
-                                                <input type="file" name="registre_dechet"
-                                                    class="form-control border-success"   />
-                                                    <input type="hidden" value="{{ $pathDechet }}" name="current_registre_dechet"
-                                                    class="form-control border-success"   />
-                                            </div>
-                                        </div><br>
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold">Une attestation de destination finale
-                                                    pour le cas spécifique du cyanure <span
-                                                        style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control"
-                                                    name="attestation_destination_finale"  />
-                                                    <input type="hidden" value="{{ $pathDechetAttestation }}" class="border-success form-control"
-                                                    name="current_attestation_destination_finale"  />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold">Liste des produits <span
-                                                        style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control"
-                                                    name="list_produit"  />
-
-                                                    <input type="hidden" value="{{ $pathProduit  }}" class="border-success form-control"
-                                                    name="current_list_produit"  />
-                                            </div>
-
-                                        </div><br>
-
-                                    </div>
-                                    <input type="button" class="previous action-button-previous" value="Retour" />
-                                    <input type="button" class="next action-button" value="Suivant" />
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title">Informations relatives au transport et au stockage</h2>
-
-                                        <div class="row">
-                                            <label for="">
-                                                Lieu d’implantation des locaux de stockage
-                                                <span style="color:red">*</span>
-                                            </label>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <label class="nom_societe fw-bold">Zone d’habitation</label>
-                                                <input type="radio" class="border-success" {{ $demande->type_local_stockage ? 'checked' : ''}}  name="type_local_stockage"
-                                                    value="Zone d’habitation" />
-                                            </div>
-                                            <div class="col-3">
-                                                <label class="siege_social fw-bold">Zone industrielle</label>
-                                                <input type="radio" {{ $demande->type_local_stockage ? 'checked' : ''}} name="type_local_stockage"
-                                                    value="Zone industrielle" />
-                                            </div>
-                                            <div class="col-3">
-                                                <label class="siege_social fw-bold">Zone commerciale</label>
-                                                <input type="radio" {{ $demande->type_local_stockage ? 'checked' : ''}} name="type_local_stockage"
-                                                    value="Zone commerciale" />
-                                            </div>
-                                            <div class="col-3">
-                                                <label class="siege_social fw-bold">Zone d’activités diverses</label>
-                                                <input type="radio" {{ $demande->type_local_stockage ? 'checked' : ''}} name="type_local_stockage"
-                                                    value="Zone d’activités diverses" />
-                                            </div>
-                                        </div><br>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="adresse fw-bold">Autre à préciser</label>
-                                                <input type="text" class="border-success"
-                                                    name="type_local_stockage_autre" value="{{ $demande->type_local_stockage_autre }}" placeholder="Autre à préciser " />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="adresse fw-bold">Capacité Totale des locaux de stockage
-                                                    <span style="color: red">*</span></label>
-                                                <input type="text" class="border-success" value="{{ $demande->capacite_stockage }}" name="capacite_stockage"
-                                                    placeholder="Capacité Totale des locaux de stockage" required />
-                                            </div>
-
-                                        </div><br>
-                                        <div class="row">
-                                            {{-- <div class="col-6">
-                                                <label class="boite_postale">Telephone<span style="color:red">
-                                                        *</span></label>
-                                                <input type="text" name="telephone" placeholder="Telephone" />
-                                            </div> --}}
-                                        </div><br>
-
-                                        {{-- <div class="row ">
-                                            <div class="col text-center">
-                                                <label for="#">Système de transport <span style="color:red">
-                                                        *</span></label>
-                                            </div>
-
-                                            <div class="col text-center">
-                                                <label for="#">Agrément<span style="color:red">
-                                                        *</span></label>
-                                            </div>
-                                        </div> --}}
-                                        <div class="row col">
-                                            <div class="col-6">
-                                                <label>Choisir le système de transport <span
-                                                        style="color: red">*</span></label>
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <label class="nom_societe fw-bold">Régime direct</label>
-                                                        <input type="radio" {{ $demande->systeme_transport ? 'checked' : ''}}  name="systeme_transport"
-                                                            value="Régime direct" />
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <span>Oui</span>
+                                                            <input type="radio" name="is_underground" class="border-success"   value="Oui" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <span>Non</span>
+                                                            <input type="radio" name="is_underground" class="border-success"   value="Non" />
+                                                        </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <label class="siege_social fw-bold">Sous-traité</label>
-                                                        <input type="radio" {{ $demande->systeme_transport ? 'checked' : ''}} name="systeme_transport"
-                                                            value="Sous-traité" />
-                                                    </div>
+                                            </div>
+                                        </div>
+                                            
+                                        <div class="row">
+                                            <div class="col">
+                                                <label class="siege_social fw-bold">Usage<span style="color:red">
+                                                        *</span></label>
+    
+                                                <select name="autre_usage_construction" class="form-select border-success" required>
+                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
+                                                    <option value="">Veuillez choisir le type d'usage'</option>
+                                                    @foreach ( $usages as  $usage)
+                                                     <option value="{{ $usage->uuid }}" >{{ $usage->libelle }}</option>
+    
+                                                    @endforeach
+                                                </select>
+                                            </div>
+    
+                                            {{-- @if($name=='ZONGO Oliver') --}}
+                                                <div class="col">
+                                                    <label class="siege_social fw-bold">Preciser l'usage<span style="color:red">
+                                                            *</span></label>
+    
+                                                    <input type="text" class="border-success" name="autre_usage_construction" placeholder="autre usage a préciser" />
                                                 </div>
+                                            {{-- @endif --}}
+                                        </div>
+    
+                                        <div class="row">
+                                            <div class="col">
+                                                <label class="siege_social fw-bold">Superficie<span style="color:red">
+                                                        *</span></label>
+    
+                                                <input type="text" class="border-success" name="superficie" placeholder="Superficie" />
                                             </div>
-
-
-                                            <div class="col-6">
-                                                <label>Choisir agrèment<span style="color: red">*</span></label>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <label class="siege_social fw-bold">Agréé</label>
-                                                        <input type="radio" {{ $demande->agrement_transport ? 'checked' : ''}} name="agrement_transport" value="Agrée" />
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <label class="siege_social fw-bold">Non agréé</label>
-                                                        <input type="radio" {{ $demande->agrement_transport ? 'checked' : ''}}  name="agrement_transport"
-                                                            value="Non agrée" />
-                                                    </div>
-                                                </div>
+                                            <div class="col">
+                                                <label class="adresse fw-bold">Secteur<span style="color: red">*</span></label>
+                                                <input type="text" class="border-success" name="secteur" 
+                                                    placeholder="Secteur" required />
                                             </div>
                                         </div>
-
+    
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="boite_postale fw-bold">Numero de la Parcelle<span style="color:red">
+                                                        *</span></label>
+                                                <input type="text" name="numero_parcelle" class="border-success"   placeholder="Numero de parcelle"/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="adresse fw-bold">Numero du Lot<span style="color: red">*</span></label>
+                                                <input type="text" class="border-success" name="lot" 
+                                                    placeholder="Lot de la parcelle" required />
+                                                {{-- <input type="email" class="border-success" name="email" value="{{ $email }}"
+                                                    placeholder="adresse email" required/> --}}
+                                            </div>
+                                        </div>
+    
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="boite_postale fw-bold">Numero de la section<span style="color:red">
+                                                        *</span></label>
+                                                <input type="text" name="section" class="border-success"  placeholder="Numero de section" />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="adresse fw-bold">Zone<span style="color: red">*</span></label>
+                                                <input type="text" class="border-success" name="zone" 
+                                                    placeholder="Zone de la parcelle" required />
+                                                {{-- <input type="email" class="border-success" name="email" value="{{ $email }}"
+                                                    placeholder="adresse email" required/> --}}
+                                            </div>
+                                        </div>
+    
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="boite_postale fw-bold">Batiment deja construit ?<span style="color:red">
+                                                        *</span></label>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <span>Oui</span>
+                                                            <input type="radio" name="is_build" class="border-success"   value="Oui" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <span>Non</span>
+                                                            <input type="radio" name="is_build" class="border-success"   value="Non" />
+                                                        </div>
+                                                    </div>
+                                            </div>
+    
+                                            
+                                        </div>
                                     </div>
-                                    <input type="button" class="previous action-button-previous" value="Retour" />
-                                    <input type="button" class="next action-button" value="Suivant" />
+    
+                                    <input type="button"   class="previous action-button-previous"
+                                        value="Retour" />
+                                    <input type="button"   class="next action-button"
+                                        value="Suivant" />
+    
                                 </fieldset>
+    
+    
                                 <fieldset>
 
                                     <div class="form-card">
@@ -676,6 +455,29 @@ jQuery('input[name=moyen]:radio').click(function(){
 
 
 </script>
+<script>
+    $(document).ready(function () {
+        $('#provinces').change(function () {
+            var provinceId = $(this).val();
+            if (provinceId) {
+                $.ajax({
+                    url: '/get-communes/' + provinceId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#communes').empty();
+                        $.each(data, function (key, value) {
+                            $('#communes').append('<option value="' + value.uuid + '">' + value.libelle + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#communes').empty();
+            }
+        });
+    });
+    </script>
+    
 <script type='text/javascript'>
     var myLink = document.querySelector('a[href="#"]');
     myLink.addEventListener('click', function(e) {

@@ -177,7 +177,7 @@ Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->nam
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
 
-Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
+Route::get("/procedure/modification/{id}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
 Route::get('/get-sous-domaine-by-categorie', [DemandeP002Controller::class, 'getSousDomaineByCategorie'])->name('get-sous-domaine-by-categorie');
 Route::get('/get-delete-autre-document', [DemandeP002Controller::class, 'deleteAutreDocument'])->name('get-delete-autre-document');
 

@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-    <h1>Liste des Démandes d'avis Technique d'importation de produit Chimiques industriels </h1>
+    <h1>Liste des Demandes d'étude de sols et de fondations </h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
