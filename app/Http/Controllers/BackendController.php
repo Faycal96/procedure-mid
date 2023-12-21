@@ -7,11 +7,9 @@ use App\Models\Commentaire;
 use App\Models\Demande;
 use App\Models\DemandeP001;
 use App\Models\DemandeP002;
-use App\Models\DemandePiece;
 use App\Models\Procedure;
 use App\Models\StatutDemande;
 use App\Repositories\BackendRepository;
-use App\Repositories\CommentaireRepository;
 use App\Repositories\DemandeP001Repository;
 use App\Repositories\DemandeP002Repository;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +21,8 @@ use App\Models\User;
 use App\Mail\AffectDemandMailable;
 use App\Mail\ValidateDemandMailable;
 use App\Mail\RejectDemandMailable;
+use App\Repositories\DemandeRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class BackendController extends Controller
@@ -73,11 +73,11 @@ class BackendController extends Controller
 
 
     // Recuperation de la list des demande concernant p001 Produi chimique
-    public function listDemande(DemandeP001Repository $demandeP001Repository, DemandeP001 $demandeTest)
+    public function listDemande(DemandeRepository $demandeRepository)
     {
         // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
-        $data = [
-            "demandes" => $demandeP001Repository->all()->sortByDesc('created_at'),
+        /* $data = [
+            "demandes" => $demandeRepository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -86,41 +86,42 @@ class BackendController extends Controller
             "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
             "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
             //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
-            "demandeEnCours" => $demandeP001Repository->nombre('demande_p001_s', array('etat' => 'en cours')),
-            "demandeEtat" => $demandeTest->statut(),
+            "demandeEnCours" => $demandeRepository->nombre('demande_p001_s', array('etat' => 'en cours')),
+            //"demandeEtat" => $demandeTest->statut(),
+            "demandeEtat" => null,
             "agents" => Agent::all(),
         ];
 
-        //   dd($data['demandes'][0]->demandePiece);
+        //   dd($data['demandes'][0]->demandePiece); */
 
 
-        return view('backend.list_demande', $data);
+        return view('backend.list_demande', /* $data */);
     }
 
 
     // Liste des demandes p002 agrement en eau
-    public function listDemandep002(DemandeP002Repository $demandeP002Repository, DemandeP002 $demandep002)
-    {
+    // public function listDemandep002(DemandeRepository $demandeP002Repository, DemandeP002 $demandep002)
+    // {
 
-        $data = [
-            "demandes" => $demandeP002Repository->all()->sortByDesc('created_at'),
-            "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
-            "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
-            "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
-            "statutEtude" => StatutDemande::where('etat', '=', 'E')->first()->statut,
-            "statutComplement" => StatutDemande::where('etat', '=', 'C')->first()->statut,
-            "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
-            "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
-            //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
-            "demandeEnCours" => $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'en cours')),
-            "demandeEtat" => $demandep002->statut(),
-            "agents" => Agent::all(),
-        ];
-        //   dd($data['demandes'][0]->demandePiece);
-        // dd($data['demandeEtat']);
+    //     $data = [
+    //         "demandes" => $demandeP002Repository->all()->sortByDesc('created_at'),
+    //         "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
+    //         "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
+    //         "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
+    //         "statutEtude" => StatutDemande::where('etat', '=', 'E')->first()->statut,
+    //         "statutComplement" => StatutDemande::where('etat', '=', 'C')->first()->statut,
+    //         "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
+    //         "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
+    //         //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
+    //         "demandeEnCours" => $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'en cours')),
+    //         "demandeEtat" => $demandep002->statut(),
+    //         "agents" => Agent::all(),
+    //     ];
+    //     //   dd($data['demandes'][0]->demandePiece);
+    //     // dd($data['demandeEtat']);
 
-        return view('backend.list_demandep002', $data);
-    }
+    //     return view('backend.list_demandep002', $data);
+    // }
 
 
     // fonction d'assignation d'un collaborateur a un dossier
@@ -153,7 +154,6 @@ class BackendController extends Controller
 
         Alert::success('Succès', 'demande assignée !');
         return redirect()->back();
-
     }
 
 
@@ -180,7 +180,7 @@ class BackendController extends Controller
                 $nextStatus = 'A';
                 break;
         }
-        DB::table($table)->where('uuid', $id)->update(['etat' => $nextStatus]);
+        Demande::where('uuid', $id)->update(['etat' => $nextStatus]);
 
 
 
@@ -211,12 +211,12 @@ class BackendController extends Controller
 
         // DB::table('commentaire_p001_s')->insert();
 
-        $proc_id = DB::table($table)->where('uuid', $id)->first()->procedure_id;
-        $usager_id = DB::table($table)->where('uuid', $id)->first()->usager_id;
+        $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
+        $usager_id = Demande::where('uuid', $id)->first()->usager_id;
         $user_email = User::where('usager_id', $usager_id)->first()->email;
         $demand = array(
             "procedure" => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
+            "reference" => Demande::where('uuid', $id)->first()->reference,
             "etat" => StatutDemande::where('etat', $nextStatus)->first()->statut
         );
         Mail::to($user_email)->send(new ValidateDemandMailable($demand));
@@ -238,30 +238,22 @@ class BackendController extends Controller
     }
 
 
-    public function rejetter($id, $table, Request $request)
+    public function rejetter($id, Request $request)
     {
-        DB::table($table)->where('uuid', $id)->update(['etat' => 'R']);
+        Demande::where('uuid', $id)->update(['etat' => 'R']);
 
-        if ($table == 'demande_p001_s') {
-            $commentaire1 = new Commentaire();
-            $commentaire1->create([
-                'libelle' => $request->libelle,
-                'demande_p001_id' => $id
-            ]);
-        } elseif ($table == 'demande_p002_s') {
-            $commentaire2 = new Commentaire();
-            $commentaire2->create([
-                'libelle' => $request->libelle,
-                'demande_p002_id' => $id
-            ]);
-        }
-        $proc_id = DB::table($table)->where('uuid', $id)->first()->procedure_id;
-        $usager_id = DB::table($table)->where('uuid', $id)->first()->usager_id;
+        $commentaire = new Commentaire();
+        $commentaire->create([
+            'libelle' => $request->libelle,
+            'demande_id' => $id
+        ]);
+        $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
+        $usager_id = Demande::where('uuid', $id)->first()->usager_id;
         $user_email = User::where('usager_id', $usager_id)->first()->email;
-        $currentStatus = DB::table($table)->where('uuid', $id)->first()->etat;
+        $currentStatus = Demande::where('uuid', $id)->first()->etat;
         $demand = array(
             "procedure" => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
+            "reference" => Demande::where('uuid', $id)->first()->reference,
             "etat" => StatutDemande::where('etat', $currentStatus)->first()->statut,
             "motif" => $request->libelle
         );
@@ -273,52 +265,31 @@ class BackendController extends Controller
 
 
 
-    public function nombreDemandeByProcedure(
-        DemandeP001Repository $demandeP001Repository,
-        DemandeP002Repository $demandeP002Repository
+    public function nombreDemandeByProcedure()
+    {
 
-    ) {
-
-        print json_encode(array(
-            'status' => 'success',
-            "nbProchimique" => $demandeP001Repository->nombre('demande_p001_s', array('etat' => 'D')),
-            "nbAgrementTechique" => $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'D')),
-        ));
+        // print json_encode(array(
+        //     'status' => 'success',
+        //     "nbProchimique" => $demandeRepository->nombre('demande_p001_s', array('etat' => 'D')),
+        //     "nbAgrementTechique" => $demandRepository->nombre('demande_p002_s', array('etat' => 'D')),
+        // ));
     }
 
 
 
     public function listsDemande(
-        DemandeP001Repository $demandeP001Repository,
-        DemandeP002Repository $demandeP002Repository,
-        DemandeP001 $demandeTest,
-        Request $request
-    ) {
+        DemandeRepository $demandeRepository, Request $request) {
 
 
         //dd($demandes);
         $demandes = null;
         $data = [];
-        if (isset($request->procedure) && strlen($request->procedure) > 0) {
-            $proc = $request->procedure;
-            switch ($proc) {
-                case 'DATIPC':
-                    $demandes = $demandeP001Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
-                    break;
-                case 'OATEA':
-                    $demandes = $demandeP002Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
-                    break;
-
-                default:
-                    # code...
-                    break;
-            }
-        }
+        $demandes = $demandeRepository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+        dd($demandes);
         $data = [
             "demandes" => $demandes,
             "procedures" => Procedure::all(),
             "selectedProcedure" => $request->procedure,
-
         ];
         return view('backend.lists_demandesAgents', $data);
     }
@@ -354,7 +325,5 @@ class BackendController extends Controller
         DB::table('agents')->where('uuid', $request->uuid)->update($agentData);
 
         return redirect()->route('users-profile')->with('success', 'Profile Mis à jour avec succès !');
-
     }
-
 }

@@ -72,7 +72,6 @@
                                         <th scope="col">Paiement</th>
                                         <th scope="col">Déposé</th>
                                         <th scope="col">Assigné a</th>
-
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>

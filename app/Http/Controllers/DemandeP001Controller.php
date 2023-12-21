@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DemandeP001;
+use App\Models\DemandePiece;
 use App\Models\Procedure;
 use App\Repositories\DemandeP001Repository;
 use Illuminate\Http\Request;
@@ -54,7 +55,6 @@ class DemandeP001Controller extends Controller
         $data =  $request->all();
         if ($this->payment($data["numero"], $data["otp"])) {
             $dataFiles = $request->all();
-            // dd($data);
 
 
             unset($data['name']);
@@ -78,36 +78,47 @@ class DemandeP001Controller extends Controller
             $puh =  $this->repository->uploadFile($dataFiles, 'puh');
             $plan =  $this->repository->uploadFile($dataFiles, 'plan');
             $coupe =  $this->repository->uploadFile($dataFiles, 'coupe');
-            // $registre_tracabilite =  $this->repository->uploadFile($dataFiles, 'registre_tracabilite');
-            // $registre_dechet =  $this->repository->uploadFile($dataFiles, 'registre_dechet');
-            // $attestation_destination_finale =  $this->repository->uploadFile($dataFiles, 'attestation_destination_finale');
-            // $list_produit =  $this->repository->uploadFile($dataFiles, 'list_produit');
-            //    dd($cheminFaisabilite, $cheminRccm, $facture_pro_format);
             unset($data['cnib']);
             unset($data['puh']);
             unset($data['plan']);
             unset($data['coupe']);
-            // unset($data['registre_tracabilite']);
-            // unset($data['registre_dechet']);
-            // unset($data['attestation_destination_finale']);
-            // unset($data['list_produit']);
-
             $demande = $this->demandeRepositoryP001->create($data);
-            dd($demande);
+           // dd($demande);
             $demande->save();
-            //    dd($demande->uuid);
-           //  $demande->demandePiece()->attach( $piece_jointe_id, ['chemin'=>cnib])
+            DemandePiece::create([
+                "libelle" => 'CNIB',
+                "chemin" => $cnib,
+                "demande_id" => $demande->uuid
+            ]);
+
+            DemandePiece::create([
+                "libelle" => 'PUH',
+                "chemin" => $puh,
+                "demande_id" => $demande->uuid
+            ]);
+
+            DemandePiece::create([
+                "libelle" => 'PLAN',
+                "chemin" => $plan,
+                "demande_id" => $demande->uuid
+            ]);
+
+            DemandePiece::create([
+                "libelle" => 'COUPE',
+                "chemin" => $coupe,
+                "demande_id" => $demande->uuid
+            ]);
             //    $this->repository->uuid();
-            $demandePieceRepository->setChemin($cnib, $demande->uuid, 'CNIB');
-            $demandePieceRepository->setChemin($puh, $demande->uuid, 'PUH');
-            $demandePieceRepository->setChemin($plan, $demande->uuid, 'PLAN');
-            $demandePieceRepository->setChemin($coupe, $demande->uuid, 'COUPE');
+            // $demandePieceRepository->setChemin($cnib, $demande->uuid, 'CNIB');
+            // $demandePieceRepository->setChemin($puh, $demande->uuid, 'PUH');
+            // $demandePieceRepository->setChemin($plan, $demande->uuid, 'PLAN');
+            // $demandePieceRepository->setChemin($coupe, $demande->uuid, 'COUPE');
             // $demandePieceP001Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de Tracabilite');
             // $demandePieceP001Repository->setChemin($registre_dechet, $demande->uuid, 'Registre Dechet');
             // $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
             // $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
 
-            return redirect('/demandes-lists?procedure=DATIPC')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+            return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
         } else {
         }
     }

@@ -23,27 +23,21 @@ class BackendRepository extends AppRepository
 
     public function nombreDemandeByProcedure($demande, $champ=array())
     {
-
-        return DB::table('procedures')
-                            ->join($demande, 'procedures.uuid', '=', $demande.'.procedure_id')
-                            ->where($champ)
-                            ->count();
-
-
-
+        return 0;
+        // return DB::table('procedures')
+        //                     ->join($demande, 'procedures.uuid', '=', $demande.'.procedure_id')
+        //                     ->where($champ)
+        //                     ->count();
     }
 
 
     public function uuidProcedureByDemande($demande, $champ=array())
     {
-
-        return DB::table('procedures')
-                            ->join($demande, 'procedures.uuid', '=', $demande.'.procedure_id')
-                            ->select('procedures.*')
-                            ->first();
-
-
-
+        return 0;
+        // return DB::table('procedures')
+        //                     ->join($demande, 'procedures.uuid', '=', $demande.'.procedure_id')
+        //                     ->select('procedures.*')
+        //                     ->first();
     }
 
     

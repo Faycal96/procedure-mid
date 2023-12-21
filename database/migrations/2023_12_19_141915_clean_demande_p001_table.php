@@ -11,11 +11,11 @@ return new class extends Migration
         Schema::dropIfExists('demande_p001_s');
         Schema::create('demande_p001_s', function (Blueprint $table) {
             $table->ulid('uuid')->primary();
-            $table->string('libelle_court');
+            $table->string('libelle_court')->nullable();
             $table->string('libelle_long')->nullable();
 
-            $table->string("autre_type_construction")->string();
-            $table->string("autre_usage_construction")->string();
+            $table->string("autre_type_construction")->nullable();
+            $table->string("autre_usage_construction")->nullable();
             $table->boolean("is_underground")->default(false);
             $table->boolean("is_build")->default(false);
 
