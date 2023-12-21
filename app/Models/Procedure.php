@@ -19,6 +19,7 @@ class Procedure extends Model
     }
 
     public function pieceJointe(){
+        // return $this->belongsToMany(PieceJointe::class, 'procedure_piece_jointes','procedure_id', 'piece_jointe_id');
         return $this->belongsToMany(PieceJointe::class, 'procedure_piece_jointes','procedure_id', 'piece_jointe_id');
     }
 

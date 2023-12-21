@@ -24,7 +24,6 @@ class AuthenticatedSessionController extends Controller
     public function create($code=null): View
     {
         $procedure=Procedure::where("code", $code)->first();
-        //dd($procedure);
         $checkPeriode = false;
         if($procedure){
             $startDate = Carbon::parse($procedure->session_debut);

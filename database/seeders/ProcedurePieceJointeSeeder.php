@@ -15,7 +15,7 @@ class ProcedurePieceJointeSeeder extends Seeder
      */
     public function run(): void
     {
-        $procedure = Procedure::where('code', 'P002')->first();
+        $procedureP001 = Procedure::where('code', 'P001')->first();
         $pj1 = PieceJointe::where('libelle', "Statut société")->first()->uuid;
         $pj2 = PieceJointe::where('libelle', "RCCM/RSCPM")->first()->uuid;
         $pj3 = PieceJointe::where('libelle', "IFU/Recepissé")->first()->uuid;
@@ -27,16 +27,16 @@ class ProcedurePieceJointeSeeder extends Seeder
         $pj9 = PieceJointe::where('libelle', "Déclaration sur l'honneur")->first()->uuid;
         $pj10 = PieceJointe::where('libelle', "CV")->first()->uuid;
         
-        $procedure->pieceJointe()->attach($pj1);
-        $procedure->pieceJointe()->attach($pj2);
-        $procedure->pieceJointe()->attach($pj3);
-        $procedure->pieceJointe()->attach($pj4);
-        $procedure->pieceJointe()->attach($pj5);
-        $procedure->pieceJointe()->attach($pj6);
-        $procedure->pieceJointe()->attach($pj7);
-        $procedure->pieceJointe()->attach($pj8);
-        $procedure->pieceJointe()->attach($pj9);
-        $procedure->pieceJointe()->attach($pj10);
-        $procedure->save();
+        $procedureP001->pieceJointe()->attach($pj1);
+        $procedureP001->pieceJointe()->attach($pj2);
+        $procedureP001->pieceJointe()->attach($pj3);
+        $procedureP001->pieceJointe()->attach($pj4);
+        $procedureP001->pieceJointe()->attach($pj5);
+        $procedureP001->pieceJointe()->attach($pj6);
+        $procedureP001->pieceJointe()->attach($pj7);
+        $procedureP001->pieceJointe()->attach($pj8);
+        $procedureP001->pieceJointe()->attach($pj9);
+        $procedureP001->pieceJointe()->attach($pj10);
+        $procedureP001->save();
     }
 }
