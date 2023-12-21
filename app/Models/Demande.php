@@ -15,17 +15,7 @@ class Demande extends Model
     protected $primaryKey = 'uuid';
     protected $with = ['demandePiece'];
 
-    function genererRandomString($longueur = 10) {
-        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = '';
-
-        for ($i = 0; $i < $longueur; $i++) {
-            $index = mt_rand(0, strlen($caracteres) - 1);
-            $randomString .= $caracteres[$index];
-        }
-
-        return $randomString;
-    }
+   
 
     public function categorie(){
         return $this->belongsTo(CategorieDemande::class, 'categorie_id', 'uuid');

@@ -45,116 +45,56 @@ class AppRepository extends BaseRepository
     }
 
     //fonction de chargement
-    public function uploadActe($table, array $data, string $name, $id){
+    public function uploadActe(array $data, string $name, $id){
         $this->unsetClauses();
         $de = null;
         $libelle = '';
-        switch ($table) {
-            case 'demande_p001_s':
-                $de = new DemandeP001();
-                $libelle = 'demandeP001';
-                break;
-            case 'demande_p002_s':
-                $de = new DemandeP002();
-                $libelle = 'demandeP002';
-                break;
-            default:
-                break;
-        }
 
-
-    $tt = $de->genererRandomString(4);
+    $tt = $this->genererRandomString(4);
 
        $fileName = time().$tt.'.'.$data[$name]->getClientOriginalExtension();
         $url = 'public/'.$libelle;
         Storage::makeDirectory($url);
 
         $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
-        DB::table($table)->where('uuid', $id)->update(['output_file' => $path]);
+        Demande::find($id)->update(['output_file' => $path]);
 
     }
 
      //fonction de chargement de la note etude
-     public function uploadNoteEtude($table, array $data, string $name, $id){
+     public function uploadNoteEtude( array $data, string $name, $id){
         $this->unsetClauses();
-        $de = null;
         $libelle = '';
-        switch ($table) {
-            case 'demande_p001_s':
-                $de = new DemandeP001();
-                $libelle = 'demandeP001';
-                break;
-            case 'demande_p002_s':
-                $de = new DemandeP002();
-                $libelle = 'demandeP002';
-                break;
-            default:
-                break;
-        }
 
 
-         $tt = $de->genererRandomString(4);
+         $tt = Demande::genererRandomString(4);
         if(!isEmpty($name)){
             $fileName = time().$tt.'.'.$data[$name]->getClientOriginalExtension();
             $url = 'public/'.$libelle;
             Storage::makeDirectory($url);
 
             $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
-            DB::table($table)->where('uuid', $id)->update(['note_etude_file' => $path]);
+            Demande::find($id)->update(['note_etude_file' => $path]);
         }
-
-
 
     }
 
-    public function nombre($table, $champ=array())
+ public function nombre($table, $champ=array())
     {
 
         return DB::table($table)->where($champ)->count();
 
 
     }
+    function genererRandomString($longueur = 10) {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
 
-    public function uploadFile(array $data, string $name){
+        for ($i = 0; $i < $longueur; $i++) {
+            $index = mt_rand(0, strlen($caracteres) - 1);
+            $randomString .= $caracteres[$index];
+        }
 
-
-        $this->unsetClauses();
-
-        $de = new Demande();
-        $tt = $de->genererRandomString(4);
-
-       $fileName = time().$tt.'.'.$data[$name]->getClientOriginalExtension();
-
-        // $libelle = $data['libelle_court'];
-        $libelle = 'demande';
-        echo $libelle;
-        $url = 'public/'.$libelle;
-        Storage::makeDirectory($url);
-
-        $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
-
-        return $path;
+        return $randomString;
     }
-
-    public function uploadAFile(UploadedFile $data){
-
-
-        $this->unsetClauses();
-
-        $de = new Demande();
-        $tt = $de->genererRandomString(4);
-
-       $fileName = time().$tt.'.'.$data->getClientOriginalExtension();
-
-        // $libelle = $data['libelle_court'];
-        $libelle = 'demande';
-        echo $libelle;
-        $url = 'public/'.$libelle;
-        Storage::makeDirectory($url);
-
-        $path = $data->storeAs('public/'.$libelle, $fileName);
-
-        return $path;
-    }
-
 }

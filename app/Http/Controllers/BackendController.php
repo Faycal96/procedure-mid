@@ -220,12 +220,12 @@ class BackendController extends Controller
 
     // fonction de chargement de acte
 
-    public function uploadActe($id, $currentStatus, $table, Request $request)
+    public function uploadActe($id, $currentStatus, Request $request)
     {
         $dataFiles = $request->all();
         if ($currentStatus == 'S') {
 
-            $acteSigne = $this->repository->uploadActe($table, $dataFiles, 'output_file', $id);
+            $acteSigne = $this->repository->uploadActe( $dataFiles, 'output_file', $id);
             return redirect()->back()->with('success', "L'acte a été Joint avec succès !");
         } else
             return redirect()->back()->with('success', "Operation echouée !");
