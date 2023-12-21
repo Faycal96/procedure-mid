@@ -501,17 +501,18 @@
                                                                     <div class="col-6">
                                                                         <b>Identite demandeur:</b>
                                                                         <span class="text-success">
-                                                                            {{-- {{ $demande->usager->nom }} --}}
+                                                                            {{ $demande->nom_representant }}
+                                                                            {{ $demande->prenom_representant }}
                                                                         </span>
 
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <b>Telephone :</b>
-                                                                        {{-- <span
-                                                                            class="text-success">{{ $demande->usager->telephone }}</span> --}}
+                                                                        <span
+                                                                            class="text-success">{{ $demande->numero_telephone }}</span>
                                                                     </div>
                                                                 </div><br>
-                                                                <div class="row">
+                                                                {{-- <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Identite Fournisseur:</b>
                                                                         <span
@@ -522,9 +523,9 @@
                                                                         <span
                                                                             class="text-success">{{ $demande->adresse_fournisseur }}</span>
                                                                     </div>
-                                                                </div> <br>
+                                                                </div> <br> --}}
 
-                                                                <div class="row">
+                                                                {{-- <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Système de transport :</b>
                                                                         <span
@@ -537,7 +538,7 @@
                                                                             class="text-success">{{ $demande->commentaire }}</span>
                                                                     </div>
 
-                                                                </div>
+                                                                </div> --}}
 
                                                                 <h4>Liste des fichiers Soumis <i
                                                                         class="bi bi-folder text-success"></i></h4>
