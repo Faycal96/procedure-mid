@@ -159,9 +159,9 @@ class BackendController extends Controller
                 $nextStatus = 'V';
                 break;
             case 'V':
-                $nextStatus = 'S';
-                break;
-            case 'S':
+                //     $nextStatus = 'S';
+                //     break;
+                // case 'S':
                 $nextStatus = 'A';
                 break;
             default:
@@ -204,7 +204,13 @@ class BackendController extends Controller
             'reference' => Demande::where('uuid', $id)->first()->reference,
             'etat' => StatutDemande::where('etat', $nextStatus)->first()->statut,
         ];
-        Mail::to($user_email)->send(new ValidateDemandMailable($demand));
+
+        // try {
+        //     Mail::to($user_email)->send(new ValidateDemandMailable($demand));
+
+        // } catch (Throwable $e) {
+        //     report($e);
+        // }
 
         return redirect()->back()->with('success', 'Opération éffectuée avec succès !');
     }
@@ -306,11 +312,12 @@ class BackendController extends Controller
         return redirect()->route('users-profile')->with('success', 'Profile Mis à jour avec succès !');
     }
 
-    public function listDemandeEtudeSols(DemandeRepository $demandeRepository, Demande $demandeTest)
+    public function listDemandeAll(DemandeRepository $demandeRepository, Demande $demandeTest)
     {
+        // dd(Demande::all()[0]);
         //dd(DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->orderBy('demande_P001_s.created_at')->get());
         $data = [
-            'demandes' => DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->get(),
+            'demandes' => Demande::all(), //DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->get(),
             'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
             'statutArchive' => StatutDemande::where('etat', '=', 'A')->first()->statut,
             'statutRejete' => StatutDemande::where('etat', '=', 'R')->first()->statut,

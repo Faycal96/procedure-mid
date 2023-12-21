@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
     <div class="pagetitle">
-        <h1>Liste des Demandes d'étude de sols et de fondations </h1>
+        <h1>Liste des Démandes</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -69,6 +69,8 @@
                                             <th scope="col">Résidence</th>
                                             <th scope="col">Paiement</th>
                                             <th scope="col">Déposé le</th>
+                                            <th scope="col">Etat</th>
+                                            <th scope="col">Type</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -126,8 +128,9 @@
                                                 <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $demande->date_demande }}</td>
                                                 {{-- <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td> --}}
-                                                <td> {{ $demande->libelle_court }}</td>
-                                                <td>{{ $demande->commune_id }}</td>
+                                                <td> {{ $demande->nom_representant }} {{ $demande->prenom_representant }}
+                                                </td>
+                                                <td>{{ $demande->localite->libelle }}</td>
                                                 {{-- <td>{{ $demande->localite->libelle }}</td> --}}
 
                                                 {{-- <td><span class="badge {{ $statutColor }} ">{{ $statut }}</span>
@@ -158,6 +161,18 @@
                                                 <td>
                                                     {{ $demande->date_demande }}
                                                 </td>
+                                                <td>
+                                                    <span class="badge {{ $statutColor }} ">{{ $statut }}</span>
+                                                </td>
+
+                                                <td>
+                                                    @if ($demande->procedure->code === 'P001')
+                                                        <span class="badge bg-dark">Etude de sols</span>
+                                                    @else
+                                                        <span class="badge bg-dark">Agrement technique</span>
+                                                    @endif
+
+                                                </td>
 
                                                 <td>
                                                     <button title="Voir Détail" type="button" class="btn btn-primary "
@@ -170,24 +185,26 @@
                                                     @endphp
 
                                                     <!-- Boutons d'action en fonction de l'état et du rôle -->
-                                                    @if (
-                                                        ($demande->etat == 'D' &&
-                                                            $demande->last_agent_assign == null &&
-                                                            in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
-                                                            ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
-                                                            ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-                                                            (($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid) ||
-                                                                in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-                                                            (($demande->etat == 'E' &&
-                                                                $demande->last_agent_assign == Auth::user()->agent->uuid &&
-                                                                Auth::user()->role->code != 'RCT') ||
-                                                                in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-                                                            ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
+                                                    @if ($demande->etat !== 'R' && in_array($userRole, ['Gestionnaire', 'Administration']))
                                                         <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
                                                             type="button" title="Valider" class="btn btn-success">
                                                             <i class="bi bi-check-circle"></i>
                                                         </a>
                                                     @endif
+
+                                                    {{-- @if (($demande->etat == 'D' &&
+        //$demande->last_agent_assign == null &&
+        in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
+    ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
+    ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
+    (($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid) || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
+    (($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid && Auth::user()->role->code != 'RCT') || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
+    ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
+                                                        <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
+                                                            type="button" title="Valider" class="btn btn-success">
+                                                            <i class="bi bi-check-circle"></i>
+                                                        </a>
+                                                    @endif --}}
 
                                                     @if ($demande->etat == 'D' && in_array($userRole, ['Gestionnaire', 'Administration']))
                                                         <button data-toggle="modal"
@@ -248,7 +265,7 @@
 
 
                                                     {{-- Model de confirmation de Valider --}}
-                                                    {{-- <div class="modal fade" id="valider{{ $demande->uuid }}"
+                                                    <div class="modal fade" id="valider{{ $demande->uuid }}"
                                                         data-backdrop="static" tabindex="-1" role="dialog"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -300,7 +317,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div> --}}
+                                                    </div>
                                                     <!-- Fin Modal Valider-->
 
 
@@ -421,7 +438,7 @@
 
 
                                                     {{-- Model de confirmation de rejet --}}
-                                                    {{-- <div class="modal fade" id="rejetter{{ $demande->uuid }}"
+                                                    <div class="modal fade" id="rejetter{{ $demande->uuid }}"
                                                         data-backdrop="static" tabindex="-1" role="dialog"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -466,11 +483,11 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div> --}}
+                                                    </div>
                                                     <!-- Fin Modal Rejet-->
                                                 </td>
                                                 {{-- detail modal     --}}
-                                                {{-- <div class="modal fade" id="largeModal{{ $demande->uuid }}"
+                                                <div class="modal fade" id="largeModal{{ $demande->uuid }}"
                                                     tabindex="-1">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content" style="height: 500px;">
@@ -483,17 +500,15 @@
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Identite demandeur:</b>
-                                                                        <span
-                                                                            class="text-success">{{ $demande->usager->nom .
-                                                                                '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
-                                                                                $demande->usager->prenom }}</span>
+                                                                        <span class="text-success">
+                                                                            {{-- {{ $demande->usager->nom }} --}}
+                                                                        </span>
 
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <b>Telephone :</b>
-                                                                        <span
-                                                                            class="text-success">{{ $demande->usager->telephone }}</span>
+                                                                        {{-- <span
+                                                                            class="text-success">{{ $demande->usager->telephone }}</span> --}}
                                                                     </div>
                                                                 </div><br>
                                                                 <div class="row">
@@ -549,7 +564,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                                 <!-- End Large Modal-->
                                             </tr>
                                         @endforeach

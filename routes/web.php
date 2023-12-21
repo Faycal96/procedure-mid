@@ -80,7 +80,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
 
     // Route partie administration
     Route::get('/administration', [BackendController::class, 'index'])->name('administration');
-    Route::get('/administration/demandes-list', [BackendController::class, 'listDemandeEtudeSols'])->name('demandes-list');
+    Route::get('/administration/demandes-list', [BackendController::class, 'listDemandeAll'])->name('demandes-list');
 
     //Route::get('/administration/demandes-list', [BackendController::class, 'listDemande'])->name('demandes-list');
     Route::get('/administration/demandesp0012-list', [BackendController::class, 'listDemandep0012'])->name('demandesp0012-list');
