@@ -107,24 +107,28 @@
 
                         <li>
                             <hr class="dropdown-divider">
-                          </li>
+                        </li>
 
-                          <li>
+                        <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
-                              <i class="bi bi-bank"></i>
-                              <span class="badge border-success border-1 text-success"><h6>{{ Auth::user()->agent->service->libelle_long }}</h6> </span>
+                                <i class="bi bi-bank"></i>
+                                <span class="badge border-success border-1 text-success">
+                                    <h6>{{ Auth::user()->agent->service->libelle_long }}</h6>
+                                </span>
                             </a>
-                          </li>
+                        </li>
 
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <i class="bi bi-person"></i>
-                                @if (Auth::user()->agent->role->libelle=="Réception")
-
-                                <span class="text-primary"> <h6>Receptioniste</h6></span>
+                                @if (Auth::user()->agent->role->libelle == 'Réception')
+                                    <span class="text-primary">
+                                        <h6>Receptioniste</h6>
+                                    </span>
                                 @else
-                                <span class="text-primary"> <h6>{{ Auth::user()->agent->role->libelle }}</h6></span>
-
+                                    <span class="text-primary">
+                                        <h6>{{ Auth::user()->agent->role->libelle }}</h6>
+                                    </span>
                                 @endif
                             </a>
                         </li>
@@ -186,75 +190,30 @@
 
                 <ul id="demandes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-                    @if (Auth::user()->agent->service->libelle_court == 'DGPE' || Auth::user()->role->libelle == 'Administration')
+                    @if (Auth::user()->agent->service->libelle_court == 'DGESS' || Auth::user()->role->libelle == 'Administration')
                         <li>
                             <a href="{{ route('demandes-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Produit Chimique &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Agrément technique
+                                    pour l’exécution des études, du contrôle et des travaux routiers &nbsp;<span
                                         id="prog_produit_chimique" class="badge bg-warning text-white"> </span>
                                 </span>
                             </a>
                         </li>
-
-                        <li>
-                            <a href="{{ route('demandesp008-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Déchets Solide &nbsp;<span
-                                        id="prog_dechet" class="badge bg-warning text-white"> </span> </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('demandesp006-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions &nbsp; <span
-                                        id="prog_exemption" class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('demandesp007-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Homologation &nbsp;<span
-                                        id="prog_homologation" class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
                     @endif
 
-                    @if (Auth::user()->agent->service->libelle_court == 'DGEF' || Auth::user()->role->libelle == 'Administration')
+                    {{-- @if (Auth::user()->agent->service->libelle_court == 'DSI' || Auth::user()->role->libelle == 'Administration')
                         <li>
                             <a href="{{ route('demandesp0012-list') }}">
                                 <i class="bi bi-circle"></i><span>Procédure écotourisme &nbsp;<span
                                         id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
                             </a>
                         </li>
+                    @endif --}}
 
-                        <li>
-                            <a href="{{ route('demandesp003-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis Chasse &nbsp;<span id="prog_chasse"
-                                        class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('demandesp004-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Détention &nbsp; <span id="prog_detention"
-                                        class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('demandesp0011-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis Coupe &nbsp;<span id="prog_coupe"
-                                        class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('demandesp005-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis de circulation&nbsp;<span
-                                        id="prog_circulation" class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
-                    @endif
-
-                    @if (Auth::user()->agent->service->libelle_court == 'DGRE' || Auth::user()->role->libelle == 'Administration')
+                    @if (Auth::user()->agent->service->libelle_court == 'LNBTP' || Auth::user()->role->libelle == 'Administration')
                         <li>
                             <a href="{{ route('demandesp002-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Agrement en Eau &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Demande d'Etude de sols et de fondations &nbsp;<span
                                         id="prog_agrement_technique" class="badge bg-warning text-white">
                                     </span></span>
                             </a>
@@ -368,8 +327,8 @@
                         </li>
 
 
-        </ul>
-      </li><!-- End Icons Nav -->
+                    </ul>
+                </li><!-- End Icons Nav -->
 
 
 
@@ -377,17 +336,19 @@
 
 
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-pencil-square"></i> <span>Plaintes</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="plainte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ route('listePlainte', ['procedure'=>'Toutes']) }}">
-              <i class="bi bi-circle"></i><span>Liste des plaintes</span>
-            </a>
-          </li>
-          <!--
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse"
+                        href="#">
+                        <i class="bi bi-pencil-square"></i> <span>Plaintes</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="plainte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('listePlainte', ['procedure' => 'Toutes']) }}">
+                                <i class="bi bi-circle"></i><span>Liste des plaintes</span>
+                            </a>
+                        </li>
+                        <!--
           <li>
             <a href="{{ route('usager-list') }}">
               <i class="bi bi-circle"></i><span>Plainte en cours</span>
@@ -395,9 +356,9 @@
           </li>
           -->
 
-        </ul>
-      </li><!-- End Charts Nav -->
-      @endif
+                    </ul>
+                </li><!-- End Charts Nav -->
+            @endif
 
 
 
@@ -408,20 +369,20 @@
     <main id="main" class="main">
         @yield('title')
         @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-           <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-           </button>
-           <h4 class="alert-heading">{{session('success')}}</h4>
-        </div>
-   @endif
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="alert-heading">{{ session('success') }}</h4>
+            </div>
+        @endif
 
 
-<script>
-   setTimeout(function() {
-       document.querySelector('.alert.alert-success').style.display = 'none';
-   }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-</script>
+        <script>
+            setTimeout(function() {
+                document.querySelector('.alert.alert-success').style.display = 'none';
+            }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+        </script>
 
         @yield('content')
 
