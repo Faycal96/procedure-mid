@@ -25,7 +25,7 @@
          <div class="row justify-content-center mt-0">
              <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                  <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
-                     <h5><strong>Octroie d'agrement techniques en Eau et Assainissement</strong></h5>
+                     <h5><strong> Délivrance et suspension de l’agrément technique </strong></h5>
                      <p>
                          @if (session('success'))
                              <div class="alert alert-success">
@@ -34,6 +34,10 @@
                          @endif
                      </p>
                      <p>Les champs suivis d'etoile rouge sont obligatoires</p>
+
+                     <!-- tres important -->
+                     <input type="number" id="nbrItem" hidden value=1>
+
                      <div class="row">
                          <div class="col-md-12 mx-0">
                              <form id="msform" role="form" method="POST"
@@ -61,60 +65,76 @@
                                                  style="color:red">
                                                  *</span></h4>
                                          <div class="row">
-                                             <label class="nom_societe fw-bold">Que voulez vous faire <span
+
+                                            <label class="fw-bold">Identité du demandeur <span style="color: red">*</span></label>
+                                            <input type="text" class="border-success" name="identite" required=true placeholder="identité" value="{{ $identite }}" /><br /><br />
+                                       
+
+                                             <label class="fw-bold">Que voulez vous faire <span
                                                      style="color: red">*</span></label>
                                              <div class="col-4">
-                                                 <input id="radio1" type="radio" value="Nouvel demande">
+                                                 <input id="radio1" type="radio" value="Nouvel demande" name="objectif_demande" checked>
                                                  <label for="radio1">Nouvel demande</label>
                                              </div>
                                              <div class="col-4">
-                                                 <input id="radio1" type="radio">
-                                                 <label for="radio1">Renouvellement</label>
+                                                 <input id="radio2" type="radio" value="Renouvellement" name="objectif_demande">
+                                                 <label for="radio2">Renouvellement</label>
                                              </div>
                                              <div class="col-4">
-                                                 <input id="radio1" type="radio">
-                                                 <label for="radio1">Changement de catégorie</label>
+                                                 <input id="radio3" type="radio" value="Changement de catégorie" name="objectif_demande">
+                                                 <label for="radio3">Changement de catégorie</label>
                                              </div>
                                          </div>
 
                                          <div class="row">
                                              <div class="col-6 form-group">
                                                  <label>Type catégorie</label>
-                                                 <select id="categorie" class="form-select border-success">
-                                                     <option class="mb-3" value=""></option>
-                                                     {{-- @foreach ($procedures as $proc)
-                                                                <option class="mb-3" value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
-                                                            @endforeach --}}
+                                                 <select id="categorie" name="categorie" class="form-select border-success" required=true>
+                                                     <option class="mb-3" ></option>
+                                                       @foreach ($categories as $cat)
+                                                                <option class="mb-3" value="{{$cat->uuid}}">{{$cat->libelle}}</option>
+                                                         @endforeach 
                                                  </select>
                                              </div>
+
+                                             <div class="col-6 form-group">
+                                                <label class="pays_residence fw-bold">Commune de Residence<span style="color:red"> *</span></label>
+                                                <select name="commune_id" id="commune_id" class="form-select border-success">
+                                                <option >Veuillez choisir le lieu</option>
+                                                @foreach($communes as $com)
+                                                    <option value="{{$com->uuid }}">{{utf8_decode($com->libelle)}}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+
                                          </div> <br>
 
                                          <div class="row">
                                              <div class="col-6 mb-3 form-group">
-                                                 <label for="fullName" class="col-form-label">Nom de
+                                                 <label for="beneficiaire" class="col-form-label">Nom de
                                                      l'entreprise</label>
-                                                 <input name="name" type="text"
-                                                     class="form-control border-success" id="fullName">
+                                                 <input name="beneficiaire" type="text"
+                                                     class="form-control border-success" id="beneficiaire" required=true>
                                              </div>
 
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Raison sociale</label>
-                                                 <input name="name" type="text"
-                                                     class="form-control border-success" id="fullName">
+                                                 <input name="raison_social" type="text"
+                                                     class="form-control border-success" id="fullName" required=true>
                                              </div>
                                          </div>
 
                                          <div class="row">
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Siège sociale</label>
-                                                 <input name="name" type="text"
-                                                     class="form-control border-success" id="fullName">
+                                                 <input name="siege_social" type="text"
+                                                     class="form-control border-success" id="fullName" required=true>
                                              </div>
 
                                              <div class="col-6 mb-3 form-group">
-                                                 <label for="fullName" class="col-form-label">Boîte Postale</label>
-                                                 <input name="name" type="text"
-                                                     class="form-control border-success" id="fullName">
+                                                 <label for="boite_postale" class="col-form-label">Boîte Postale</label>
+                                                 <input name="boite_postale" type="text"
+                                                     class="form-control border-success" id="boite_postale" required=true>
                                              </div>
                                          </div>
 
@@ -122,25 +142,25 @@
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Télephone<span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="form-control border-success" />
+                                                 <input type="text" name="tel_1" class="form-control border-success" required=true />
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Fax<span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="form-control border-success" />
+                                                 <input type="text" name="fax" class="form-control border-success" required=true />
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Email<span
                                                          style="color: red">*</span></label>
-                                                 <input type="email" class="form-control border-success" />
+                                                 <input type="email" name="email_entreprise" class="form-control border-success" required=true />
                                              </div>
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Adresse Physique<span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="form-control border-success" />
+                                                 <input type="text" name="adresse_physique" class="form-control border-success" required=true/>
                                              </div>
                                          </div>
 
@@ -148,7 +168,7 @@
                                                 *</span></h4>
                                             <div class="row">
                                                 <div class="col-3">
-                                                    <label class="nom_societe fw-bold" >Moi Même</label>
+                                                    <label class="fw-bold" >Moi Même</label>
                                                     <input type="radio" value="Moi même" class="checkbox"  name="beneficiaire" />
                                                 </div>
                                                 <div class="col-3">
@@ -174,33 +194,33 @@
 
                                          <div class="row">
                                              <div class="col-6">
-                                                 <label class="nom_societe fw-bold">Nom <span
+                                                 <label class="fw-bold">Nom <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
+                                                 <input type="text" name="nom_representant" class="border-success form-control" required=true />
                                              </div>
                                              <div class="col-6">
-                                                 <label class="nom_societe fw-bold">Prénom(s) <span
+                                                 <label class="fw-bold">Prénom(s) <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
-                                             </div>
-                                         </div>
-                                         <div class="row">
-                                             <div class="col-6">
-                                                 <label class="nom_societe fw-bold">Qualité <span
-                                                         style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
-                                             </div>
-                                             <div class="col-6">
-                                                 <label class="nom_societe fw-bold">Adresse <span
-                                                         style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
+                                                 <input type="text" name="prenom_representant" class="border-success form-control" required=true />
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6">
-                                                 <label class="nom_societe fw-bold">N° employeur (CNSS)<span
+                                                 <label class="fw-bold">Qualité <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" class="border-success form-control" />
+                                                 <input type="text" name="fonction_representant" class="border-success form-control" required=true />
+                                             </div>
+                                             <div class="col-6">
+                                                 <label class="fw-bold">Adresse <span
+                                                         style="color: red">*</span></label>
+                                                 <input type="text" name="adresse_representant" class="border-success form-control" required=true/>
+                                             </div>
+                                         </div>
+                                         <div class="row">
+                                             <div class="col-6">
+                                                 <label class="fw-bold" for="numero_cnss_entreprise">N° employeur (CNSS)<span
+                                                         style="color: red">*</span></label>
+                                                 <input type="text"  name="numero_cnss_entreprise" id="numero_cnss_entreprise" class="border-success form-control" required=true/>
                                              </div>
                                          </div>
 
@@ -219,13 +239,13 @@
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">Statut légalisée de la
                                                      société<span style="color: red">*</span></label>
-                                                 <input type="file" class="form-control border-success" />
+                                                 <input type="file" name="statutSociete" class="form-control border-success" required=true/>
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">RCCM / RSCPM<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" class="form-control border-success" />
+                                                 <input type="file" name="rccm" class="form-control border-success" required=true />
                                              </div>
                                          </div>
 
@@ -233,26 +253,26 @@
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">IFU / Récipissé<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" class="form-control border-success" />
+                                                 <input type="file" name="ifu" class="form-control border-success" required=true />
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">Document chiffre d'affaire<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" class="form-control border-success" />
+                                                 <input type="file" name="chiffreAffaire" class="form-control border-success" required=true/>
                                              </div>
                                          </div>
 
                                          <div class="row">
                                              <div class="col-6">
-                                                 <label class="nom_societe fw-bold">Ancient agrément <span
+                                                 <label class="fw-bold">Ancient agrément <span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" class="border-success form-control" />
+                                                 <input type="file" name="ancienAgrement" class="border-success form-control" required=true />
                                              </div>
                                              <div class="col-6">
-                                                 <label class="nom_societe fw-bold">Liste matériel <span
+                                                 <label class="fw-bold">Liste matériel <span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" class="border-success form-control" />
+                                                 <input type="file" name="listeMateriel" class="border-success form-control" required=true />
                                              </div>
                                          </div>
 
@@ -260,7 +280,7 @@
                                              <div class="col-6">
                                                  <label class="adresse fw-bold">Liste personnel<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" class="border-success form-control" />
+                                                 <input type="file" name="listePersonnel" class="border-success form-control" required=true />
                                              </div>
                                          </div>
 
@@ -344,90 +364,87 @@
 
                                          <div class="accordion" id="accordionReferenceEntreprise">
                                              <div class="accordion-item">
-                                                 <h2 class="accordion-header" id="headingOne">
+                                                 <h2 class="accordion-header" id="heading1">
                                                      <button class="accordion-button" type="button"
-                                                         data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                                         aria-expanded="true" aria-controls="collapseOne">
-                                                         Accordion Item #1
+                                                         data-bs-toggle="collapse" data-bs-target="#reference1"
+                                                         aria-expanded="true" aria-controls="reference1">
+                                                         Référence #1
                                                      </button>
                                                  </h2>
-                                                 <div id="collapseOne" class="accordion-collapse collapse show"
-                                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
+                                                 <div id="reference1" class="accordion-collapse collapse show"
+                                                     aria-labelledby="heading1" data-bs-parent="#accordionReferenceEntreprise">
                                                      <div class="accordion-body">
                                                          <div class="row">
-                                                             <div class="col-4">
-                                                                 <label for="domaine"
-                                                                     class="siege_social">Localisation
+                                                             <div class="col-6">
+                                                                 <label for="localisation">Localisation
                                                                      <span style="color:red">*</span></label>
-                                                                 <select name="domaine" id="domaine"
-                                                                     class="form-select border-success">
-                                                                     <option value="">Veuillez choisir la
-                                                                         localisation</option>
-                                                                 </select>
-
+                                                                 <input type="text" name="localisation[]" id="localisation"
+                                                                     class="border-success form-control" required=true/>
                                                              </div>
-                                                             <div class="col-4">
-                                                                 <label for="categorie"
-                                                                     class="siege_social">Désignation de travaux
+                                                             <div class="col-6">
+                                                                 <label for="designation">Désignation de travaux
                                                                      <span style="color:red">*</span></label>
-                                                                 <select name="categorie" id="categorie"
-                                                                     class="form-select border-success">
-                                                                     <option value="">Veuillez choisir la
-                                                                         désignation des travaux</option>
-                                                                 </select>
+                                                                 <input type="text" name="designation[]" id="designation"
+                                                                     class="border-success form-control" required=true/>
                                                              </div>
-                                                             <div class="col-4">
-                                                                 <label for="sousdomaine" class="nom_societe">Maitrise
-                                                                     d'ouvrage
-                                                                     <span style="color: red">*</span></label>
-                                                                 <input type="text"
-                                                                     class="border-success form-control" />
-                                                             </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="col-6">
+                                                                <label for="maitre_ouvrage" >Maitrise d'ouvrage
+                                                                    <span style="color: red">*</span></label>
+                                                                <input type="text" name="maitre_ouvrage[]" id="maitre_ouvrage"
+                                                                    class="border-success form-control" required=true/>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label for="montany_travaux" >Montant travaux
+                                                                    <span style="color: red">*</span></label>
+                                                                <input type="number" name="montany_travaux[]" id="montany_travaux"
+                                                                    class="border-success form-control" required=true/>
+                                                            </div>
                                                          </div>
 
                                                          <div class="row">
                                                              <div class="col-6 form-group">
-                                                                 <label class="col-form-label">Date début<span
+                                                                 <label class="col-form-label" for="date_debut">Date début<span
                                                                          style="color: red">*</span></label>
-                                                                 <input type="date"
-                                                                     class="form-control border-success" />
+                                                                 <input type="date" name="date_debut[]" id="date_debut"
+                                                                     class="form-control border-success" required=true/>
                                                              </div>
 
                                                              <div class="col-6 mb-3 form-group">
-                                                                 <label for="fullName" class="col-form-label">Date
-                                                                     fin</label>
-                                                                 <input type="date"
-                                                                     class="form-control border-success"
-                                                                     id="fullName">
+                                                                 <label for="date_fin" class="col-form-label">Date fin</label>
+                                                                 <input type="date" name="date_fin[]" id="date_fin"
+                                                                     class="form-control border-success" required=true>
                                                              </div>
                                                          </div>
 
                                                          <div class="row">
                                                              <div class="col-6">
-                                                                 <label class="nom_societe fw-bold">Nature<span
+                                                                 <label class="fw-bold" for="nature">Nature<span
                                                                          style="color: red">*</span></label>
-                                                                 <input type="text"
+                                                                 <input type="text" name="nature[]" id="nature"
                                                                      class="border-success form-control" />
                                                              </div>
                                                              <div class="col-6">
-                                                                 <label class="nom_societe fw-bold">Pourcentage Montant
-                                                                     total <span style="color: red">*</span></label>
-                                                                 <input type="number"
-                                                                     class="border-success form-control" />
+                                                                 <label class="fw-bold" for="pourcentage_montant_total">Pourcentage Montant total
+                                                                     <span style="color: red">*</span></label>
+                                                                 <input type="number" name="pourcentage_montant_total[]" id="pourcentage_montant_total"
+                                                                     class="border-success form-control" required=true/>
                                                              </div>
                                                          </div>
                                                          <div class="row">
                                                              <div class="col-6">
-                                                                 <label class="nom_societe fw-bold">Condition <span
-                                                                         style="color: red">*</span></label>
-                                                                 <textarea name="" id="" cols="30" rows="10" style="border: solid green 2px"></textarea>
-                                                                 {{-- <input type="text" class="border-success form-control" /> --}}
+                                                                 <label class="fw-bold" for="condition">Condition
+                                                                     <span style="color: red">*</span></label>
+                                                                 <textarea id="" cols="30" rows="10" style="border: solid green 2px"
+                                                                     name="condition[]" id="condition" required=true ></textarea>
                                                              </div>
                                                              <div class="col-6">
-                                                                 <label class="nom_societe fw-bold">Observation <span
+                                                                 <label class="fw-bold" for="observations">Observation <span
                                                                          style="color: red">*</span></label>
-                                                                 <textarea name="" id="" cols="30" rows="10" style="border: solid green 2px"></textarea>
-                                                                 {{-- <input type="text" class="border-success form-control" /> --}}
+                                                                 <textarea id="" cols="30" rows="10" style="border: solid green 2px"
+                                                                        name="observations[]" id="observations" required=true></textarea>
                                                              </div>
                                                          </div>
                                                      </div>
@@ -435,6 +452,7 @@
                                              </div>
                                          </div>
                                      </div>
+
                                      <a class="btn btn-default" onclick="addCollapseAccordion()">
                                          <i class="fa fa-plus-circle text-success"></i>
                                          <span>Ajouter Réferences de l'entreprise </span>
@@ -442,7 +460,7 @@
                                      <button type="button" name="previous"
                                          class="previous action-button-previous">Retour</button>
                                      <Button type="button" name="make_payment" id="next_domaine"
-                                         class="next action-button">Suivant</button>
+                                         class="next action-button">Suivant</button> 
                                  </fieldset>
 
                                  <fieldset>
@@ -481,7 +499,7 @@
                                                      *</span></label>
                                              <div class="row">
                                                  <div class="col-3">
-                                                     <label class="nom_societe fw-bold">ORANGE</label>
+                                                     <label class="fw-bold">ORANGE</label>
                                                      <input id="radio1" type="radio" value="1"
                                                          class="checkbox" name="moyen" />
                                                  </div>
@@ -532,7 +550,9 @@
                                          <input type="button" name="previous"
                                              class="previous action-button-previous" value="Retour" />
 
-                                         <button type="submit" class="action-button" id="btn_send">Valider</button>
+                                         <!-- <button type="submit" class="action-button" id="btn_send">Valider</button> -->
+
+                                         <input type="submit" class="next action-button" value="Valider" />
 
                                          <!-- Ajoutez ceci dans la première étape du formulaire -->
                                          <div class="error-message" style="color: red;"></div>
@@ -701,7 +721,7 @@
              '</tr>',
          ].join());
      }
-
+        
      function deleteRowCV(me) {
          $(me).closest('tr').remove();
      }
@@ -718,67 +738,81 @@
          ].join());
      }
 
+
      function addCollapseAccordion() {
+        
+        nbrItem = document.getElementById("nbrItem");
+        nbrItemValue = nbrItem.value;
+        nbrItemValue = parseInt(nbrItemValue) + 1;
+        
+        nbrItem.value = nbrItemValue;
+
         // Now you can use the accordionItemHTML variable as needed.
         let innerHTML = "" +
         "<div class=\"accordion-item\">" +
-            "<h2 class=\"accordion-header\" id=\"headingTwo\">" +
-                "<button class=\"accordion-button\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">" +
-                    "Accordion Item #2" +
+            "<h2 class=\"accordion-header\" id=\"heading"+nbrItemValue+"\">" +
+                "<button class=\"accordion-button\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#reference"+nbrItemValue+"\" aria-expanded=\"true\" aria-controls=\"reference"+nbrItemValue+"\">" +
+                    "Référence #" + nbrItemValue +
                 "<\/button>" +
             "<\/h2>" +
-            "<div id=\"collapseOne\" class=\"accordion-collapse collapse show\" aria-labelledby=\"headingTwo\" data-bs-parent=\"#accordionReferenceEntreprise\">" +
+            "<div id=\"reference"+nbrItemValue+"\" class=\"accordion-collapse collapse show\" aria-labelledby=\"heading"+nbrItemValue+"\" data-bs-parent=\"#accordionReferenceEntreprise\">" +
                 "<div class=\"accordion-body\">" +
                     "<div class=\"row\">" +
-                        "<div class=\"col-4\">" +
-                            "<label for=\"domaine\" class=\"siege_social\">Localisation<span style=\"color:red\">*<\/span><\/label>" +
-                            "<select name=\"domaine\" id=\"domaine\" class=\"form-select border-success\">" +
-                                "<option value=\"\">Veuillez choisir la localisation<\/option>" +
-                            "<\/select>" +
+                        "<div class=\"col-6\">" +
+                            "<label for=\"localisation\">Localisation<span style=\"color:red\">*<\/span><\/label>" +
+                            "<input type=\"text\" name=\"localisation[]\" id=\"localisation\" class=\"border-success form-control\" \/>" +
                         "<\/div>" +
-                        "<div class=\"col-4\">" +
-                            "<label for=\"categorie\" class=\"siege_social\">D\u00e9signation de travaux<span style=\"color:red\">*<\/span><\/label>" +
-                            "<select name=\"categorie\" id=\"categorie\" class=\"form-select border-success\">" +
-                                "<option value=\"\">Veuillez choisir la d\u00e9signation des travaux<\/option>" +
-                            "<\/select>" +
+                        "<div class=\"col-6\">" +
+                            "<label for=\"designation\">Désignation de travaux<span style=\"color:red\">*<\/span><\/label>" +
+                            "<input type=\"text\" name=\"designation[]\" id=\"designation\" class=\"border-success form-control\" \/>" +
                         "<\/div>" +
-                        "<div class=\"col-4\">" +
-                            "<label for=\"sousdomaine\" class=\"nom_societe\">Maitrise d'ouvrage<span style=\"color: red\">*<\/span><\/label>" +
-                            "<input type=\"text\" class=\"border-success form-control\" \/>" +
+                    "<\/div>" +
+                    "<div class=\"row\">" +
+                        "<div class=\"col-6\">" +
+                            "<label for=\"maitre_ouvrage\">Maitrise d'ouvrage<span style=\"color: red\">*<\/span><\/label>" +
+                            "<input type=\"text\" name=\"maitre_ouvrage[]\" id=\"maitre_ouvrage\" class=\"border-success form-control\" \/>" +
                         "<\/div>" +
-                    "<\/div><div class=\"row\">" +
+                        "<div class=\"col-6\">" +
+                            "<label for=\"montany_travaux\">Montant travaux" +
+                                "<span style=\"color: red\">*<\/span><\/label>" +
+                            "<input type=\"number\" name=\"montany_travaux[]\" id=\"montany_travaux\" class=\"border-success form-control\" \/>" +
+                        "<\/div>" +
+                    "<\/div>" +
+                    "<div class=\"row\">" +
                         "<div class=\"col-6 form-group\">" +
-                            "<label class=\"col-form-label\">Date d\u00e9but<span style=\"color: red\">*<\/span><\/label>" +
-                            "<input type=\"date\" class=\"form-control border-success\" \/>" +
+                            "<label class=\"col-form-label\" for=\"date_debut\">Date début<span style=\"color: red\">*<\/span><\/label>" +
+                            "<input type=\"date\" name=\"date_debut[]\" id=\"date_debut\" class=\"form-control border-success\" \/>" +
                         "<\/div>" +
                         "<div class=\"col-6 mb-3 form-group\">" +
-                            "<label for=\"fullName\" class=\"col-form-label\">Date fin<\/label>" +
-                            "<input type=\"date\" class=\"form-control border-success\" id=\"fullName\">" +
+                            "<label for=\"date_fin\" class=\"col-form-label\">Date fin<\/label>" +
+                            "<input type=\"date\" name=\"date_fin[]\" id=\"date_fin\" class=\"form-control border-success\">" +
                         "<\/div>" +
-                    "<\/div><div class=\"row\">" +
+                    "<\/div>" +
+                    "<div class=\"row\">" +
                         "<div class=\"col-6\">" +
-                            "<label class=\"nom_societe fw-bold\">Nature<span style=\"color: red\">*<\/span><\/label>" +
-                            "<input type=\"text\" class=\"border-success form-control\" \/>" +
-                        "<\/div>" +
-                        "<div class=\"col-6\">" +
-                            "<label class=\"nom_societe fw-bold\">Pourcentage Montant total <span style=\"color: red\">*<\/span><\/label>" +
-                            "<input type=\"number\" class=\"border-success form-control\" \/>" +
-                        "<\/div>" +
-                    "<\/div><div class=\"row\">" +
-                        "<div class=\"col-6\">" +
-                            "<label class=\"nom_societe fw-bold\">Condition <span style=\"color: red\">*<\/span><\/label>" +
-                            "<textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" style=\"border: solid green 2px\"><\/textarea>" +
+                            "<label class=\"fw-bold\" for=\"nature\">Nature<span style=\"color: red\">*<\/span><\/label>" +
+                            "<input type=\"text\" name=\"nature[]\" id=\"nature\" class=\"border-success form-control\" \/>" +
                         "<\/div>" +
                         "<div class=\"col-6\">" +
-                            "<label class=\"nom_societe fw-bold\">Observation <span style=\"color: red\">*<\/span><\/label>" +
-                            "<textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" style=\"border: solid green 2px\"><\/textarea>" +
+                            "<label class=\"fw-bold\" for=\"pourcentage_montant_total\">Pourcentage Montant total<span style=\"color: red\">*<\/span><\/label>" +
+                            "<input type=\"number\" name=\"pourcentage_montant_total[]\" id=\"pourcentage_montant_total\" class=\"border-success form-control\" \/>" +
+                        "<\/div>" +
+                    "<\/div>" +
+                    "<div class=\"row\">" +
+                        "<div class=\"col-6\">" +
+                            "<label class=\"fw-bold\" for=\"condition\">Condition<span style=\"color: red\">*<\/span><\/label>" +
+                            "<textarea cols=\"30\" rows=\"10\" style=\"border: solid green 2px\" name=\"condition[]\" id=\"condition\"><\/textarea>" +
+                        "<\/div>" +
+                        "<div class=\"col-6\">" +
+                            "<label class=\"fw-bold\" for=\"observations\">Observation <span style=\"color: red\">*<\/span><\/label>" +
+                            "<textarea cols=\"30\" rows=\"10\" style=\"border: solid green 2px\" name=\"observations[]\" id=\"observations\"><\/textarea>" +
                         "<\/div>" +
                     "<\/div>" +
                 "<\/div>" +
             "<\/div>" +
         "<\/div>";
         
-        // document.write("<div class=\"accordion-item\">\r\n                                                 <h2 class=\"accordion-header\" id=\"headingTwo\">\r\n                                                     <button class=\"accordion-button\" type=\"button\"\r\n                                                         data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne\"\r\n                                                         aria-expanded=\"true\" aria-controls=\"collapseOne\">\r\n                                                         Accordion Item #1\r\n                                                     <\/button>\r\n                                                 <\/h2>\r\n                                                 <div id=\"collapseOne\" class=\"accordion-collapse collapse show\"\r\n                                                     aria-labelledby=\"headingTwo\" data-bs-parent=\"#accordionExample\">\r\n                                                     <div class=\"accordion-body\">\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"domaine\"\r\n                                                                     class=\"siege_social\">Localisation\r\n                                                                     <span style=\"color:red\">*<\/span><\/label>\r\n                                                                 <select name=\"domaine\" id=\"domaine\"\r\n                                                                     class=\"form-select border-success\">\r\n                                                                     <option value=\"\">Veuillez choisir la\r\n                                                                         localisation<\/option>\r\n                                                                 <\/select>\r\n\r\n                                                             <\/div>\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"categorie\"\r\n                                                                     class=\"siege_social\">D\u00e9signation de travaux\r\n                                                                     <span style=\"color:red\">*<\/span><\/label>\r\n                                                                 <select name=\"categorie\" id=\"categorie\"\r\n                                                                     class=\"form-select border-success\">\r\n                                                                     <option value=\"\">Veuillez choisir la\r\n                                                                         d\u00e9signation des travaux<\/option>\r\n                                                                 <\/select>\r\n                                                             <\/div>\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"sousdomaine\" class=\"nom_societe\">Maitrise\r\n                                                                     d'ouvrage\r\n                                                                     <span style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"text\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6 form-group\">\r\n                                                                 <label class=\"col-form-label\">Date d\u00e9but<span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"date\"\r\n                                                                     class=\"form-control border-success\" \/>\r\n                                                             <\/div>\r\n\r\n                                                             <div class=\"col-6 mb-3 form-group\">\r\n                                                                 <label for=\"fullName\" class=\"col-form-label\">Date\r\n                                                                     fin<\/label>\r\n                                                                 <input type=\"date\"\r\n                                                                     class=\"form-control border-success\"\r\n                                                                     id=\"fullName\">\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"nom_societe fw-bold\">Nature<span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"text\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"nom_societe fw-bold\">Pourcentage Montant\r\n                                                                     total <span style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"number\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"nom_societe fw-bold\">Condition <span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" style=\"border: solid green 2px\"><\/textarea>\r\n                                                                 {{-- <input type=\"text\" class=\"border-success form-control\" \/> --}}\r\n                                                             <\/div>\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"nom_societe fw-bold\">Observation <span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" style=\"border: solid green 2px\"><\/textarea>\r\n                                                                 {{-- <input type=\"text\" class=\"border-success form-control\" \/> --}}\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n                                                     <\/div>\r\n                                                 <\/div>\r\n                                             <\/div>");
+        // document.write("<div class=\"accordion-item\">\r\n                                                 <h2 class=\"accordion-header\" id=\"headingTwo\">\r\n                                                     <button class=\"accordion-button\" type=\"button\"\r\n                                                         data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne\"\r\n                                                         aria-expanded=\"true\" aria-controls=\"collapseOne\">\r\n                                                         Accordion Item #1\r\n                                                     <\/button>\r\n                                                 <\/h2>\r\n                                                 <div id=\"collapseOne\" class=\"accordion-collapse collapse show\"\r\n                                                     aria-labelledby=\"headingTwo\" data-bs-parent=\"#accordionExample\">\r\n                                                     <div class=\"accordion-body\">\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"domaine\"\r\n                                                                     class=\"siege_social\">Localisation\r\n                                                                     <span style=\"color:red\">*<\/span><\/label>\r\n                                                                 <select name=\"domaine\" id=\"domaine\"\r\n                                                                     class=\"form-select border-success\">\r\n                                                                     <option value=\"\">Veuillez choisir la\r\n                                                                         localisation<\/option>\r\n                                                                 <\/select>\r\n\r\n                                                             <\/div>\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"categorie\"\r\n                                                                     class=\"siege_social\">D\u00e9signation de travaux\r\n                                                                     <span style=\"color:red\">*<\/span><\/label>\r\n                                                                 <select name=\"categorie\" id=\"categorie\"\r\n                                                                     class=\"form-select border-success\">\r\n                                                                     <option value=\"\">Veuillez choisir la\r\n                                                                         d\u00e9signation des travaux<\/option>\r\n                                                                 <\/select>\r\n                                                             <\/div>\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"sousdomaine\" class=\"nom_societe\">Maitrise\r\n                                                                     d'ouvrage\r\n                                                                     <span style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"text\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6 form-group\">\r\n                                                                 <label class=\"col-form-label\">Date d\u00e9but<span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"date\"\r\n                                                                     class=\"form-control border-success\" \/>\r\n                                                             <\/div>\r\n\r\n                                                             <div class=\"col-6 mb-3 form-group\">\r\n                                                                 <label for=\"fullName\" class=\"col-form-label\">Date\r\n                                                                     fin<\/label>\r\n                                                                 <input type=\"date\"\r\n                                                                     class=\"form-control border-success\"\r\n                                                                     id=\"fullName\">\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"fw-bold\">Nature<span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"text\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"fw-bold\">Pourcentage Montant\r\n                                                                     total <span style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"number\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"fw-bold\">Condition <span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" style=\"border: solid green 2px\"><\/textarea>\r\n                                                                 {{-- <input type=\"text\" class=\"border-success form-control\" \/> --}}\r\n                                                             <\/div>\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"fw-bold\">Observation <span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" style=\"border: solid green 2px\"><\/textarea>\r\n                                                                 {{-- <input type=\"text\" class=\"border-success form-control\" \/> --}}\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n                                                     <\/div>\r\n                                                 <\/div>\r\n                                             <\/div>");
          $("#accordionReferenceEntreprise").append( innerHTML );
      }
 

@@ -76,50 +76,128 @@
                         <h5 class="single">
                             {{ $procedure->libelle_long }}
                         </h5>
-                        @if ($checkSession)
-                        <marquee font style="bold" scrolldelay="100">
-                            <h6 style="color:red">
-                                *** Les demandes sont closes pour cette année ***
-                             </h6>
-                        </marquee>
-
-                        @endif
                         <p style="text-align: justify;text-indent : 10%;">{{ $procedure->description }}</p>
                         <div style=" margin: 18px 0 33px;">
 
-                            <i class="bi bi-clock text-success"
-                                style="display: inline-block;
-                        width: 24px;
-                        height: 24px;
-                        fill: none;
-                        stroke: currentColor;
-                        stroke-width: 2px;
-                        stroke-linecap: round;
-                        stroke-linejoin: round;"></i>
-                            <b>Délai de traitement : <b class="text-success">{{ $procedure->delai }} Jours</b>  </b>
-
-
+                            @if($procedure->code == "P001")
+                                <div class="row">
+                                    <div class="col">
+                                        <i class="bi bi-tag text-success"
+                                            style="display: inline-block;
+                                                width: 24px;
+                                                height: 24px;
+                                                fill: none;
+                                                stroke: currentColor;
+                                                stroke-width: 2px;
+                                                stroke-linecap: round;
+                                                stroke-linejoin: round;"></i>
+                                        <b>Frais : <b class="text-success">Sur Dévis</b></b><br><br>
+                                    </div>
+                                </div>
+                            @else
                             <i class="bi bi-tag text-success"
+                            style="display: inline-block;
+                                   width: 24px;
+                                   height: 24px;
+                                   fill: none;
+                                   stroke: currentColor;
+                                   stroke-width: 2px;
+                                   stroke-linecap: round;
+                                   stroke-linejoin: round;"></i>
+                        <b>Frais de dossier : <b class="text-success">25 000 FCFA</b>  </b>
+                        <i class="bi bi-tag text-success"
+                            style="display: inline-block;
+                                   width: 24px;
+                                   height: 24px;
+                                   fill: none;
+                                   stroke: currentColor;
+                                   stroke-width: 2px;
+                                   stroke-linecap: round;
+                                   stroke-linejoin: round;"></i>
+                        <b>Frais de timbre : <b class="text-success"> 20 000 F CFA</b></b><br><br>
+                        <p><b><i class="bi bi-tag text-success"
+                            style="display: inline-block;
+                               width: 24px;
+                               height: 24px;
+                               fill: none;
+                               stroke: currentColor;
+                               stroke-width: 2px;
+                               stroke-linecap: round;
+                               stroke-linejoin: round;"></i>Frais d'examen de dossier :</b></p>
+                        <div class="row">
+                            <div class="col">
+                                <i class="bi bi-tag text-success"
                                 style="display: inline-block;
-                        width: 24px;
-                        height: 24px;
-                        fill: none;
-                        stroke: currentColor;
-                        stroke-width: 2px;
-                        stroke-linecap: round;
-                        stroke-linejoin: round;"></i>
-                            <b>Montant à payer : <b class="text-success"> {{ $procedure->tarif }} F CFA</b></b><br><br>
-
+                                   width: 24px;
+                                   height: 24px;
+                                   fill: none;
+                                   stroke: currentColor;
+                                   stroke-width: 2px;
+                                   stroke-linecap: round;
+                                   stroke-linejoin: round;"></i>
+                                <b>TH : <b class="text-success"> 50 000 F CFA</b></b><br>
+                            </div>
+                            <div class="col">
+                                <i class="bi bi-tag text-success"
+                                style="display: inline-block;
+                                   width: 24px;
+                                   height: 24px;
+                                   fill: none;
+                                   stroke: currentColor;
+                                   stroke-width: 2px;
+                                   stroke-linecap: round;
+                                   stroke-linejoin: round;"></i>
+                                <b>TR1 : <b class="text-success"> 200 000 F CFA</b></b><br>
+                            </div>
+                            <div class="col">
+                                <i class="bi bi-tag text-success"
+                                style="display: inline-block;
+                                   width: 24px;
+                                   height: 24px;
+                                   fill: none;
+                                   stroke: currentColor;
+                                   stroke-width: 2px;
+                                   stroke-linecap: round;
+                                   stroke-linejoin: round;"></i>
+                                <b>TR2 : <b class="text-success"> 300 000 F CFA</b></b><br>
+                            </div>
+                            <div class="col">
+                                <i class="bi bi-tag text-success"
+                                style="display: inline-block;
+                                   width: 24px;
+                                   height: 24px;
+                                   fill: none;
+                                   stroke: currentColor;
+                                   stroke-width: 2px;
+                                   stroke-linecap: round;
+                                   stroke-linejoin: round;"></i>
+                                <b>TR3 : <b class="text-success"> 500 000 F CFA</b></b><br>
+                            </div>
+                            <div class="col">
+                                <i class="bi bi-tag text-success"
+                                style="display: inline-block;
+                                   width: 24px;
+                                   height: 24px;
+                                   fill: none;
+                                   stroke: currentColor;
+                                   stroke-width: 2px;
+                                   stroke-linecap: round;
+                                   stroke-linejoin: round;"></i>
+                                <b>EC : <b class="text-success"> 300 000 F CFA</b></b>
+                            </div>
+                        </div><br><br>
+                            @endif
 
                             <i class="bi bi-house text-success"></i>
                             <b style="margin-left:0px">Fourni par</b> <span
                                 style="border: 1px solid #48cf00c7;
-                        color: #0063cf;
-                        padding: 0 0.5em;
-                        border-radius: 5px;"> <b>{{ $procedure->service->libelle_court }}</b> </span><br><br>
-
-
+                                       color: #0063cf;
+                                       padding: 0 0.5em;
+                                       border-radius: 5px;"> <b>{{ $procedure->service->libelle_court }}</b> </span><br><br>
                         </div>
+
+                        
+                        
                         <!-- <h4>$29<span>per month</span></h4> -->
 
                         <!-- {{-- La partie des descriptions --}} -->

@@ -43,5 +43,22 @@ class PieceJointeSeeder extends Seeder
         PieceJointe::create([
             "libelle" => "Déclaration sur l'honneur"
         ]);
+
+
+        PieceJointe::create([
+            "libelle" => "PUH/Attestation d'attribution"
+        ]);
+
+        PieceJointe::create([
+            "libelle" => "Plan de masse/plan d'implantation"
+        ]);
+
+        PieceJointe::create([
+            "libelle" => "Vue en plan et coupe du batiment"
+        ]);
+
+        PieceJointe::create([
+            "libelle" => "Copie CNIB"
+        ]);
     }
 }
