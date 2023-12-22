@@ -160,12 +160,12 @@
                                                     <td>
                                                         <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i> Voir </button>
 
-                                                        @if ($demande->etat =='R')
+                                                     {{--    @if ($demande->etat =='R')
                                                         <!--button title="Modifier" type="button" class="btn btn-info "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
                                                     class="bi bi-pencil-square text-white">Modifier </i> </button-->
                                                         <a title="Modifier" class="btn btn-info" href="{{ route('editer-demande', ['id' =>$demande->uuid/*, 'procedure' => $selectedProcedure*/] ) }}"> <i class="bi bi-pencil-square text-white">Modifier </i> </a>
-                                                        @endif
+                                                        @endif --}}
 
 
                                                         @if ($demande->etat == 'S' && !is_null($demande->output_file) ||
