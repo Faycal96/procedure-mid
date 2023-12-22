@@ -447,9 +447,9 @@
                             break;
                     }
                 },
-                error: function() {
+                /* error: function() {
                     alert("Erreur de chargement des données");
-                }
+                } */
             });
         }
         $(document).ready(function() {
