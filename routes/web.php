@@ -19,11 +19,13 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\TypeUsagerController;
+use App\Http\Controllers\UploadAgrementController;
 use App\Http\Controllers\UsagerController;
 use App\Livewire\DemandeComp;
 use App\Livewire\DemandeCompP002;
 use App\Livewire\DemandeFontController;
 use App\Models\Procedure;
+use App\Models\UploadAgrement;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -167,6 +169,11 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
     Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
     Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
+
+    // Route Arrêté d'agrément
+    Route::get('/administration/agrement/', [UploadAgrementController::class, 'indexAdmin'])->name('agrement-list');
+    Route::post('/administration/agrement/', [UploadAgrementController::class, 'store'])->name('agrement-store');
+    Route::put('/administration/agrement/{uuid}', [UploadAgrementController::class, 'update'])->name('agrement-update');
 
 });
 

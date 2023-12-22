@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\UploadAgrement;
 use App\Http\Requests\StoreUploadAgrementRequest;
 use App\Http\Requests\UpdateUploadAgrementRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UploadAgrementController extends Controller
 {
@@ -15,6 +17,12 @@ class UploadAgrementController extends Controller
     {
         //
     }
+
+    public function indexAdmin(Request $request){
+        $agrements = UploadAgrement::all();
+           
+        return view('/backend/list_agrement', ['objectList' => $agrements, ]);
+   }
 
     /**
      * Show the form for creating a new resource.
@@ -27,9 +35,25 @@ class UploadAgrementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUploadAgrementRequest $request)
+    public function store(Request $request)
     {
         //
+        $this->validate($request, [            
+            'Annee' => 'required',
+            'libelle'=>'required',
+            'chemin' => 'required'
+        ]);
+
+        Storage::makeDirectory('public/arrete_agrement');
+        $chemin =   $request->chemin->store('public/arrete_agrement');
+
+        $object = new UploadAgrement();
+        $object->Annee = $request->Annee;
+        $object->libelle = $request->libelle;
+        $object->chemin = $chemin;
+        $object->save();
+
+        return redirect('/')->with('success', 'Objet enregistré !!');
     }
 
     /**
@@ -51,9 +75,27 @@ class UploadAgrementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUploadAgrementRequest $request, UploadAgrement $uploadAgrement)
+    public function update(Request $request, $uuid)
     {
         //
+        // $this->validate($request, [            
+        //     'Annee' => 'required',
+        //     'libelle'=>'required',
+        // ]);
+
+        // dd("oi");
+        $object = UploadAgrement::find($uuid);
+        $object->Annee = $request->Annee;
+        $object->libelle = $request->libelle;
+        if( isset($request->chemin) )
+        {
+            Storage::makeDirectory('public/arrete_agrement');
+            $chemin =   $request->chemin->store('public/arrete_agrement');
+            $object->chemin = $chemin;
+        }
+        $object->save();
+
+        return redirect('/')->with('success', 'Objet enregistré !!');
     }
 
     /**
