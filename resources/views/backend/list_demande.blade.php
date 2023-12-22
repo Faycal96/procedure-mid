@@ -78,6 +78,9 @@
                                         @php
                                             $i = 1;
                                         @endphp
+                                        @php
+
+                                        @endphp
                                         @foreach ($demandes as $demande)
                                             @php
                                                 $statut = '';
@@ -185,7 +188,7 @@
                                                     @endphp
 
                                                     <!-- Boutons d'action en fonction de l'état et du rôle -->
-                                                    @if ($demande->etat !== 'R' && in_array($userRole, ['Gestionnaire', 'Administration']))
+                                                    @if ($demande->etat !== 'R' && $demande->etat !== 'V' && in_array($userRole, ['Gestionnaire', 'Administration']))
                                                         <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
                                                             type="button" title="Valider" class="btn btn-success">
                                                             <i class="bi bi-check-circle"></i>
@@ -206,7 +209,7 @@
                                                         </a>
                                                     @endif --}}
 
-                                                    @if ($demande->etat == 'D' && in_array($userRole, ['Gestionnaire', 'Administration']))
+                                                    {{-- @if ($demande->etat == 'D' && in_array($userRole, ['Gestionnaire', 'Administration']))
                                                         <button data-toggle="modal"
                                                             data-target="#assigner{{ $demande->uuid }}" type="button"
                                                             title="Assigner à un collaborateur" class="btn btn-primary">
@@ -219,48 +222,37 @@
                                                             title="Assigner à un collaborateur" class="btn btn-primary">
                                                             <i class="bi bi-folder-symlink"></i>
                                                         </button>
-                                                    @endif
+                                                    @endif --}}
 
-                                                    @if ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))
+                                                    {{-- @if ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))
                                                         <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
                                                             type="button" title="Joindre Acte Signé"
                                                             class="btn btn-success">
                                                             <i class="bi bi-upload"></i>
                                                         </a>
-                                                    @endif
+                                                    @endif --}}
                                                     @if (
-                                                        $demande->etat != 'A' &&
-                                                            $demande->etat != 'S' &&
-                                                            $demande->etat != 'R' &&
+                                                        $demande->etat != 'R' &&
+                                                            $demande->etat != 'V' &&
+                                                            $demande->etat != 'A' &&
                                                             in_array($userRole, ['Gestionnaire', 'Administration']))
                                                         <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}"
                                                             type="button" title="Rejeter" class="btn btn-danger">
                                                             <i class="bi bi-x-circle"></i>
                                                         </a>
                                                     @endif
-                                                    @if (
-                                                        $demande->etat != 'A' &&
-                                                            $demande->etat != 'S' &&
-                                                            $demande->etat != 'E' &&
-                                                            $demande->etat != 'V' &&
-                                                            $demande->etat != 'R' &&
-                                                            in_array($userRole, ['Réception']))
+                                                    {{-- @if ($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat != 'E' && $demande->etat != 'V' && $demande->etat != 'R' && in_array($userRole, ['Réception']))
                                                         <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}"
                                                             type="button" title="Rejeter" class="btn btn-danger">
                                                             <i class="bi bi-x-circle"></i>
                                                         </a>
                                                     @endif
-                                                    @if (
-                                                        ($demande->etat == 'E' && $demande->last_agent_assign == null && in_array($userRole, ['Etudes'])) ||
-                                                            ($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Etudes'])) ||
-                                                            ($demande->etat == 'E' &&
-                                                                $demande->last_agent_assign == Auth::user()->agent->uuid &&
-                                                                in_array($userRole, ['Etudes'])))
+                                                    @if (($demande->etat == 'E' && $demande->last_agent_assign == null && in_array($userRole, ['Etudes'])) || ($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Etudes'])) || ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes'])))
                                                         <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}"
                                                             type="button" title="Rejeter" class="btn btn-danger">
                                                             <i class="bi bi-x-circle"></i>
                                                         </a>
-                                                    @endif
+                                                    @endif --}}
 
 
 
@@ -508,10 +500,201 @@
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <b>Telephone :</b>
-                                                                        <span
-                                                                            class="text-success">{{ $demande->numero_telephone }}</span>
+                                                                        @if (!empty($demande->numero_telephone))
+                                                                            <span
+                                                                                class="text-success">{{ $demande->numero_telephone }}
+                                                                                /</span>
+                                                                        @endif
+                                                                        @if (!empty($demande->tel_1))
+                                                                            <span
+                                                                                class="text-success">{{ $demande->tel_1 }}
+                                                                                /</span>
+                                                                        @endif
+                                                                        @if (!empty($demande->tel_2))
+                                                                            <span
+                                                                                class="text-success">{{ $demande->tel_2 }}</span>
+                                                                        @endif
                                                                     </div>
-                                                                </div><br>
+
+                                                                </div>
+                                                                <br>
+
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <b>Date demande:</b>
+                                                                        <span
+                                                                            class="text-success">{{ $demande->date_demande }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <b>Montant:</b>
+                                                                        <span
+                                                                            class="text-success">{{ $demande->montant }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <b>Code demande:</b>
+                                                                        <span
+                                                                            class="text-success">{{ $demande->code }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <b>Reference:</b>
+                                                                        <span
+                                                                            class="text-success">{{ $demande->reference }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <b>Email:</b>
+                                                                        <span
+                                                                            class="text-success">{{ $demande->email }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <b>Objectif demande:</b>
+                                                                        <span
+                                                                            class="text-success">{{ $demande->objectif_demande }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+
+                                                                @if ($demande->procedure->code === 'P001')
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <b>Superficie:</b>
+                                                                            <span
+                                                                                class="text-success">{{ $demande->demandeP001->superficie }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <b>Localisation:</b>
+                                                                            <span class="text-success">
+                                                                                @if (!empty($demande->demandeP001->section))
+                                                                                    Section{{ $demande->demandeP001->section }}
+                                                                                @endif
+                                                                                @if (!empty($demande->demandeP001->secteur))
+                                                                                    Sect{{ $demande->demandeP001->secteur }}
+                                                                                @endif
+                                                                                @if (!empty($demande->demandeP001->lot))
+                                                                                    Lot{{ $demande->demandeP001->lot }}
+                                                                                @endif
+                                                                                @if (!empty($demande->demandeP001->numero_parcelle))
+                                                                                    N°pelle{{ $demande->demandeP001->numero_parcelle }}
+                                                                                @endif
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <b>Usage contruction:</b>
+                                                                            <span
+                                                                                class="text-success">{{ $demande->demandeP001->usageConstruction->libelle }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <b>Type construction:</b>
+                                                                            <span
+                                                                                class="text-success">{{ $demande->demandeP001->typeConstruction->libelle }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                @endif
+                                                                @if ($demande->procedure->code === 'P002')
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <b>CNSS:</b>
+                                                                            <span
+                                                                                class="text-success">{{ $demande->demandeP002->numero_cnss_entreprise }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <b>Localisation:</b>
+                                                                            <span class="text-success">
+                                                                                @if (!empty($demande->demandeP001->section))
+                                                                                    Section{{ $demande->demandeP001->section }}
+                                                                                @endif
+                                                                                @if (!empty($demande->demandeP001->secteur))
+                                                                                    Secteur{{ $demande->demandeP001->secteur }}
+                                                                                @endif
+                                                                                @if (!empty($demande->demandeP001->lot))
+                                                                                    Lot{{ $demande->demandeP001->lot }}
+                                                                                @endif
+                                                                                @if (!empty($demande->demandeP001->numero_parcelle))
+                                                                                    N°pelle{{ $demande->demandeP001->numero_parcelle }}
+                                                                                @endif
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    @foreach ($demande->demandeP002->activitesDemandeP002 as $activitesDemande)
+                                                                        <br>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <b>Localisation:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->localisation }}</span>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <b>Designation:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->designation }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <b>Maitre d'ouvrage:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->maitre_ouvrage }}</span>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <b>Montany travaux:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->montany_travaux }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <b>Date debut:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->date_debut }}</span>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <b>Date fin:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->date_fin }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <b>Nature:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->nature }}</span>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <b>Condition:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->condition }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <b>Pourcentage montant total:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->pourcentage_montant_total }}</span>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <b>Observations:</b>
+                                                                                <span
+                                                                                    class="text-success">{{ $activitesDemande->observations }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                    @endforeach
+                                                                @endif
+
+
                                                                 {{-- <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Identite Fournisseur:</b>
