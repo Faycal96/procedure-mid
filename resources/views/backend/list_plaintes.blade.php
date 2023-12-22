@@ -124,7 +124,7 @@
                                     @foreach ($listePlainte as $plainte)
                                     @php
 
-                                        if($plainte->etat== "nouveau")		
+                                        if($plainte->etat== "")		
                                             $statutColor = "bg-primary";
                                         elseif ($plainte->etat== "en cours") 
                                             $statutColor = "bg-warning";
@@ -139,22 +139,22 @@
                                             <td> {{ $plainte->usager->nom.' '.$plainte->usager->prenom}}</td>
                                             <td>{{  $plainte->usager->telephone }}</td>
                                             <td>{{ $plainte->procedure }}</td>
-                                            <td><span class="badge {{ $statutColor }} ">{{ $plainte->etat }}</span> </td>
+                                            <td><span class="badge {{ $statutColor }} "> @if($plainte->etat == "") nouveau @else {{ $plainte->etat }} @endif</span> </td>
                                             <td>
                                                 <button title="Voir détail de la plainte" type="button" class="btn btn-primary" 
-                                                    data-bs-toggle="modal" data-bs-target="#largeModal{{ $plainte->id }}">
+                                                    data-bs-toggle="modal" data-bs-target="#largeModal{{ $plainte->uuid }}">
                                                     <i class="bi bi-eye"></i> 
                                                 </button>
 
                                             
-                                                <a data-toggle="modal" data-target="#signer{{ $plainte->id}}"
+                                                <a data-toggle="modal" data-target="#signer{{ $plainte->uuid}}"
                                                     type="button" title="Modifier l'etat de la plainte" class="btn btn-success"><i
                                                         class="bi bi-pencil-square"></i> </a>
 
 
 
                                                 {{-- Voir detail Modal --}}
-                                                <div class="modal fade" id="largeModal{{ $plainte->id }}" tabindex="-1">
+                                                <div class="modal fade" id="largeModal{{ $plainte->uuid }}" tabindex="-1">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content" style="height: 500px;">
                                                             <div class="modal-header">
@@ -233,7 +233,7 @@
 
 
                                                  {{-- Model modifier etat de la plainte --}}
-                                            <div class="modal fade" id="signer{{ $plainte->id}}"
+                                            <div class="modal fade" id="signer{{ $plainte->uuid}}"
                                                 data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
@@ -247,7 +247,7 @@
 
                                                         <div class="modal-body">
                                                             <form method="post" enctype="multipart/form-data" 
-                                                            action="{{ route('editPlainte', ['id' =>$plainte->id]) }}"
+                                                            action="{{ route('editPlainte', ['uuid' => $plainte->uuid]) }}"
                                                             >
                                                                 @csrf
 
@@ -256,7 +256,7 @@
                                                                         <label class="col-form-label">Modifier l'état de la plainte</label>
                                                                             <select class="form-select" name="etat" required>
                                                                                 <option class=""> </option>
-                                                                                @if ($plainte->etat == 'nouveau')
+                                                                                @if ($plainte->etat == '')
                                                                                     <option value="en cours" @if ($plainte->etat == 'en cours') selected @endif> En cours de traitement</option> 
                                                                                 @endif 
 

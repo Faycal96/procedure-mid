@@ -21,6 +21,7 @@ use App\Http\Controllers\StructureController;
 use App\Http\Controllers\TypeUsagerController;
 use App\Http\Controllers\UploadAgrementController;
 use App\Http\Controllers\UsagerController;
+use App\Http\Controllers\UploadAgrementController;
 use App\Livewire\DemandeComp;
 use App\Livewire\DemandeCompP002;
 use App\Livewire\DemandeFontController;
@@ -59,6 +60,8 @@ Route::middleware(['mustreset'])->group(function () {
 
     Route::get('/contact', [ContactUsFormController::class, 'createForm']);
     Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
+
+    Route::get('/listeAgrement', [UploadAgrementController::class, 'index'])->name('listeAgrement');
 
 });
 
@@ -168,7 +171,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
     Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
     Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
-    Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
+    Route::post('/editPlainte/{uuid}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
 
     // Route Arrêté d'agrément
     Route::get('/administration/agrement/', [UploadAgrementController::class, 'indexAdmin'])->name('agrement-list');

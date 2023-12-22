@@ -16,6 +16,8 @@ class UploadAgrementController extends Controller
     public function index()
     {
         //
+        $listeAgrement = UploadAgrement::all(); 
+        return view("agrementAprouve", ["listeAgrement" => $listeAgrement]);
     }
 
     public function indexAdmin(Request $request){

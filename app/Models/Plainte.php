@@ -9,9 +9,10 @@ class Plainte extends Model
 {
     use HasFactory;
     use \Wildside\Userstamps\Userstamps;
+    use \Illuminate\Database\Eloquent\Concerns\HasUlids;
 
     protected $guarded = [];
-    
+    protected $primaryKey = 'uuid';
 
     public function user()
     {
