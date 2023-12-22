@@ -58,6 +58,8 @@ Route::middleware(['mustreset'])->group(function () {
     Route::get('/contact', [ContactUsFormController::class, 'createForm']);
     Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
+    Route::post('/listeAgrement', [UploadAgrementController::class, 'index'])->name('listeAgrement');
+
 });
 
 //Route::middleware(['auth', 'mustreset'])->group(function () {

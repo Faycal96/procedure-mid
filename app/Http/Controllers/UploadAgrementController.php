@@ -14,7 +14,11 @@ class UploadAgrementController extends Controller
     public function index()
     {
         //
+        $listeAgrement = UploadAgrement::all(); 
+        return view("acceuil", ["listeAgrement" => $listeAgrement]);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
