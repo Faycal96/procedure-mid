@@ -68,9 +68,9 @@ class PlainteController extends Controller
 
 
     // modifie l'etat d'une plainte
-    public function editPlainte(Request $request, $id){
+    public function editPlainte(Request $request, $uuid){
 
-        $plainte = Plainte::find($id); 
+        $plainte = Plainte::find($uuid); 
 		$plainte->etat = $request->etat;
 		$plainte->commentaire = $request->commentaire;
 		$plainte->user_id = Auth::user()->uuid; // "c98a27b7-c1ce-40e4-9914-6f2cc4fa1d30";

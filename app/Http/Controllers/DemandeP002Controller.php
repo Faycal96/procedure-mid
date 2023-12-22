@@ -56,6 +56,7 @@ class DemandeP002Controller extends Controller
 
 
         $data =  $request->all();
+
 //    if ($this->payment($data["numero"], $data["otp"])) {
             $dataFiles = $request->all();
 
@@ -69,14 +70,15 @@ class DemandeP002Controller extends Controller
             
             $data['procedure_id'] = Procedure::where(['code' => 'P002'])->first('uuid')->uuid;
                     
-            
+            //dd($data);
             $demande = $this->demandeRepositoryP002->create($data);  
           
             //dd($data);
             //$demande->save();
+            
 
-            return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
-            //return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+            //return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+            return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
         //} else {
         //}
     }

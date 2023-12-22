@@ -83,12 +83,12 @@ class Demande extends Model
 
     public function demandeP001()
     {
-        return $this->hasOne(DemandeP001::class);
+        return $this->hasOne(DemandeP001::class, 'demande_id', 'uuid');
     }
 
     public function demandeP002()
     {
-        return $this->hasOne(DemandeP002::class);
+        return $this->hasOne(DemandeP002::class, 'demande_id', 'uuid');
     }
 
     // public function scopeDemande($query)

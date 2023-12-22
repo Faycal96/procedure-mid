@@ -125,38 +125,47 @@ class DemandeP002Repository extends AppRepository
             "demande_id" => $demandeVar->uuid
         ]);
 
-        foreach($data['fichier_document_CV'] as $index => $cv) {
-            $var = $this->uploadAFile($cv);
-            DemandePiece::create([
-                "libelle" => $data['libelle_document_CV'][$index],
-                "chemin" => $var,
-                "demande_id" => $demandeVar->uuid
-            ]);
+
+        if( isset($data['fichier_document_CV'] )){
+            foreach($data['fichier_document_CV'] as $index => $cv) {
+                $var = $this->uploadAFile($cv);
+                DemandePiece::create([
+                    "libelle" => $data['libelle_document_CV'][$index],
+                    "chemin" => $var,
+                    "demande_id" => $demandeVar->uuid
+                ]);
+            }
         }
 
-        foreach($data['fichier_document_diplome'] as $index => $diplome) {
-            $var = $this->uploadAFile($diplome);
-            DemandePiece::create([
-                "libelle" => $data['libelle_document_diplome'][$index],
-                "chemin" => $var,
-                "demande_id" => $demandeVar->uuid
-            ]);
+
+        if( isset($data['fichier_document_diplome'] )){
+            foreach($data['fichier_document_diplome'] as $index => $diplome) {
+                $var = $this->uploadAFile($diplome);
+                DemandePiece::create([
+                    "libelle" => $data['libelle_document_diplome'][$index],
+                    "chemin" => $var,
+                    "demande_id" => $demandeVar->uuid
+                ]);
+            }
         }
 
-        foreach($data['localisation'] as $index => $loc) {
-            ActiviteDemandeP002::create([
-                "localisation" => $data['localisation'][$index],
-                "designation" => $data['designation'][$index],
-                "maitre_ouvrage" => $data['maitre_ouvrage'][$index],
-                "date_debut" => $data['date_debut'][$index],
-                "date_fin" => $data['date_fin'][$index],
-                "montany_travaux" => $data['montany_travaux'][$index],
-                "nature" => $data['nature'][$index],
-                "condition" => $data['condition'][$index],
-                "pourcentage_montant_total" => $data['pourcentage_montant_total'][$index],
-                "observations" => $data['observations'][$index],
-                "demande_p002_id" => $demandeP002Var->uuid,
-            ]);
+
+        if( isset($data['localisation'] )){
+            foreach($data['localisation'] as $index => $loc) {
+                ActiviteDemandeP002::create([
+                    "localisation" => $data['localisation'][$index],
+                    "designation" => $data['designation'][$index],
+                    "maitre_ouvrage" => $data['maitre_ouvrage'][$index],
+                    "date_debut" => $data['date_debut'][$index],
+                    "date_fin" => $data['date_fin'][$index],
+                    "montany_travaux" => $data['montany_travaux'][$index],
+                    "nature" => $data['nature'][$index],
+                    "condition" => $data['condition'][$index],
+                    "pourcentage_montant_total" => $data['pourcentage_montant_total'][$index],
+                    "observations" => $data['observations'][$index],
+                    "demande_p002_id" => $demandeP002Var->uuid,
+                ]);
+            }
         }
 
         $this->unsetClauses();
