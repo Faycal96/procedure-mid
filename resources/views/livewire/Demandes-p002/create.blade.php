@@ -126,7 +126,7 @@
 
                                          <div class="row">
                                              <div class="col-6 mb-3 form-group">
-                                                 <label for="fullName" class="col-form-label">Siège sociale</label>
+                                                 <label for="fullName" class="col-form-label">Siège social</label>
                                                  <input name="siege_social" type="text"
                                                      class="form-control border-success" id="fullName" required=true>
                                              </div>

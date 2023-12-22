@@ -27,7 +27,7 @@
                                 </ul>
                             </div>
 
-                        <h2 class="card-title text-center">Liste de mes Démandes </h2>
+                        <h2 class="card-title text-center">Liste de mes Demandes </h2>
 
                             <div class="card-body">
 
@@ -62,9 +62,9 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Date Démande</th>
+                                                <th scope="col">Date Demande</th>
                                                 <th scope="col">Réference</th>
-                                                <th scope="col">etat de mes Démandes</th>
+                                                <th scope="col">etat de mes Demandes</th>
                                                 <th scope="col">Délai de traitement</th>
                                                 <th scope="col">Déposé</th>
                                                 <th scope="col">Paiement</th>
