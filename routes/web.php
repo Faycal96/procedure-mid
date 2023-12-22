@@ -169,7 +169,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
     Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
     Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
-    Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
+    Route::post('/editPlainte/{uuid}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
 
 });
 
