@@ -20,6 +20,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\TypeUsagerController;
 use App\Http\Controllers\UsagerController;
+use App\Http\Controllers\UploadAgrementController;
 use App\Livewire\DemandeComp;
 use App\Livewire\DemandeCompP002;
 use App\Livewire\DemandeFontController;
@@ -57,6 +58,8 @@ Route::middleware(['mustreset'])->group(function () {
 
     Route::get('/contact', [ContactUsFormController::class, 'createForm']);
     Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
+
+    Route::get('/listeAgrement', [UploadAgrementController::class, 'index'])->name('listeAgrement');
 
 });
 

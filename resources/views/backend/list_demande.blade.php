@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
     <div class="pagetitle">
-        <h1>Liste des Démandes</h1>
+        <h1>Liste des Demandes</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -554,8 +554,6 @@
                                                                         @endforeach
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-danger"

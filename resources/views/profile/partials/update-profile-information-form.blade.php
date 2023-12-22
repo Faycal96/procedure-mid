@@ -138,7 +138,7 @@
         <div class="row">
             <div class="col">
                 <div>
-                    <x-input-label for="siege_social" :value="__('Siège Sociale')" />
+                    <x-input-label for="siege_social" :value="__('Siège Social')" />
                     <x-text-input id="siege_social" name="siege_social" type="text" class="mt-1 block w-full" :value="old('siege_social', $user->siege_social)" required autofocus autocomplete="siege_social" />
                     <x-input-error class="mt-2" :messages="$errors->get('siege_social')" />
                 </div>
