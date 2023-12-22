@@ -355,7 +355,7 @@ rel="stylesheet"
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>MEEA</span></strong> 2023
+      &copy; Copyright <strong><span>MID</span></strong> 2023
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->

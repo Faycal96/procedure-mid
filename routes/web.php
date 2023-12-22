@@ -21,7 +21,7 @@ use App\Http\Controllers\StructureController;
 use App\Http\Controllers\TypeUsagerController;
 use App\Http\Controllers\UploadAgrementController;
 use App\Http\Controllers\UsagerController;
-use App\Http\Controllers\UploadAgrementController;
+// use App\Http\Controllers\UploadAgrementController;
 use App\Livewire\DemandeComp;
 use App\Livewire\DemandeCompP002;
 use App\Livewire\DemandeFontController;

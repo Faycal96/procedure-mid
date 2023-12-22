@@ -55,7 +55,7 @@ class UploadAgrementController extends Controller
         $object->chemin = $chemin;
         $object->save();
 
-        return redirect('/')->with('success', 'Objet enregistré !!');
+        return redirect('/administration')->with('success', 'Objet enregistré !!');
     }
 
     /**
