@@ -97,4 +97,50 @@ class AppRepository extends BaseRepository
 
         return $randomString;
     }
+
+
+
+    public function uploadFile(array $data, string $name){
+
+
+        $this->unsetClauses();
+
+        $de = new Demande();
+        $tt = $de->genererRandomString(4);
+
+       $fileName = time().$tt.'.'.$data[$name]->getClientOriginalExtension();
+
+        // $libelle = $data['libelle_court'];
+        $libelle = 'demande';
+        echo $libelle;
+        $url = 'public/'.$libelle;
+        Storage::makeDirectory($url);
+
+        $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
+
+        return $path;
+    }
+
+    
+    public function uploadAFile(UploadedFile $data){
+
+
+        $this->unsetClauses();
+
+        $de = new Demande();
+        $tt = $de->genererRandomString(4);
+
+       $fileName = time().$tt.'.'.$data->getClientOriginalExtension();
+
+        // $libelle = $data['libelle_court'];
+        $libelle = 'demande';
+        echo $libelle;
+        $url = 'public/'.$libelle;
+        Storage::makeDirectory($url);
+
+        $path = $data->storeAs('public/'.$libelle, $fileName);
+
+        return $path;
+    }
+
 }
