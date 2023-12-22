@@ -296,7 +296,7 @@
                                                                                     class="form-control border-success">
                                                                             </div>
                                                                         </div>
-                                                                        <div class="form-group">
+                                                                        {{-- <div class="form-group">
                                                                             <div class="text-center">
                                                                                 <label class="col-form-label">Charger la
                                                                                     note d'étude si y'a lieu</label>
@@ -305,7 +305,7 @@
                                                                                     class="form-control border-success">
                                                                             </div>
 
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-warning"
                                                                                 data-dismiss="modal">Non, Annuler</button>
