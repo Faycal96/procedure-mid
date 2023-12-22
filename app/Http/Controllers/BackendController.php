@@ -173,7 +173,7 @@ class BackendController extends Controller
         if ($table == 'demande_p001_s') {
 
             $dataFiles = $request->all();
-            $noteEtude = $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+            //$noteEtude = $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
 
             $commentaire1 = new Commentaire();
             $commentaire1->create([
@@ -185,7 +185,7 @@ class BackendController extends Controller
         } elseif ($table == 'demande_p002_s') {
 
             $dataFiles = $request->all();
-            $noteEtude = $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+            //$noteEtude = $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
 
             $commentaire2 = new Commentaire();
             $commentaire2->create([
