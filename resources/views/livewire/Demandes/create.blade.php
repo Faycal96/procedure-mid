@@ -30,7 +30,7 @@
                                 <li id="caracteristik"><strong>Pièces Jointes</strong></li>
                                 <li id="personal"><strong>Information du terrain</strong></li>
                                 <li id="engagement"><strong>Engagement </strong></li>
-                                <li id="paiement"><strong>Paiement </strong></li>
+                                {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
                                 {{--<li id="confirm"><strong>Validation</strong></li>--}}
                             </ul>
                             <!-- fieldsets -->
@@ -283,53 +283,7 @@
 
                                 <input type="button"  class="previous action-button-previous"
                                     value="Retour" />
-                                    <input type="button"  class="next action-button btn btn-success"
-                                    value="Suivant" />
-                            </fieldset>
-
-                            <fieldset>
-                                {{-- <form action=""> --}}
-                                <div class="form-card">
-                                    <h4 class="fs-title">Paiement <span style="color:red">
-                                        *</span></h4>
-                                        <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
-                                                *</span></label>
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <label class="nom_societe fw-bold" >ORANGE</label>
-                                            <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
-                                        </div>
-                                        <div class="col-3">
-                                            <label class="siege_social fw-bold ">MOOV</label>
-                                            <input id="radio2" type="radio" value="0"  name="moyen"/>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div id="moyenP1">
-                                            <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
-
-                                        </div>
-                                        <div id="moyenP2">
-                                            <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
-
-                                        </div>
-                                        <div class="col-6">
-                                            <label class="boite_postale fw-bold">Téléphone<span style="color:red">
-                                                    *</span></label>
-                                            <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
-                                        </div>
-                                        <div class="col-6">
-                                            <label class="boite_postale fw-bold">OTP<span style="color:red">
-                                                    *</span></label>
-                                            <input type="number" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <input type="button"   class="previous action-button-previous"
-                                    value="Retour" />
-                                <input type="submit"   class="next action-button"
+                                    <input type="submit"   class="next action-button"
                                     value="Valider" />
                             </fieldset>
 

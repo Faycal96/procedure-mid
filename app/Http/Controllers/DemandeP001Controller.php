@@ -53,7 +53,7 @@ class DemandeP001Controller extends Controller
     {
 
         $data =  $request->all();
-        if ($this->payment($data["numero"], $data["otp"])) {
+        // if ($this->payment($data["numero"], $data["otp"])) {
             $dataFiles = $request->all();
 
 
@@ -119,8 +119,8 @@ class DemandeP001Controller extends Controller
             // $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
 
             return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
-        } else {
-        }
+        /* } else {
+        } */
     }
 
 
