@@ -56,6 +56,7 @@ class DemandeP001Repository extends BaseRepository
             "section"=>$data["section"],
             "zone"=>$data["zone"],
             "is_build"=>$data["is_build"],
+            "usage_construction_id"=>$data["usage_construction"],
         ]);
         $this->unsetClauses();
 

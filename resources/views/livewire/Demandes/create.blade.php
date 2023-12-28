@@ -173,7 +173,7 @@
                                             <label class="siege_social fw-bold">Usage<span style="color:red">
                                                     *</span></label>
 
-                                            <select name="autre_usage_construction" class="form-select border-success" required>
+                                            <select name="usage_construction" class="form-select border-success" required>
                                                 {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                 <option value="">Veuillez choisir le type d'usage'</option>
                                                 @foreach ( $usages as  $usage)

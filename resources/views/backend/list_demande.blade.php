@@ -588,8 +588,7 @@
                                                                     <div class="row">
                                                                         <div class="col-6">
                                                                             <b>Usage contruction:</b>
-                                                                            <span
-                                                                                class="text-success">{{ $demande->demandeP001->usageConstruction->libelle }}</span>
+                                                                            <span class="text-success">{{ $demande->demandeP001->usageConstruction->libelle }}</span>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <b>Type construction:</b>
