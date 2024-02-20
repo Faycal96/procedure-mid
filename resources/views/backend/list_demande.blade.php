@@ -134,7 +134,12 @@
                                                 <td> {{ $demande->nom_representant }} {{ $demande->prenom_representant }}
                                                 </td>
                                                 <td>{{ $demande->localite->libelle }}</td>
-                                                
+                                                {{-- <td>{{ $demande->localite->libelle }}</td> --}}
+
+                                                {{-- <td><span class="badge {{ $statutColor }} ">{{ $statut }}</span>
+                                                </td> --}}
+
+                                                {{-- partie paiement --}}
                                                 @if ($demande->paiement === 1)
                                                     <td><b><span class="text-success">Payé</span></b></td>
                                                 @else
