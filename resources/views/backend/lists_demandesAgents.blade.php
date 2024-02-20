@@ -62,13 +62,13 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Date Demande</th>
+                                                {{-- <th scope="col">Date Demande</th> --}}
                                                 <th scope="col">Réference</th>
-                                                <th scope="col">etat de mes Demandes</th>
-                                                <th scope="col">Délai de traitement</th>
+                                                <th scope="col">Etat</th>
+                                                {{-- <th scope="col">Délai de traitement</th> --}}
                                                 <th scope="col">Déposé</th>
                                                 <th scope="col">Paiement</th>
-                                                <th scope="col">Type</th>
+                                                <th scope="col">Type procédure</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
@@ -124,7 +124,7 @@
                                                 @endphp
                                                 <tr class="table-bordered">
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
+                                                    {{-- <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td> --}}
                                                     <td>{{ $demande->reference }}</td>
                                                     <td>
                                                         @if ($statut == 'demande en etude')
@@ -137,11 +137,11 @@
                                                     <span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
                                                     @endif
 
-                                                    @if($demande->exploitant == "Forestier")
+                                                    {{-- @if($demande->exploitant == "Forestier")
                                                     <td><span class="badge bg-dark"> 10</span> Jours </td>
                                                     @else
                                                     <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
-                                                    @endif
+                                                    @endif --}}
 
                                                     <td>{{ $demande->created_at->diffForHumans() }}</td>
 
@@ -158,7 +158,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i> Voir </button>
+                                                        <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i></button>
 
                                                      {{--    @if ($demande->etat =='R')
                                                         <!--button title="Modifier" type="button" class="btn btn-info "

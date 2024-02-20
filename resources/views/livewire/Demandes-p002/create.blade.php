@@ -90,17 +90,17 @@
                                              <div class="col-6 form-group">
                                                  <label>Type catégorie</label>
                                                  <select id="categorie" name="categorie" class="form-select border-success" required=true>
-                                                     <option class="mb-3" ></option>
+                                                    <option value="">Veuillez choisir la catégorie d'agrément</option>
                                                        @foreach ($categories as $cat)
-                                                                <option class="mb-3" value="{{$cat->uuid}}">{{$cat->libelle}}</option>
-                                                         @endforeach 
+                                                            <option class="mb-3" value="{{$cat->uuid}}">{{$cat->libelle}}</option>
+                                                       @endforeach 
                                                  </select>
                                              </div>
 
                                              <div class="col-6 form-group">
                                                 <label class="pays_residence fw-bold">Commune de Residence<span style="color:red"> *</span></label>
                                                 <select name="commune_id" id="commune_id" class="form-select border-success">
-                                                <option >Veuillez choisir le lieu</option>
+                                                <option >Veuillez choisir la commune</option>
                                                 @foreach($communes as $com)
                                                     <option value="{{$com->uuid }}">{{utf8_decode($com->libelle)}}</option>
                                                 @endforeach
@@ -114,12 +114,12 @@
                                                  <label for="beneficiaire" class="col-form-label">Nom de
                                                      l'entreprise</label>
                                                  <input name="beneficiaire" type="text"
-                                                     class="form-control border-success" id="beneficiaire" required=true>
+                                                     class="form-control border-success" id="beneficiaire" placeholder="Nom de l'entreprise" required=true>
                                              </div>
 
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Raison sociale</label>
-                                                 <input name="raison_social" type="text"
+                                                 <input name="raison_social" type="text" placeholder="Raison sociale"
                                                      class="form-control border-success" id="fullName" required=true>
                                              </div>
                                          </div>
@@ -127,58 +127,38 @@
                                          <div class="row">
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Siège social</label>
-                                                 <input name="siege_social" type="text"
+                                                 <input name="siege_social" type="text" placeholder="Siege social"
                                                      class="form-control border-success" id="fullName" required=true>
                                              </div>
 
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="boite_postale" class="col-form-label">Boîte Postale</label>
-                                                 <input name="boite_postale" type="text"
+                                                 <input name="boite_postale" type="text" placeholder="Boite postale"
                                                      class="form-control border-success" id="boite_postale" required=true>
                                              </div>
                                          </div>
 
                                          <div class="row">
                                              <div class="col-6 form-group">
-                                                 <label class="col-form-label">Télephone<span
-                                                         style="color: red">*</span></label>
-                                                 <input type="text" name="tel_1" class="form-control border-success" required=true />
+                                                 <label class="col-form-label">Télephone<span style="color: red">*</span></label>
+                                                 <input type="text" name="tel_1" class="form-control border-success" placeholder="Téléphone" required=true />
                                              </div>
 
                                              <div class="col-6 form-group">
-                                                 <label class="col-form-label">Fax<span
-                                                         style="color: red">*</span></label>
-                                                 <input type="text" name="fax" class="form-control border-success" required=true />
+                                                 <label class="col-form-label">Fax<span style="color: red">*</span></label>
+                                                 <input type="text" name="fax" class="form-control border-success" placeholder="Fax" required=true />
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6 form-group">
-                                                 <label class="col-form-label">Email<span
-                                                         style="color: red">*</span></label>
-                                                 <input type="email" name="email_entreprise" class="form-control border-success" required=true />
+                                                 <label class="col-form-label">Email<span style="color: red">*</span></label>
+                                                 <input type="email" name="email_entreprise" class="form-control border-success" placeholder="Email" required=true />
                                              </div>
                                              <div class="col-6 form-group">
-                                                 <label class="col-form-label">Adresse Physique<span
-                                                         style="color: red">*</span></label>
-                                                 <input type="text" name="adresse_physique" class="form-control border-success" required=true/>
+                                                 <label class="col-form-label">Adresse Physique<span style="color: red">*</span></label>
+                                                 <input type="text" name="adresse_physique" class="form-control border-success" placeholder="Adresse physique" required=true/>
                                              </div>
                                          </div>
-
-                                         {{-- <h4 class="fs-title">Beneficiaire <span style="color:red">
-                                                *</span></h4>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <label class="fw-bold" >Moi Même</label>
-                                                    <input type="radio" value="Moi même" class="checkbox"  name="beneficiaire" />
-                                                </div>
-                                                <div class="col-3">
-                                                    <label class="siege_social fw-bold ">Autre Personne</label>
-                                                    <input type="radio" value="Autre personne" name="beneficiaire"/>
-                                                </div>
-                                                  @if ($errors->has('beneficiaire'))
-                                                      <p class="alert alert-danger">{{ $errors->first('beneficiaire') }}</p>
-                                                  @endif
-                                            </div> --}}
 
                                      </div>
                                      <button type="button" name="next" class="next action-button btn btn-success"
@@ -196,31 +176,31 @@
                                              <div class="col-6">
                                                  <label class="fw-bold">Nom <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" name="nom_representant" class="border-success form-control" required=true />
+                                                 <input type="text" name="nom_representant" placeholder="Nom" class="border-success form-control" required=true />
                                              </div>
                                              <div class="col-6">
                                                  <label class="fw-bold">Prénom(s) <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" name="prenom_representant" class="border-success form-control" required=true />
+                                                 <input type="text" name="prenom_representant" placeholder="Prénom" class="border-success form-control" required=true />
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6">
                                                  <label class="fw-bold">Qualité <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" name="fonction_representant" class="border-success form-control" required=true />
+                                                 <input type="text" name="fonction_representant" placeholder="Qualité de la personne" class="border-success form-control" required=true />
                                              </div>
                                              <div class="col-6">
                                                  <label class="fw-bold">Adresse <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" name="adresse_representant" class="border-success form-control" required=true/>
+                                                 <input type="text" name="adresse_representant" placeholder="Adresse" class="border-success form-control" required=true/>
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6">
                                                  <label class="fw-bold" for="numero_cnss_entreprise">N° employeur (CNSS)<span
                                                          style="color: red">*</span></label>
-                                                 <input type="text"  name="numero_cnss_entreprise" id="numero_cnss_entreprise" class="border-success form-control" required=true/>
+                                                 <input type="text"  name="numero_cnss_entreprise" placeholder="N° CNSS de l'employeur" id="numero_cnss_entreprise" class="border-success form-control" required=true/>
                                              </div>
                                          </div>
 
@@ -239,13 +219,13 @@
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">Statut légalisée de la
                                                      société<span style="color: red">*</span></label>
-                                                 <input type="file" name="statutSociete" class="form-control border-success" required=true/>
+                                                 <input type="file" name="statutSociete" placeholder="Statut légalisé de la société" class="form-control border-success" required=true/>
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">RCCM / RSCPM<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="rccm" class="form-control border-success" required=true />
+                                                 <input type="file" name="rccm" placeholder="RCCM / RSCPM" class="form-control border-success" required=true />
                                              </div>
                                          </div>
 
@@ -253,26 +233,26 @@
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">IFU / Récipissé<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="ifu" class="form-control border-success" required=true />
+                                                 <input type="file" name="ifu" placeholder="IFU / Récipissé" class="form-control border-success" required=true />
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">Document chiffre d'affaire<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="chiffreAffaire" class="form-control border-success" required=true/>
+                                                 <input type="file" name="chiffreAffaire" placeholder="Document chiffre d'affaire" class="form-control border-success" required=true/>
                                              </div>
                                          </div>
 
                                          <div class="row">
                                              <div class="col-6">
-                                                 <label class="fw-bold">Ancient agrément <span
+                                                 <label class="fw-bold">Ancien agrément <span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="ancienAgrement" class="border-success form-control" required=true />
+                                                 <input type="file" name="ancienAgrement" placeholder="Ancien agrément" class="border-success form-control" required=true />
                                              </div>
                                              <div class="col-6">
                                                  <label class="fw-bold">Liste matériel <span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="listeMateriel" class="border-success form-control" required=true />
+                                                 <input type="file" name="listeMateriel" placeholder="Liste du matériel" class="border-success form-control" required=true />
                                              </div>
                                          </div>
 
@@ -280,7 +260,7 @@
                                              <div class="col-6">
                                                  <label class="adresse fw-bold">Liste personnel<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="listePersonnel" class="border-success form-control" required=true />
+                                                 <input type="file" name="listePersonnel" placeholder="Liste du personnel" class="border-success form-control" required=true />
                                              </div>
                                          </div>
 
@@ -379,14 +359,14 @@
                                                              <div class="col-6">
                                                                  <label for="localisation">Localisation
                                                                      <span style="color:red">*</span></label>
-                                                                 <input type="text" name="localisation[]" id="localisation"
-                                                                     class="border-success form-control" required=true/>
+                                                                 <input type="text" name="localisation[]" id="localisation" 
+                                                                     class="border-success form-control" placeholder="Localité" required=true/>
                                                              </div>
                                                              <div class="col-6">
                                                                  <label for="designation">Désignation de travaux
                                                                      <span style="color:red">*</span></label>
                                                                  <input type="text" name="designation[]" id="designation"
-                                                                     class="border-success form-control" required=true/>
+                                                                     class="border-success form-control" placeholder="Désignation de travaux" required=true/>
                                                              </div>
                                                          </div>
                                                          <div class="row">
@@ -394,13 +374,13 @@
                                                                 <label for="maitre_ouvrage" >Maitrise d'ouvrage
                                                                     <span style="color: red">*</span></label>
                                                                 <input type="text" name="maitre_ouvrage[]" id="maitre_ouvrage"
-                                                                    class="border-success form-control" required=true/>
+                                                                    class="border-success form-control" placeholder="Maitrise d'ouvrage" required=true/>
                                                             </div>
                                                             <div class="col-6">
                                                                 <label for="montany_travaux" >Montant travaux
                                                                     <span style="color: red">*</span></label>
                                                                 <input type="number" name="montany_travaux[]" id="montany_travaux"
-                                                                    class="border-success form-control" required=true/>
+                                                                    class="border-success form-control" placeholder="Montant travaux" required=true/>
                                                             </div>
                                                          </div>
 
@@ -409,12 +389,12 @@
                                                                  <label class="col-form-label" for="date_debut">Date début<span
                                                                          style="color: red">*</span></label>
                                                                  <input type="date" name="date_debut[]" id="date_debut"
-                                                                     class="form-control border-success" required=true/>
+                                                                     class="form-control border-success" placeholder="Date début" required=true/>
                                                              </div>
 
                                                              <div class="col-6 mb-3 form-group">
                                                                  <label for="date_fin" class="col-form-label">Date fin</label>
-                                                                 <input type="date" name="date_fin[]" id="date_fin"
+                                                                 <input type="date" name="date_fin[]" id="date_fin" placeholder="Date fin"
                                                                      class="form-control border-success" required=true>
                                                              </div>
                                                          </div>
@@ -424,13 +404,13 @@
                                                                  <label class="fw-bold" for="nature">Nature<span
                                                                          style="color: red">*</span></label>
                                                                  <input type="text" name="nature[]" id="nature"
-                                                                     class="border-success form-control" />
+                                                                     class="border-success form-control" placeholder="Nature" />
                                                              </div>
                                                              <div class="col-6">
                                                                  <label class="fw-bold" for="pourcentage_montant_total">Pourcentage Montant total
                                                                      <span style="color: red">*</span></label>
                                                                  <input type="number" name="pourcentage_montant_total[]" id="pourcentage_montant_total"
-                                                                     class="border-success form-control" required=true/>
+                                                                     class="border-success form-control" placeholder="Pourcentage Montant total" required=true/>
                                                              </div>
                                                          </div>
                                                          <div class="row">
@@ -438,13 +418,13 @@
                                                                  <label class="fw-bold" for="condition">Condition
                                                                      <span style="color: red">*</span></label>
                                                                  <textarea id="" cols="30" rows="10" style="border: solid green 2px"
-                                                                     name="condition[]" id="condition" required=true ></textarea>
+                                                                     name="condition[]" id="condition" placeholder="Condition" required=true ></textarea>
                                                              </div>
                                                              <div class="col-6">
                                                                  <label class="fw-bold" for="observations">Observation <span
                                                                          style="color: red">*</span></label>
                                                                  <textarea id="" cols="30" rows="10" style="border: solid green 2px"
-                                                                        name="observations[]" id="observations" required=true></textarea>
+                                                                        name="observations[]" id="observations" placeholder="Observation" required=true></textarea>
                                                              </div>
                                                          </div>
                                                      </div>

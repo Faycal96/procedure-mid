@@ -335,4 +335,5 @@ class BackendController extends Controller
 
         return view('backend.list_demande', $data);
     }
+
 }

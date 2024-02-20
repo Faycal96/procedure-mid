@@ -65,10 +65,8 @@
                                         <div class="col">
                                             <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
                                                     *</span></label>
-
                                             <select name="commune_id"  id="communes" class="form-select border-success" required>
-                                                {{-- <input type="text" placeholder="filtrer ici"> --}}
-
+                                                <option value="">Veuillez choisir la commune</option>
                                             </select>
                                         </div>
                                     </div>
@@ -84,7 +82,7 @@
                                         <div class="col-6">
                                             <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                     *</span></label>
-                                            <input type="text" name="telephone" class="border-success"   placeholder="Telephone" value="{{ $telephone}}" />
+                                            <input type="text" name="telephone" class="border-success"   placeholder="Téléphone" value="{{ $telephone}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +101,7 @@
                                         <div class="col-6">
                                             <label for="demande timbre" class="fw-bold">CNIB ou Passport<span style="color:red">
                                                 *</span></label>
-                                            <input type="file" name="cnib" class="form-control border-success" required>
+                                            <input type="file" name="cnib" class="form-control border-success" required >
                                         </div>
                                         <div class="col-6">
                                             <label for="demande timbre" class="fw-bold">PUH ou attestation d'attribution<span style="color:red">
@@ -195,10 +193,10 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <label class="siege_social fw-bold">Superficie<span style="color:red">
+                                            <label class="siege_social fw-bold">Superficie / m²<span style="color:red">
                                                     *</span></label>
 
-                                            <input type="text" class="border-success" name="superficie" placeholder="Superficie" />
+                                            <input type="text" class="border-success" name="superficie" placeholder="Superficie en m²" />
                                         </div>
                                         <div class="col">
                                             <label class="adresse fw-bold">Secteur<span style="color: red">*</span></label>
