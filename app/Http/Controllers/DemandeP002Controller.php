@@ -56,6 +56,7 @@ class DemandeP002Controller extends Controller
 
 
         $data =  $request->all();
+        //dd($data);
 
 //    if ($this->payment($data["numero"], $data["otp"])) {
             $dataFiles = $request->all();
@@ -66,7 +67,7 @@ class DemandeP002Controller extends Controller
             $data['reference'] = $this->repository->generateReference('P002');
             $data['delai'] = Procedure::where(['code' => 'P002'])->first('delai')->delai;
             $data['paiement']= 1;
-            $data['reference'] = $this->repository->generateReference('P002');
+            //$data['reference'] = $this->repository->generateReference('P002');
             
             $data['procedure_id'] = Procedure::where(['code' => 'P002'])->first('uuid')->uuid;
                     

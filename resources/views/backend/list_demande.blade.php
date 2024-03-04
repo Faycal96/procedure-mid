@@ -82,6 +82,7 @@
 
                                         @endphp
                                         @foreach ($demandes as $demande)
+                                        @if(Auth::user()->agent->service_id == $demande->procedure->service_id || Auth::user()->role->code == 'ADMIN')
                                             @php
                                                 $statut = '';
                                                 $statutColor = '';
@@ -131,7 +132,12 @@
                                                 <th scope="row">{{ $i++ }}</th>
                                                 {{-- <td>{{ $demande->date_demande }}</td> --}}
                                                 {{-- <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td> --}}
-                                                <td> {{ $demande->nom_representant }} {{ $demande->prenom_representant }}
+                                                @if($demande->procedure->code == 'P001')
+                                                <td> {{ $demande->usager->nom }} {{ $demande->usager->prenom }}
+                                                @else
+                                                <td> {{ $demande->raison_social }}
+                                                @endif
+                                                
                                                 </td>
                                                 <td>{{ $demande->localite->libelle }}</td>
                                                 {{-- <td>{{ $demande->localite->libelle }}</td> --}}
@@ -225,6 +231,13 @@
                                                             type="button" title="Rejeter" class="btn btn-danger">
                                                             <i class="bi bi-x-circle"></i>
                                                         </a>
+                                                    @endif
+
+                                                    @if($demande->procedure->code == 'P001')
+                                                    <a data-toggle="modal" data-target="#noteEtude{{ $demande->uuid }}"
+                                                        type="button" title="Note d'étude" class="btn btn-success">
+                                                        <i class="bi bi-upload"></i>
+                                                    </a>
                                                     @endif
                                                     {{-- @if ($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat != 'E' && $demande->etat != 'V' && $demande->etat != 'R' && in_array($userRole, ['Réception']))
                                                         <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}"
@@ -436,16 +449,16 @@
                                                                         action="{{ route('rejetter', ['id' => $demande->uuid, 'table' => 'demande_p001_s']) }}">
                                                                         @csrf
                                                                         @method('PUT')
-
-
-
                                                                         <div class="form-group">
                                                                             <div class="text-center">
                                                                                 <label class="col-form-label">Motif du
                                                                                     rejet ?</label>
-                                                                                <input required type="text"
-                                                                                    name="libelle"
-                                                                                    class="form-control border-success">
+                                                                                <select id="libelle" class="form-control border-success" name="libelle">
+                                                                                    <option value="" class="form-control border-success">Veuillez préciser le motif du rejet</option>
+                                                                                    <option value="rejet1" class="form-control border-success">rejet 1</option>
+                                                                                    <option value="rejet2" class="form-control border-success">rejet 2</option>
+                                                                                    <option value="rejet3" class="form-control border-success">rejet 3</option>
+                                                                                </select>
                                                                             </div>
 
                                                                         </div>
@@ -462,24 +475,71 @@
                                                         </div>
                                                     </div>
                                                     <!-- Fin Modal Rejet-->
+
+                                                    {{-- Model d'upload note d'étude --}}
+                                                    <div class="modal fade" id="noteEtude{{ $demande->uuid }}"
+                                                        data-backdrop="static" tabindex="-1" role="dialog"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content bgcustom-gradient-light">
+                                                                <div class="modal-header">
+                                                                    <img src="{{ asset('backend/assets/img/delete.svg') }}"
+                                                                        width="60" height="45"
+                                                                        class="d-inline-block align-top" alt="">
+                                                                    <h5 class="modal-title m-auto"> Envoyer une note d'étude
+                                                                    </h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-dismiss="modal" aria-label="btn-close">
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="POST"
+                                                                        action="{{ route('noteEtude', ['id' => $demande->uuid, 'table' => 'demandes']) }}" enctype="multipart/form-data">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <div class="form-group">
+                                                                            <div class="text-center">
+                                                                                <label class="col-form-label"></label>
+                                                                                <input required type="file"
+                                                                                    name="note_etude_file" id="note_etude_file"
+                                                                                    class="form-control border-success">
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-warning"
+                                                                                data-dismiss="modal">Annuler</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-success">Envoyer</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Fin Modal Note d'étude-->
                                                 </td>
+
                                                 {{-- detail modal     --}}
                                                 <div class="modal fade" id="largeModal{{ $demande->uuid }}"
                                                     tabindex="-1">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content" style="height: 500px;">
+                                                        <div class="modal-content" >
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title">Détail de la Demande</h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <div class="modal-body">
+                                                            <div class="modal-body" style="max-height: 70vh; overflow: auto">
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Identite demandeur:</b>
                                                                         <span class="text-success">
-                                                                            {{ $demande->nom_representant }}
-                                                                            {{ $demande->prenom_representant }}
+                                                                            @if($demande->procedure->code == 'P001')
+                                                                                {{ $demande->usager->nom }} {{ $demande->usager->prenom }}
+                                                                            @else
+                                                                                {{ $demande->raison_social }}
+                                                                            @endif
                                                                         </span>
 
                                                                     </div>
@@ -554,11 +614,11 @@
                                                                         <div class="col-6">
                                                                             <b>Localisation:</b>
                                                                             <span class="text-success">
-                                                                                @if (!empty($demande->demandeP001->section))
-                                                                                    Section{{ $demande->demandeP001->section }}
-                                                                                @endif
                                                                                 @if (!empty($demande->demandeP001->secteur))
                                                                                     Sect{{ $demande->demandeP001->secteur }}
+                                                                                @endif
+                                                                                @if (!empty($demande->demandeP001->section))
+                                                                                    Section{{ $demande->demandeP001->section }}
                                                                                 @endif
                                                                                 @if (!empty($demande->demandeP001->lot))
                                                                                     Lot{{ $demande->demandeP001->lot }}
@@ -593,17 +653,17 @@
                                                                         <div class="col-6">
                                                                             <b>Localisation:</b>
                                                                             <span class="text-success">
-                                                                                @if (!empty($demande->demandeP001->section))
-                                                                                    Section{{ $demande->demandeP001->section }}
-                                                                                @endif
                                                                                 @if (!empty($demande->demandeP001->secteur))
                                                                                     Secteur{{ $demande->demandeP001->secteur }}
+                                                                                @endif
+                                                                                @if (!empty($demande->demandeP001->section))
+                                                                                    Section{{ $demande->demandeP001->section }}
                                                                                 @endif
                                                                                 @if (!empty($demande->demandeP001->lot))
                                                                                     Lot{{ $demande->demandeP001->lot }}
                                                                                 @endif
                                                                                 @if (!empty($demande->demandeP001->numero_parcelle))
-                                                                                    N°pelle{{ $demande->demandeP001->numero_parcelle }}
+                                                                                    N°ple{{ $demande->demandeP001->numero_parcelle }}
                                                                                 @endif
                                                                             </span>
                                                                         </div>
@@ -675,6 +735,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <br>
+                                                                    
                                                                     @endforeach
                                                                 @endif
 
@@ -733,6 +794,7 @@
                                                 </div>
                                                 <!-- End Large Modal-->
                                             </tr>
+                                            @endif
                                         @endforeach
 
 

@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             // 'id' => ['required'],
+            'nip' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'String', 'max:255'],
@@ -55,6 +56,7 @@ class RegisteredUserController extends Controller
         // creation de usager
         $usager = Usager::create([
             //'id' => Str::uuid(), // Génération d'un UUID pour l'utilisateur
+            'nip' => $request->nip,
             'nom' => $request->name,
             'prenom' => $request->prenom,
             'email' => $request->email,

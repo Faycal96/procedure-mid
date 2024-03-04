@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Portail | MEEA</title>
+    <title>Portail | MID</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -13,18 +13,17 @@
     <link href="img/armoirie.png" rel="icon">
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
 
     <!-- Template Main CSS File -->
     <link href="css/style.css" rel="stylesheet">
@@ -45,6 +44,7 @@
 </head>
 
 <body>
+
     <!--  -->
     <!-- ======= Top Bar ======= -->
     <x-topbar />
@@ -76,236 +76,246 @@
             {{ session('message') }}
         </div>
         @endif
-
-        <div class="cont_info_log_sign_up">
-            <div class="col_md_login">
-                <div class="cont_ba_opcitiy">
-
-                    <h2><i class="bi bi-person"></i></h2>
-                    <h5> Personne physique</h5>
-                    <p>Inscrivez vous ici si vous etes une personne physique</p>
-                    <button class="btn_login" onclick="change_to_login()">Inscription</button>
-                </div>
-            </div>
-            <div class="col_md_sign_up">
-                <div class="cont_ba_opcitiy">
-                    <h2><i class="bi bi-buildings-fill"></i></h2>
-                    <h5>Personne morale</h5>
-
-                    <p>Inscrivez vous ici si vous etes une entreprise &nbsp; <br></p>
-
-                    <button class="btn_sign_up" onclick="change_to_sign_up()">Inscription</button>
-                </div>
-            </div>
+  
+    <main id="main">
+  
+      <!-- ======= Breadcrumbs ======= -->
+      <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+  
+          <h2 style="color: #1A33FF">INSCRIPTION</h2>
+  
         </div>
-
-        <div class="cont_forms" >
-            {{-- <div class="cont_img_back_">
-                <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
-                    alt="" />
-            </div> --}}
-            <div class="cont_form_login">
-                <div class="row pt-2">
-                    <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
-                        <i class="text-white material-icons">&#xE5C4;</i>
-                    </a>
-                    <h5 class="col-10">Personne physique</h5>
-                </div>
-                <x-guest-layout>
-                {{-- <i style="color: red;">Veuillez remplir bien les champs</i> --}}
-
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <!-- Name -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4 text-white" for="name" :value="__('Nom')" />
-                            <x-text-input class="col-7" id="name"  type="text" name="name"
-                                :value="old('name')" required autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                        </div><br>
-
-                        <!-- Name -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="prenom" :value="__('Prénom')" />
-                            <x-text-input class="col-7" id="lastname"  type="text" name="prenom"
-                                :value="old('prenom')" required autofocus autocomplete="prenom" />
-                            <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
-                        </div><br>
-
-                        <!-- Email Address -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="email" :value="__('Email')" />
-                            <x-text-input class="col-7" id="email"  type="email" name="email"
-                                :value="old('email')" required autocomplete="username" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        </div><br>
-
-                        <!-- Telephone number -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="telephone" :value="__('Telephone')" />
-                            <x-text-input class="col-7" id="telephone"  type="number"
-                            :value="old('telephone')" name="telephone" required autocomplete="telephone" />
-                            <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
-                        </div><br>
-
-                        <!-- Password -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="password" :value="__('Password')" />
-
-                            <x-text-input class="col-7" id="password"  type="password"
-                                name="password" required autocomplete="new-password" />
-
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div><br>
-
-                        <!-- Confirm Password -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="password_confirmation" :value="__('Confirm Password')" />
-
-                            <x-text-input class="col-7" id="password_confirmation"  type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                        </div>
-
-                        <div class="flex items-center justify-end mt-2">
-                            <a class="underline text-sm col  text-white"
-                                href="{{ route('login') }}" style="color: black">
-                                {{ __('Déjà inscrit?') }}
-                            </a>
-                            <x-primary-button class="col">
-                                {{ __('Valider') }}
-                            </x-primary-button>
-                        </div>
-                    </form>
-                </x-guest-layout>
-
-                {{-- <button class="btn_login" onclick="change_to_sign_up()">Inscription</button> --}}
+      </section><!-- End Breadcrumbs -->
+  
+      <!-- ======= Portfolio Section ======= -->
+      <section id="portfolio" class="portfolio">
+        <div class="container
+            <div class="col-lg-12 d-flex justify-content-center">
+              <ul id="portfolio-flters">
+                <li id="physiq" class="filter-active">Personne Physique</li>
+                <li id="moral" >Personne Morale</li>
+              </ul>
             </div>
-
-            <div class="cont_form_sign_up">
-                <div class="row pt-2">
-                    <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
-                        <i class="material-icons text-white cursor-pointer ">&#xE5C4;</i>
-                    </a>
-                    <h5 class="col-10">Personne morale</h5>
-                </div>
-                <x-guest-layout>
-                {{-- <i style="color: red;">Veuillez remplir bien les champs</i>
-                <br/><br/> --}}
-                    <form method="POST" action="{{ route('register-personne-morale') }}">
-                        @csrf
-
-                        <!-- Name -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="name" :value="__('Nom de la societé')" />
-                            <x-text-input class="col-7" id="name"  type="text" name="name"
+          </div>
+          <div class="row portfolio-container">
+            <x-guest-layout>
+            <div id="physique" style="display:block" class="col-lg-6 offset-lg-3">
+                <i style="color: red;">Veuillez remplir bien les champs</i>
+                <form method="POST" action="{{ route('register') }}" style="border: 1px solid #1A33FF;
+                    background: #ecf5fc; padding: 40px 50px 45px; width: 600px" class="php-email-form">
+                    @csrf
+                        <div class="form-group mt-3">
+                            <label for="nip"> NIP</label>
+                            <input class="form-control" id="nip" type="text" name="nip"
+                                :value="old('nip')" required autofocus autocomplete="nip" />
+                            <input-error :messages="$errors->get('nip')" class="mt-2" />
+                       </div>
+                        <div class="form-group mt-3">
+                            <label for="name">Nom</label>
+                            <input id="name" class="form-control" type="text" name="name"
                                 :value="old('name')" required autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
-                        <!-- IFU -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="ifu" :value="__('Numéro IFU')" />
-                            <x-text-input class="col-7" id="ifu"  type="text" name="ifu"
+                        <div class="form-group mt-3">
+                            <!-- Name -->
+                                <label for="prenom" >Prénom</label>
+                                <input class="form-control" id="lastname" type="text" name="prenom"
+                                    :value="old('prenom')" required autofocus autocomplete="prenom" />
+                                <input-error :messages="$errors->get('prenom')" class="mt-2" />
+                        </div>
+                        <div class="form-group mt-3">
+                            <!-- Email Address -->
+                            
+                                <label for="email" >Email</label>
+                                <input class="form-control" id="email" type="email" name="email"
+                                    :value="old('email')" required autocomplete="username" />
+                                <input-error :messages="$errors->get('email')" class="mt-2" />
+                     
+                        </div>
+                        <div class="form-group mt-3">
+                            <!-- Telephone number -->
+                                <label for="telephone" >Téléphone</label>
+                                <input class="form-control" id="telephone" type="number"
+                                :value="old('telephone')" name="telephone" required autocomplete="telephone" />
+                                <input-error :messages="$errors->get('telephone')" class="mt-2" />
+                         
+                        </div>
+                        <div class="form-group mt-3">
+                            <!-- Password -->
+                                <label for="password" >Mot de passe</label>
+                                <input class="form-control" id="password" type="password"
+                                    name="password" required autocomplete="new-password" />
+                                <input-error :messages="$errors->get('password')" class="mt-2" />
+                        </div>
+                        <div class="form-group mt-3">
+                            <!-- Confirm Password -->
+                                <label for="password_confirmation" >Confirmer mot de passe</label>
+
+                                <input class="form-control" id="password_confirmation" type="password"
+                                    name="password_confirmation" required autocomplete="new-password" />
+                                <input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+
+                        </div>
+
+                    <div class="flex items-center justify-end mt-2">
+                        <a class="underline text-sm col  text-black"
+                            href="{{ route('login') }}" style="color: black">
+                            {{ __('Déjà inscrit?') }}
+                        </a>
+                        <x-primary-button class="col">
+                            {{ __('Valider') }}
+                        </x-primary-button>
+                    </div>
+                </form>
+            </div>
+            </x-guest-layout>
+
+            <x-guest-layout>
+            <div id="morale" style="display:none">
+                <i style="color: red;">Veuillez remplir bien les champs *</i>
+                <form method="POST" action="{{ route('register') }}" style="border: 1px solid #1A33FF;
+                    background: #ecf5fc; padding: 40px 50px 45px; width: 600px" class="php-email-form">
+                    @csrf
+                        <div class="form-group mt-3">
+                            <label for="nip"> Nom de la société</label>
+                            <input class="form-control" id="name"  type="text" name="name"
+                                :value="old('name')" required autofocus autocomplete="name" />
+                            <input-error :messages="$errors->get('name')" class="mt-2" />
+                       </div>
+                        <div class="form-group mt-3">
+                            <label for="name">Numéro IFU</label>
+                            <input class="form-control" id="ifu"  type="text" name="ifu"
                                 :value="old('ifu')" required autofocus autocomplete="ifu" />
-                            <x-input-error :messages="$errors->get('ifu')" class="mt-2" />
+                            <input-error :messages="$errors->get('ifu')" class="mt-2" />
                         </div>
 
-                        <!-- RCCM -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="rccm" :value="__('Numéro RCCM')" />
-                            <x-text-input class="col-7" id="rccm"  type="text" name="rccm"
+                        <div class="form-group mt-3">
+                            <!-- Name -->
+                                <label for="prenom" >Numéro RCCM</label>
+                                <input class="form-control" id="rccm"  type="text" name="rccm"
                                 :value="old('rccm')" required autofocus autocomplete="rccm" />
-                            <x-input-error :messages="$errors->get('rccm')" class="mt-2" />
+                            <input-error :messages="$errors->get('rccm')" class="mt-2" />
                         </div>
-
-                        <!-- Email Address -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="email" :value="__('Email')" />
-                            <x-text-input class="col-7" id="email"  type="email" name="email"
+                        <div class="form-group mt-3">
+                            <!-- Email Address -->
+                            
+                                <label for="email" >Email</label>
+                                <input class="form-control" id="email"  type="email" name="email"
                                 :value="old('email')" required autocomplete="username" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 
-                        <!-- Telephone number -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="telephone" :value="__('Telephone')" />
-                            <x-text-input class="col-7" id="telephone"  type="number"
+                        <div class="form-group mt-3">
+                            <!-- Telephone number -->
+                                <label for="telephone" >Téléphone</label>
+                                <input class="form-control" id="telephone"  type="number"
                                 name="telephone" :value="old('telephone')" required autocomplete="telephone" />
-                            <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
+                            <input-error :messages="$errors->get('telephone')" class="mt-2" />
+                         
                         </div>
-
-                        <!-- Siège social -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="siege_social" :value="__('Siège social')" />
-                            <x-text-input class="col-7" id="siege_social"  type="text" name="siege_social"
+                        <div class="form-group mt-3">
+                            <!-- Password -->
+                                <label for="password" >Siege social</label>
+                                <input class="form-control" id="siege_social"  type="text" name="siege_social"
                                 :value="old('siege_social')" required autofocus autocomplete="siege_social" />
-                            <x-input-error :messages="$errors->get('siege_social')" class="mt-2" />
+                            <input-error :messages="$errors->get('siege_social')" class="mt-2" />
                         </div>
+                    
+                        <div class="form-group mt-3">
+                            <!-- Confirm Password -->
+                                <label for="boite_postale" >Boite postale</label>
 
-                        <!-- Boite postal -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="boite_postale" :value="__('Boîte postale')" />
-                            <x-text-input class="col-7" id="boite_postale"  type="text" name="boite_postale"
+                                <input class="form-control" id="boite_postale"  type="text" name="boite_postale"
                                 :value="old('boite_postale')" required autofocus autocomplete="boite_postale" />
-                            <x-input-error :messages="$errors->get('boite_postale')" class="mt-2" />
+                            <input-error :messages="$errors->get('boite_postale')" class="mt-2" />
+
                         </div>
 
-                        <!-- Password -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="password" :value="__('Password')" />
+                        <div class="form-group mt-3">
+                            <!-- Confirm Password -->
+                                <label for="mot_de_passe" >Mot de passe</label>
 
-                            <x-text-input class="col-7" id="password"  type="password"
+                                <input class="form-control" id="password"  type="password"
                                 name="password" required autocomplete="new-password" />
 
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                            <input-error :messages="$errors->get('password')" class="mt-2" />
+
                         </div>
 
-                        <!-- Confirm Password -->
-                        <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4  text-white" for="password_confirmation" :value="__('Confirm Password')" />
+                        <div class="form-group mt-3">
+                            <!-- Confirm Password -->
+                                <label for="password_confirmation" >Confirmer mot de passe</label>
 
-                            <x-text-input class="col-7" id="password_confirmation"  type="password"
+                                <input class="form-control" id="password_confirmation"  type="password"
                                 name="password_confirmation" required autocomplete="new-password" />
 
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                            <input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+
                         </div>
 
-                        <div class="flex items-center">
-                            <a class="underline text-sm col  text-white"
-                                href="{{ route('login') }}" style="color: black">
-                                {{ __('Déjà inscrit?') }}
-                            </a>
-                            <x-primary-button class="col">
-                                {{ __('Valider') }}
-                            </x-primary-button>
-                        </div>
-                    </form>
-                </x-guest-layout>
+                        
 
-                <!-- <button class="btn_sign_up" onclick="change_to_login()">Inscription</button> -->
-
+                    <div class="flex items-center justify-end mt-2">
+                        <a class="underline text-sm col  text-black"
+                            href="{{ route('login') }}" style="color: black">
+                            {{ __('Déjà inscrit?') }}
+                        </a>
+                        <x-primary-button class="col">
+                            {{ __('Valider') }}
+                        </x-primary-button>
+                    </div>
+                </form>
             </div>
+            </x-guest-layout>
+          </div>
+        <div >
+      </section><!-- End Portfolio Section -->
+  
+    </main><!-- End #main -->
+  
+    <!-- ======= Footer ======= -->
+  
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+    <!-- Vendor JS Files -->
+    <script src="vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="vendor/php-email-form/validate.js"></script>
+  
+    <!-- Template Main JS File -->
+    <script src="js/main.js"></script>
 
-        </div>
-        <!-- End Contact Section -->
+    <script>
+        let physiq = document.getElementById("physiq");
+        let moral = document.getElementById("moral");
+        let physique = document.getElementById("physique");
+        let morale = document.getElementById("morale");
+        physiq.addEventListener("click", () => {
+        if(getComputedStyle(physique).display != "none"){
+            physique.style.display = "none";
+        } else {
+            physique.style.display = "block";
+            morale.style.display = "none";
+        }
+        })
 
-            </main>
-
-        </div>
-
-
-        <!-- ======= Footer ======= -->
-        <x-footer />
-        <!-- End Footer -->
-
-        {{-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a> --}}
-
-                <script src="./script.js"></script>
-
-</body>
+        function togg(){
+        if(getComputedStyle(morale).display != "none"){
+            morale.style.display = "none";
+        } else {
+            morale.style.display = "block";
+            physique.style.display = "none";
+        }
+        };
+        moral.onclick = togg;
+    </script>
+  
+  </body>
 
 </html>

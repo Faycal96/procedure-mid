@@ -9,6 +9,7 @@ use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\ContactUsFormController;
 use App\Http\Controllers\DemandeP001Controller;
 use App\Http\Controllers\DemandeP002Controller;
+use App\Http\Controllers\EtatController;
 use App\Http\Controllers\PieceJointeController;
 use App\Http\Controllers\PlainteController;
 use App\Http\Controllers\ProcedureController;
@@ -171,12 +172,17 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
     Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
     Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
+    Route::get('/listePlainteUsager', [PlainteController::class, 'listePlainteUsager'])->name('listePlainteUsager');
     Route::post('/editPlainte/{uuid}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
 
     // Route Arrêté d'agrément
     Route::get('/administration/agrement/', [UploadAgrementController::class, 'indexAdmin'])->name('agrement-list');
     Route::post('/administration/agrement/', [UploadAgrementController::class, 'store'])->name('agrement-store');
     Route::put('/administration/agrement/{uuid}', [UploadAgrementController::class, 'update'])->name('agrement-update');
+
+    Route::put('/administration/demande/{id}/{table}', [BackendController::class, 'noteEtude'])->name('noteEtude');
+
+    Route::get('/Etat', [EtatController::class, 'index'])->name('etat');
 
 });
 

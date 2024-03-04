@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('plaintes', function (Blueprint $table) {
             //
             $table->string('procedure')->nullable();
-            $table->boolean('etat')->nullable();
+            $table->string('etat')->nullable();
         });
     }
 

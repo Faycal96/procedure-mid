@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Demande;
 use App\Models\DemandeP001;
 use App\Models\DemandePiece;
 use App\Models\Procedure;
@@ -55,10 +56,9 @@ class DemandeP001Controller extends Controller
         $data =  $request->all();
         // if ($this->payment($data["numero"], $data["otp"])) {
             $dataFiles = $request->all();
-
-
-            unset($data['name']);
-            unset($data['telephone']);
+            
+            //unset($data['name']);
+            //unset($data['telephone']);
             unset($data['moyen']);
             unset($data["numero"]);
             unset($data["otp"]);
@@ -226,4 +226,5 @@ class DemandeP001Controller extends Controller
             return redirect('/demandes-lists?procedure=DATIPC')->with('success', 'Votre Demande à bien été Modifiée et en cours de traitement !!');
 
     }
+    
 }

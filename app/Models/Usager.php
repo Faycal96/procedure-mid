@@ -30,6 +30,7 @@ class Usager extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'nip',
         'nom',
         'prenom',
         'telephone',

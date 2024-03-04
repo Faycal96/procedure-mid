@@ -45,14 +45,13 @@
                                  @csrf
                                  <!-- progressbar -->
                                  <ul id="progressbar">
-                                     <li class="active" id="personal"><strong>Fiche de renseignement
-                                             administratif</strong></li>
-                                     <li id="folder"><strong>Personne habilitée à representer l'entreprise</strong>
+                                     <li class="active" id="personal"><strong>Renseignement administratif</strong></li>
+                                     <li id="folder"><strong>Representant</strong>
                                      </li>
-                                     <li id="personal"><strong>Pièces jointes</strong></li>
-                                     <li id="personal"><strong>Participation effective du candidat à
-                                             l'agrément</strong></li>
+                                     <li id="folder"><strong>Pièces jointes</strong></li>
+                                     <li id="personal"><strong>Participation effective du candidat à l'agrément</strong></li>
                                      <li id="engagement"><strong>Engagement </strong></li>
+                                     <li id="engagement"><strong>Récapitulatif </strong></li>
                                      <li id="paiement"><strong>Paiement </strong></li>
 
                                      {{-- <li id="confirm"><strong>Validation</strong></li> --}}
@@ -67,22 +66,22 @@
                                          <div class="row">
 
                                             <label class="fw-bold">Identité du demandeur <span style="color: red">*</span></label>
-                                            <input type="text" class="border-success" name="identite" required=true placeholder="identité" value="{{ $identite }}" /><br /><br />
+                                            <input type="text" class="border-success" name="identite" id="identite" required=true placeholder="identité" value="{{ $identite }}" /><br /><br />
                                        
 
                                              <label class="fw-bold">Que voulez vous faire <span
                                                      style="color: red">*</span></label>
                                              <div class="col-4">
-                                                 <input id="radio1" type="radio" value="Nouvel demande" name="objectif_demande" checked>
-                                                 <label for="radio1">Nouvel demande</label>
+                                                 <input id="type_Demende" type="radio" value="Nouvel demande" name="objectif_demande" checked>
+                                                 <label for="typeDemende">Nouvel demande</label>
                                              </div>
                                              <div class="col-4">
-                                                 <input id="radio2" type="radio" value="Renouvellement" name="objectif_demande">
-                                                 <label for="radio2">Renouvellement</label>
+                                                 <input id="type_Demende" type="radio" value="Renouvellement" name="objectif_demande">
+                                                 <label for="typeDemende">Renouvellement</label>
                                              </div>
                                              <div class="col-4">
-                                                 <input id="radio3" type="radio" value="Changement de catégorie" name="objectif_demande">
-                                                 <label for="radio3">Changement de catégorie</label>
+                                                 <input id="type_Demende" type="radio" value="Changement de catégorie" name="objectif_demande">
+                                                 <label for="typeDemende">Changement de catégorie</label>
                                              </div>
                                          </div>
 
@@ -120,7 +119,7 @@
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Raison sociale</label>
                                                  <input name="raison_social" type="text" placeholder="Raison sociale"
-                                                     class="form-control border-success" id="fullName" required=true>
+                                                     class="form-control border-success" id="raison_sociale" required=true>
                                              </div>
                                          </div>
 
@@ -128,7 +127,7 @@
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Siège social</label>
                                                  <input name="siege_social" type="text" placeholder="Siege social"
-                                                     class="form-control border-success" id="fullName" required=true>
+                                                     class="form-control border-success" id="siege_social" required=true>
                                              </div>
 
                                              <div class="col-6 mb-3 form-group">
@@ -141,22 +140,22 @@
                                          <div class="row">
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Télephone<span style="color: red">*</span></label>
-                                                 <input type="text" name="tel_1" class="form-control border-success" placeholder="Téléphone" required=true />
+                                                 <input type="text" id="telephone" name="tel_1" class="form-control border-success" placeholder="Téléphone" required=true />
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Fax<span style="color: red">*</span></label>
-                                                 <input type="text" name="fax" class="form-control border-success" placeholder="Fax" required=true />
+                                                 <input type="text" name="fax" id="fax" class="form-control border-success" placeholder="Fax" required=true />
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Email<span style="color: red">*</span></label>
-                                                 <input type="email" name="email_entreprise" class="form-control border-success" placeholder="Email" required=true />
+                                                 <input type="email" name="email_entreprise" id="email" class="form-control border-success" placeholder="Email" required=true />
                                              </div>
                                              <div class="col-6 form-group">
-                                                 <label class="col-form-label">Adresse Physique<span style="color: red">*</span></label>
-                                                 <input type="text" name="adresse_physique" class="form-control border-success" placeholder="Adresse physique" required=true/>
+                                                 <label class="col-form-label">Localisation<span style="color: red">*</span></label>
+                                                 <input type="text" name="adresse_physique" id="adresse_physique" class="form-control border-success" placeholder="Adresse physique" required=true/>
                                              </div>
                                          </div>
 
@@ -176,24 +175,24 @@
                                              <div class="col-6">
                                                  <label class="fw-bold">Nom <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" name="nom_representant" placeholder="Nom" class="border-success form-control" required=true />
+                                                 <input type="text" name="nom_representant" id="nom_representant" placeholder="Nom" class="border-success form-control" required=true />
                                              </div>
                                              <div class="col-6">
                                                  <label class="fw-bold">Prénom(s) <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" name="prenom_representant" placeholder="Prénom" class="border-success form-control" required=true />
+                                                 <input type="text" name="prenom_representant" id="prenom_representant" placeholder="Prénom" class="border-success form-control" required=true />
                                              </div>
                                          </div>
                                          <div class="row">
                                              <div class="col-6">
                                                  <label class="fw-bold">Qualité <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" name="fonction_representant" placeholder="Qualité de la personne" class="border-success form-control" required=true />
+                                                 <input type="text" name="fonction_representant" id="fonction_representant" placeholder="Qualité de la personne" class="border-success form-control" required=true />
                                              </div>
                                              <div class="col-6">
                                                  <label class="fw-bold">Adresse <span
                                                          style="color: red">*</span></label>
-                                                 <input type="text" name="adresse_representant" placeholder="Adresse" class="border-success form-control" required=true/>
+                                                 <input type="text" name="adresse_representant" id="adresse_representant" placeholder="Adresse" class="border-success form-control" required=true/>
                                              </div>
                                          </div>
                                          <div class="row">
@@ -219,13 +218,13 @@
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">Statut légalisée de la
                                                      société<span style="color: red">*</span></label>
-                                                 <input type="file" name="statutSociete" placeholder="Statut légalisé de la société" class="form-control border-success" required=true/>
+                                                 <input type="file" name="statutSociete" id="statutSociete" placeholder="Statut légalisé de la société" class="form-control border-success" required=true/>
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">RCCM / RSCPM<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="rccm" placeholder="RCCM / RSCPM" class="form-control border-success" required=true />
+                                                 <input type="file" name="rccm" id="rccm" placeholder="RCCM / RSCPM" class="form-control border-success" required=true />
                                              </div>
                                          </div>
 
@@ -233,13 +232,13 @@
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">IFU / Récipissé<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="ifu" placeholder="IFU / Récipissé" class="form-control border-success" required=true />
+                                                 <input type="file" name="ifu" id="ifu" placeholder="IFU / Récipissé" class="form-control border-success" required=true />
                                              </div>
 
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label fw-bold">Document chiffre d'affaire<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="chiffreAffaire" placeholder="Document chiffre d'affaire" class="form-control border-success" required=true/>
+                                                 <input type="file" name="chiffreAffaire" id="chiffreAffaire" placeholder="Document chiffre d'affaire" class="form-control border-success" required=true/>
                                              </div>
                                          </div>
 
@@ -247,12 +246,12 @@
                                              <div class="col-6">
                                                  <label class="fw-bold">Ancien agrément <span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="ancienAgrement" placeholder="Ancien agrément" class="border-success form-control" required=true />
+                                                 <input type="file" name="ancienAgrement" id="ancienAgrement" placeholder="Ancien agrément" class="border-success form-control" required=true />
                                              </div>
                                              <div class="col-6">
                                                  <label class="fw-bold">Liste matériel <span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="listeMateriel" placeholder="Liste du matériel" class="border-success form-control" required=true />
+                                                 <input type="file" name="listeMateriel" id="listeMateriel" placeholder="Liste du matériel" class="border-success form-control" required=true />
                                              </div>
                                          </div>
 
@@ -260,7 +259,7 @@
                                              <div class="col-6">
                                                  <label class="adresse fw-bold">Liste personnel<span
                                                          style="color: red">*</span></label>
-                                                 <input type="file" name="listePersonnel" placeholder="Liste du personnel" class="border-success form-control" required=true />
+                                                 <input type="file" name="listePersonnel" id="listePersonnel" placeholder="Liste du personnel" class="border-success form-control" required=true />
                                              </div>
                                          </div>
 
@@ -379,7 +378,7 @@
                                                             <div class="col-6">
                                                                 <label for="montany_travaux" >Montant travaux
                                                                     <span style="color: red">*</span></label>
-                                                                <input type="number" name="montany_travaux[]" id="montany_travaux"
+                                                                <input type="number" name="montant_travaux[]" id="montant_travaux"
                                                                     class="border-success form-control" placeholder="Montant travaux" required=true/>
                                                             </div>
                                                          </div>
@@ -407,7 +406,7 @@
                                                                      class="border-success form-control" placeholder="Nature" />
                                                              </div>
                                                              <div class="col-6">
-                                                                 <label class="fw-bold" for="pourcentage_montant_total">Pourcentage Montant total
+                                                                 <label class="fw-bold" for="pourcentage_montant_total">Pourcentage Montant total (%)
                                                                      <span style="color: red">*</span></label>
                                                                  <input type="number" name="pourcentage_montant_total[]" id="pourcentage_montant_total"
                                                                      class="border-success form-control" placeholder="Pourcentage Montant total" required=true/>
@@ -417,14 +416,14 @@
                                                              <div class="col-6">
                                                                  <label class="fw-bold" for="condition">Condition
                                                                      <span style="color: red">*</span></label>
-                                                                 <textarea id="" cols="30" rows="10" style="border: solid green 2px"
+                                                                 <textarea cols="30" rows="10" style="border: solid green 2px"
                                                                      name="condition[]" id="condition" placeholder="Condition" required=true ></textarea>
                                                              </div>
                                                              <div class="col-6">
                                                                  <label class="fw-bold" for="observations">Observation <span
                                                                          style="color: red">*</span></label>
-                                                                 <textarea id="" cols="30" rows="10" style="border: solid green 2px"
-                                                                        name="observations[]" id="observations" placeholder="Observation" required=true></textarea>
+                                                                 <textarea cols="30" rows="10" style="border: solid green 2px"
+                                                                        name="observations[]" id="observation" placeholder="Observation" required=true></textarea>
                                                              </div>
                                                          </div>
                                                      </div>
@@ -464,12 +463,198 @@
 
                                      <button type="button" name="previous"
                                          class="previous action-button-previous">Retour</button>
-                                     <button type="button" name="make_payment" id="next_piece"
-                                         class="next action-button">Suivant</button>
+                                         <input type="button" class="next action-button" id="recap"
+                                    value="Suivant" />
                                  </fieldset>
 
-
                                  <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Fiche de renseignement administratif</h2>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Identité : </label>
+                                                <input type="text" name="recapNom" id="recapNom" disabled/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Type demande : </label>
+                                                <input type="text" name="recapTypeDemande" id="recapTypeDemande" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Catégorie : </label>
+                                                <input type="text" name="recapCategorie" id="recapCategorie" disabled/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Commune : </label>
+                                                <input type="text" name="recapCommune" id="recapCommune" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Raison Sociale : </label>
+                                                <input type="text" name="recapRaisonSociale" id="recapRaisonSociale" disabled/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Siege Sociale : </label>
+                                                <input type="text" name="recapSiegeSocial" id="recapSiegeSocial" disabled/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Boite postale : </label>
+                                                <input type="text" name="recapBP" id="recapBP" disabled/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Téléphone : </label>
+                                                <input type="text" name="recapTelephone" id="recapTelephone" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">FAX : </label>
+                                                <input type="text" name="recapFax" id="recapFax" disabled/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Email : </label>
+                                                <input type="text" name="recapEmail" id="recapEmail" disabled/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Localisation : </label>
+                                                <input type="text" name="recapAdressePhysique" id="recapAdressePhysique" disabled/>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <h2 class="fs-title">Personne habilitée à representer l'entreprise</h2>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Nom : </label>
+                                                <input type="text" name="recapNomRepresentant" id="recapNomRepresentant" disabled/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Prenom : </label>
+                                                <input type="text" name="recapPrenomRepresentant" id="recapPrenomRepresentant" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Qualité : </label>
+                                                <input type="text" name="recapFonctionRepresentant" id="recapFonctionRepresentant" disabled/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Adresse : </label>
+                                                <input type="text" name="recapAdresseRepresentant" id="recapAdresseRepresentant" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">N° CNSS Employeur : </label>
+                                                <input type="text" name="recapNumero_cnss_entreprise" id="recapNumero_cnss_entreprise" disabled/>
+                                            </div>
+                                        </div>
+    
+                                        <hr>
+                                        <h2 class="fs-title">Pieces Jointes</h2>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table
+                                                     class="table datatable table-bordered table-striped datatable-table"
+                                                     id="dt_diplome">
+                                                     <thead class="dst-form-thead">
+                                                         <tr>
+                                                             <th colspan="3" style="text-align: center">Liste des pieces jointes</th>
+                                                         </tr>
+                                                         <tr>
+                                                             <th>Sujet du document <span style="color:red">*</span>
+                                                             </th>
+                                                             <th>Fichier <span style="color:red">*</span></th>
+                                                             <th></th>
+                                                         </tr>
+                                                         
+                                                     </thead>
+                                                     <tbody>
+                                                        <tr>
+                                                            <td><label for="">Statut de la société : </label></td>
+                                                            <td><input id="" disabled name="recapStatut" class="border-success form-control" ></td>
+                                                            <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label for="">RCCM : </label></td>
+                                                            <td><input id="" disabled name="recapRccm" class="border-success form-control"></td>
+                                                            <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label for="">IFU : </label></td>
+                                                            <td><input id="" disabled name="recapIfu" class="border-success form-control"></td>
+                                                            <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label for="">Chiffre d'affaire : </label></td>
+                                                            <td><input id="" disabled name="recapChiffre" class="border-success form-control"></td>
+                                                            <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label for="">Ancien agrément : </label></td>
+                                                            <td><input id="" disabled name="recapAgrement" class="border-success form-control"></td>
+                                                            <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label for="">Liste matériel : </label></td>
+                                                            <td><input id="" disabled name="recapMateriel" class="border-success form-control"></td>
+                                                            <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label for="">Liste personnel : </label></td>
+                                                            <td><input id="" disabled name="recapPersonnel" class="border-success form-control"></td>
+                                                            <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
+                                                        </tr>
+                                                     </tbody>
+                                                     <tfoot>
+                                                         
+                                                     </tfoot>
+                                                 </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table
+                                                     class="table datatable table-bordered table-striped datatable-table"
+                                                     id="recap_cv">
+                                                     <thead class="dst-form-thead">
+                                                         <tr>
+                                                             <th colspan="3" style="text-align: center">CV du
+                                                                 Personnel</th>
+                                                         </tr>
+                                                         <tr>
+                                                             <th>Sujet du document <span style="color:red">*</span>
+                                                             </th>
+                                                             <th>Fichier <span style="color:red">*</span></th>
+                                                             <th></th>
+                                                         </tr>
+                                                     </thead>
+                                                     <tbody>
+                                                     </tbody>
+                                                     <tfoot>  
+                                                     </tfoot>
+                                                 </table>
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+    
+                                    <input type="button"  class="previous action-button-previous"
+                                        value="Retour" />
+                                    <button type="button" name="make_payment" id="next_piece"
+                                        class="next action-button">Suivant</button>
+                                </fieldset>
+
+                                 {{-- <fieldset>
                                      <form action="">
                                          <div class="form-card">
                                              <h4 class="fs-title">Paiement <span style="color:red">
@@ -518,26 +703,17 @@
                                                          required />
                                                  </div>
                                              </div>
-
-
-
                                          </div>
-                                         {{-- <input type="button"  class="previous action-button-previous"
-                                        value="Retour" />
-                                    <input type="submit"   class="next action-button"
-                                        value="Valider" /> --}}
+                                         
 
                                          <input type="button" name="previous"
                                              class="previous action-button-previous" value="Retour" />
-
-                                         <!-- <button type="submit" class="action-button" id="btn_send">Valider</button> -->
-
                                          <input type="submit" class="next action-button" value="Valider" />
 
                                          <!-- Ajoutez ceci dans la première étape du formulaire -->
                                          <div class="error-message" style="color: red;"></div>
                                      </form>
-                                 </fieldset>
+                                 </fieldset> --}}
 
                              </form>
                          </div>
@@ -566,6 +742,89 @@
           });
        })*/
  </script>
+
+<script>
+    $(document).ready(function() {
+      $("#recap").click(function(){
+        var beneficiaire = $("#beneficiaire").val();
+        var typeDemande = $("input[type=radio][name=objectif_demande]:checked").val();
+        var categorie = $("#categorie").find('option:selected').text();
+        var commune = $("#commune_id").find('option:selected').text();
+        var raisonSociale = $("#raison_sociale").val();
+        var siegeSocial = $("#siege_social").val();
+        var boitePostale = $("#boite_postale").val();
+        var telephone = $("#telephone").val();
+        var fax = $("#fax").val();
+        var email = $("#email").val();
+        var adressePhysique = $("#adresse_physique").val();
+
+        var nomRepresentant = $("#nom_representant").val();
+        var prenomRepresentant = $("#prenom_representant").val();
+        var fonctionRepresentant = $("#fonction_representant").val();
+        var adresseRepresentant = $("#adresse_representant").val();
+        var numeroCnssEntreprise = $("#numero_cnss_entreprise").val();
+        
+        var statut = $('#statutSociete')[0].files[0].name;
+        var rccm = $('#rccm')[0].files[0].name;
+        var ifu = $('#ifu')[0].files[0].name;
+        var chiffreAffaire = $('#chiffreAffaire')[0].files[0].name;
+        var agrement = $('#ancienAgrement')[0].files[0].name;
+        var materiel = $('#listeMateriel')[0].files[0].name;
+        var personnel = $('#listePersonnel')[0].files[0].name;
+        
+        $('input[name=recapNom]').val(beneficiaire);
+        $('input[name=recapTypeDemande]').val(typeDemande);
+        $('input[name=recapCommune]').val(commune);
+        $('input[name=recapCategorie]').val(categorie);
+        $('input[name=recapRaisonSociale]').val(raisonSociale);
+        $('input[name=recapSiegeSocial]').val(siegeSocial);
+        $('input[name=recapBP]').val(boitePostale);
+        $('input[name=recapTelephone]').val(telephone);
+        $('input[name=recapFax]').val(fax);
+        $('input[name=recapEmail]').val(email);
+        $('input[name=recapAdressePhysique]').val(adressePhysique);
+
+        $('input[name=recapNomRepresentant]').val(nomRepresentant);
+        $('input[name=recapPrenomRepresentant]').val(prenomRepresentant);
+        $('input[name=recapFonctionRepresentant]').val(fonctionRepresentant);
+        $('input[name=recapAdresseRepresentant]').val(adresseRepresentant);
+        $('input[name=recapNumero_cnss_entreprise]').val(numeroCnssEntreprise);
+        
+        $('input[name=recapStatut]').val(statut);
+        $('input[name=recapRccm]').val(rccm);
+        $('input[name=recapIfu]').val(ifu);
+        $('input[name=recapChiffre]').val(chiffreAffaire);
+        $('input[name=recapAgrement]').val(agrement);
+        $('input[name=recapMateriel]').val(materiel);
+        $('input[name=recapPersonnel]').val(personnel);
+
+        /* var inputId = '#libelle_document_CV\\[\\]';
+        var libelleCv = $(inputId).val(); */
+        //alert(libelleCv);
+        /* $('input[name=recapLibelleCv[]]').val(libelleCv);
+        $('input[name=recapdocCv[]]').val(listeCv);
+
+        var file = $('#fichier_document_CV\\[\\]')[0].files[0].name; */
+        /* for (var i = 0; i < files.length; i++) {
+            alert((files[i].name);)
+            console.log("Nom du fichier:", files[i].name);
+        } */
+        
+
+        /* $("#recap_cv").append([
+             '<tr class="">',
+             '<td class="rs">' +
+             '<input type="text" name="recapLibelleCv[]" id="recapLibelleCv[]" class="border-success form-control" />' +
+             '</td>',
+             '<td class="rs"><input type="file" id="recapdocCv[]" class="border-success form-control required name="recapdocCv[]"> </td>',
+             '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
+             '</tr>',
+         ].join()); */
+        })   
+    });
+
+</script>
+    
 
  <script type='text/javascript'>
      $(document).ready(function() {
@@ -694,9 +953,9 @@
          $("#dt_cv").append([
              '<tr class="">',
              '<td class="rs">' +
-             '<input type="text" name="libelle_document_CV[]" class="border-success form-control" />' +
+             '<input type="text" name="libelle_document_CV[]" id="libelle_document_CV[]" class="border-success form-control" />' +
              '</td>',
-             '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_CV[]"> </td>',
+             '<td class="rs"><input type="file" id="fichier_document_CV[]" class="border-success form-control required name="fichier_document_CV[]"> </td>',
              '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
              '</tr>',
          ].join());
@@ -712,7 +971,7 @@
              '<td class="rs">' +
              '<input type="text" name="libelle_document_diplome[]" class="border-success form-control" />' +
              '</td>',
-             '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_diplome[]"> </td>',
+             '<td class="rs"><input type="file" class="border-success form-control required name="fichier_document_diplome[]"> </td>',
              '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
              '</tr>',
          ].join());
@@ -872,7 +1131,7 @@
 
              +'</select>' +
              '</td>',
-             '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_non_roulant[]"> </td>',
+             '<td class="rs"><input type="file" disabled required name="fichier_document_non_roulant[]"> </td>',
              '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
              '</tr>',
          ].join());

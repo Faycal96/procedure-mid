@@ -6,8 +6,8 @@
   <div class="accordion">
     <!-- Permis d'écotourisme ou de tourisme écologique -->
     <div class="accordion-item">
-      <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">Comment obtenir un permis d'écotourisme ou de tourisme écologique?</span><span class="icon" aria-hidden="true"></span></button>
-      <div class="accordion-content">
+      <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">Comment obtenir mon agrément technique ?</span><span class="icon" aria-hidden="true"></span></button>
+      <div class="accordion-content" style="overflow: auto">
         <p>Pour obtenir un permis d'écotourisme, suivez les étapes suivantes... [Informations spécifiques aux permis d'écotourisme.]</p>
         <ol>
             <li>il Faut disposer des ces pieces</li>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="accordion-item">
-      <button id="accordion-button-2" aria-expanded="false"><span class="accordion-title">Quels sont les frais associés à la demande de permis d'écotourisme?</span><span class="icon" aria-hidden="true"></span></button>
+      <button id="accordion-button-2" aria-expanded="false"><span class="accordion-title">Comment obtenir mon devis d'etude de sol et de fondation?</span><span class="icon" aria-hidden="true"></span></button>
       <div class="accordion-content">
         <p>Les frais varient en fonction du type de permis et de la durée. Voici les tarifs actuels... [Informations sur les frais.]</p>
       </div>

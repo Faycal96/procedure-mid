@@ -17,9 +17,17 @@
                 <li><a class="active" href="/">Accueil</a></li>
                 {{-- <li><a href="#">FAQ</a></li> --}}
 
-                <li><a href="{{ route('listeAgrement') }}" title="Liste des agréments aprouvés">Agréments approuvés</a></li>
-                
-                <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Mon dossier
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+             
+                    <a class="dropdown-item" href="{{ route('listeAgrement') }}" title="Liste des agréments aprouvés">Agréments approuvés</a>
+                    <a class="dropdown-item" href="{{ route('listePlainteUsager') }}" title="Déposer une plainte">Mes plaintes</a>
+                   
+                    </div>
+                  </li>
 
                 <li><a href="contact">Contact</a></li>
                 <li><a href="faq">FAQ</a></li>
@@ -29,12 +37,20 @@
                 <li><a class="active" href="/">Accueil</a></li>
                 {{-- <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li> --}}
                 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Mon dossier
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('demandes-lists') }}">Mes demandes</a>
+                     
+                    <a class="dropdown-item" href="{{ route('listeAgrement') }}" title="Liste des agréments aprouvés">Agréments approuvés</a>
+                    <a class="dropdown-item" href="{{ route('listePlainteUsager') }}" title="Déposer une plainte">Mes plaintes</a>
 
-                <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
-
-                <li><a href="{{ route('listeAgrement') }}" title="Liste des agréments aprouvés">Agréments approuvés</a></li>
-                
-                <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
+                    
+                   
+                    </div>
+                  </li>
 
                 <li><a href="contact">Contact</a></li>
                 <li><a href="faq">FAQ</a></li>

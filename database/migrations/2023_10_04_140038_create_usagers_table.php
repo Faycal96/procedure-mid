@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('uuid')->primary();
             $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
-
+            $table->string('nip')->nullable();
             $table->date('date_naissance')->nullable();
             $table->string('lieu_naisssance')->nullable();
             $table->string('nom_pere')->nullable();

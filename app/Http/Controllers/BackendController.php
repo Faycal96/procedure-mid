@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Mail\AffectDemandMailable;
+use App\Mail\NoteEtudeMailable;
 use App\Mail\RejectDemandMailable;
 use App\Mail\ValidateDemandMailable;
 use App\Models\Agent;
 use App\Models\Commentaire;
 use App\Models\Demande;
+use App\Models\DemandeP001;
+use App\Models\DemandeP002;
 use App\Models\Procedure;
 use App\Models\StatutDemande;
+use App\Models\Usager;
 use App\Models\User;
 use App\Repositories\BackendRepository;
 use App\Repositories\DemandeRepository;
@@ -18,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BackendController extends Controller
@@ -35,8 +40,11 @@ class BackendController extends Controller
 
         // dd(Auth::user()->role->libelle);
         $data = [
-            'nbAgrementTechnique' => $backendRepository->nombreDemandeByProcedure('demande_p001_s', ['etat' => 'D']),
-            'nbEtudeSol' => $backendRepository->nombreDemandeByProcedure('demande_p002_s', ['etat' => 'D']),
+            /* 'nbreEtudeSol' => DemandeP001::where(['etat' => 'v'])->count(),
+            'nbreAgrement' => DemandeP002::where(['etat' => 'R'])->count(), */
+
+            'nbreEtudeSol' => DemandeP001::all()->count(),
+            'nbreAgrement' => DemandeP002::all()->count(),
         ];
 
         return view('backend.home', $data);
@@ -217,7 +225,7 @@ class BackendController extends Controller
 
     // fonction de chargement de acte
 
-    public function uploadActe($id, $currentStatus, Request $request)
+    /* public function uploadActe($id, $currentStatus, Request $request)
     {
         $dataFiles = $request->all();
         if ($currentStatus == 'S') {
@@ -229,7 +237,7 @@ class BackendController extends Controller
             return redirect()->back()->with('success', 'Operation echouée !');
         }
     }
-
+ */
     public function rejetter($id, Request $request)
     {
         Demande::where('uuid', $id)->update(['etat' => 'R']);
@@ -336,4 +344,29 @@ class BackendController extends Controller
         return view('backend.list_demande', $data);
     }
 
+    public function noteEtude($id, Request $request)
+    {
+        Storage::makeDirectory('public/Notes_Etudes');
+        $demande = Demande::find($id);
+        $note = $request->file('note_etude_file')->store('public/Notes_Etudes');
+        $demande->note_etude_file = $note;
+        $demande->save();
+        
+        $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
+        $usager_id = Demande::where('uuid', $id)->first()->usager_id;
+        $usager = Usager::where('uuid', $usager_id)->first();
+        $user_email = User::where('usager_id', $usager_id)->first()->email;
+        $demand = [
+            'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+            'reference' => Demande::where('uuid', $id)->first()->reference,
+            "name" => $usager->nom . ' ' . $usager->prenom,
+        ];
+        Mail::to($user_email)->send(new NoteEtudeMailable($demand));
+
+        return redirect()->back()->with('success', 'Note d\'étude envoyée avec succes avec succès !');
+    }
+
+    public function nbreDemandeRejetter(){
+        return Demande::where(['etat' => 'R'])->count();
+    }
 }

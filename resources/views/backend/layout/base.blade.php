@@ -195,24 +195,15 @@
                             <a href="{{ route('demandes-list') }}">
                                 <i class="bi bi-circle"></i><span>Agrément technique
                                     pour l’exécution des études, du contrôle et des travaux routiers &nbsp;<span
-                                        id="prog_produit_chimique" class="badge bg-warning text-white"> </span>
+                                        id="prog_produit_chimique" class="badge bg-warning text-white"></span>
                                 </span>
                             </a>
                         </li>
                     @endif
 
-                    {{-- @if (Auth::user()->agent->service->libelle_court == 'DSI' || Auth::user()->role->libelle == 'Administration')
-                        <li>
-                            <a href="{{ route('demandesp0012-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure écotourisme &nbsp;<span
-                                        id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
-                            </a>
-                        </li>
-                    @endif --}}
-
                     @if (Auth::user()->agent->service->libelle_court == 'LNBTP' || Auth::user()->role->libelle == 'Administration')
                         <li>
-                            <a href="{{ route('demandesp002-list') }}">
+                            <a href="{{ route('demandes-list') }}">
                                 <i class="bi bi-circle"></i><span>Demande d'Etude de sols et de fondations &nbsp;<span
                                         id="prog_agrement_technique" class="badge bg-warning text-white">
                                     </span></span>
@@ -294,22 +285,11 @@
                                 <i class="bi bi-circle"></i><span>Role</span>
                             </a>
                         </li>
-
-                        {{-- <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Piece-Justificative</span>
-            </a>
-          </li> --}}
                         <li>
                             <a href=" {{ route('basejuridique-list') }}">
                                 <i class="bi bi-circle"></i><span>Base Juridique</span>
                             </a>
                         </li>
-                        {{-- <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Tarif</span>
-            </a>
-          </li> --}}
                         <li>
                             <a href=" {{ route('commune-list') }}">
                                 <i class="bi bi-circle"></i><span>Commune</span>
@@ -330,12 +310,6 @@
                     </ul>
                 </li><!-- End Icons Nav -->
 
-
-
-
-
-
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse"
                         href="#">
@@ -348,14 +322,7 @@
                                 <i class="bi bi-circle"></i><span>Liste des plaintes</span>
                             </a>
                         </li>
-                        <!--
-          <li>
-            <a href="{{ route('usager-list') }}">
-              <i class="bi bi-circle"></i><span>Plainte en cours</span>
-            </a>
-          </li>
-          -->
-
+                        
                     </ul>
                 </li><!-- End Charts Nav -->
 

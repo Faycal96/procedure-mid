@@ -2081,7 +2081,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
- /* position: absolute;*/
+  position: fixed;
   bottom: 0;
   width: 100%;
   background: #316399;
@@ -2599,7 +2599,7 @@ select.list-dt:focus {
     list-style-type: none;
     font-size: 12px;
     /*width: 25%;*/
-    width: 16%;
+    width: 14%;
     float: left;
     position: relative;
 }

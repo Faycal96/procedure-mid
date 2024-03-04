@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Plainte;
 use App\Models\Procedure;
 
+
+
 use App\Repositories\PlainteRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,8 +42,9 @@ class PlainteController extends Controller
          $plainte->message = $request->message;
          $plainte->usager_id = Auth::user()->usager_id; // Auth::user()->usager->uuid;
          $plainte->save();      // ou Plainte::create($request->all());
-
-        return redirect('/')->with('success', 'Votre plainte à bien été soumise et est en cours de traitement !!');
+         
+        //return redirect('/')->with('success', 'Votre plainte à bien été soumise et est en cours de traitement !!');
+        return redirect('listePlainteUsager')->with('success', 'Votre plainte à bien été soumise et est en cours de traitement !!');
     }
 
 
@@ -64,6 +67,29 @@ class PlainteController extends Controller
         // $listePlainte = $this->repository->all();                
         return view('/backend/list_plaintes', ['procedures' => $procedures, 'selectedProcedure' => $selectedProcedure,'listePlainte' => $listePlainte ]);
    }
+
+
+
+
+   // recuperation de la liste des plaintes d'un usager
+   public function listePlainteUsager(Request $request, $procedure="Toutes"){
+    /*
+    if($procedure == "Toutes"){
+        $listePlainte = Plainte::all()->sortByDesc("etat");
+    }else{
+        $listePlainte = Plainte::all()->where('procedure', "$procedure")->sortByDesc("etat");
+    }
+    */
+    
+    $listePlainte = Plainte::where(['usager_id' => Auth::user()->usager->uuid])->get();
+
+    $procedures = Procedure::all();
+
+    $selectedProcedure = $procedure;
+
+    return view('/usager/list_plainteUsager', ['procedures' => $procedures, 'selectedProcedure' => $selectedProcedure,'listePlainte' => $listePlainte ]);
+}
+
 
 
 

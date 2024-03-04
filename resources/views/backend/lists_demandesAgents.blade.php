@@ -41,17 +41,7 @@
                                         <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
                                         @endforeach
                                     </select><br><br>
-                                    {{-- <div class="form-inline">
-                                    <label for="">Rechercher par code : </label>
-                                    <input type="text" class="form-control border-success"style="width: 200px;"  placeholder="code">
-                                </div> --}}
-                                </div>
-                                <div class="col-3">
-                                    <div style="float: right">
-                                        {{-- <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
-                                                    class="bi bi-arrow-repeat"></i></button> --}}
-                                        <button title="Ajouter" type="button" class="btn btn-success"><i class="bi bi-printer"></i> Imprimer</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <br>
@@ -137,12 +127,6 @@
                                                     <span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
                                                     @endif
 
-                                                    {{-- @if($demande->exploitant == "Forestier")
-                                                    <td><span class="badge bg-dark"> 10</span> Jours </td>
-                                                    @else
-                                                    <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
-                                                    @endif --}}
-
                                                     <td>{{ $demande->created_at->diffForHumans() }}</td>
 
                                                     {{-- partie paiement --}}
@@ -159,15 +143,7 @@
 
                                                     <td>
                                                         <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i></button>
-
-                                                     {{--    @if ($demande->etat =='R')
-                                                        <!--button title="Modifier" type="button" class="btn btn-info "
-                                                data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                    class="bi bi-pencil-square text-white">Modifier </i> </button-->
-                                                        <a title="Modifier" class="btn btn-info" href="{{ route('editer-demande', ['id' =>$demande->uuid/*, 'procedure' => $selectedProcedure*/] ) }}"> <i class="bi bi-pencil-square text-white">Modifier </i> </a>
-                                                        @endif --}}
-
-
+                                                        <button title="Imprimer" type="button" class="btn btn-success " data-bs-toggle="modal" ><a href="{{ route('etat') }}"> <i class="bi bi-printer"></i></a></button>
                                                         @if ($demande->etat == 'S' && !is_null($demande->output_file) ||
                                                         $demande->etat == 'A' && !is_null($demande->output_file))
 
@@ -175,9 +151,6 @@
                                                                 Télécharger</b></a>
                                                         @endif
 
-
-                                                        {{-- <button type="button" title="Annuler" class="btn btn-danger"><i
-                                                    class="bi bi-x-circle"></i></button> --}}
                                                     </td>
 
                                                     <div class="modal" id="largeModal{{ $demande->uuid }}">
