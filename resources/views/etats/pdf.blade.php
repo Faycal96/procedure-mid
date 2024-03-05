@@ -7,132 +7,238 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-        body {
-            margin-top: 20px;
-        }
+        body{
+background:#eee;
+margin-top:20px;
+}
+.text-danger strong {
+        	color: #9f181c;
+		}
+		.receipt-main {
+			background: #ffffff none repeat scroll 0 0;
+			border-bottom: 12px solid #333333;
+			border-top: 12px solid #9f181c;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			padding: 40px 30px !important;
+			position: relative;
+			color: #333333;
+			font-family: open sans;
+		}
+		.receipt-main p {
+			color: #333333;
+			font-family: open sans;
+			line-height: 1.42857;
+		}
+		.receipt-footer h1 {
+			font-size: 15px;
+			font-weight: 400 !important;
+			margin: 0 !important;
+		}
+		.receipt-main::after {
+			background: #414143 none repeat scroll 0 0;
+			content: "";
+			height: 5px;
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: -13px;
+		}
+		.receipt-main thead {
+			background: #414143 none repeat scroll 0 0;
+		}
+		.receipt-main thead th {
+			color:#fff;
+		}
+		.receipt-right h5 {
+			font-size: 16px;
+			font-weight: bold;
+			margin: 0 0 7px 0;
+		}
+		.receipt-right p {
+			font-size: 12px;
+			margin: 0px;
+		}
+		.receipt-right p i {
+			text-align: center;
+			width: 18px;
+		}
+		.receipt-main td {
+			padding: 9px 20px !important;
+		}
+		.receipt-main th {
+			padding: 13px 20px !important;
+		}
+		.receipt-main td {
+			font-size: 13px;
+			font-weight: initial !important;
+		}
+		.receipt-main td p:last-child {
+			margin: 0;
+			padding: 0;
+		}	
+		.receipt-main td h2 {
+			font-size: 20px;
+			font-weight: 900;
+			margin: 0;
+			text-transform: uppercase;
+		}
+		.receipt-header-mid .receipt-left h1 {
+			font-weight: 100;
+			margin: 34px 0 0;
+			text-align: right;
+			text-transform: uppercase;
+		}
+		.receipt-header-mid {
+			margin: 24px 0;
+			overflow: hidden;
+		}
+		
+		#container {
+			background-color: #dcdcdc;
+		}
     </style>
 </head>
 
 <body>
-    <div style="background-color: #f6f6f6; color: #333; height: 100%; width: 100%;" height="100%" width="100%">
-        <table cellspacing="0" style="background-color: #f6f6f6; border-collapse: collapse; padding: 40px; width: 100%;" width="100%">
-            <tbody>
-                <tr>
-                    <td width="5px" style="padding: 0;"></td>
-                    <td style="clear: both; display: block; margin: 0 auto; max-width: 600px; padding: 10px 0;">
-                        <table width="100%" cellspacing="0" style="border-collapse: collapse;">
-                            <tbody>
-                                <tr>
-                                    <td style="padding: 0;">
-                                        <a href="#" style="color: #348eda;" target="_blank">
-                                            <img src="//ssl.gstatic.com/accounts/ui/logo_2x.png" alt="Bootdey.com" style="height: 50px; max-width: 100%; width: 157px;" height="50" width="157" />
-                                        </a>
-                                    </td>
-                                    <td style="color: #999; font-size: 12px; padding: 0; text-align: right; align-items: end;" >
-                                        Bootdey<br />
-                                        Invoice #3440952<br />
-                                        August 04, 2018
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td width="5px" style="padding: 0;"></td>
-                </tr>
-                <tr>
-                    <td width="5px" style="padding: 0;"></td>
-                    <td style="background-color:#FFFFFF; border: 1px solid #000; clear: both; display: block; margin: 0 auto; max-width: 600px; padding: 0;">
-                        <table width="100%" style="background: #f9f9f9; border-bottom: 1px solid #eee; border-collapse: collapse; color: #999;">
-                            <tbody>
-                                <tr>
-                                    <td width="50%" style="padding: 20px;"><strong style="color: #333; font-size: 24px;">$23.95</strong> Paid</td>
-                                    <td width="50%" style="padding: 20px; align-items: end;">Thanks for using <span class="il">Bootdey.com</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td style="padding: 0;"></td>
-                    <td width="5px" style="padding: 0;"></td>
-                </tr>
-                <tr>
-                    <td width="5px" style="padding: 0;"></td>
-                    <td style="border: 1px solid #000; border-top: 0; clear: both; display: block; margin: 0 auto; max-width: 600px; padding: 0;">
-                        <table cellspacing="0" style="border-collapse: collapse; border-left: 1px solid #000; margin: 0 auto; max-width: 600px;">
-                            <tbody>
-                                <tr>
-                                    <td valign="top" style="padding: 20px;">
-                                        <h3 style="
-                                            border-bottom: 1px solid #000;
-                                            color: #000;
-                                            font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-                                            font-size: 18px;
-                                            font-weight: bold;
-                                            line-height: 1.2;
-                                            margin: 0;
-                                            margin-bottom: 15px;
-                                            padding-bottom: 5px;
-                                        ">
-                                            Summary
-                                        </h3>
-                                        <table cellspacing="0" style="border-collapse: collapse; margin-bottom: 40px;">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding: 5px 0;">Old Plan</td>
-                                                    <td style="padding: 5px 0; align-items: end;">Free plan (10,000 msg/month)</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding: 5px 0;">New Plan</td>
-                                                    <td style="padding: 5px 0;align-items: end;">Concept Plan</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding: 5px 0;">Prorated subscription amount due</td>
-                                                    <td style="padding: 5px 0;align-items: end;">$23.95</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="border-bottom: 2px solid #000; border-top: 2px solid #000; font-weight: bold; padding: 5px 0;">Amount paid</td>
-                                                    <td style="align-items: end;border-bottom: 2px solid #000; border-top: 2px solid #000; font-weight: bold; padding: 5px 0;">$23.95</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td width="5px" style="padding: 0;"></td>
-                </tr>
-                <tr style="color: #666; font-size: 12px;">
-                    <td width="5px" style="padding: 10px 0;"></td>
-                    <td style="clear: both; display: block; margin: 0 auto; max-width: 600px; padding: 10px 0;">
-                        <table width="100%" cellspacing="0" style="border-collapse: collapse;">
-                            <tbody>
-                                <tr>
-                                    <td width="40%" valign="top" style="padding: 10px 0;">
-                                        <h4 style="margin: 0;">Questions?</h4>
-                                        <p style="color: #666; font-size: 12px; font-weight: normal; margin-bottom: 10px;">
-                                            Please visit our
-                                            <a href="#" style="color: #666;" target="_blank">
-                                                Support Center
-                                            </a>
-                                            with any questions.
-                                        </p>
-                                    </td>
-                                    <td width="10%" style="padding: 10px 0;">&nbsp;</td>
-                                    <td width="40%" valign="top" style="padding: 10px 0;">
-                                        <h4 style="margin: 0;"><span class="il">Bootdey</span> Technologies</h4>
-                                        <p style="color: #666; font-size: 12px; font-weight: normal; margin-bottom: 10px;">
-                                            <a href="#">535 Mission St., 14th Floor San Francisco, CA 94105</a>
-                                        </p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td width="5px" style="padding: 10px 0;"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    
+    <div class="col-md-12">   
+        <div class="row">
+               
+               <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+                   <div class="row">
+                       <div class="receipt-header">
+                       </div>
+                   </div>
+                   
+                   <div class="row">
+                       <div class="receipt-header receipt-header-mid">
+                           <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                               <div class="receipt-right">
+                                   <h5>Identité du demandeur </h5>
+                                   <p><b>démandeur :</b> 
+                                    @if($demande->procedure->code == 'P001')
+                                        {{ $demande->usager->nom }} {{ $demande->usager->prenom }}
+                                    @else
+                                        {{ $demande->raison_social }}
+                                    @endif</p>
+                                   <p><b>Email :</b> {{$demande->email}} {{$demande->email_entreprise}}</b></p>
+                                   <p><b>Téléphone :</b> 
+                                    @if (!empty($demande->numero_telephone))
+                                        {{ $demande->numero_telephone }}
+                                    @endif
+                                    @if (!empty($demande->tel_1))
+                                        {{ $demande->tel_1 }}
+                                    @endif
+                                    @if (!empty($demande->tel_2))
+                                        {{ $demande->tel_2 }}
+                                    @endif</p>
+                                    @if($demande->procedure->code == 'P002')
+                                        <p><b>Fax :</b> {{$demande->fax}}</b></p>
+                                        <p><b>Boite Postale :</b> {{$demande->boite_postale}}</b></p>
+                                        <p><b>Adresse Postale :</b> {{$demande->adresse_physique}}</b></p>
+                                    @endif
+                                    <p><b>Réference :</b> {{$demande->reference}}</b></p>
+                               </div>
+                           </div>
+                       </div>
+                   </div><br><br><br><br>
+                   
+                   <div class="row">
+                       <table class="table table-bordered">
+                           <thead>
+                               <tr>
+                                   <th colspan="2" style="text-align: center">INFORMATIONS : Demande {{ $statut->libelle }}</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <tr>
+                                   <td class="col-md-9"><strong>Date de dépot</strong></td>
+                                   <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->created_at }}</td>
+                               </tr>
+                               @if($demande->procedure->code == 'P002')
+                                    <tr>
+                                        <td class="col-md-9"><strong>Objectif de la demande</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->objectif_demande }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Siege social</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i>{{ $demande->siege_social }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Nom du representant</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->nom_representant }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Prenom du representant</td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i>{{ $demande->prenom_representant }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Fonction du representant</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->fonction_representant }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Adresse du representant</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i>{{ $demande->adresse_representant }}</td>
+                                    </tr>
+                               @else
+                                    <tr>
+                                        <td class="col-md-9"><strong>Province</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->localite->provinces->libelle }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Commune</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->localite->libelle }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Type de construction</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->typeConstruction->libelle }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Sous sol ?</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i>
+                                             {{ $demande->demandeP001->is_underground == 0 ? "Non" : "Oui" }}
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Superficie</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->superficie}} m²</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Secteur</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->secteur}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Zone</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->zone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Section</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->section}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Lot</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->lot}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Parcelle</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->numero_parcelle}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-9"><strong>Usage construction</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->usageConstruction->libelle}} {{ $demande->autre_usage_construction}}</td>
+                                    </tr>
+                               @endif
+                               
+                           </tbody>
+                       </table>
+                   </div>
+                   
+               </div>    
+           </div>
+       </div>
+      </div>
+    
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">

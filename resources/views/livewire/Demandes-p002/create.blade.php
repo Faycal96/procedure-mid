@@ -378,7 +378,7 @@
                                                             <div class="col-6">
                                                                 <label for="montany_travaux" >Montant travaux
                                                                     <span style="color: red">*</span></label>
-                                                                <input type="number" name="montant_travaux[]" id="montant_travaux"
+                                                                <input type="number" name="montany_travaux[]" id="montany_travaux"
                                                                     class="border-success form-control" placeholder="Montant travaux" required=true/>
                                                             </div>
                                                          </div>
@@ -652,11 +652,10 @@
                                         value="Retour" />
                                     <button type="button" name="make_payment" id="next_piece"
                                         class="next action-button">Suivant</button>
-                                </fieldset>
+                                 </fieldset>
 
-                                 {{-- <fieldset>
-                                     <form action="">
-                                         <div class="form-card">
+                                 <fieldset>
+                                    <div class="form-card">
                                              <h4 class="fs-title">Paiement <span style="color:red">
                                                      *</span></h4>
                                              <label for="demande timbre" class="fw-bold">Moyens de Paiement<span
@@ -712,8 +711,7 @@
 
                                          <!-- Ajoutez ceci dans la première étape du formulaire -->
                                          <div class="error-message" style="color: red;"></div>
-                                     </form>
-                                 </fieldset> --}}
+                                 </fieldset>
 
                              </form>
                          </div>
