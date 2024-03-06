@@ -9,8 +9,6 @@ use App\Mail\ValidateDemandMailable;
 use App\Models\Agent;
 use App\Models\Commentaire;
 use App\Models\Demande;
-use App\Models\DemandeP001;
-use App\Models\DemandeP002;
 use App\Models\Motif;
 use App\Models\Procedure;
 use App\Models\StatutDemande;
@@ -41,11 +39,32 @@ class BackendController extends Controller
 
         // dd(Auth::user()->role->libelle);
         $data = [
-            /* 'nbreEtudeSol' => DemandeP001::where(['etat' => 'v'])->count(),
-            'nbreAgrement' => DemandeP002::where(['etat' => 'R'])->count(), */
+           
+            'nbAgrementTechnique' => Demande::all()->where('code', "P002")->count(),
+            'nbAgrementTechniqueEnAttente' => Demande::all()->where('code', "P002")->where('etat', "D")->count(),
+            'nbAgrementTechniqueEnComplement' => Demande::all()->where('code', "P002")->where('etat', "C")->count(),
+            'nbAgrementTechniqueEnEtude' => Demande::all()->where('code', "P002")->where('etat', "E")->count(),
+            'nbAgrementTechniqueRejette' => Demande::all()->where('code', "P002")->where('etat', "R")->count(),
+            'nbAgrementTechniqueEnAttenteVisa' => Demande::all()->where('code', "P002")->where('etat', "V")->count(),
+            'nbAgrementTechniqueSigner' => Demande::all()->where('code', "P002")->where('etat', "S")->count(),
+            'nbAgrementTechniqueArchiver' => Demande::all()->where('code', "P002")->where('etat', "A")->count(),
 
-            'nbreEtudeSol' => DemandeP001::all()->count(),
-            'nbreAgrement' => DemandeP002::all()->count(),
+            'nbEtudeSol' => Demande::all()->where('code', "P001")->count(),
+            'nbEtudeSolEnAttente' => Demande::all()->where('code', "P001")->where('etat', "D")->count(),
+            'nbEtudeSolEnComplement' => Demande::all()->where('code', "P001")->where('etat', "C")->count(),
+            'nbEtudeSolEnEtude' => Demande::all()->where('code', "P001")->where('etat', "E")->count(),
+            'nbEtudeSolRejette' => Demande::all()->where('code', "P001")->where('etat', "R")->count(),
+            'nbEtudeSolEnAttenteVisa' => Demande::all()->where('code', "P001")->where('etat', "V")->count(),
+            'nbEtudeSolSigner' => Demande::all()->where('code', "P001")->where('etat', "S")->count(),
+            'nbEtudeSolArchiver' => Demande::all()->where('code', "P001")->where('etat', "A")->count(),
+
+            // Demandes d'Agrement par categorie
+            'demande' => Demande::all(),
+            'countTH' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TH')->count(),
+            'countTR1' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR1')->count(),
+            'countTR2' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR2')->count(),
+            'countTR3' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR3')->count(),
+            'countEC' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'EC')->count(),
         ];
 
         return view('backend.home', $data);
@@ -186,28 +205,21 @@ class BackendController extends Controller
         if ($table == 'demande_p001_s') {
 
             $dataFiles = $request->all();
-            //$noteEtude = $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
-
             $commentaire1 = new Commentaire();
             $commentaire1->create([
                 'libelle' => $request->libelle,
                 'demande_id' => $id,
             ]);
-        // return redirect()->back()->with('success', "opération effectuée avec succès !");
-
+        
         } elseif ($table == 'demande_p002_s') {
 
             $dataFiles = $request->all();
-            //$noteEtude = $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
-
             $commentaire2 = new Commentaire();
             $commentaire2->create([
                 'libelle' => $request->libelle,
                 'demande_id' => $id,
             ]);
         }
-
-        // DB::table('commentaire_p001_s')->insert();
 
         $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
         $usager_id = Demande::where('uuid', $id)->first()->usager_id;
@@ -218,12 +230,8 @@ class BackendController extends Controller
             'etat' => StatutDemande::where('etat', $nextStatus)->first()->statut,
         ];
 
-        // try {
-        //     Mail::to($user_email)->send(new ValidateDemandMailable($demand));
-
-        // } catch (Throwable $e) {
-        //     report($e);
-        // }
+        
+         Mail::to($user_email)->send(new ValidateDemandMailable($demand));
 
         return redirect()->back()->with('success', 'Opération éffectuée avec succès !');
     }
@@ -407,7 +415,4 @@ class BackendController extends Controller
         return redirect()->back()->with('success', 'Note d\'étude envoyée avec succes avec succès !');
     }
 
-    public function nbreDemandeRejetter(){
-        return Demande::where(['etat' => 'R'])->count();
-    }
 }

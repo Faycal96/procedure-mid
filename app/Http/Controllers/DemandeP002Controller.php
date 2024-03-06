@@ -71,7 +71,7 @@ class DemandeP002Controller extends Controller
             
             $data['procedure_id'] = Procedure::where(['code' => 'P002'])->first('uuid')->uuid;
                     
-            //dd($data);
+            $demande->code = "P002";
             $demande = $this->demandeRepositoryP002->create($data);  
           
             //dd($data);

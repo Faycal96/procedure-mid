@@ -83,7 +83,7 @@ class DemandeP001Controller extends Controller
             unset($data['plan']);
             unset($data['coupe']);
             $demande = $this->demandeRepositoryP001->create($data);
-           // dd($demande);
+            $demande->code = "P001";
             $demande->save();
             DemandePiece::create([
                 "libelle" => 'CNIB',

@@ -34,13 +34,13 @@
                                 <div class="row">
 
                                 <div class="col-4 offset-md-3">
-                                    <label for="">Choisir sa procédure</label>
+                                    {{-- <label for="">Choisir sa procédure</label>
                                     <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
                                         <option class="mb-3" value=""></option>
                                         @foreach($procedures as $proc)
                                         <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
                                         @endforeach
-                                    </select><br><br>
+                                    </select><br><br> --}}
                                     
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
 
                                                     <td>
                                                         <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i></button>
-                                                        <button title="Imprimer" type="button" class="btn btn-success " data-bs-toggle="modal" ><a href="{{ route('etat') }}"> <i class="bi bi-printer"></i></a></button>
+                                                        <button title="Imprimer" type="button" class="btn btn-success " data-bs-toggle="modal"><a href="{{ route('etat', ['uuid' => $demande->uuid]) }}"> <i class="bi bi-printer"></i></a></button>
                                                         @if ($demande->etat == 'S' && !is_null($demande->output_file) ||
                                                         $demande->etat == 'A' && !is_null($demande->output_file))
 

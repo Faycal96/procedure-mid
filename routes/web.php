@@ -182,7 +182,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
 
     Route::put('/administration/demande/{id}/{table}', [BackendController::class, 'noteEtude'])->name('noteEtude');
 
-    Route::get('/Etat', [EtatController::class, 'index'])->name('etat');
+    Route::get('/etat/{uuid}', [EtatController::class, 'index'])->name('etat');
 
 });
 
