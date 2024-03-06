@@ -277,7 +277,7 @@
                                                                         action="{{ route('statusChange', ['id' => $demande->uuid, 'currentStatus' => $demande->etat, 'table' => 'demande_p001_s']) }}">
                                                                         @csrf
 
-                                                                        <div class="form-group">
+                                                                        {{-- <div class="form-group">
                                                                             <div class="text-center">
                                                                                 <label class="col-form-label">Motif de la
                                                                                     validation ?</label>
@@ -285,7 +285,7 @@
                                                                                     name="libelle"
                                                                                     class="form-control border-success">
                                                                             </div>
-                                                                        </div>
+                                                                        </div> --}}
                                                                         {{-- <div class="form-group">
                                                                             <div class="text-center">
                                                                                 <label class="col-form-label">Charger la
@@ -486,7 +486,7 @@
                                                                     <img src="{{ asset('backend/assets/img/delete.svg') }}"
                                                                         width="60" height="45"
                                                                         class="d-inline-block align-top" alt="">
-                                                                    <h5 class="modal-title m-auto"> Envoyer une note d'étude
+                                                                    <h5 class="modal-title m-auto"> Envoyer un dévis d'étude
                                                                     </h5>
                                                                     <button type="button" class="btn-close"
                                                                         data-dismiss="modal" aria-label="btn-close">

@@ -27,7 +27,7 @@ class AffectDemandMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notification d\'affectation de demande pour traitement sur le portail du MEEA',
+            subject: 'Notification d\'affectation de demande pour traitement sur le portail du MID',
         );
     }
 

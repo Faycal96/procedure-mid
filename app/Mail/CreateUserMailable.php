@@ -27,7 +27,7 @@ class CreateUserMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Creation de compte d\'acces sur la platforme MEEA',
+            subject: 'Creation de compte d\'acces sur la platforme MID',
         );
     }
 

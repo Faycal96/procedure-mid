@@ -193,9 +193,9 @@
                                                                     <br>
                                                                     @endforeach
                                                                 </div>
-                                                                <h4>La note d'étude</h4>
+                                                                <h4>Dévis d'étude</h4>
                                                                 <div class="col-6">
-                                                                    <a class="text-success" target="_blank" href="{{ Storage::url($demande->note_etude_file) }}"> Note D'étude</a>
+                                                                    <a class="text-success" target="_blank" href="{{ Storage::url($demande->note_etude_file) }}"><b> Dévis d'étude</b></a>
                                                                 </div>
                                                             </div>
                                                             <br>

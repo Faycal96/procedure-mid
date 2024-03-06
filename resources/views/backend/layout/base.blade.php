@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('img/logo_meea.jpg') }}" rel="icon">
+    <link href="{{ asset('img/logo_MID.jpg') }}" rel="icon">
     <link href="{{ asset('backend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
 
@@ -79,7 +79,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ route('administration') }}" class="logo d-flex align-items-center">
-                <img src="{{ asset('img/logo_meea.jpg') }}" alt="">
+                <img src="{{ asset('img/armoiries.png') }}" alt="">
                 <span class="d-none d-lg-block"> </span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -330,7 +330,7 @@
                     <a class="nav-link " href="{{ route('agrement-list') }}">
                         <i class="bi bi-grid"></i>
     
-                        <span>Arrêté d'agréments</span>
+                        <span>Arrêté portant délivrance d'agrément technique</span>
                     </a>
                 </li>
             @endif

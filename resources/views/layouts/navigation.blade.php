@@ -13,9 +13,9 @@
                 <!-- Navigation Links -->
                 <div class="container  d-flex float-start logo">
 
-                    <img src="{{ asset('img/logo_meea.jpg') }}" width="50px" height="70px" />
+                    <img src="{{ asset('img/logo_MID.jpg') }}" width="50px" height="70px" />
                     <h1 class="mt-4" style="margin-left: 8%; display:inline">
-                        <a href="/">Portail des demandes des services en ligne du MEEA</a>
+                        <a href="/">Portail des demandes des services en ligne du MID</a>
                     </h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->

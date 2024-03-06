@@ -41,7 +41,7 @@
                                     </h4>
                                     <h4>Merci de votre compréhension.</h4>
                                     <h4>Cordialement,</h4>
-                                    <h4>Le MEEA</h4>
+                                    <h4>Le MID</h4>
                                 </div>
                                 <a href="/"  class="next action-button btn btn-success"> Retour </a>
                                 {{-- <input type="button"  class="next action-button btn btn-success"

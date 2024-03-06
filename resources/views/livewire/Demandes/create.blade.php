@@ -41,10 +41,10 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <label class="nom_societe fw-bold"> <strong>identité</strong> <span
+                                            <label class="nom_societe fw-bold"> <strong>NIP / Passeport</strong> <span
                                                     style="color: red">*</span></label>
-                                            <input type="text" class="border-success" id="name" name="name" value="{{ $name }}"
-                                                placeholder="Nom et prenom" />
+                                            <input type="text" class="border-success" id="nip" name="nip" value="{{ $nip }}"
+                                                placeholder="Nom et prenom" readonly/>
                                         </div>
                                         <div class="col">
                                             <label class="siege_social fw-bold">Province de résidence<span style="color:red">
@@ -81,7 +81,7 @@
                                         <div class="col-6">
                                             <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                     *</span></label>
-                                            <input type="text" name="telephone" class="border-success" id="telephone"   placeholder="Téléphone" value="{{ $telephone}}" />
+                                            <input type="text" name="telephone" class="border-success" id="telephone" placeholder="Téléphone" value="{{ $telephone}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -426,7 +426,7 @@ $('#selectMultiple').select2();
 <script>
     $(document).ready(function(){
       $("#recap").click(function(){
-        var nom = $("#name").val();
+        var nom = $("#nip").val();
         var email = $("#email").val();
         var autre = $("#autre_usage_construction").val();
         var superficie = $("#superficie").val();

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>MEEA</title>
+    <title>MID</title>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel="stylesheet" href="./style.css">

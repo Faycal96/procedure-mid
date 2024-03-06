@@ -77,7 +77,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Fonction</div>
-                    <div class="col-lg-9 col-md-8">{{ Auth::user()->agent->fonction.'/MEEA' }}</div>
+                    <div class="col-lg-9 col-md-8">{{ Auth::user()->agent->fonction.'/MID' }}</div>
                   </div>
 
                   <div class="row">

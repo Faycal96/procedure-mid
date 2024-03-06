@@ -148,7 +148,7 @@ margin-top:20px;
                        <table class="table table-bordered">
                            <thead>
                                <tr>
-                                   <th colspan="2" style="text-align: center">INFORMATIONS : Demande {{ $statut->libelle }}</th>
+                                   <th colspan="2" style="text-align: center">INFORMATIONS</th>
                                </tr>
                            </thead>
                            <tbody>

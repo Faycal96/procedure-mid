@@ -55,6 +55,7 @@ class DemandeComp extends Component
             "procedure" => $procedure,
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+            "nip" => Auth::user()->usager->nip,
             "email" => Auth::user()->email,
             "provinces" => Province::all(),
             "communes" => Commune::all(),

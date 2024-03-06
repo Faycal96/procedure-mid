@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,8 +15,17 @@ class Demande extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'uuid';
-
+    protected $dateFormat = 'd/m/Y';
     protected $with = ['demandePiece', 'procedure'];
+
+    protected $casts = [
+        'date_demande' => 'date',
+        'created_at' => 'date',
+        ];
+
+    public function setDateAttribute( $value ) {
+        $this->attributes['date'] = (new Carbon($value))->format('d/m/y');
+    }
 
     public function genererRandomString($longueur = 10)
     {

@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Portail-meea'),
+    'name' => env('APP_NAME', 'Portail-MID'),
 
     /*
     |--------------------------------------------------------------------------

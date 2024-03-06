@@ -55,6 +55,7 @@ class DemandeCompP002 extends Component
             "communes" => Commune::all(),
             "pays" => Pays::all(),
             "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
+            "nip" => Auth::user()->usager->nip,
            // "default_pays" => Auth::user()->usager->pays,
             //"domaines" => DemandeDomaineP002::all(),
             //"categories" => DemandeCategorieP002::all(),

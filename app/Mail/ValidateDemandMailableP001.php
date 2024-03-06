@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RejectDemandMailable extends Mailable
+class ValidateDemandMailableP001 extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +27,7 @@ class RejectDemandMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ministère des Infrastructures et du désenclavement',
+            subject: 'Laboratoire National du Bâtiment et des Travaux Publics',
         );
     }
 
@@ -37,7 +37,7 @@ class RejectDemandMailable extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.demands.rejected',
+            view: 'emails.demands.validatedP001',
         );
     }
 

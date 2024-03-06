@@ -27,7 +27,7 @@ class ValidateDemandMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notification de validation de votre demande sur le portail du MEEA',
+            subject: 'Ministère des Infrastructures et du désenclavement',
         );
     }
 

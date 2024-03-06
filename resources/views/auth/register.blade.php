@@ -105,7 +105,7 @@
                     background: #ecf5fc; padding: 40px 50px 45px; width: 600px">
                     @csrf
                         <div class="form-group mt-3">
-                            <label for="nip"> NIP</label>
+                            <label for="nip"> NIP / Passport</label>
                             <input class="form-control" id="nip" type="text" name="nip"
                                 :value="old('nip')" required autofocus autocomplete="nip" />
                             <input-error :messages="$errors->get('nip')" class="mt-2" />

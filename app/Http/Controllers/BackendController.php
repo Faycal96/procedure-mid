@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Mail\AffectDemandMailable;
 use App\Mail\NoteEtudeMailable;
 use App\Mail\RejectDemandMailable;
+use App\Mail\RejectDemandMailableP001;
 use App\Mail\ValidateDemandMailable;
+use App\Mail\ValidateDemandMailableP001;
 use App\Models\Agent;
 use App\Models\Commentaire;
 use App\Models\Demande;
@@ -16,6 +18,7 @@ use App\Models\User;
 use App\Repositories\BackendRepository;
 use App\Repositories\DemandeRepository;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,28 +38,18 @@ class BackendController extends Controller
 
     public function index(BackendRepository $backendRepository)
     {
-
-        // dd(Auth::user()->role->libelle);
         $data = [
            
             'nbAgrementTechnique' => Demande::all()->where('code', "P002")->count(),
             'nbAgrementTechniqueEnAttente' => Demande::all()->where('code', "P002")->where('etat', "D")->count(),
-            'nbAgrementTechniqueEnComplement' => Demande::all()->where('code', "P002")->where('etat', "C")->count(),
-            'nbAgrementTechniqueEnEtude' => Demande::all()->where('code', "P002")->where('etat', "E")->count(),
+            'nbAgrementTechniqueValider' => Demande::all()->where('code', "P002")->where('etat', "V")->count(),
             'nbAgrementTechniqueRejette' => Demande::all()->where('code', "P002")->where('etat', "R")->count(),
-            'nbAgrementTechniqueEnAttenteVisa' => Demande::all()->where('code', "P002")->where('etat', "V")->count(),
-            'nbAgrementTechniqueSigner' => Demande::all()->where('code', "P002")->where('etat', "S")->count(),
-            'nbAgrementTechniqueArchiver' => Demande::all()->where('code', "P002")->where('etat', "A")->count(),
 
             'nbEtudeSol' => Demande::all()->where('code', "P001")->count(),
             'nbEtudeSolEnAttente' => Demande::all()->where('code', "P001")->where('etat', "D")->count(),
-            'nbEtudeSolEnComplement' => Demande::all()->where('code', "P001")->where('etat', "C")->count(),
-            'nbEtudeSolEnEtude' => Demande::all()->where('code', "P001")->where('etat', "E")->count(),
+            'nbEtudeSolValider' => Demande::all()->where('code', "P001")->where('etat', "V")->count(),
             'nbEtudeSolRejette' => Demande::all()->where('code', "P001")->where('etat', "R")->count(),
-            'nbEtudeSolEnAttenteVisa' => Demande::all()->where('code', "P001")->where('etat', "V")->count(),
-            'nbEtudeSolSigner' => Demande::all()->where('code', "P001")->where('etat', "S")->count(),
-            'nbEtudeSolArchiver' => Demande::all()->where('code', "P001")->where('etat', "A")->count(),
-
+            
             // Demandes d'Agrement par categorie
             'demande' => Demande::all(),
             'countTH' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TH')->count(),
@@ -180,9 +173,6 @@ class BackendController extends Controller
         $nextStatus = '';
         switch ($currentStatus) {
             case 'D':
-                $nextStatus = 'E';
-                break;
-            case 'E':
                 $nextStatus = 'V';
                 break;
             case 'V':
@@ -197,36 +187,57 @@ class BackendController extends Controller
         }
         Demande::where('uuid', $id)->update(['etat' => $nextStatus]);
 
-        if ($table == 'demande_p001_s') {
+        $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
+        $usager_id = Demande::where('uuid', $id)->first()->usager_id;
+        $usager = Usager::where('uuid', $usager_id)->first();
+        $user_email = User::where('usager_id', $usager_id)->first()->email;
+        $demande = Demande::find($id);
+        $code = $demande->procedure->code;
+        
+        if ($code == 'P001') {
 
-            $dataFiles = $request->all();
-            $commentaire1 = new Commentaire();
+           /* $dataFiles = $request->all();
+             $commentaire1 = new Commentaire();
             $commentaire1->create([
                 'libelle' => $request->libelle,
                 'demande_id' => $id,
-            ]);
+            ]); */
+            $demand = [
+                'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+                'reference' => Demande::where('uuid', $id)->first()->reference,
+                'etat' => StatutDemande::where('etat', $nextStatus)->first()->statut,
+                'name' => $usager->nom . ' ' . $usager->prenom,
+            ];
+            try {
+                Mail::to($user_email)->send(new ValidateDemandMailableP001($demand));
+            } catch (\Exception $e) {
+                //
+            }
+            
         
-        } elseif ($table == 'demande_p002_s') {
+        } elseif ($code == 'P002'){
 
-            $dataFiles = $request->all();
+            /* $dataFiles = $request->all();
             $commentaire2 = new Commentaire();
             $commentaire2->create([
                 'libelle' => $request->libelle,
                 'demande_id' => $id,
-            ]);
+            ]); */
+            $demand = [
+                'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+                'reference' => Demande::where('uuid', $id)->first()->reference,
+                'etat' => StatutDemande::where('etat', $nextStatus)->first()->statut,
+                "name" => $usager->nom . ' ' . $usager->prenom,
+                'categorie' => $demande->categorie->libelle,
+                'nomEntreprise' => $demande->raison_social,
+            ];
+            try {
+                Mail::to($user_email)->send(new ValidateDemandMailable($demand));
+            } catch (\Exception $e) {
+                //
+            }
+            
         }
-
-        $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
-        $usager_id = Demande::where('uuid', $id)->first()->usager_id;
-        $user_email = User::where('usager_id', $usager_id)->first()->email;
-        $demand = [
-            'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            'reference' => Demande::where('uuid', $id)->first()->reference,
-            'etat' => StatutDemande::where('etat', $nextStatus)->first()->statut,
-        ];
-
-        
-         Mail::to($user_email)->send(new ValidateDemandMailable($demand));
 
         return redirect()->back()->with('success', 'Opération éffectuée avec succès !');
     }
@@ -259,13 +270,43 @@ class BackendController extends Controller
         $usager_id = Demande::where('uuid', $id)->first()->usager_id;
         $user_email = User::where('usager_id', $usager_id)->first()->email;
         $currentStatus = Demande::where('uuid', $id)->first()->etat;
-        $demand = [
-            'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            'reference' => Demande::where('uuid', $id)->first()->reference,
-            'etat' => StatutDemande::where('etat', $currentStatus)->first()->statut,
-            'motif' => $request->libelle,
-        ];
-        Mail::to($user_email)->send(new RejectDemandMailable($demand));
+        $usager = Usager::where('uuid', $usager_id)->first();
+        $demande = Demande::find($id);
+        $code = $demande->procedure->code;
+
+        if($code == 'P001'){
+            $demand = [
+                'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+                'reference' => Demande::where('uuid', $id)->first()->reference,
+                'etat' => StatutDemande::where('etat', $currentStatus)->first()->statut,
+                'motif' => $request->libelle,
+                "name" => $usager->nom . ' ' . $usager->prenom,
+            ];
+            try {
+                Mail::to($user_email)->send(new RejectDemandMailableP001($demand));
+            } catch (\Exception $e) {
+                //
+            }
+            
+        }
+        elseif($code == 'P002'){
+            $demand = [
+                'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+                'reference' => Demande::where('uuid', $id)->first()->reference,
+                'etat' => StatutDemande::where('etat', $currentStatus)->first()->statut,
+                'motif' => $request->libelle,
+                "categorie" => $demande->categorie->libelle,
+                "nomEntreprise" => $demande->raison_social,
+                "name" => $usager->nom . ' ' . $usager->prenom,
+            ];
+            try {
+                Mail::to($user_email)->send(new RejectDemandMailable($demand));
+            } catch (\Exception $e) {
+                //
+            }
+            
+        }
+        
 
         return redirect()->back()->with('success', 'La Demande a été Rejetter avec succès !');
     }
@@ -368,8 +409,15 @@ class BackendController extends Controller
             'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
             'reference' => Demande::where('uuid', $id)->first()->reference,
             "name" => $usager->nom . ' ' . $usager->prenom,
+            "date" => $demande->created_at,
+            "note" => $note,
         ];
-        Mail::to($user_email)->send(new NoteEtudeMailable($demand));
+        try {
+            Mail::to($user_email)->send(new NoteEtudeMailable($demand));
+        } catch (Exception $e) {
+            dd($e);
+        }
+        
 
         return redirect()->back()->with('success', 'Note d\'étude envoyée avec succes avec succès !');
     }

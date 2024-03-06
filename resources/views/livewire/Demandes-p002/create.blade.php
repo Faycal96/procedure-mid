@@ -65,8 +65,8 @@
                                                  *</span></h4>
                                          <div class="row">
 
-                                            <label class="fw-bold">Identité du demandeur <span style="color: red">*</span></label>
-                                            <input type="text" class="border-success" name="identite" id="identite" required=true placeholder="identité" value="{{ $identite }}" /><br /><br />
+                                            <label class="fw-bold">NIP / Passeport<span style="color: red">*</span></label>
+                                            <input type="text" class="border-success" name="nip" id="nip" required=true placeholder="identité" value="{{ $nip }}" /><br /><br />
                                        
 
                                              <label class="fw-bold">Que voulez vous faire <span

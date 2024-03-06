@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Portail | MEEA</title>
+    <title>Portail | MID</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
      <!-- Favicons -->
-    <link href="{{ asset('img/logo_meea.jpg')  }}" rel="icon">
+    <link href="{{ asset('img/logo_MID.jpg')  }}" rel="icon">
     <link href="{{ asset('backend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <link href="{{ asset('img/armoirie.png')  }}" rel="icon">
     <link href="{{ asset('img/apple-touch-icon.png')  }}" rel="apple-touch-icon">
