@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        // dd($request);
+        
         // creation de usager
         $usager = Usager::create([
             //'id' => Str::uuid(), // Génération d'un UUID pour l'utilisateur

@@ -11,6 +11,7 @@ use App\Models\Commentaire;
 use App\Models\Demande;
 use App\Models\DemandeP001;
 use App\Models\DemandeP002;
+use App\Models\Motif;
 use App\Models\Procedure;
 use App\Models\StatutDemande;
 use App\Models\Usager;
@@ -67,6 +68,7 @@ class BackendController extends Controller
             'demandeArchive' => $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'A']),
             'demandeComplement' => $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'C']),
             'demandeEtude' => $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'E']),
+       
         ];
 
         return view('backend.home_detail', $data);
@@ -89,9 +91,12 @@ class BackendController extends Controller
             'demandeEnCours' => $demandeRepository->nombre('demandes', ['etat' => 'en cours']),
             'demandeEtat' => $demandeTest->statut(),
             'agents' => Agent::all(),
+            'motifsP001'=>Motif::where("code","=", "P001")->sortByAsc('ordre'),
+            'motifsP002'=>Motif::where("code","=", "P002"),
+            'motifs'=>Motif::all()
         ];
 
-        //   dd($data['demandes'][0]->demandePiece);
+        //  dd($data['demandes'][0]->demandePiece);
 
         return view('backend.list_demande', $data);
     }
@@ -240,13 +245,45 @@ class BackendController extends Controller
  */
     public function rejetter($id, Request $request)
     {
-        Demande::where('uuid', $id)->update(['etat' => 'R']);
 
-        $commentaire = new Commentaire();
+      
+        Demande::where('uuid', $id)->update(['etat' => 'R']);
+     
+
+        $demande = Demande::where('uuid', $id)->first();
+
+        $motifdd = $demande->motif()->first();
+
+       /* dd($motifdd->pivot->commentaire);
+       
+        foreach ($motifdd as $motif) {
+           dd ($motif->pivot->commentaire);
+        }*/
+        
+       // dd( $demande->motif()->pivot->commentaire);
+        $motifIDS = $request->libelle;
+        foreach ($motifIDS as $motifid) {
+         // $motif = Motif::find($motifid);
+          //$motif->demande()->attach($id);
+          $demande->motif()->attach($motifid, ["commentaire"=>$request->autre]);
+          /*if ($request->autre == null) {
+
+          }else {
+            //dd($request->autre);
+           // dd($demande->motif()->first()->pivot->commentaire);
+    $demande->motif()->first()->pivot->commentaire = $request->autre;
+            $demande->save();
+          }*/
+        }
+     
+      
+        
+     
+        /*$commentaire = new Commentaire();
         $commentaire->create([
             'libelle' => $request->libelle,
             'demande_id' => $id,
-        ]);
+        ]);*/
         $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
         $usager_id = Demande::where('uuid', $id)->first()->usager_id;
         $user_email = User::where('usager_id', $usager_id)->first()->email;
@@ -337,6 +374,10 @@ class BackendController extends Controller
             'demandeEnCours' => $demandeRepository->nombre('demandes', ['etat' => 'en cours']),
             'demandeEtat' => $demandeTest->statut(),
             'agents' => Agent::all(),
+
+            "motifP001" => Motif::where("code_procedure","=","P001")->orderBy("ordre"),
+            "motifP002" => Motif::where("code_procedure","=","P002")->orderBy("ordre"),
+            "motifs" => Motif::all()
         ];
 
         //   dd($data['demandes'][0]->demandePiece);

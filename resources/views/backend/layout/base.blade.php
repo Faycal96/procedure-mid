@@ -29,6 +29,8 @@
     <link href="{{ asset('backend/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('backend/assets/css/style.css') }}" rel="stylesheet">
@@ -354,6 +356,8 @@
 
 
         <script>
+             //  console.log("test")
+                                                                                     
             setTimeout(function() {
                 document.querySelector('.alert.alert-success').style.display = 'none';
             }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)

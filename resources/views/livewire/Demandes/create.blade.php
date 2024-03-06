@@ -229,7 +229,7 @@
 
                                             <select name="usage_construction" id="usage_construction" class="form-select border-success" required>
                                                 {{-- <input type="text" placeholder="filtrer ici"> --}}
-                                                <option value="">Veuillez choisir le type d'usage'</option>
+                                                <option value="">Veuillez choisir le type d'usage</option>
                                                 @foreach ( $usages as  $usage)
                                                  <option value="{{ $usage->uuid }}" >{{ $usage->libelle }}</option>
                                                 @endforeach
@@ -282,6 +282,7 @@
                             </fieldset>
 
                             <fieldset>
+                            <p style="color: red;"> Veuillez vérifier vos informations minitieusement avant la validation</p>
                                 <div class="form-card">
                                     <h2 class="fs-title">Identité du Demandeur</h2>
                                     <div class="row">
