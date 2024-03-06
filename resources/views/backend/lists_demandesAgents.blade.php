@@ -58,7 +58,7 @@
                                                 {{-- <th scope="col">Délai de traitement</th> --}}
                                                 <th scope="col">Déposé</th>
                                                 <th scope="col">Paiement</th>
-                                                <th scope="col">Type procédure</th>
+                                                <th scope="col">Type Demande</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>

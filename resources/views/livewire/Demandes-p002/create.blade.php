@@ -109,15 +109,10 @@
                                          </div> <br>
 
                                          <div class="row">
-                                             <div class="col-6 mb-3 form-group">
-                                                 <label for="beneficiaire" class="col-form-label">Nom de
-                                                     l'entreprise</label>
-                                                 <input name="beneficiaire" type="text"
-                                                     class="form-control border-success" id="beneficiaire" placeholder="Nom de l'entreprise" required=true>
-                                             </div>
+                                          
 
                                              <div class="col-6 mb-3 form-group">
-                                                 <label for="fullName" class="col-form-label">Raison sociale</label>
+                                                 <label for="fullName" class="col-form-label">Raison sociale <span style="color: red">*</span></label>
                                                  <input name="raison_social" type="text" placeholder="Raison sociale"
                                                      class="form-control border-success" id="raison_sociale" required=true>
                                              </div>
@@ -155,7 +150,7 @@
                                              </div>
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Localisation<span style="color: red">*</span></label>
-                                                 <input type="text" name="adresse_physique" id="adresse_physique" class="form-control border-success" placeholder="Adresse physique" required=true/>
+                                                 <input type="text" name="adresse_physique" id="adresse_physique" class="form-control border-success" placeholder="Quartier ou secteur" required=true/>
                                              </div>
                                          </div>
 
@@ -468,6 +463,7 @@
                                  </fieldset>
 
                                  <fieldset>
+                                    <p style="color: red;"> Veuillez vérifier vos informations minitieusement avant la validation</p>
                                     <div class="form-card">
                                         <h2 class="fs-title">Fiche de renseignement administratif</h2>
                                         <div class="row">
@@ -492,7 +488,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="">Raison Sociale : </label>
+                                                <label for="">Raison Sociale :  </label>
                                                 <input type="text" name="recapRaisonSociale" id="recapRaisonSociale" disabled/>
                                             </div>
                                             <div class="col-6">

@@ -90,7 +90,7 @@
   
       <!-- ======= Portfolio Section ======= -->
       <section id="portfolio" class="portfolio">
-        <div class="container">
+        <div class="container">">
             <div class="col-lg-12 d-flex justify-content-center">
               <ul id="portfolio-flters">
                 <li id="physiq" class="filter-active">Personne Physique</li>
@@ -99,10 +99,10 @@
             </div>
           <div class="row portfolio-container">
             <x-guest-layout>
-            <div id="physique" style="display:block" class="col-lg-6 offset-lg-3">
+            <div   id="physique" style="display:block" class="col-lg-6 offset-lg-3">
                 <i style="color: red;">Veuillez remplir bien les champs</i>
                 <form method="POST" action="{{ route('register') }}" style="border: 1px solid #1A33FF;
-                    background: #ecf5fc; padding: 40px 50px 45px; width: 600px">
+                    background: #ecf5fc; padding: 40px 50px 45px; width: 600px" >
                     @csrf
                         <div class="form-group mt-3">
                             <label for="nip"> NIP / Passport</label>
@@ -172,7 +172,7 @@
             </x-guest-layout>
 
             <x-guest-layout>
-            <div id="morale" style="display:none">
+           <div id="morale" style="display:none">
                 <i style="color: red;">Veuillez remplir bien les champs *</i>
                 <form method="POST" action="{{ route('register-personne-morale') }}" style="border: 1px solid #1A33FF;
                     background: #ecf5fc; padding: 40px 50px 45px; width: 600px">
