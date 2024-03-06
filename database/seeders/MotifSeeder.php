@@ -44,12 +44,12 @@ class MotifSeeder extends Seeder
             "ordre" => 5
         ]);
 
-        Motif::create([
+      /*  Motif::create([
             
             "libelle" => "AUTRES",
             "code_procedure" => "P002",
             "ordre" => 6
-        ]);
+        ]);*/
    
    
    
@@ -87,12 +87,12 @@ class MotifSeeder extends Seeder
             "ordre" => 5
           
         ]);
-        Motif::create([
+      /*  Motif::create([
             
             "libelle" => "AUTRES",
             "code_procedure" => "P001",
             "ordre" => 6
-        ]);
+        ]);*/
 
    
    
