@@ -28,6 +28,7 @@ use App\Livewire\DemandeCompP002;
 use App\Livewire\DemandeFontController;
 use App\Models\Procedure;
 use App\Models\UploadAgrement;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,11 +43,25 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware(['mustreset'])->group(function () {
     Route::get('/', function () {
-        $procedure = Procedure::all();
+        if (Auth::user()){
+        if (Auth::user()->agent_id) {
+            return redirect("/administration");
+        }else {
 
+       
+        $procedure=Procedure::all();
         return view('welcome', [
-            'procedure' => $procedure,
+            'procedure' => $procedure
         ]);
+    }
+}else {
+      
+    $procedure=Procedure::all();
+    return view('welcome', [
+        'procedure' => $procedure
+    ]);
+
+}
     });
 
     // routes des tests
