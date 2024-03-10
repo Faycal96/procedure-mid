@@ -109,45 +109,41 @@
                                          </div> <br>
 
                                          <div class="row">
-                                          
-
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="fullName" class="col-form-label">Raison sociale <span style="color: red">*</span></label>
                                                  <input name="raison_social" type="text" placeholder="Raison sociale"
                                                      class="form-control border-success" id="raison_sociale" required=true>
                                              </div>
+                                             <div class="col-6 mb-3 form-group">
+                                                <label for="fullName" class="col-form-label">Siège social</label>
+                                                <input name="siege_social" type="text" placeholder="Siege social"
+                                                    class="form-control border-success" id="siege_social" required=true>
+                                            </div>
                                          </div>
 
                                          <div class="row">
-                                             <div class="col-6 mb-3 form-group">
-                                                 <label for="fullName" class="col-form-label">Siège social</label>
-                                                 <input name="siege_social" type="text" placeholder="Siege social"
-                                                     class="form-control border-success" id="siege_social" required=true>
-                                             </div>
-
                                              <div class="col-6 mb-3 form-group">
                                                  <label for="boite_postale" class="col-form-label">Boîte Postale</label>
                                                  <input name="boite_postale" type="text" placeholder="Boite postale"
                                                      class="form-control border-success" id="boite_postale" required=true>
                                              </div>
+                                             <div class="col-6 form-group">
+                                                <label class="col-form-label">Télephone<span style="color: red">*</span></label>
+                                                <input type="text" id="telephone" name="tel_1" class="form-control border-success" placeholder="Téléphone" required=true />
+                                            </div>
                                          </div>
 
                                          <div class="row">
-                                             <div class="col-6 form-group">
-                                                 <label class="col-form-label">Télephone<span style="color: red">*</span></label>
-                                                 <input type="text" id="telephone" name="tel_1" class="form-control border-success" placeholder="Téléphone" required=true />
-                                             </div>
-
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Fax<span style="color: red">*</span></label>
                                                  <input type="text" name="fax" id="fax" class="form-control border-success" placeholder="Fax" required=true />
                                              </div>
+                                             <div class="col-6 form-group">
+                                                <label class="col-form-label">Email<span style="color: red">*</span></label>
+                                                <input type="email" name="email_entreprise" id="email" class="form-control border-success" placeholder="Email" required=true />
+                                            </div>
                                          </div>
                                          <div class="row">
-                                             <div class="col-6 form-group">
-                                                 <label class="col-form-label">Email<span style="color: red">*</span></label>
-                                                 <input type="email" name="email_entreprise" id="email" class="form-control border-success" placeholder="Email" required=true />
-                                             </div>
                                              <div class="col-6 form-group">
                                                  <label class="col-form-label">Localisation<span style="color: red">*</span></label>
                                                  <input type="text" name="adresse_physique" id="adresse_physique" class="form-control border-success" placeholder="Quartier ou secteur" required=true/>

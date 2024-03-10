@@ -30,7 +30,7 @@ class NoteEtudeMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ministère des Infrastructures et du désenclavement',
+            subject: 'Laboratoire National du Bâtiment et des Travaux Publics',
         );
     }
 

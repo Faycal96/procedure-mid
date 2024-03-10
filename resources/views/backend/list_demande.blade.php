@@ -39,7 +39,6 @@
                             </ul>
                         </div>
 
-
                         <h5 class="card-title">Liste des Demandes <span>| Demandes</span></h5>
 
                         <div class="card-body">
@@ -47,20 +46,27 @@
                             <div class="row">
 
                                 <div class="col-3 offset-9">
-
-
                                     <div style="float: right">
-
                                         <button title="Actualiser la Page" type="button" onclick="refresh()" class="btn btn-success"><i class="bi bi-arrow-repeat"></i></button>
                                         <button title="Ajouter" type="button" class="btn btn-success"><i class="bi bi-plus"></i></button>
                                     </div>
-
-
                                 </div>
                             </div><br>
 
+
+                            <label>Filtrer les demandes par état</label>
+                            <select name="procedure" id="procedure" class="form-select border-success" onchange="changeTypeProc()">
+                            <option class="mb-3" value="Toutes">Toutes les demandes</option>
+                            <option class="mb-3" value="D" {{($selectedProcedure == "D" ? 'selected': '')}}>Nouveau</option>
+                            <option class="mb-3" value="V" {{($selectedProcedure == "V" ? 'selected': '')}}>Validés </option>
+                            <option class="mb-3" value="R" {{($selectedProcedure == "R" ? 'selected': '')}}>Rejettés </option>
+                            </select><br><br>
+
+
                             <!-- Table with stripped rows -->
                             <table id="example1" class="table datatable table-bordered table-striped">
+
+                                
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -153,7 +159,7 @@
                                         @endif
 
                                         <td>
-                                            {{ $demande->date_demande }}
+                                            {{ $demande->created_at }}
                                         </td>
                                         <td>
                                             <span class="badge {{ $statutColor }} ">{{ $statut }}</span>
@@ -182,41 +188,6 @@
                                                 <i class="bi bi-check-circle"></i>
                                             </a>
                                             @endif
-
-                                            {{-- @if (($demande->etat == 'D' &&
-        //$demande->last_agent_assign == null &&
-        in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
-    ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
-    ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-    (($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid) || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-    (($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid && Auth::user()->role->code != 'RCT') || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-    ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
-                                                        <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
-                                            type="button" title="Valider" class="btn btn-success">
-                                            <i class="bi bi-check-circle"></i>
-                                            </a>
-                                            @endif --}}
-
-                                            {{-- @if ($demande->etat == 'D' && in_array($userRole, ['Gestionnaire', 'Administration']))
-                                                        <button data-toggle="modal"
-                                                            data-target="#assigner{{ $demande->uuid }}" type="button"
-                                            title="Assigner à un collaborateur" class="btn btn-primary">
-                                            <i class="bi bi-folder-symlink"></i>
-                                            </button>
-                                            @endif
-                                            @if ($demande->etat == 'E' && in_array($userRole, ['Gestionnaire', 'Administration']))
-                                            <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur" class="btn btn-primary">
-                                                <i class="bi bi-folder-symlink"></i>
-                                            </button>
-                                            @endif --}}
-
-                                            {{-- @if ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))
-                                                        <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
-                                            type="button" title="Joindre Acte Signé"
-                                            class="btn btn-success">
-                                            <i class="bi bi-upload"></i>
-                                            </a>
-                                            @endif --}}
                                             @if (
                                             $demande->etat != 'R' &&
                                             $demande->etat != 'V' &&
@@ -227,25 +198,12 @@
                                             </a>
                                             @endif
 
-                                            @if($demande->procedure->code == 'P001')
+                                            @if($demande->procedure->code == 'P001' && $demande->etat = 'V')
                                             <a data-toggle="modal" data-target="#noteEtude{{ $demande->uuid }}" type="button" title="Note d'étude" class="btn btn-success">
                                                 <i class="bi bi-upload"></i>
                                             </a>
                                             @endif
-                                            {{-- @if ($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat != 'E' && $demande->etat != 'V' && $demande->etat != 'R' && in_array($userRole, ['Réception']))
-                                                        <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}"
-                                            type="button" title="Rejeter" class="btn btn-danger">
-                                            <i class="bi bi-x-circle"></i>
-                                            </a>
-                                            @endif
-                                            @if (($demande->etat == 'E' && $demande->last_agent_assign == null && in_array($userRole, ['Etudes'])) || ($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Etudes'])) || ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes'])))
-                                            <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
-                                                <i class="bi bi-x-circle"></i>
-                                            </a>
-                                            @endif --}}
-
-
-
+                                            
                                             {{-- Model de confirmation de Valider --}}
                                             <div class="modal fade" id="valider{{ $demande->uuid }}" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -263,26 +221,6 @@
                                                                     <form method="post" enctype="multipart/form-data"
                                                                         action="{{ route('statusChange', ['id' => $demande->uuid, 'currentStatus' => $demande->etat, 'table' => 'demande_p001_s']) }}">
                                                                         @csrf
-
-                                                                        {{-- <div class="form-group">
-                                                                            <div class="text-center">
-                                                                                <label class="col-form-label">Motif de la
-                                                                                    validation ?</label>
-                                                                                <input type="text" required
-                                                                                    name="libelle"
-                                                                                    class="form-control border-success">
-                                                                            </div>
-                                                                        </div> --}}
-                                                                        {{-- <div class="form-group">
-                                                                            <div class="text-center">
-                                                                                <label class="col-form-label">Charger la
-                                                                                    note d'étude si y'a lieu</label>
-                                                                                <input type="file"
-                                                                                    name="note_etude_file"
-                                                                                    class="form-control border-success">
-                                                                            </div>
-
-                                                                        </div> --}}
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-warning" data-dismiss="modal">Non, Annuler</button>
                                                                     <button type="submit" class="btn btn-success">Oui,
@@ -294,108 +232,6 @@
                                                 </div>
                                             </div>
                                             <!-- Fin Modal Valider-->
-
-
-
-                                            {{-- Modal de Joindre acte signé --}}
-                                            {{-- <div class="modal fade" id="signer{{ $demande->uuid }}"
-                                            data-backdrop="static" tabindex="-1" role="dialog"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content bgcustom-gradient-light">
-                                                    <div class="modal-header">
-                                                        <img src="{{ asset('backend/assets/img/valide.png') }}" width="60" height="45" class="d-inline-block align-top" alt="">
-                                                        <h5 class="modal-title m-auto"> Joindre l'acte Signé
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close">
-
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="post" enctype="multipart/form-data" action="{{ route('uploadActe', ['id' => $demande->uuid, 'currentStatus' => $demande->etat, 'table' => 'demande_p001_s']) }}">
-                                                            @csrf
-
-                                                                        <div class="form-group">
-                                                                            <div class="text-center">
-                                                                                <label class="col-form-label">Charger le
-                                                                                    fichier scanné</label>
-                                                                                <input type="file" required
-                                                                                    name="output_file"
-                                                                                    class="form-control border-success">
-                                                                            </div>
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-warning" data-dismiss="modal">Non, Annuler</button>
-                                                                <button type="submit" class="btn btn-success">Oui,
-                                                                    Joindre</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                        </div> --}}
-                        <!-- Fin Modal Signer-->
-
-
-                        {{-- Model de confirmation de Assigner a un collabrateur --}}
-                        {{-- <div class="modal fade" id="assigner{{ $demande->uuid }}"
-                        data-backdrop="static" tabindex="-1" role="dialog"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content bgcustom-gradient-light">
-                                <div class="modal-header">
-                                    <img src="{{ asset('backend/assets/img/assigner.jpg') }}" width="60" height="45" class="d-inline-block align-top" alt="">
-                                    <h5 class="modal-title m-auto"> Assigner à un
-                                        Collaborateur
-                                    </h5>
-                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close">
-
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" enctype="multipart/form-data" action="{{ route('assignation', ['model' => 'AffectationP001', 'idDemande' => $demande->uuid, 'nameDemandeId' => 'demande_p001_id', 'tableName' => 'demande_p001_s']) }}">
-                                        @csrf
-
-
-                                        <div class="form-group">
-                                            <div class="text-center">
-                                                <h5>Choisir le collaborateur à assigné</h5>
-
-                                                <select name="agent_id" id="" class="form-select border-success">
-                                                    "" @foreach ($agents as $agent)
-                                                    @if ($agent->service->libelle_court == $demande->procedure->service->libelle_court)
-                                                    <option value="{{ $agent->uuid }}">
-                                                        {{ $agent->nom . ' ' . $agent->prenom }}
-                                                    </option>
-                                                    @endif
-                                                    @endforeach
-
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="text-center">
-                                                    <label class="col-form-label">Commentaires</label>
-                                                    <textarea required name="commentaire" class="form-control border-success"></textarea>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Non, Annuler</button>
-                                            <button type="submit" class="btn btn-success">Oui,
-                                                Assigner</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- Fin Modal Valider-->
-
-
-
-
 
                     {{-- Model de confirmation de rejet --}}
                     <div class="modal fade" id="rejetter{{ $demande->uuid }}" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
@@ -455,31 +291,13 @@
                                     </form>
                                 </div>
                                 <script>
-                                    /*$("select").change(function() {
-    
-    let option = '';
-    
-    $("select option:selected").each(function() {
-      option = $( this ).text();
-    });
-    
-    if(option == 'AUTRES'){
-    //  $('#autreUsage').css('display','block')
-    }else{
-      $('#autreUsage').css('display','none')
-    }
-    
-})*/
+                                    
                                     function autreMotif() {
 
                                         var select = document.getElementById('my-select');
                                         console.log(select.value);
 
                                     }
-
-                                    /*  document.getElementById('my-select').addEventListener('change', function() {
-                                              console.log('You selected: ', this.value);
-                                              });*/
                                 </script>
                             </div>
                         </div>
@@ -718,33 +536,6 @@
                                     @endforeach
                                     @endif
 
-
-                                    {{-- <div class="row">
-                                                                    <div class="col-6">
-                                                                        <b>Identite Fournisseur:</b>
-                                                                        <span
-                                                                            class="text-success">{{ $demande->denomination_sociale_fournisseur }}</span>
-                                </div>
-                                <div class="col-6">
-                                    <b>Addresse:</b>
-                                    <span class="text-success">{{ $demande->adresse_fournisseur }}</span>
-                                </div>
-                            </div> <br> --}}
-
-                            {{-- <div class="row">
-                                                                    <div class="col-6">
-                                                                        <b>Système de transport :</b>
-                                                                        <span
-                                                                            class="text-success">{{ $demande->systeme_transport }}
-                            | {{ $demande->agrement_transport }}</span>
-                        </div>
-                        <div class="col-6">
-                            <b>Commentaire:</b>
-                            <span class="text-success">{{ $demande->commentaire }}</span>
-                        </div>
-
-                    </div> --}}
-
                     <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
                     <div class="row">
                         <div class="col">
@@ -793,61 +584,13 @@
 
 
 <script>
-    /* $("select").change(function() {
-
-
-  
-  //console.log("bizarre")
-    
-    let option = '';
-    
-    $("select option:selected").each(function() {
-      option = $( this ).text();
-    });
-    
-          
-    if(option === 'AUTRES'){
-        console.log("autre selected")
-      $('#autreUsage').css('display','block')
-      console.log("autre selected")
-    }else{
-      $('#autreUsage').css('display','none')
-    }
-    
-})
-*/
-</script>
-
-
-<script>
-    /*
-function checkCustomOption() {
-    
-
-        var select = document.getElementById("libelle");
-        var selectedOption = select.options[select.selectedIndex].value;
-        console.log(select.value)
-        if (selectedOption === "custom") {
-            
-            document.getElementById("customOption").style.color = "red";
-            console.log("test");
-        } else {
-            document.getElementById("customOption").style.display = "none";
-        }
-    }
-
-*/
-
-
-
-
-
-
-
-
-
-
-
+     function changeTypeProc() {
+                procedureSelect = document.getElementById("procedure").value;
+                let url = "{{ route('demandes-list', ['procedure'=>'procedureSelect']) }}";
+                url = url.replace('procedureSelect', procedureSelect);
+                // alert(url);
+                document.location.href=url;
+            }
 
 
 

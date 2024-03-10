@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UploadAgrement;
 use App\Http\Requests\StoreUploadAgrementRequest;
 use App\Http\Requests\UpdateUploadAgrementRequest;
+use App\Models\Demande;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,15 +17,16 @@ class UploadAgrementController extends Controller
     public function index()
     {
         //
-        $listeAgrement = UploadAgrement::all(); 
+        $listeAgrement = UploadAgrement::all();
         return view("agrementAprouve", ["listeAgrement" => $listeAgrement]);
     }
 
-    public function indexAdmin(Request $request){
+    public function indexAdmin(Request $request)
+    {
         $agrements = UploadAgrement::all();
-           
-        return view('/backend/list_agrement', ['objectList' => $agrements, ]);
-   }
+
+        return view('/backend/list_agrement', ['objectList' => $agrements,]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -39,10 +41,16 @@ class UploadAgrementController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $this->validate($request, [            
+        /* $demandeId = Demande::where('etat', '=', 'V')->first()->uuid;
+        $emails = array();
+        foreach ($demandeId as $id) {
+            $email = Demande::where('uuid', $id)->first()->email_entreprise;
+            array_push($emails, $email);
+        }
+        dd($emails); */
+        $this->validate($request, [
             'Annee' => 'required',
-            'libelle'=>'required',
+            'libelle' => 'required',
             'chemin' => 'required'
         ]);
 
@@ -89,8 +97,7 @@ class UploadAgrementController extends Controller
         $object = UploadAgrement::find($uuid);
         $object->Annee = $request->Annee;
         $object->libelle = $request->libelle;
-        if( isset($request->chemin) )
-        {
+        if (isset($request->chemin)) {
             Storage::makeDirectory('public/arrete_agrement');
             $chemin =   $request->chemin->store('public/arrete_agrement');
             $object->chemin = $chemin;

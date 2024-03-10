@@ -15,7 +15,7 @@ class MotifSeeder extends Seeder
     {
         Motif::create([
            
-            "libelle" => "Pièces non conformes",
+            "libelle" => "Présence d’au moins une pièce administrative non conforme",
             "code_procedure" => "P002",
             "ordre" => 1
         ]);
@@ -27,7 +27,7 @@ class MotifSeeder extends Seeder
         ]);
         Motif::create([
            
-            "libelle" => "Cartes grises du matériel non authentiques ",
+            "libelle" => "Présence d’au moins d’une carte grise du matériel non conforme",
             "code_procedure" => "P002",
             "ordre" => 3
         ]);
@@ -65,7 +65,7 @@ class MotifSeeder extends Seeder
         ]);
         Motif::create([
          
-            "libelle" => "Manque de plans de vues ou coupes détaillées",
+            "libelle" => "Manque de plans de vues",
             "code_procedure" => "P001",
             "ordre" => 2
         ]);

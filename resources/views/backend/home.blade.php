@@ -26,7 +26,7 @@
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
                                     <h5 class="card-title"><a
-                                            href="#">Agrement technique </a>
+                                        href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">Agrement technique </a>
                                         <span>| <b>Total</b></span>
                                     </h5>
 
@@ -55,7 +55,7 @@
                         <div class="card info-card revenue-card">
                             <div class="card-body">
                                 <h5 class="card-title"><a
-                                        href="#">Agrement technique </a>
+                                    href="{{ route('demandes-list', ['procedure' => 'D']) }}">Agrement technique </a>
                                     <span>| <b>En attente</b></span>
                                 </h5>
 
@@ -83,7 +83,7 @@
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
                                     <h5 class="card-title"><a
-                                            href="#">Agrement technique</a>
+                                        href="{{ route('demandes-list', ['procedure' => 'V']) }}">Agrement technique</a>
                                         <span>| <b>Validés</b></span>
                                     </h5>
 
@@ -112,7 +112,7 @@
                         <div class="card info-card revenue-card">
                             <div class="card-body">
                                 <h5 class="card-title"><a
-                                        href="#">Agrement technique</a>
+                                    href="{{ route('demandes-list', ['procedure' => 'R']) }}">Agrement technique</a>
                                     <span>| <b> Rejettés</b></span>
                                 </h5>
  
@@ -163,7 +163,7 @@
                         <div class="card info-card revenue-card">
                             <div class="card-body">
                                 <h5 class="card-title"><a
-                                        href="#">Etude de sols et fondation</a>
+                                    href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">Etude de sols et fondation</a>
                                     <span>| <b>Total</b></span>
                                 </h5>
 
@@ -193,7 +193,7 @@
                     <div class="card info-card revenue-card">
                         <div class="card-body">
                             <h5 class="card-title"><a
-                                    href="#">Etude de sols et fondation </a>
+                                href="{{ route('demandes-list', ['procedure' => 'D']) }}">Etude de sols et fondation </a>
                                 <span>| <b>En attente</b></span>
                             </h5>
 
@@ -222,7 +222,7 @@
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
                                     <h5 class="card-title"><a
-                                            href="#"> Etude de sols et fondation </a>
+                                        href="{{ route('demandes-list', ['procedure' => 'V']) }}"> Etude de sols et fondation </a>
                                         <span>| <b>Validés</b></span>
                                     </h5>
 
@@ -251,7 +251,7 @@
                         <div class="card info-card revenue-card">
                             <div class="card-body">
                                 <h5 class="card-title"><a
-                                        href="#">Etude de sols et fondations</a>
+                                    href="{{ route('demandes-list', ['procedure' => 'R']) }}">Etude de sols et fondations</a>
                                     <span>| <b>Rejettés</b></span>
                                 </h5>
  

@@ -105,7 +105,7 @@ margin-top:20px;
     <div class="col-md-12">   
         <div class="row">
                
-               <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+               <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3 form-card">
                    <div class="row">
                        <div class="receipt-header">
                        </div>
@@ -115,15 +115,16 @@ margin-top:20px;
                        <div class="receipt-header receipt-header-mid">
                            <div class="col-xs-8 col-sm-8 col-md-8 text-left">
                                <div class="receipt-right">
-                                   <h5>Identité du demandeur </h5>
-                                   <p><b>démandeur :</b> 
-                                    @if($demande->procedure->code == 'P001')
-                                        {{ $demande->usager->nom }} {{ $demande->usager->prenom }}
-                                    @else
-                                        {{ $demande->raison_social }}
-                                    @endif</p>
-                                   <p><b>Email :</b> {{$demande->email}} {{$demande->email_entreprise}}</b></p>
-                                   <p><b>Téléphone :</b> 
+                                @if($demande->procedure->code == 'P002')
+                                <h4 class="fs-title">Fiche de renseignement Administratif</h4>
+                                <p><b>Entreprise :</b>
+                                    {{ $demande->raison_social }} 
+                                </p>
+                                <p>
+                                    <b>Email :</b>{{$demande->email_entreprise}}
+                                </p>
+                                <p>
+                                    <b>Téléphone :</b> 
                                     @if (!empty($demande->numero_telephone))
                                         {{ $demande->numero_telephone }}
                                     @endif
@@ -132,13 +133,40 @@ margin-top:20px;
                                     @endif
                                     @if (!empty($demande->tel_2))
                                         {{ $demande->tel_2 }}
-                                    @endif</p>
-                                    @if($demande->procedure->code == 'P002')
-                                        <p><b>Fax :</b> {{$demande->fax}}</b></p>
-                                        <p><b>Boite Postale :</b> {{$demande->boite_postale}}</b></p>
-                                        <p><b>Adresse Postale :</b> {{$demande->adresse_physique}}</b></p>
                                     @endif
-                                    <p><b>Réference :</b> {{$demande->reference}}</b></p>
+                                </p>
+                                <p>
+                                    <b>Boite Postale :</b>
+                                    {{$demande->boite_postale}}</b>
+                                </p>
+                                <p><b>Adresse Postale :</b>
+                                    {{$demande->adresse_physique}}</b>
+                                </p>
+                                <p>
+                                    <b>Siege social :</b> {{$demande->siege_social}}
+                                </p>
+                                @else
+                                <h5>Identité du demandeur </h5>
+                                <p><b>démandeur :</b> 
+                                    {{ $demande->usager->nom }} {{ $demande->usager->prenom }}
+                                </p>
+                                <p>
+                                    <b>Email :</b> {{$demande->email}}
+                                </p>
+                                <p>
+                                    <b>Téléphone :</b> 
+                                    @if (!empty($demande->numero_telephone))
+                                        {{ $demande->numero_telephone }}
+                                    @endif
+                                    @if (!empty($demande->tel_1))
+                                        {{ $demande->tel_1 }}
+                                    @endif
+                                    @if (!empty($demande->tel_2))
+                                        {{ $demande->tel_2 }}
+                                    @endif
+                                </p>
+                                @endif
+                                <p><b>Réference :</b> {{$demande->reference}}</b></p>
                                </div>
                            </div>
                        </div>
@@ -162,8 +190,9 @@ margin-top:20px;
                                         <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->objectif_demande }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-9"><strong>Siege social</strong></td>
-                                        <td class="col-md-3"><i class="fa fa-inr"></i>{{ $demande->siege_social }}</td>
+                                        <td class="col-md-12" colspan="2" style="text-align: center">
+                                            Représentant de l'entreprise
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-9"><strong>Nom du representant</strong></td>

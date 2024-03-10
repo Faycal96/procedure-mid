@@ -48,5 +48,10 @@ class StatutDemandeSeeder extends Seeder
             "libelle" =>"Demande archivée",
             "statut" => "Demande archivée"
         ]);
+        StatutDemande::create([
+            "etat" => "N",
+            "libelle" =>"Devis envoyé",
+            "statut" => "Devis envoyé"
+        ]);
     }
 }

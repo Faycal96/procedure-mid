@@ -40,7 +40,7 @@ class BackendController extends Controller
     public function index(BackendRepository $backendRepository)
     {
         $data = [
-           
+
             'nbAgrementTechnique' => Demande::all()->where('code', "P002")->count(),
             'nbAgrementTechniqueEnAttente' => Demande::all()->where('code', "P002")->where('etat', "D")->count(),
             'nbAgrementTechniqueValider' => Demande::all()->where('code', "P002")->where('etat', "V")->count(),
@@ -50,14 +50,14 @@ class BackendController extends Controller
             'nbEtudeSolEnAttente' => Demande::all()->where('code', "P001")->where('etat', "D")->count(),
             'nbEtudeSolValider' => Demande::all()->where('code', "P001")->where('etat', "V")->count(),
             'nbEtudeSolRejette' => Demande::all()->where('code', "P001")->where('etat', "R")->count(),
-            
+
             // Demandes d'Agrement par categorie
             'demande' => Demande::all(),
-            'countTH' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TH')->count(),
-            'countTR1' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR1')->count(),
-            'countTR2' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR2')->count(),
-            'countTR3' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR3')->count(),
-            'countEC' => Demande::join('categorie_demandes', 'demandes.categorie_id','=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'EC')->count(),
+            'countTH' => Demande::join('categorie_demandes', 'demandes.categorie_id', '=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TH')->count(),
+            'countTR1' => Demande::join('categorie_demandes', 'demandes.categorie_id', '=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR1')->count(),
+            'countTR2' => Demande::join('categorie_demandes', 'demandes.categorie_id', '=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR2')->count(),
+            'countTR3' => Demande::join('categorie_demandes', 'demandes.categorie_id', '=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'TR3')->count(),
+            'countEC' => Demande::join('categorie_demandes', 'demandes.categorie_id', '=', 'categorie_demandes.uuid')->where('categorie_demandes.code', 'EC')->count(),
         ];
 
         return view('backend.home', $data);
@@ -65,9 +65,6 @@ class BackendController extends Controller
 
     public function procedureDashboard($procedure, $procedureName)
     {
-        // dd($this->repository->uuidProcedureByDemande($procedure));
-
-        // Procedure::where('etat', '=', 'D')->first()->statut;
         $data = [
 
             //  "demandes" => $demandeP001Repository->all(),
@@ -80,7 +77,7 @@ class BackendController extends Controller
             'demandeArchive' => $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'A']),
             'demandeComplement' => $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'C']),
             'demandeEtude' => $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'E']),
-       
+
         ];
 
         return view('backend.home_detail', $data);
@@ -103,39 +100,15 @@ class BackendController extends Controller
             'demandeEnCours' => $demandeRepository->nombre('demandes', ['etat' => 'en cours']),
             'demandeEtat' => $demandeTest->statut(),
             'agents' => Agent::all(),
-            'motifsP001'=>Motif::where("code","=", "P001")->sortByAsc('ordre'),
-            'motifsP002'=>Motif::where("code","=", "P002"),
-            'motifs'=>Motif::all()
+            'motifsP001' => Motif::where("code", "=", "P001")->sortByAsc('ordre'),
+            'motifsP002' => Motif::where("code", "=", "P002"),
+            'motifs' => Motif::all()
         ];
 
         //  dd($data['demandes'][0]->demandePiece);
 
         return view('backend.list_demande', $data);
     }
-
-    // Liste des demandes p002 agrement en eau
-    // public function listDemandep002(DemandeRepository $demandeP002Repository, DemandeP002 $demandep002)
-    // {
-
-    //     $data = [
-    //         "demandes" => $demandeP002Repository->all()->sortByDesc('created_at'),
-    //         "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
-    //         "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
-    //         "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
-    //         "statutEtude" => StatutDemande::where('etat', '=', 'E')->first()->statut,
-    //         "statutComplement" => StatutDemande::where('etat', '=', 'C')->first()->statut,
-    //         "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
-    //         "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
-    //         //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
-    //         "demandeEnCours" => $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'en cours')),
-    //         "demandeEtat" => $demandep002->statut(),
-    //         "agents" => Agent::all(),
-    //     ];
-    //     //   dd($data['demandes'][0]->demandePiece);
-    //     // dd($data['demandeEtat']);
-
-    //     return view('backend.list_demandep002', $data);
-    // }
 
     // fonction d'assignation d'un collaborateur a un dossier
     public function assignation($model, $idDemande, $nameDemandeId, $tableName, Request $request)
@@ -172,7 +145,7 @@ class BackendController extends Controller
 
     //Function de mise a jour de statut demande
 
-    public function statutChange($id, $currentStatus, $table, Request $request)
+    public function statutChange($id, $currentStatus, Request $request)
     {
 
         $nextStatus = '';
@@ -181,15 +154,16 @@ class BackendController extends Controller
                 $nextStatus = 'V';
                 break;
             case 'V':
-                //     $nextStatus = 'S';
-                //     break;
-                // case 'S':
                 $nextStatus = 'A';
-                break;
+                 break;
+            /* case 'S':
+                $nextStatus = 'A';
+                break; */
             default:
                 $nextStatus = 'A';
                 break;
         }
+        dd($currentStatus);
         Demande::where('uuid', $id)->update(['etat' => $nextStatus]);
 
         $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
@@ -198,15 +172,9 @@ class BackendController extends Controller
         $user_email = User::where('usager_id', $usager_id)->first()->email;
         $demande = Demande::find($id);
         $code = $demande->procedure->code;
-        
+
         if ($code == 'P001') {
 
-           /* $dataFiles = $request->all();
-             $commentaire1 = new Commentaire();
-            $commentaire1->create([
-                'libelle' => $request->libelle,
-                'demande_id' => $id,
-            ]); */
             $demand = [
                 'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
                 'reference' => Demande::where('uuid', $id)->first()->reference,
@@ -216,18 +184,10 @@ class BackendController extends Controller
             try {
                 Mail::to($user_email)->send(new ValidateDemandMailableP001($demand));
             } catch (\Exception $e) {
-                //
+                dd($e);
             }
-            
-        
-        } elseif ($code == 'P002'){
+        } elseif ($code == 'P002') {
 
-            /* $dataFiles = $request->all();
-            $commentaire2 = new Commentaire();
-            $commentaire2->create([
-                'libelle' => $request->libelle,
-                'demande_id' => $id,
-            ]); */
             $demand = [
                 'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
                 'reference' => Demande::where('uuid', $id)->first()->reference,
@@ -239,9 +199,8 @@ class BackendController extends Controller
             try {
                 Mail::to($user_email)->send(new ValidateDemandMailable($demand));
             } catch (\Exception $e) {
-                //
+                
             }
-            
         }
 
         return redirect()->back()->with('success', 'Opération éffectuée avec succès !');
@@ -264,88 +223,63 @@ class BackendController extends Controller
  */
     public function rejetter($id, Request $request)
     {
-
-      
         Demande::where('uuid', $id)->update(['etat' => 'R']);
-     
 
         $demande = Demande::where('uuid', $id)->first();
-
         $motifdd = $demande->motif()->first();
-
-       /* dd($motifdd->pivot->commentaire);
-       
-        foreach ($motifdd as $motif) {
-           dd ($motif->pivot->commentaire);
-        }*/
-        
-       // dd( $demande->motif()->pivot->commentaire);
         $motifIDS = $request->libelle;
         foreach ($motifIDS as $motifid) {
-         // $motif = Motif::find($motifid);
-          //$motif->demande()->attach($id);
-          $demande->motif()->attach($motifid, ["commentaire"=>$request->autre]);
-          /*if ($request->autre == null) {
+            $demande->motif()->attach($motifid, ["commentaire" => $request->autre]);
+            $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
+            $usager_id = Demande::where('uuid', $id)->first()->usager_id;
+            $user_email = User::where('usager_id', $usager_id)->first()->email;
+            $currentStatus = Demande::where('uuid', $id)->first()->etat;
+            $usager = Usager::where('uuid', $usager_id)->first();
+            $demande = Demande::find($id);
+            $code = $demande->procedure->code;
 
-          }else {
-            //dd($request->autre);
-           // dd($demande->motif()->first()->pivot->commentaire);
-    $demande->motif()->first()->pivot->commentaire = $request->autre;
-            $demande->save();
-          }*/
-        }
-     
-      
-        
-     
-        /*$commentaire = new Commentaire();
-        $commentaire->create([
-            'libelle' => $request->libelle,
-            'demande_id' => $id,
-        ]);*/
-        $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
-        $usager_id = Demande::where('uuid', $id)->first()->usager_id;
-        $user_email = User::where('usager_id', $usager_id)->first()->email;
-        $currentStatus = Demande::where('uuid', $id)->first()->etat;
-        $usager = Usager::where('uuid', $usager_id)->first();
-        $demande = Demande::find($id);
-        $code = $demande->procedure->code;
+            $libelles = array();
+            foreach ($motifIDS as $motifid) {
 
-        if($code == 'P001'){
-            $demand = [
-                'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-                'reference' => Demande::where('uuid', $id)->first()->reference,
-                'etat' => StatutDemande::where('etat', $currentStatus)->first()->statut,
-                'motif' => $request->libelle,
-                "name" => $usager->nom . ' ' . $usager->prenom,
-            ];
-            try {
-                Mail::to($user_email)->send(new RejectDemandMailableP001($demand));
-            } catch (\Exception $e) {
-                //
+                $libelle = Motif::where('uuid', $motifid)->first()->libelle;
+                array_push($libelles, $libelle);
             }
-            
-        }
-        elseif($code == 'P002'){
-            $demand = [
-                'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-                'reference' => Demande::where('uuid', $id)->first()->reference,
-                'etat' => StatutDemande::where('etat', $currentStatus)->first()->statut,
-                'motif' => $request->libelle,
-                "categorie" => $demande->categorie->libelle,
-                "nomEntreprise" => $demande->raison_social,
-                "name" => $usager->nom . ' ' . $usager->prenom,
-            ];
-            try {
-                Mail::to($user_email)->send(new RejectDemandMailable($demand));
-            } catch (\Exception $e) {
-                //
+            if ($request->autre != null) {
+                array_push($libelles, $request->autre);
             }
-            
-        }
-        
 
-        return redirect()->back()->with('success', 'La Demande a été Rejetter avec succès !');
+            if ($code == 'P001') {
+                $demand = [
+                    'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+                    'reference' => Demande::where('uuid', $id)->first()->reference,
+                    'etat' => StatutDemande::where('etat', $currentStatus)->first()->statut,
+                    //'motif' => $request->libelle,
+                    'motif' => $libelles, // Motif::where('uuid', $request->libelle)->libelle,
+                    "name" => $usager->nom . ' ' . $usager->prenom,
+                ];
+                try {
+                    Mail::to($user_email)->send(new RejectDemandMailableP001($demand));
+                } catch (\Exception $e) {
+                    
+                }
+            } elseif ($code == 'P002') {
+                $demand = [
+                    'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+                    'reference' => Demande::where('uuid', $id)->first()->reference,
+                    'etat' => StatutDemande::where('etat', $currentStatus)->first()->statut,
+                    'motif' => $libelles,
+                    "categorie" => $demande->categorie->libelle,
+                    "nomEntreprise" => $demande->raison_social,
+                    "name" => $usager->nom . ' ' . $usager->prenom,
+                ];
+                try {
+                    Mail::to($user_email)->send(new RejectDemandMailable($demand));
+                } catch (\Exception $e) {
+                }
+            }
+
+            return redirect()->back()->with('success', 'La Demande a été Rejetter avec succès !');
+        }
     }
 
     public function nombreDemandeByProcedure()
@@ -359,8 +293,9 @@ class BackendController extends Controller
     }
 
     public function listsDemande(
-        DemandeRepository $demandeRepository, Request $request)
-    {
+        DemandeRepository $demandeRepository,
+        Request $request
+    ) {
 
         //dd($demandes);
         $demandes = null;
@@ -406,12 +341,26 @@ class BackendController extends Controller
         return redirect()->route('users-profile')->with('success', 'Profile Mis à jour avec succès !');
     }
 
-    public function listDemandeAll(DemandeRepository $demandeRepository, Demande $demandeTest)
+    public function listDemandeAll(DemandeRepository $demandeRepository, Demande $demandeTest, $procedure="Toutes")
     {
-        // dd(Demande::all()[0]);
-        //dd(DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->orderBy('demande_P001_s.created_at')->get());
+        if($procedure == "D"){
+            $demandes = Demande::all()->where("etat", "D");;
+
+        }else if($procedure == "V"){
+            $demandes = Demande::all()->where("etat", "V");
+
+        }else if($procedure == "R"){
+            $demandes = Demande::all()->where("etat", "R");
+
+        }else{
+            $demandes = Demande::all();
+        }
+
+
         $data = [
-            'demandes' => Demande::all(), //DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->get(),
+            'demandes' => $demandes, //DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->get(),
+            'selectedProcedure' => $procedure,
+            'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
             'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
             'statutArchive' => StatutDemande::where('etat', '=', 'A')->first()->statut,
             'statutRejete' => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -424,8 +373,8 @@ class BackendController extends Controller
             'demandeEtat' => $demandeTest->statut(),
             'agents' => Agent::all(),
 
-            "motifP001" => Motif::where("code_procedure","=","P001")->orderBy("ordre"),
-            "motifP002" => Motif::where("code_procedure","=","P002")->orderBy("ordre"),
+            "motifP001" => Motif::where("code_procedure", "=", "P001")->orderBy("ordre"),
+            "motifP002" => Motif::where("code_procedure", "=", "P002")->orderBy("ordre"),
             "motifs" => Motif::all()
         ];
 
@@ -434,14 +383,15 @@ class BackendController extends Controller
         return view('backend.list_demande', $data);
     }
 
-    public function noteEtude($id, Request $request)
+
+    public function noteEtude($id, $currentStatus, Request $request)
     {
         Storage::makeDirectory('public/Notes_Etudes');
         $demande = Demande::find($id);
         $note = $request->file('note_etude_file')->store('public/Notes_Etudes');
         $demande->note_etude_file = $note;
         $demande->save();
-        
+
         $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
         $usager_id = Demande::where('uuid', $id)->first()->usager_id;
         $usager = Usager::where('uuid', $usager_id)->first();
@@ -456,11 +406,25 @@ class BackendController extends Controller
         try {
             Mail::to($user_email)->send(new NoteEtudeMailable($demand));
         } catch (Exception $e) {
-            dd($e);
+            
         }
-        
+        $nextStatus = '';
+        switch ($currentStatus) {
+            case 'V':
+                $nextStatus = 'N';
+                break;
+            case 'N':
+                //     $nextStatus = 'S';
+                //     break;
+                // case 'S':
+                $nextStatus = 'A';
+                break;
+            default:
+                $nextStatus = 'A';
+                break;
+        }
+        Demande::where('uuid', $id)->update(['etat' => $nextStatus]);
 
         return redirect()->back()->with('success', 'Note d\'étude envoyée avec succes avec succès !');
     }
-
 }

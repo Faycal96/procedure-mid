@@ -27,7 +27,7 @@
                                 </ul>
                             </div>
 
-                        <h2 class="card-title text-center">Liste de mes Demandes </h2>
+                        <h2 class="card-title text-center">Mes Demandes </h2>
 
                             <div class="card-body">
 
