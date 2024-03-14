@@ -64,10 +64,15 @@
                                                  style="color:red">
                                                  *</span></h4>
                                          <div class="row">
-
-                                            <label class="fw-bold">NIP / Passeport<span style="color: red">*</span></label>
-                                            <input type="text" class="border-success" name="nip" id="nip" required=true placeholder="identité" value="{{ $nip }}" /><br /><br />
-                                       
+                                            <div class="col-6">
+                                                <label class="fw-bold">NIP / Passeport<span style="color: red">*</span></label>
+                                                <input type="text" class="border-success" name="nip" id="nip" required=true placeholder="identité" value="{{ $nip }}" /><br />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="fw-bold">Identité<span style="color: red">*</span></label>
+                                                <input type="text" class="border-success" name="beneficiaire" id="beneficiaire" required=true placeholder="identité" value="{{ $identite }}" /><br />
+                                            </div>
+                                            <br />
 
                                              <label class="fw-bold">Que voulez vous faire <span
                                                      style="color: red">*</span></label>

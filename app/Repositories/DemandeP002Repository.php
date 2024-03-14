@@ -41,7 +41,7 @@ class DemandeP002Repository extends AppRepository
             'date_demande' => Carbon::parse(Carbon::now())->format('Ymd'),
             'etat' => 'D',
             'libelle_court' => "DSAT", 
-            'identite' => $data["identite"],
+            'identite' => $data["beneficiaire"],
             'commune_id' => $data["commune_id"], //$data["commune_id,
             'beneficiaire' => "Ali", //$data["beneficiaire,
             'procedure_id' => Procedure::where(['code' => 'P002'])->first('uuid')->uuid,
