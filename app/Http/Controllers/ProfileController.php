@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -125,4 +125,60 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function updateUsager(Request $request) {
+        $data = $request->all();
+        $currentUserId = Auth::user()->uuid;
+    
+        $user = User::where('uuid',$currentUserId)->first();
+    
+        $user->name = $data["nom"];
+    
+        $user->usager->nom = $data["nom"];
+        $user->usager->prenom = $data["prenom"];
+        $user->usager->telephone = $data["telephone"];
+    
+        $user->email = $data["email"];
+    
+    
+       
+       $user->usager->save();
+        
+        $user->save();
+        
+        return redirect('/')->with('success', 'Informations enregistrées!!');;
+    
+    }
+
+
+
+    public function updateUsagerMorale(Request $request) {
+        $data = $request->all();
+        $currentUserId = Auth::user()->uuid;
+    
+        $user = User::where('uuid',$currentUserId)->first();
+    
+        //$user->name = $data["nom"];
+    
+        $user->usager->nom_entreprise = $data["nom_entreprise"];
+        $user->usager->rccm = $data["rccm"];
+        $user->usager->telephone = $data["telephone"];
+        $user->usager->siege_social = $data["siege_social"];
+        $user->usager->boite_postale = $data["boite_postale"];
+        $user->usager->ifu = $data["ifu"];
+    
+        $user->email = $data["email"];
+    
+    
+       
+       $user->usager->save();
+        
+        $user->save();
+        
+        return redirect('/')->with('success', 'Informations enregistrées!!');;
+    
+    }
+    
+
 }
+

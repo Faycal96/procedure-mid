@@ -43,6 +43,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $typeUsager = TypeUsager::where('libelle_court', 'PP')->first();
         $request->validate([
             // 'id' => ['required'],
             'nip' => ['required', 'string', 'max:255'],
@@ -75,10 +76,11 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
         event(new Registered($usager));
-
+        event(new Registered($typeUsager));
         $user->usager_id = $usager->uuid;
+        $usager->type_usager_id = $typeUsager->uuid;
         $user->save();
-
+        $usager->save();
         Auth::login($user);
 
         // session()->flash('success', 'Registration successful!');
