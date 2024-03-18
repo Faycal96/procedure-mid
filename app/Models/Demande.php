@@ -15,17 +15,17 @@ class Demande extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'uuid';
-    protected $dateFormat = 'd/m/Y';
+    /* protected $dateFormat = 'dd/mm/YYYY'; */
     protected $with = ['demandePiece', 'procedure'];
 
-    protected $casts = [
+    /* protected $casts = [
         'date_demande' => 'date',
         'created_at' => 'date',
         ];
 
     public function setDateAttribute( $value ) {
-        $this->attributes['date'] = (new Carbon($value))->format('d/m/y');
-    }
+        $this->attributes['date'] = (new Carbon($value))->format('dd/mm/YYYY');
+    } */
 
     public function genererRandomString($longueur = 10)
     {

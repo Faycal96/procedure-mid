@@ -159,7 +159,7 @@
                                         @endif
 
                                         <td>
-                                            {{ $demande->created_at }}
+                                            {{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/y') }}
                                         </td>
                                         <td>
                                             <span class="badge {{ $statutColor }} ">{{ $statut }}</span>
@@ -187,6 +187,7 @@
                                             <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
                                                 <i class="bi bi-check-circle"></i>
                                             </a>
+                                           
                                             @endif
                                             @if (
                                             $demande->etat != 'R' &&
@@ -216,11 +217,14 @@
                                                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close">
 
                                                                     </button>
-                                                                </div>
+                                                                </div>*
+                                                                
                                                                 <div class="modal-body">
+
                                                                     <form method="post" enctype="multipart/form-data"
-                                                                        action="{{ route('statusChange', ['id' => $demande->uuid, 'currentStatus' => $demande->etat, 'table' => 'demande_p001_s']) }}">
+                                                                        action="{{ route('statusChange', ['id' => $demande->uuid, 'currentStatus' => 'D', 'table' => 'demande_p001_s']) }}">
                                                                         @csrf
+                                                                        
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-warning" data-dismiss="modal">Non, Annuler</button>
                                                                     <button type="submit" class="btn btn-success">Oui,
@@ -382,7 +386,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <b>Date demande:</b>
-                                            <span class="text-success">{{ $demande->date_demande }}</span>
+                                            <span class="text-success">{{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/y') }}</span>
                                         </div>
                                         <div class="col-6">
                                             <b>Montant:</b>
@@ -454,7 +458,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <b>CNSS:</b>
-                                            <span class="text-success">{{ $demande->demandeP002->numero_cnss_entreprise }}</span>
+                                            
+                                            <span class="text-success">{{ $demande->demandeP002->uuid }}</span>
                                         </div>
                                         <div class="col-6">
                                             <b>Localisation:</b>

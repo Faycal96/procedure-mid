@@ -163,9 +163,11 @@ class BackendController extends Controller
                 $nextStatus = 'A';
                 break;
         }
-        dd($currentStatus);
+       // dd($currentStatus);
+       
+       
         Demande::where('uuid', $id)->update(['etat' => $nextStatus]);
-
+        
         $proc_id = Demande::where('uuid', $id)->first()->procedure_id;
         $usager_id = Demande::where('uuid', $id)->first()->usager_id;
         $usager = Usager::where('uuid', $usager_id)->first();
@@ -178,13 +180,13 @@ class BackendController extends Controller
             $demand = [
                 'procedure' => Procedure::where('uuid', $proc_id)->first()->libelle_long,
                 'reference' => Demande::where('uuid', $id)->first()->reference,
-                'etat' => StatutDemande::where('etat', $nextStatus)->first()->statut,
+                //'etat' => StatutDemande::where('etat', $nextStatus)->first()->statut,
                 'name' => $usager->nom . ' ' . $usager->prenom,
             ];
             try {
                 Mail::to($user_email)->send(new ValidateDemandMailableP001($demand));
             } catch (\Exception $e) {
-                dd($e);
+               // dd($e);
             }
         } elseif ($code == 'P002') {
 
@@ -352,7 +354,7 @@ class BackendController extends Controller
         }else if($procedure == "R"){
             $demandes = Demande::all()->where("etat", "R");
 
-        }else{
+        }else if($procedure == "Toutes"){
             $demandes = Demande::all();
         }
 
@@ -360,8 +362,8 @@ class BackendController extends Controller
         $data = [
             'demandes' => $demandes, //DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->get(),
             'selectedProcedure' => $procedure,
-            'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
-            'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
+            /* 'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
+             */'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
             'statutArchive' => StatutDemande::where('etat', '=', 'A')->first()->statut,
             'statutRejete' => StatutDemande::where('etat', '=', 'R')->first()->statut,
             'statutEtude' => StatutDemande::where('etat', '=', 'E')->first()->statut,
