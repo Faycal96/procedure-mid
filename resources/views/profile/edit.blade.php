@@ -126,9 +126,9 @@
            
           </div>
         </form>
-<p>{{Auth::user()}}</p>
+
        
-        <a href="{{ route('password.request') }}"><input type="button" class="btn btn-secondary" value="Changer mot de passe"></a>
+       <!-- <a href="{{ route('password.request') }}"><input type="button" class="btn btn-secondary" value="Changer mot de passe"></a>-->
        @else 
 
         <form  method="POST" action="{{route('profileMorale.update')}}" enctype="multipart/form-data"  >
@@ -191,10 +191,8 @@
         </form>
         @endif
       
-<br>
-<br>
-        {{--<a  href="{{ route('password.request2') }}"type="button" class="btn btn-secondary" >Modifier le mot de passe
-              </a>--}}
+
+       
       </div>
   </div>
 </div>

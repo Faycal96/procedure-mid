@@ -387,13 +387,13 @@
                                                              <div class="col-6 form-group">
                                                                  <label class="col-form-label" for="date_debut">Date début</label>
                                                                  <input type="date" name="date_debut[]" id="date_debut"
-                                                                     class="form-control border-success" placeholder="Date début"/>
+                                                                     class="date-debut form-control border-success" placeholder="Date début"/>
                                                              </div>
 
                                                              <div class="col-6 mb-3 form-group">
                                                                  <label for="date_fin" class="col-form-label">Date fin</label>
                                                                  <input type="date" name="date_fin[]" id="date_fin" placeholder="Date fin"
-                                                                     class="form-control border-success">
+                                                                     class="date-fin form-control border-success">
                                                              </div>
                                                          </div>
 
@@ -722,6 +722,7 @@
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script>
  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <!--<script src="{{ asset('js/jToast.min.js') }}"></script>-->
  <script src="{{ asset('js/sweetalert2.js') }}"></script>
 
@@ -884,15 +885,10 @@ function controlDate() {
     })
 });
 </script>
-
- <script type='text/javascript'>
-     $(document).ready(function() {
-
-         var current_fs, next_fs, previous_fs; //fieldsets
-         var opacity;
-
-         $(".next").click(function() {
-            var dateDebut = document.getElementById('date_debut').value
+<script>
+    function verifDate() {
+        var isValid = true;
+        var dateDebut = document.getElementById('date_debut').value
         var  dateFin = document.getElementById('date_fin').value
 
         // var dateDebutF = new Date(dateDebut.value)
@@ -900,16 +896,17 @@ function controlDate() {
 
       
         if (dateDebut> dateFin) {
-            alert("erreur de date")
+          isValid = false
         }
 
 
-        
-                accordion = document.getElementById("accordionReferenceEntreprise")
-   items = accordion.querySelectorAll("accordion-item")
+        accordion = document.getElementById("accordionReferenceEntreprise")
+   items = accordion.querySelectorAll(".accordion-item")
+
     items.forEach(item=> {
-        const dateDebut = document.getElementById(item.querySelector('input[type="date"][id^="date_debut"]').id)
-        const dateFin = document.getElementById(item.querySelector('input[type="date"][id^="date_fin"]').id)
+        const dateDebut = item.querySelector('.date-debut');
+    const dateFin = item.querySelector('.date-fin');
+     
 
         var dateDebutF = dateDebut.value
         var dateFinF = dateFin.value
@@ -918,9 +915,38 @@ function controlDate() {
             
             console.log("vrai")
         if (dateDebutF> dateFinF) {
-            alert("erreur de date")
+            isValid = false
+           
+        
+           
         }
     })
+    return isValid;
+    }
+</script>
+
+ <script type='text/javascript'>
+     $(document).ready(function() {
+
+         var current_fs, next_fs, previous_fs; //fieldsets
+         var opacity;
+
+         $(".next").click(function() {
+       
+
+
+        if (!verifDate()) {
+            Swal.fire({
+  title: 'Erreur!',
+  text: 'La/Les dates de debut est supérieur à/aux date de fin',
+  icon: 'error',
+  confirmButtonText: 'OK'
+})
+return;
+        }
+
+        
+               
             
              current_fs = $(this).parent();
              next_fs = $(this).parent().next();
@@ -1140,11 +1166,11 @@ function controlDate() {
                     "<div class=\"row\">" +
                         "<div class=\"col-6 form-group\">" +
                             "<label class=\"col-form-label\" for=\"date_debut\">Date début<span style=\"color: red\">*<\/span><\/label>" +
-                            "<input type=\"date\" name=\"date_debut[]\" id=\"date_debut\" class=\"form-control border-success\" \/>" +
+                            "<input type=\"date\" name=\"date_debut[]\" id=\"date_debut\" class=\"date-debut form-control border-success\" \/>" +
                         "<\/div>" +
                         "<div class=\"col-6 mb-3 form-group\">" +
                             "<label for=\"date_fin\" class=\"col-form-label\">Date fin<\/label>" +
-                            "<input type=\"date\" name=\"date_fin[]\" id=\"date_fin\" class=\"form-control border-success\">" +
+                            "<input type=\"date\" name=\"date_fin[]\" id=\"date_fin\" class=\"date-fin form-control border-success\">" +
                         "<\/div>" +
                     "<\/div>" +
                     "<div class=\"row\">" +
