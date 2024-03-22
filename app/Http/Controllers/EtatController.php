@@ -18,7 +18,7 @@ class EtatController extends Controller
         ];
         
        // dd($data);
-        $pdf = Pdf::loadView("etats.pdf",$data);
+        $pdf = Pdf::loadView("etats.quittance",$data);
         return $pdf->download($demande->uuid.".pdf");
     }
 }

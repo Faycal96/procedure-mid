@@ -141,23 +141,16 @@
                                 <span>Mon Profile</span>
                             </a>
                         </li>
-
-
-
-
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <x-dropdown-link :href="route('logout')" class="text-warning"
-                                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                                        <i class="bi bi-box-arrow-right"></i> {{ __('Se Deconnecter') }}
-                                    </x-dropdown-link>
+                            <br>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')" class="text-warning"
+                                    onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                                    <i class="bi bi-box-arrow-right"></i> {{ __('Se Deconnecter') }}
+                                </x-dropdown-link>
                                 </form>
-                            </a>
                         </li>
 
                     </ul><!-- End Profile Dropdown Items -->

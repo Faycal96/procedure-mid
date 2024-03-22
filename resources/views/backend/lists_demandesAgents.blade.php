@@ -173,16 +173,6 @@
                                                                             <span>{{ $demande->usager->telephone}}</span>
                                                                         </div>
                                                                     </div><br>
-                                                                    {{-- <div class="row">
-                                                            <div class="col-6">
-                                                                <b>Identite Fournisseur:</b>
-                                                                <span>{{$demande->denomination_sociale_fournisseur}}</span>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <b>Addresse:</b>
-                                                                    <span>{{$demande->adresse_fournisseur}}</span>
-                                                                </div>
-                                                            </div> <br> --}}
                                                             <h4>Liste des fichiers Soumis</h4>
                                                             <div class="row">
                                                                 <div class="col-6">
@@ -193,10 +183,13 @@
                                                                     <br>
                                                                     @endforeach
                                                                 </div>
-                                                                <h4>Dévis d'étude</h4>
-                                                                <div class="col-6">
-                                                                    <a class="text-success" target="_blank" href="{{ Storage::url($demande->note_etude_file) }}"><b> Dévis d'étude</b></a>
-                                                                </div>
+                                                                @if($demande->procedure->code == "P001")
+                                                                    <h4>Dévis d'étude</h4>
+                                                                    <div class="col-6">
+                                                                        <a class="text-success" target="_blank" href="{{ Storage::url($demande->note_etude_file) }}"><b> Dévis d'étude</b></a>
+                                                                    </div>
+                                                                @endif
+                                                                
                                                             </div>
                                                             <br>
                                                             <h4>Etat de la demande</h4>

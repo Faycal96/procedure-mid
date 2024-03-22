@@ -128,6 +128,11 @@
                                     $statut = $statutEtude;
                                     $statutColor = 'bg-info';
                                     break;
+                                    case 'N':
+                                    # code...
+                                    $statut = $statutDevisEnvoye;
+                                    $statutColor = 'bg-succes';
+                                    break;
                                     default:
                                     # code...
                                     break;
@@ -183,7 +188,7 @@
                                             @endphp
 
                                             <!-- Boutons d'action en fonction de l'état et du rôle -->
-                                            @if ($demande->etat !== 'R' && $demande->etat !== 'V' && in_array($userRole, ['Gestionnaire', 'Administration']))
+                                            @if ($demande->etat !== 'R' && $demande->etat !== 'V' && $demande->etat !== 'N' && in_array($userRole, ['Gestionnaire', 'Administration']))
                                             <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
                                                 <i class="bi bi-check-circle"></i>
                                             </a>
@@ -193,13 +198,14 @@
                                             $demande->etat != 'R' &&
                                             $demande->etat != 'V' &&
                                             $demande->etat != 'A' &&
+                                            $demande->etat != 'N' &&
                                             in_array($userRole, ['Gestionnaire', 'Administration']))
                                             <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
                                                 <i class="bi bi-x-circle"></i>
                                             </a>
                                             @endif
 
-                                            @if($demande->procedure->code == 'P001' && $demande->etat = 'V')
+                                            @if($demande->procedure->code == 'P001' && $demande->etat == 'V')
                                             <a data-toggle="modal" data-target="#noteEtude{{ $demande->uuid }}" type="button" title="Note d'étude" class="btn btn-success">
                                                 <i class="bi bi-upload"></i>
                                             </a>
@@ -367,13 +373,14 @@
                                         </div>
                                         <div class="col-6">
                                             <b>Telephone :</b>
+                                            @if (!empty($demande->usager->telephone))
+                                            <span class="text-success">{{ $demande->usager->telephone }}/</span>
+                                            @endif
                                             @if (!empty($demande->numero_telephone))
-                                            <span class="text-success">{{ $demande->numero_telephone }}
-                                                /</span>
+                                            <span class="text-success">{{ $demande->numero_telephone }}/</span>
                                             @endif
                                             @if (!empty($demande->tel_1))
-                                            <span class="text-success">{{ $demande->tel_1 }}
-                                                /</span>
+                                            <span class="text-success">{{ $demande->tel_1 }}/</span>
                                             @endif
                                             @if (!empty($demande->tel_2))
                                             <span class="text-success">{{ $demande->tel_2 }}</span>
@@ -408,11 +415,17 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <b>Email:</b>
-                                            <span class="text-success">{{ $demande->email }}</span>
+                                            <span class="text-success">{{ $demande->email }} {{ $demande->email_entreprise }}</span>
                                         </div>
                                         <div class="col-6">
                                             <b>Objectif demande:</b>
-                                            <span class="text-success">{{ $demande->objectif_demande }}</span>
+                                            <span class="text-success">
+                                                @if($demande->procedure->code === 'P002')
+                                                    {{ $demande->objectif_demande }}
+                                                @else
+                                                    Demande de dévis
+                                                @endif
+                                            </span>
                                         </div>
                                     </div>
                                     <br>
@@ -427,16 +440,16 @@
                                             <b>Localisation:</b>
                                             <span class="text-success">
                                                 @if (!empty($demande->demandeP001->secteur))
-                                                Sect{{ $demande->demandeP001->secteur }}
+                                                Sect {{ $demande->demandeP001->secteur }} / 
                                                 @endif
                                                 @if (!empty($demande->demandeP001->section))
-                                                Section{{ $demande->demandeP001->section }}
+                                                Section {{ $demande->demandeP001->section }} / 
                                                 @endif
                                                 @if (!empty($demande->demandeP001->lot))
-                                                Lot{{ $demande->demandeP001->lot }}
+                                                Lot {{ $demande->demandeP001->lot }} / 
                                                 @endif
                                                 @if (!empty($demande->demandeP001->numero_parcelle))
-                                                N°pelle{{ $demande->demandeP001->numero_parcelle }}
+                                                N°ple {{ $demande->demandeP001->numero_parcelle }}
                                                 @endif
                                             </span>
                                         </div>
@@ -459,7 +472,7 @@
                                         <div class="col-6">
                                             <b>CNSS:</b>
                                             
-                                            <span class="text-success">{{ $demande->demandeP002->uuid }}</span>
+                                            <span class="text-success">{{ $demande->demandeP002->numero_cnss_entreprise }}</span>
                                         </div>
                                         <div class="col-6">
                                             <b>Localisation:</b>
@@ -536,8 +549,6 @@
                                         </div>
                                     </div>
                                     <br>
-
-
                                     @endforeach
                                     @endif
 

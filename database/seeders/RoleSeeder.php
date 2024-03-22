@@ -15,27 +15,15 @@ class RoleSeeder extends Seeder
     {
         //
         Role::create([
-            "libelle" => "Gestionnaire",
-            "code" =>"GRE",
-            
-        ]);
-        //
-        Role::create([
-            "libelle" => "Reception",
-            "code" =>"RCT",
+            "libelle" => "Administration",
+            "code" =>"ADMIN",
             
         ]);
 
         //
         Role::create([
-            "libelle" => "Etudes",
-            "code" =>"ETDS",
-            
-        ]);
-        //
-        Role::create([
-            "libelle" => "administration",
-            "code" =>"ADMIN",
+            "libelle" => "Gestionnaire",
+            "code" =>"GRE",
             
         ]);
     }

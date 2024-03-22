@@ -208,21 +208,7 @@ class BackendController extends Controller
         return redirect()->back()->with('success', 'Opération éffectuée avec succès !');
     }
 
-    // fonction de chargement de acte
-
-    /* public function uploadActe($id, $currentStatus, Request $request)
-    {
-        $dataFiles = $request->all();
-        if ($currentStatus == 'S') {
-
-            $acteSigne = $this->repository->uploadActe($table, $dataFiles, 'output_file', $id);
-
-            return redirect()->back()->with('success', "L'acte a été Joint avec succès !");
-        } else {
-            return redirect()->back()->with('success', 'Operation echouée !');
-        }
-    }
- */
+    
     public function rejetter($id, Request $request)
     {
         Demande::where('uuid', $id)->update(['etat' => 'R']);
@@ -294,10 +280,7 @@ class BackendController extends Controller
         // ));
     }
 
-    public function listsDemande(
-        DemandeRepository $demandeRepository,
-        Request $request
-    ) {
+    public function listsDemande(DemandeRepository $demandeRepository,Request $request) {
 
         //dd($demandes);
         $demandes = null;
@@ -362,8 +345,8 @@ class BackendController extends Controller
         $data = [
             'demandes' => $demandes, //DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->get(),
             'selectedProcedure' => $procedure,
-            /* 'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
-             */'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
+            'statutDevisEnvoye' => StatutDemande::where('etat', '=', 'N')->first()->statut,
+            'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
             'statutArchive' => StatutDemande::where('etat', '=', 'A')->first()->statut,
             'statutRejete' => StatutDemande::where('etat', '=', 'R')->first()->statut,
             'statutEtude' => StatutDemande::where('etat', '=', 'E')->first()->statut,
@@ -410,22 +393,8 @@ class BackendController extends Controller
         } catch (Exception $e) {
             
         }
-        $nextStatus = '';
-        switch ($currentStatus) {
-            case 'V':
-                $nextStatus = 'N';
-                break;
-            case 'N':
-                //     $nextStatus = 'S';
-                //     break;
-                // case 'S':
-                $nextStatus = 'A';
-                break;
-            default:
-                $nextStatus = 'A';
-                break;
-        }
-        Demande::where('uuid', $id)->update(['etat' => $nextStatus]);
+        
+        Demande::where('uuid', $id)->update(['etat' => 'N']);
 
         return redirect()->back()->with('success', 'Note d\'étude envoyée avec succes avec succès !');
     }

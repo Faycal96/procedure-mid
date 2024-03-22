@@ -112,77 +112,104 @@ margin-top:20px;
                    </div>
                    
                    <div class="row">
-                       <div class="receipt-header receipt-header-mid">
-                           <div class="col-xs-8 col-sm-8 col-md-8 text-left">
-                               <div class="receipt-right">
-                                @if($demande->procedure->code == 'P002')
-                                <h4 class="fs-title">Fiche de renseignement Administratif</h4>
-                                <p><b>Entreprise :</b>
-                                    {{ $demande->raison_social }} 
-                                </p>
-                                <p>
-                                    <b>Email :</b>{{$demande->email_entreprise}}
-                                </p>
-                                <p>
-                                    <b>Téléphone :</b> 
-                                    @if (!empty($demande->numero_telephone))
-                                        {{ $demande->numero_telephone }}
-                                    @endif
-                                    @if (!empty($demande->tel_1))
-                                        {{ $demande->tel_1 }}
-                                    @endif
-                                    @if (!empty($demande->tel_2))
-                                        {{ $demande->tel_2 }}
-                                    @endif
-                                </p>
-                                <p>
-                                    <b>Boite Postale :</b>
-                                    {{$demande->boite_postale}}</b>
-                                </p>
-                                <p><b>Adresse Postale :</b>
-                                    {{$demande->adresse_physique}}</b>
-                                </p>
-                                <p>
-                                    <b>Siege social :</b> {{$demande->siege_social}}
-                                </p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                @if($demande->procedure->code == 'P001')
+                                    <th colspan="2" style="text-align: center">IDENTITE DU DEMANDEUR</th>
                                 @else
-                                <h5>Identité du demandeur </h5>
-                                <p><b>démandeur :</b> 
-                                    {{ $demande->usager->nom }} {{ $demande->usager->prenom }}
-                                </p>
-                                <p>
-                                    <b>Email :</b> {{$demande->email}}
-                                </p>
-                                <p>
-                                    <b>Téléphone :</b> 
-                                    @if (!empty($demande->numero_telephone))
-                                        {{ $demande->numero_telephone }}
-                                    @endif
-                                    @if (!empty($demande->tel_1))
-                                        {{ $demande->tel_1 }}
-                                    @endif
-                                    @if (!empty($demande->tel_2))
-                                        {{ $demande->tel_2 }}
-                                    @endif
-                                </p>
+                                    <th colspan="2" style="text-align: center">FICHE DE RENSEIGNEMENT ADMINISTRATIF</th>
                                 @endif
-                                <p><b>Réference :</b> {{$demande->reference}}</b></p>
-                               </div>
-                           </div>
-                       </div>
-                   </div><br><br><br><br>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="col-md-12" style="background-color: #9f181c; color: #fff;text-align: center"><p>{{$demande->reference}}</td>
+                            </tr>
+                            
+                            @if($demande->procedure->code == 'P002')
+                                 <tr>
+                                     <td class="col-md-9"><strong>Entreprise</strong></td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->raison_social }}</td>
+                                 </tr>
+                                 <tr>
+                                     <td class="col-md-9"><strong>Email</strong></td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i>{{$demande->email_entreprise}}</td>
+                                 </tr>
+                                 <tr>
+                                     <td class="col-md-9"><strong>Téléphone</strong></td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i>
+                                        @if (!empty($demande->numero_telephone))
+                                        {{ $demande->numero_telephone }}
+                                        @endif
+                                        @if (!empty($demande->tel_1))
+                                            {{ $demande->tel_1 }}
+                                        @endif
+                                        @if (!empty($demande->tel_2))
+                                            {{ $demande->tel_2 }}
+                                        @endif
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="col-md-9"><strong>Boite Postale</td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i>{{ $demande->boite_postale }}</td>
+                                 </tr>
+                                 <tr>
+                                     <td class="col-md-9"><strong>Adresse Postale</strong></td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->adresse_physique }}</td>
+                                 </tr>
+                                 <tr>
+                                     <td class="col-md-9"><strong>Siege social</strong></td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i>{{ $demande->siege_social }}</td>
+                                 </tr>
+                            @else
+                                 <tr>
+                                     <td class="col-md-9"><strong>démandeur</strong></td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->usager->nom }} {{ $demande->usager->prenom }}</td>
+                                 </tr>
+                                 <tr>
+                                     <td class="col-md-9"><strong>Email</strong></td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->email }}</td>
+                                 </tr>
+                                 <tr>
+                                     <td class="col-md-9"><strong>Téléphone</strong></td>
+                                     <td class="col-md-3"><i class="fa fa-inr"></i>
+                                        @if (!empty($demande->numero_telephone))
+                                        {{ $demande->numero_telephone }}
+                                        @endif
+                                        @if (!empty($demande->tel_1))
+                                            {{ $demande->tel_1 }}
+                                        @endif
+                                        @if (!empty($demande->tel_2))
+                                            {{ $demande->tel_2 }}
+                                        @endif
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="col-md-9"><strong>Province</strong></td>
+                                    <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->localite->provinces->libelle }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-9"><strong>Commune</strong></td>
+                                    <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->localite->libelle }}</td>
+                                </tr>
+                            @endif
+                            
+                        </tbody>
+                    </table>
+                </div><br><br><br><br>
                    
                    <div class="row">
                        <table class="table table-bordered">
                            <thead>
                                <tr>
-                                   <th colspan="2" style="text-align: center">INFORMATIONS</th>
+                                   <th colspan="2" style="text-align: center">AUTRES</th>
                                </tr>
                            </thead>
                            <tbody>
                                <tr>
                                    <td class="col-md-9"><strong>Date de dépot</strong></td>
-                                   <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->created_at }}</td>
+                                   <td class="col-md-3"><i class="fa fa-inr"></i> {{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/y') }}</td>
                                </tr>
                                @if($demande->procedure->code == 'P002')
                                     <tr>
@@ -190,8 +217,8 @@ margin-top:20px;
                                         <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->objectif_demande }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-12" colspan="2" style="text-align: center">
-                                            Représentant de l'entreprise
+                                        <td class="col-md-12" colspan="2" style="text-align: center"><b>
+                                            Représentant de l'entreprise</b>
                                         </td>
                                     </tr>
                                     <tr>
@@ -211,14 +238,6 @@ margin-top:20px;
                                         <td class="col-md-3"><i class="fa fa-inr"></i>{{ $demande->adresse_representant }}</td>
                                     </tr>
                                @else
-                                    <tr>
-                                        <td class="col-md-9"><strong>Province</strong></td>
-                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->localite->provinces->libelle }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-9"><strong>Commune</strong></td>
-                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->localite->libelle }}</td>
-                                    </tr>
                                     <tr>
                                         <td class="col-md-9"><strong>Type de construction</strong></td>
                                         <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->demandeP001->typeConstruction->libelle }}</td>

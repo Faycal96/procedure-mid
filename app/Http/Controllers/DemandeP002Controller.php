@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\StoreDemandeP002Request;
+use App\Models\Categorie;
+use App\Models\CategorieDemande;
 
 class DemandeP002Controller extends Controller
 {
@@ -68,12 +70,28 @@ class DemandeP002Controller extends Controller
             $data['delai'] = Procedure::where(['code' => 'P002'])->first('delai')->delai;
             $data['paiement']= 1;
             //$data['reference'] = $this->repository->generateReference('P002');
-            
             $data['procedure_id'] = Procedure::where(['code' => 'P002'])->first('uuid')->uuid;
-                    
-            $demande->code = "P002";
+
+            $categorie = $request['categorie'];
+            $codeCategorie = CategorieDemande::where(['uuid' => $categorie])->first()->code;
+            //dd($codeCategorie);
             $demande = $this->demandeRepositoryP002->create($data);  
-          
+            if($codeCategorie == "TH"){
+                $demande->montant = "95000";
+            }
+            elseif($codeCategorie == "TR1"){
+                $demande->montant = "245000";
+            }
+            elseif($codeCategorie == "TR2"){
+                $demande->montant = "345000";
+            }
+            elseif($codeCategorie == "TR3"){
+                $demande->montant = "545000";
+            }else{
+                $demande->montant = "345000";
+            }
+            $demande->code = "P002";
+            $demande->save();
             //dd($data);
             //$demande->save();
             
