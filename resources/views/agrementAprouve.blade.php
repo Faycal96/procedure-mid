@@ -7,7 +7,6 @@
     <table>
 </div>
 
-
 <table id="example1" class="table datatable table-bordered table-striped">
     <thead>
         <tr>
@@ -36,15 +35,6 @@
 
 <br />
 <br />
-
-
-
-
-
-
-
-
-
 <script>
 
   $(function() {

@@ -50,7 +50,7 @@
                                             <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                     *</span></label>
 
-                                            <select name="province_id" id="provinces" class="form-select border-success" required>
+                                            <select name="province_id" id="provinces" class="form-select border-success" required=true>
                                                 {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                 <option value="">Veuillez choisir une Province</option>
                                                 @foreach ( $provinces as  $prov)
@@ -64,7 +64,7 @@
                                         <div class="col">
                                             <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
                                                     *</span></label>
-                                            <select name="commune_id"  id="communes" class="form-select border-success" required>
+                                            <select name="commune_id"  id="communes" class="form-select border-success" required=true>
                                                 <option value="">Veuillez choisir la commune</option>
                                             </select>
                                         </div>
@@ -139,12 +139,11 @@
                                         <div class="col">
                                             <label class="siege_social fw-bold">Type de construction<span style="color:red">
                                                     *</span></label>
-                                            <select name="type_construction_id" id="typeConstructions" class="form-select border-success" required>
+                                            <select name="type_construction_id" id="typeConstructions" class="form-select border-success" required=true>
                                                 {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                 <option value="">Veuillez choisir le type de construction</option>
                                                 @foreach ( $typeConstructions as  $type)
-                                                 <option value="{{ $type->uuid }}" >{{ $type->libelle }}</option>
-
+                                                    <option value="{{ $type->uuid }}" >{{ $type->libelle }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -169,12 +168,12 @@
                                             <label class="siege_social fw-bold">Superficie / m²<span style="color:red">
                                                     *</span></label>
 
-                                            <input type="text" class="border-success" name="superficie" id="superficie" placeholder="Superficie en m²" />
+                                            <input type="text" class="border-success" name="superficie" id="superficie" placeholder="Superficie en m²" required=true/>
                                         </div>
                                         <div class="col">
                                             <label class="adresse fw-bold">Secteur<span style="color: red">*</span></label>
                                             <input type="text" class="border-success" name="secteur" id="secteur" 
-                                                placeholder="Secteur" required />
+                                                placeholder="Secteur" required=true />
                                         </div>
                                     </div>
 
@@ -182,12 +181,12 @@
                                         <div class="col-6">
                                             <label class="boite_postale fw-bold">Numero de la Parcelle<span style="color:red">
                                                     *</span></label>
-                                            <input type="text" name="numero_parcelle" id="numero_parcelle" class="border-success"   placeholder="Numero de parcelle"/>
+                                            <input type="text" name="numero_parcelle" id="numero_parcelle" class="border-success" placeholder="Numero de parcelle" required=true/>
                                         </div>
                                         <div class="col-6">
                                             <label class="adresse fw-bold">Numero du Lot<span style="color: red">*</span></label>
                                             <input type="text" class="border-success" name="lot" id="lot"
-                                                placeholder="Lot de la parcelle" required />
+                                                placeholder="Lot de la parcelle" required=true />
                                             {{-- <input type="email" class="border-success" name="email" value="{{ $email }}"
                                                 placeholder="adresse email" required/> --}}
                                         </div>
@@ -197,12 +196,12 @@
                                         <div class="col-6">
                                             <label class="boite_postale fw-bold">Numero de la section<span style="color:red">
                                                     *</span></label>
-                                            <input type="text" name="section" id="section" class="border-success"  placeholder="Numero de section" />
+                                            <input type="text" name="section" id="section" class="border-success" placeholder="Numero de section" required=true/>
                                         </div>
                                         <div class="col-6">
                                             <label class="adresse fw-bold">Zone<span style="color: red">*</span></label>
                                             <input type="text" class="border-success" name="zone" id="zone"
-                                                placeholder="Zone de la parcelle" required />
+                                                placeholder="Zone de la parcelle" required=true />
                                             {{-- <input type="email" class="border-success" name="email" value="{{ $email }}"
                                                 placeholder="adresse email" required/> --}}
                                         </div>
@@ -227,11 +226,11 @@
                                             <label class="siege_social fw-bold">Type d'usage<span style="color:red">
                                                     *</span></label>
 
-                                            <select name="usage_construction" id="usage_construction" class="form-select border-success" required>
+                                            <select name="usage_construction" id="usage_construction" class="form-select border-success">
                                                 {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                 <option value="">Veuillez choisir le type d'usage</option>
                                                 @foreach ( $usages as  $usage)
-                                                 <option value="{{ $usage->uuid }}" >{{ $usage->libelle }}</option>
+                                                 <option value="{{ $usage->uuid }}" required=true>{{ $usage->libelle }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -243,7 +242,7 @@
                                             <div class="col-6" id="autreUsage" style="display:none">
                                                 <label class="siege_social fw-bold">Preciser l'usage<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" class="border-success" name="autre_usage_construction" id="autre_usage_construction" placeholder="autre usage a préciser" />
+                                                <input type="text" class="border-success" name="autre_usage_construction" id="autre_usage_construction" placeholder="autre usage a préciser"/>
                                             </div>
                                         {{-- @endif --}}
                                     </div>

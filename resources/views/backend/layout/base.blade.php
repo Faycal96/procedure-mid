@@ -141,23 +141,16 @@
                                 <span>Mon Profile</span>
                             </a>
                         </li>
-
-
-
-
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <x-dropdown-link :href="route('logout')" class="text-warning"
-                                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                                        <i class="bi bi-box-arrow-right"></i> {{ __('Se Deconnecter') }}
-                                    </x-dropdown-link>
+                            <br>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')" class="text-warning"
+                                    onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                                    <i class="bi bi-box-arrow-right"></i> {{ __('Se Deconnecter') }}
+                                </x-dropdown-link>
                                 </form>
-                            </a>
                         </li>
 
                     </ul><!-- End Profile Dropdown Items -->
@@ -177,13 +170,13 @@
                 <a class="nav-link " href="{{ route('administration') }}">
                     <i class="bi bi-grid"></i>
 
-                    <span>Tableaau de Bord</span>
+                    <span>Tableau de Bord</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#demandes-nav" data-bs-toggle="collapse"
-                    href="{{ route('demandes-list') }}">
+                    href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">
                     <i class="bi bi-menu-button-wide"></i><span>Demandes</span><i
                         class="bi bi-chevron-down   ms-auto"></i>
                 </a>
@@ -194,7 +187,7 @@
 
                     @if (Auth::user()->agent->service->libelle_court == 'DGESS' || Auth::user()->role->libelle == 'Administration')
                         <li>
-                            <a href="{{ route('demandes-list') }}">
+                            <a href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">
                                 <i class="bi bi-circle"></i><span>Agrément technique
                                     pour l’exécution des études, du contrôle et des travaux routiers &nbsp;<span
                                         id="prog_produit_chimique" class="badge bg-warning text-white"></span>
@@ -205,7 +198,7 @@
 
                     @if (Auth::user()->agent->service->libelle_court == 'LNBTP' || Auth::user()->role->libelle == 'Administration')
                         <li>
-                            <a href="{{ route('demandes-list') }}">
+                            <a href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">
                                 <i class="bi bi-circle"></i><span>Demande d'Etude de sols et de fondations &nbsp;<span
                                         id="prog_agrement_technique" class="badge bg-warning text-white">
                                     </span></span>

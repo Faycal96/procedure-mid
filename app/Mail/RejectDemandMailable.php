@@ -27,7 +27,7 @@ class RejectDemandMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ministère des Infrastructures et du désenclavement',
+            subject: 'Direction Générale des Etudes Statistiques et Sectorielles',
         );
     }
 
