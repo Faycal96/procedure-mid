@@ -11,6 +11,10 @@
 
      }
  </style>
+
+
+
+
  <section id="about" class="about">
      @if (session()->has('message'))
          <div class="alert alert-success">
@@ -330,7 +334,7 @@
                                      </div>
                                      <button type="button" name="previous"
                                          class="previous action-button-previous">Retour</button>
-                                     <Button type="button" name="make_payment" id="next_domaine"
+                                     <button  type="button" name="make_payment" id="next_domaine"
                                          class="next action-button">Suivant</button>
                                  </fieldset>
                                  <fieldset>
@@ -374,6 +378,10 @@
                                                                     class="border-success form-control" placeholder="Montant travaux"/>
                                                             </div>
                                                          </div>
+
+                                                         <script>
+
+                                                         </script>
 
                                                          <div class="row">
                                                              <div class="col-6 form-group">
@@ -425,7 +433,7 @@
                                      </a>
                                      <button type="button" name="previous"
                                          class="previous action-button-previous">Retour</button>
-                                     <Button type="button" name="make_payment" id="next_domaine"
+                                     <button onclick="controlDate()"    type="button" name="make_payment" id="next_domaine"
                                          class="next action-button">Suivant</button> 
                                  </fieldset>
 
@@ -716,6 +724,9 @@
  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
  <!--<script src="{{ asset('js/jToast.min.js') }}"></script>-->
  <script src="{{ asset('js/sweetalert2.js') }}"></script>
+
+
+
  <script type="text/javascript">
      //intitialisation du tableau des autres documents
      $(function() {
@@ -730,6 +741,32 @@
        })*/
  </script>
 <script>
+
+
+//test.onclick  =  console.log("ok")//compareDates(dateDebut, dateFin)
+
+
+   
+function controlDate() {
+        accordion = document.getElementById("accordionReferenceEntreprise")
+   items = accordion.querySelectorAll("accordion-item")
+    items.forEach(item=> {
+        const dateDebut = document.getElementById(item.querySelector('input[type="date"][id^="date_debut"]').id)
+        const dateFIN = document.getElementById(item.querySelector('input[type="date"][id^="date_fin"]').id)
+
+        const dateDebutF = new Date(dateDebut.value)
+        const dateFinF = new Date(dateFin.value)
+
+        if (dateDebutF> dateFinF) {
+            alert("erreur de date")
+        }
+    })
+
+     }
+
+
+
+
     $(document).ready(function() {
       $("#next_piece").click(function(){
         var categorie = $("#categorie").find('option:selected').text();
@@ -855,6 +892,36 @@
          var opacity;
 
          $(".next").click(function() {
+            var dateDebut = document.getElementById('date_debut').value
+        var  dateFin = document.getElementById('date_fin').value
+
+        // var dateDebutF = new Date(dateDebut.value)
+       // var dateFinF = new Date(dateFin.value)
+
+      
+        if (dateDebut> dateFin) {
+            alert("erreur de date")
+        }
+
+
+        
+                accordion = document.getElementById("accordionReferenceEntreprise")
+   items = accordion.querySelectorAll("accordion-item")
+    items.forEach(item=> {
+        const dateDebut = document.getElementById(item.querySelector('input[type="date"][id^="date_debut"]').id)
+        const dateFin = document.getElementById(item.querySelector('input[type="date"][id^="date_fin"]').id)
+
+        var dateDebutF = dateDebut.value
+        var dateFinF = dateFin.value
+        console.log(dateDebutF)
+        console.log(dateFinF)
+            
+            console.log("vrai")
+        if (dateDebutF> dateFinF) {
+            alert("erreur de date")
+        }
+    })
+            
              current_fs = $(this).parent();
              next_fs = $(this).parent().next();
 
@@ -1000,7 +1067,38 @@
      }
 
 
+
+  
+    
+
+
+    
+
+
      function addCollapseAccordion() {
+
+       
+   
+     
+     test = document.getElementById("next_domaine")
+     
+  
+     
+          
+     
+         dateDebut = document.getElementById('date_debut').value
+         dateFin = document.getElementById('date_fin').value
+      //   compareDates(dateDebut, dateFin)
+         
+     
+     
+   
+   
+   
+
+
+
+
         
         nbrItem = document.getElementById("nbrItem");
         nbrItemValue = nbrItem.value;
@@ -1078,7 +1176,19 @@
         
         // document.write("<div class=\"accordion-item\">\r\n                                                 <h2 class=\"accordion-header\" id=\"headingTwo\">\r\n                                                     <button class=\"accordion-button\" type=\"button\"\r\n                                                         data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne\"\r\n                                                         aria-expanded=\"true\" aria-controls=\"collapseOne\">\r\n                                                         Accordion Item #1\r\n                                                     <\/button>\r\n                                                 <\/h2>\r\n                                                 <div id=\"collapseOne\" class=\"accordion-collapse collapse show\"\r\n                                                     aria-labelledby=\"headingTwo\" data-bs-parent=\"#accordionExample\">\r\n                                                     <div class=\"accordion-body\">\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"domaine\"\r\n                                                                     class=\"siege_social\">Localisation\r\n                                                                     <span style=\"color:red\">*<\/span><\/label>\r\n                                                                 <select name=\"domaine\" id=\"domaine\"\r\n                                                                     class=\"form-select border-success\">\r\n                                                                     <option value=\"\">Veuillez choisir la\r\n                                                                         localisation<\/option>\r\n                                                                 <\/select>\r\n\r\n                                                             <\/div>\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"categorie\"\r\n                                                                     class=\"siege_social\">D\u00e9signation de travaux\r\n                                                                     <span style=\"color:red\">*<\/span><\/label>\r\n                                                                 <select name=\"categorie\" id=\"categorie\"\r\n                                                                     class=\"form-select border-success\">\r\n                                                                     <option value=\"\">Veuillez choisir la\r\n                                                                         d\u00e9signation des travaux<\/option>\r\n                                                                 <\/select>\r\n                                                             <\/div>\r\n                                                             <div class=\"col-4\">\r\n                                                                 <label for=\"sousdomaine\" class=\"nom_societe\">Maitrise\r\n                                                                     d'ouvrage\r\n                                                                     <span style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"text\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6 form-group\">\r\n                                                                 <label class=\"col-form-label\">Date d\u00e9but<span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"date\"\r\n                                                                     class=\"form-control border-success\" \/>\r\n                                                             <\/div>\r\n\r\n                                                             <div class=\"col-6 mb-3 form-group\">\r\n                                                                 <label for=\"fullName\" class=\"col-form-label\">Date\r\n                                                                     fin<\/label>\r\n                                                                 <input type=\"date\"\r\n                                                                     class=\"form-control border-success\"\r\n                                                                     id=\"fullName\">\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"fw-bold\">Nature<span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"text\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"fw-bold\">Pourcentage Montant\r\n                                                                     total <span style=\"color: red\">*<\/span><\/label>\r\n                                                                 <input type=\"number\"\r\n                                                                     class=\"border-success form-control\" \/>\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n                                                         <div class=\"row\">\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"fw-bold\">Condition <span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" style=\"border: solid green 2px\"><\/textarea>\r\n                                                                 {{-- <input type=\"text\" class=\"border-success form-control\" \/> --}}\r\n                                                             <\/div>\r\n                                                             <div class=\"col-6\">\r\n                                                                 <label class=\"fw-bold\">Observation <span\r\n                                                                         style=\"color: red\">*<\/span><\/label>\r\n                                                                 <textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" style=\"border: solid green 2px\"><\/textarea>\r\n                                                                 {{-- <input type=\"text\" class=\"border-success form-control\" \/> --}}\r\n                                                             <\/div>\r\n                                                         <\/div>\r\n                                                     <\/div>\r\n                                                 <\/div>\r\n                                             <\/div>");
          $("#accordionReferenceEntreprise").append( innerHTML );
+       console.log( $("#accordionReferenceEntreprise")
+       )
      }
+
+
+     
+
+
+
+
+
+
+
      function deleteCollapseAccordion(me) {
          $(me).closest('.accordion-item').remove();
      }

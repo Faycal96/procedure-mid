@@ -71,10 +71,18 @@ class DemandeP002Controller extends Controller
             $data['paiement']= 1;
             //$data['reference'] = $this->repository->generateReference('P002');
             $data['procedure_id'] = Procedure::where(['code' => 'P002'])->first('uuid')->uuid;
-
             $categorie = $request['categorie'];
             $codeCategorie = CategorieDemande::where(['uuid' => $categorie])->first()->code;
-            //dd($codeCategorie);
+            $dateDebut = $request['date_debut'];
+            $dateFin = $request['date_fin'];
+
+            //dd($request['date_debut']);
+           /* foreach ($dateDebut as $dateD)
+            {
+                for
+            }*/
+            $result = $dateDebut->gt($dateFin);
+            
             $demande = $this->demandeRepositoryP002->create($data);  
             if($codeCategorie == "TH"){
                 $demande->montant = "95000";
@@ -90,15 +98,10 @@ class DemandeP002Controller extends Controller
             }else{
                 $demande->montant = "345000";
             }
-            $demande->code = "P002";
+            /* $demande->code = "P002";
             $demande->save();
-            //dd($data);
-            //$demande->save();
-            
-
-            //return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
             return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
-        //} else {
+         *///} else {
         //}
     }
 
