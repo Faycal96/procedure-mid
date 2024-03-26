@@ -187,7 +187,7 @@
 
                     @if (Auth::user()->agent->service->libelle_court == 'DGESS' || Auth::user()->role->libelle == 'Administration')
                         <li>
-                            <a href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">
+                            <a href="{{ route('demandes-list', ['procedure' => 'D']) }}">
                                 <i class="bi bi-circle"></i><span>Agrément technique
                                     pour l’exécution des études, du contrôle et des travaux routiers &nbsp;<span
                                         id="prog_produit_chimique" class="badge bg-warning text-white"></span>
@@ -198,7 +198,7 @@
 
                     @if (Auth::user()->agent->service->libelle_court == 'LNBTP' || Auth::user()->role->libelle == 'Administration')
                         <li>
-                            <a href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">
+                            <a href="{{ route('demandes-list', ['procedure' => 'D']) }}">
                                 <i class="bi bi-circle"></i><span>Demande d'Etude de sols et de fondations &nbsp;<span
                                         id="prog_agrement_technique" class="badge bg-warning text-white">
                                     </span></span>
@@ -384,6 +384,8 @@
     <script src="{{ asset('backend/assets/vendor/echarts/echarts.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/quill/quill.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendor/simple-datatables/moment.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendor/simple-datatables/dataTables.dateTime.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/php-email-form/validate.js') }}"></script>
 

@@ -48,3 +48,4 @@ function setMenuActive($route){
 function contains($container, $contenu){
     return Str::contains($container, $contenu);
 }
+

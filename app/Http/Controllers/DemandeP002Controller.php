@@ -17,15 +17,18 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreDemandeP002Request;
 use App\Models\Categorie;
 use App\Models\CategorieDemande;
+use App\Repositories\OMRepository;
 
 class DemandeP002Controller extends Controller
 {
     public $repository;
     public $demandeRepositoryP002;
-    public function __construct(DemandeRepository $repository, DemandeP002Repository $demandeRepositoryP002)
+    public $paiementRepository;
+    public function __construct(DemandeRepository $repository, DemandeP002Repository $demandeRepositoryP002, OMRepository $paiementRepository)
     {
         $this->repository = $repository;
         $this->demandeRepositoryP002 = $demandeRepositoryP002;
+        $this->paiementRepository = $paiementRepository;
         
     }
 
@@ -75,14 +78,6 @@ class DemandeP002Controller extends Controller
             $codeCategorie = CategorieDemande::where(['uuid' => $categorie])->first()->code;
             $dateDebut = $request['date_debut'];
             $dateFin = $request['date_fin'];
-
-            //dd($request['date_debut']);
-           /* foreach ($dateDebut as $dateD)
-            {
-                for
-            }*/
-            $result = $dateDebut->gt($dateFin);
-            
             $demande = $this->demandeRepositoryP002->create($data);  
             if($codeCategorie == "TH"){
                 $demande->montant = "95000";
@@ -98,10 +93,10 @@ class DemandeP002Controller extends Controller
             }else{
                 $demande->montant = "345000";
             }
-            /* $demande->code = "P002";
+            $demande->code = "P002";
             $demande->save();
             return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
-         *///} else {
+         //} else {
         //}
     }
 

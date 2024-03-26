@@ -62,7 +62,7 @@ class DemandeP002Repository extends AppRepository
             'raison_social' =>  $data["raison_social"], 
             'siege_social' =>  $data["siege_social"], 
             'boite_postale' =>  $data["boite_postale"], 
-            'fax' =>  $data["fax"], 
+            /* 'fax' =>  $data["fax"],  */
             'tel_1' =>  $data["tel_1"], 
             'email_entreprise' =>  $data["email_entreprise"], 
             'adresse_physique' =>  $data["adresse_physique"], 

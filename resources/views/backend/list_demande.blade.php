@@ -3,7 +3,7 @@
 
 @section('title')
 <div class="pagetitle">
-    <h1>Liste des Demandes</h1>
+    <h1>Liste des demandes</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -39,7 +39,7 @@
                             </ul>
                         </div>
 
-                        <h5 class="card-title">Liste des Demandes <span>| Demandes</span></h5>
+                        <h5 class="card-title">Liste des demandes <span>| demandes</span></h5>
 
                         <div class="card-body">
 
@@ -53,19 +53,30 @@
                                 </div>
                             </div><br>
 
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Filtrer les demandes par état</label>
+                                    <select name="procedure" id="procedure" class="form-select border-success" onchange="changeTypeProc()">
+                                    <option class="mb-3" value="Toutes">Toutes les demandes</option>
+                                    <option class="mb-3" value="D" {{($selectedProcedure == "D" ? 'selected': '')}}>Nouveau</option>
+                                    <option class="mb-3" value="V" {{($selectedProcedure == "V" ? 'selected': '')}}>Validés </option>
+                                    <option class="mb-3" value="R" {{($selectedProcedure == "R" ? 'selected': '')}}>Rejettés </option>
+                                    </select>
+                                </div>
 
-                            <label>Filtrer les demandes par état</label>
-                            <select name="procedure" id="procedure" class="form-select border-success" onchange="changeTypeProc()">
-                            <option class="mb-3" value="Toutes">Toutes les demandes</option>
-                            <option class="mb-3" value="D" {{($selectedProcedure == "D" ? 'selected': '')}}>Nouveau</option>
-                            <option class="mb-3" value="V" {{($selectedProcedure == "V" ? 'selected': '')}}>Validés </option>
-                            <option class="mb-3" value="R" {{($selectedProcedure == "R" ? 'selected': '')}}>Rejettés </option>
-                            </select><br><br>
+                                <div class="col-md-4">
+                                    <label> Date début (de) </label>
+                                    <input type="date" id="min" name="min" class="form-control">
+                                </div>
 
+                                <div class="col-md-4">
+                                    <label> Date fin (à) </label>
+                                    <input type="date" id="max" name="max" class="form-control">
+                                </div>
+                            </div><br>
 
                             <!-- Table with stripped rows -->
                             <table id="example1" class="table datatable table-bordered table-striped">
-
                                 
                                 <thead>
                                     <tr>
@@ -164,8 +175,9 @@
                                         @endif
 
                                         <td>
-                                            {{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/y') }}
+                                            {{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/Y') }}
                                         </td>
+
                                         <td>
                                             <span class="badge {{ $statutColor }} ">{{ $statut }}</span>
                                         </td>
@@ -393,7 +405,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <b>Date demande:</b>
-                                            <span class="text-success">{{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/y') }}</span>
+                                            <span class="text-success">{{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/Y') }}</span>
                                         </div>
                                         <div class="col-6">
                                             <b>Montant:</b>
@@ -683,6 +695,8 @@
     $(function() {
 
         $(document).ready(function() {
+            
+
             $('#example1').DataTable({
 
                 dom: 'Blfrtip',
@@ -751,6 +765,61 @@
                     }
                 }
             });
+
+
+
+
+
+
+
+            function filtre2Date(){
+                // Cette fonction permet de filtrer le datatable entre 02 dates
+                
+                let minDate, maxDate;
+                
+                // Custom filtering function which will search data in column four between two values
+                DataTable.ext.search.push(function (settings, data, dataIndex) {
+
+                    let minDate = document.getElementById("min").value;
+                    let maxDate = document.getElementById("max").value;
+
+                    minDate = new Date(minDate);
+
+                    maxDate = new Date(maxDate);
+
+                    //let date = new Date(data[5]);  // YYYY/MM/DD
+
+                    let date = data[4].split("/");                   
+                    date =  new Date(date[2], date[1] -1 , date[0]); 
+                
+                    if (
+                        (minDate === null && maxDate === null) ||
+                        (minDate === null && date <= maxDate) ||
+                        (minDate <= date && maxDate === null) ||
+                        (minDate <= date && date <= maxDate)
+                    ) {
+                        return true;
+                    }
+                    return false;
+                });
+
+            }
+           
+            $("#min").change(function(){
+                filtre2Date(); // appel de la fonction de filtrage
+                 // DataTables initialisation
+                 let table = new DataTable('#example1');
+                 table.draw();
+            });
+
+
+            $("#max").change(function(){
+                filtre2Date();  // appel de la fonction de filtrage
+                 // DataTables initialisation
+                 let table = new DataTable('#example1');
+                 table.draw();
+            });
+
         });
 
     });

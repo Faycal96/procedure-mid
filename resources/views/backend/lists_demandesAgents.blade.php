@@ -27,7 +27,7 @@
                                 </ul>
                             </div>
 
-                        <h2 class="card-title text-center">Mes Demandes </h2>
+                        <h2 class="card-title text-center">Mes demandes </h2>
 
                             <div class="card-body">
 
@@ -58,7 +58,7 @@
                                                 {{-- <th scope="col">Délai de traitement</th> --}}
                                                 <th scope="col">Déposé</th>
                                                 <th scope="col">Paiement</th>
-                                                <th scope="col">Type Demande</th>
+                                                <th scope="col">Type demande</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
@@ -127,7 +127,7 @@
                                                     <span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
                                                     @endif
 
-                                                    <td>{{ $demande->created_at->diffForHumans() }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/y') }}</td>
 
                                                     {{-- partie paiement --}}
                                                     @if ($demande->paiement === 1)

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->json('schemas')->nullable();
             $table->ulid('service_id')->nullable();
             $table->foreign('service_id')->references('uuid')->on('services');
+            $table->decimal('fraisTimbre')->nullable();
+            $table->decimal('fraisDossier')->nullable();
             $table->timestamps();
         });
     }

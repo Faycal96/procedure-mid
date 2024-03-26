@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('uuid')->primary();
             $table->string('categorie_usager')->nullable();
             $table->string('libelle');
+            $table->decimal('montant');
             $table->timestamps();
         });
     }

@@ -56,7 +56,9 @@ class ProcedureSeeder extends Seeder
             "code" => "P002",
             "service_id" => $serv1->uuid,
             "delai" => "90",
-            "tarif" => 1500
+            "tarif" => 1500,
+            "fraisTimbre" => 25000,
+            "fraisDossier" =>2000
         ]);
 
         Procedure::create([

@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BackendController extends Controller
 {
@@ -102,7 +103,7 @@ class BackendController extends Controller
             'agents' => Agent::all(),
             'motifsP001' => Motif::where("code", "=", "P001")->sortByAsc('ordre'),
             'motifsP002' => Motif::where("code", "=", "P002"),
-            'motifs' => Motif::all()
+            'motifs' => Motif::all(),
         ];
 
         //  dd($data['demandes'][0]->demandePiece);
