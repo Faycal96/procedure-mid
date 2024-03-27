@@ -6,7 +6,7 @@
         {{ $demand['procedure'] }}
     </div>
     <div class="card-body">
-        <h5 class="card-title">Madame/Monsieur {{ $demand['name'] }},</h5>
+        <h5 class="card-title">Madame/Monsieur,</h5>
         <p class="card-text">
         Vous avez soumis une demande d’agrément technique pour la catégorie <b>{{$demand['categorie']}}</b> pour le compte de <b>{{$demand['nomEntreprise']}}</b>.
         La commission d’attribution des agréments techniques a l’honneur de porter à votre connaissance que votre demande a reçu une suite favorable.

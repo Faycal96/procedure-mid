@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('procedures', function (Blueprint $table) {
             $table->ulid('uuid')->primary();
-            $table->string('categorie_usager')->nullable();
-            $table->string('libelle');
-            $table->decimal('montant');
+            $table->string('libelle_court');
+            $table->string('libelle_long')->nullable();
+            $table->string('code')->nullable();
+            $table->json('schemas')->nullable();
+            $table->ulid('service_id')->nullable();
+            $table->foreign('service_id')->references('uuid')->on('services');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('procedures');
     }
 };

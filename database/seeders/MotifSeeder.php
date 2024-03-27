@@ -65,7 +65,7 @@ class MotifSeeder extends Seeder
         ]);
         Motif::create([
          
-            "libelle" => "Manque de plans de vues",
+            "libelle" => "Manque de plan en vue",
             "code_procedure" => "P001",
             "ordre" => 2
         ]);

@@ -107,7 +107,7 @@
                                    stroke-width: 2px;
                                    stroke-linecap: round;
                                    stroke-linejoin: round;"></i>
-                        <b>Frais de dossier : <b class="text-success">25 000 FCFA</b>  </b>
+                        <b>Frais de dossier : <b class="text-success">{{$fraisDossier}} F CFA</b>  </b>
                         <i class="bi bi-tag text-success"
                             style="display: inline-block;
                                    width: 24px;
@@ -117,7 +117,7 @@
                                    stroke-width: 2px;
                                    stroke-linecap: round;
                                    stroke-linejoin: round;"></i>
-                        <b>Frais de timbre : <b class="text-success"> 20 000 F CFA</b></b><br><br>
+                        <b>Frais de timbre : <b class="text-success"> {{$fraisTimbre}} F CFA</b></b><br><br>
                         <p><b><i class="bi bi-tag text-success"
                             style="display: inline-block;
                                width: 24px;
@@ -138,7 +138,7 @@
                                    stroke-width: 2px;
                                    stroke-linecap: round;
                                    stroke-linejoin: round;"></i>
-                                <b>TH : <b class="text-success"> 50 000 F CFA</b></b><br>
+                                <b>TH : <b class="text-success"> {{$montantTH}} F CFA</b></b><br>
                             </div>
                             <div class="col">
                                 <i class="bi bi-tag text-success"
@@ -150,7 +150,7 @@
                                    stroke-width: 2px;
                                    stroke-linecap: round;
                                    stroke-linejoin: round;"></i>
-                                <b>TR1 : <b class="text-success"> 200 000 F CFA</b></b><br>
+                                <b>TR1 : <b class="text-success">{{$montantTR1}} F CFA</b></b><br>
                             </div>
                             <div class="col">
                                 <i class="bi bi-tag text-success"
@@ -162,7 +162,7 @@
                                    stroke-width: 2px;
                                    stroke-linecap: round;
                                    stroke-linejoin: round;"></i>
-                                <b>TR2 : <b class="text-success"> 300 000 F CFA</b></b><br>
+                                <b>TR2 : <b class="text-success"> {{$montantTR2}} F CFA</b></b><br>
                             </div>
                             <div class="col">
                                 <i class="bi bi-tag text-success"
@@ -174,7 +174,7 @@
                                    stroke-width: 2px;
                                    stroke-linecap: round;
                                    stroke-linejoin: round;"></i>
-                                <b>TR3 : <b class="text-success"> 500 000 F CFA</b></b><br>
+                                <b>TR3 : <b class="text-success">{{$montantTR3}} F CFA</b></b><br>
                             </div>
                             <div class="col">
                                 <i class="bi bi-tag text-success"
@@ -186,7 +186,7 @@
                                    stroke-width: 2px;
                                    stroke-linecap: round;
                                    stroke-linejoin: round;"></i>
-                                <b>EC : <b class="text-success"> 300 000 F CFA</b></b>
+                                <b>EC : <b class="text-success"> {{$montantEC}} F CFA</b></b>
                             </div>
                         </div><br><br>
                             @endif

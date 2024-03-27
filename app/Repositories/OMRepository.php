@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\OMResponse;
+use App\Models\Paiement;
 use Exception;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
@@ -18,7 +19,7 @@ class OMRepository extends BaseRepository
      */
     public function model()
     {
-        //return YourModel::class;
+        return Paiement::class;
     }
 
     public function payOrange($montant, $numberUser, $codeOtp): OMResponse
@@ -120,6 +121,7 @@ class OMRepository extends BaseRepository
                         $response_text = $message->textContent;
                     }
                     $omResponse = new OMResponse(true, $response_text, $trans_id);
+                    
                 } else {
                         //Paiement non validé
                     if ('200' != trim($status->textContent)) {

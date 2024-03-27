@@ -342,7 +342,6 @@ class BackendController extends Controller
             $demandes = Demande::all();
         }
 
-
         $data = [
             'demandes' => $demandes, //DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->get(),
             'selectedProcedure' => $procedure,
@@ -394,8 +393,6 @@ class BackendController extends Controller
         } catch (Exception $e) {
             
         }
-        
-        Demande::where('uuid', $id)->update(['etat' => 'N']);
 
         return redirect()->back()->with('success', 'Note d\'étude envoyée avec succes avec succès !');
     }

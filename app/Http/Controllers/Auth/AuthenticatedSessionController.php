@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\UpdatePWDRequest;
+use App\Models\CategorieDemande;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,9 +33,25 @@ class AuthenticatedSessionController extends Controller
             $checkPeriode = ($procedure->estperiodique && !$checkSession && $procedure->session_debut && $procedure->session_fin) ? 1 : 0;
         }
 
+        $montantTH = CategorieDemande::where("code", "=", "TH" )->first()->montant;
+        $montantTR1 = CategorieDemande::where("code", "=", "TR1" )->first()->montant;
+        $montantTR2 = CategorieDemande::where("code", "=", "TR2" )->first()->montant;
+        $montantTR3 = CategorieDemande::where("code", "=", "TR3" )->first()->montant;
+        $montantEC = CategorieDemande::where("code", "=", "EC" )->first()->montant;
+
+        $fraisTimbre = Procedure::where("code", "=", "P002" )->first()->frais_timbre;
+        $fraisDossier = Procedure::where("code", "=", "P002" )->first()->frais_dossier;
+
         return view('auth.login', [
             'procedure' => $procedure,
             'checkSession' => $checkPeriode,
+            "fraisTimbre"=>$fraisTimbre,
+            "fraisDossier"=>$fraisDossier,
+            "montantTH" =>$montantTH,
+            "montantTR1" =>$montantTR1,
+            "montantTR2" =>$montantTR2,
+            "montantTR3" =>$montantTR3,
+            "montantEC" =>$montantEC,
         ]);
     }
 

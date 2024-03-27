@@ -217,6 +217,10 @@ margin-top:20px;
                                         <td class="col-md-3"><i class="fa fa-inr"></i> {{ $demande->objectif_demande }}</td>
                                     </tr>
                                     <tr>
+                                        <td class="col-md-9"><strong>Catégorie</strong></td>
+                                        <td class="col-md-3"><i class="fa fa-inr"></i>{{ $demande->categorie->libelle }}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="col-md-12" colspan="2" style="text-align: center"><b>
                                             Représentant de l'entreprise</b>
                                         </td>

@@ -10,6 +10,7 @@ use App\Models\Demande;
 use App\Models\DemandePiece;
 use App\Models\DemandeP002;
 use App\Models\ActiviteDemandeP002;
+use App\Models\Paiement;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -85,7 +86,15 @@ class DemandeP002Repository extends AppRepository
         $rccm =  $this->uploadFile($data, 'rccm');
         $ifu =  $this->uploadFile($data, 'ifu');
         $chiffreAffaire =  $this->uploadFile($data, 'chiffreAffaire');
-        $ancienAgrement =  $this->uploadFile($data, 'ancienAgrement');
+        if($data['objectif_demande'] == "Renouvellement" || $data['objectif_demande'] == "Changement de catégorie"){
+            $ancienAgrement =  $this->uploadFile($data, 'ancienAgrement');
+
+            DemandePiece::create([
+                "libelle" => "Ancien agrément",
+                "chemin" => $ancienAgrement,
+                "demande_id" => $demandeVar->uuid
+            ]);
+        }
         $listeMateriel =  $this->uploadFile($data, 'listeMateriel');
         $listePersonnel =  $this->uploadFile($data, 'listePersonnel');
 
@@ -110,11 +119,6 @@ class DemandeP002Repository extends AppRepository
             "demande_id" => $demandeVar->uuid
         ]);
         DemandePiece::create([
-            "libelle" => "Ancien agrément",
-            "chemin" => $ancienAgrement,
-            "demande_id" => $demandeVar->uuid
-        ]);
-        DemandePiece::create([
                 "libelle" => "Liste matériel",
             "chemin" => $listeMateriel,
             "demande_id" => $demandeVar->uuid
@@ -124,8 +128,8 @@ class DemandeP002Repository extends AppRepository
             "chemin" => $listePersonnel,
             "demande_id" => $demandeVar->uuid
         ]);
-
-
+         
+       
         if( isset($data['fichier_document_CV'] )){
             foreach($data['fichier_document_CV'] as $index => $cv) {
                 $var = $this->uploadAFile($cv);

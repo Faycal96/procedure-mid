@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreDemandeP002Request;
 use App\Models\Categorie;
 use App\Models\CategorieDemande;
+use App\Models\ModePaiement;
+use App\Models\Paiement;
 use App\Repositories\OMRepository;
 
 class DemandeP002Controller extends Controller
@@ -40,9 +42,6 @@ class DemandeP002Controller extends Controller
 
     public function create()
     {
-
-        // $data["commune"] = Commune::all();
-        // dd($data["commune"]);
         return view('livewire.Demandes.create');
     }
 
@@ -56,14 +55,13 @@ class DemandeP002Controller extends Controller
         //return view('livewire.Demandesp0022.create');
     }
 
-    public function store(Request $request, UserRepository $userRepository, DemandePieceRepository $demandePieceRepository, DemandeP002 $demande)
+    public function store(Request $request, UserRepository $userRepository, DemandePieceRepository $demandePieceRepository, DemandeP002 $demande, OMRepository  $paiementRepository)
     {
 
-
         $data =  $request->all();
-        //dd($data);
+        //    if ($this->payment($data["numero"], $data["otp"])) {
 
-//    if ($this->payment($data["numero"], $data["otp"])) {
+          
             $dataFiles = $request->all();
 
             $data['usager_id'] = Auth::user()->usager_id;
@@ -94,6 +92,16 @@ class DemandeP002Controller extends Controller
                 $demande->montant = "345000";
             }
             $demande->code = "P002";
+
+           // $paiementRepository->payOrange($demande->montant,$data['numero'], $data['otp'] );
+           $pay = new Paiement();
+           $pay->demande_id = $demande->uuid;
+           $pay->code_procedure = $demande->procedure->code;
+
+           $idPay = ModePaiement::where("ordre","=",$data["moyen"] )->first();
+           $pay->mode_paiement_id =  $idPay->uuid;
+           $pay->save();
+           $demande->paiement = 1;
             $demande->save();
             return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
          //} else {

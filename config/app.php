@@ -171,6 +171,8 @@ return [
 
         // manipulation des images
         Intervention\Image\ImageServiceProvider::class,
+        //qrCode
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
     ])->toArray(),
 
     /*
@@ -188,6 +190,9 @@ return [
         // 'Example' => App\Facades\Example::class,
         // manipulation des images
         'Image' => Intervention\Image\Facades\Image::class,
+
+        //Qrcode
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
     ])->toArray(),
 
 ];

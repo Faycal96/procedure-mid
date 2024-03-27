@@ -144,6 +144,9 @@
                                                     <td>
                                                         <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i></button>
                                                         <button title="Imprimer" type="button" class="btn btn-success " data-bs-toggle="modal"><a href="{{ route('etat', ['uuid' => $demande->uuid]) }}"> <i class="bi bi-printer"></i></a></button>
+                                                        @if($demande->procedure->code == 'P002')
+                                                        <button title="Quittance" type="button" class="btn btn-success " data-bs-toggle="modal"><a href="{{ route('quittance', ['uuid' => $demande->uuid]) }}"> <i class="bi bi-receipt-cutoff"></i></a></button>
+                                                        @endif
                                                         @if ($demande->etat == 'S' && !is_null($demande->output_file) ||
                                                         $demande->etat == 'A' && !is_null($demande->output_file))
 

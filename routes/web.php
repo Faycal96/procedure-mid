@@ -15,6 +15,7 @@ use App\Http\Controllers\PlainteController;
 use App\Http\Controllers\ProcedureController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\QuittanceController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
@@ -198,6 +199,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::put('/administration/demande/{id}/{table}', [BackendController::class, 'noteEtude'])->name('noteEtude');
 
     Route::get('/etat/{uuid}', [EtatController::class, 'index'])->name('etat');
+    Route::get('/quittance/{uuid}', [QuittanceController::class, 'index'])->name('quittance');
 
 });
 

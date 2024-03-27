@@ -16,7 +16,7 @@
               <div class="pdf-header-left">
                 <div>Ministère des Infrastructures et du Désenclavement</div>
                 <div style="margin-left: 100px">-------------</div>
-                <div style="margin-left: 50px">Secrétariat Général</div>
+                <div style="margin-left: 80px">Secrétariat Général</div>
                 <div style="margin-left: 100px">-------------</div>
                 <div>Direction Générale des Études et des Statistiques Sectorielles</div><br />
               </div>
@@ -25,8 +25,10 @@
                 <div style="margin-left: 10">BURKINA FASO</div>
                 <div style="margin-left: 30"></div>
                 <div>Unité-Progrès-Justice</div>
+                <img style="width: 90px; height:90px; margin-top: 60px; margin-left: 50px" 
+                  src="data:image/png;base64, {!! $qrCode !!}"/>
               </div>
-            </div><br><br><br><br>
+            </div>
       
             <!-- <div class="logo-container">
               
@@ -42,7 +44,6 @@
             Quittance N° {{$demande->reference}} du {{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/y') }} <br><br>
               délivrée à <strong>{{ $demande->raison_social }}</strong>
             </div>
-      
             <table class="line-items-container">
               <thead>
                 <tr>
@@ -53,20 +54,20 @@
               <tbody>
                 <tr>
                   <td>Frais de dossier</td>
-                  <td class="bold">25000 F CFA</td>
+                  <td class="bold">{{$fraisDossier}} F CFA</td>
                 </tr>
                 <tr>
                   <td>Frais de timbre</td>
-                  <td class="bold">20000 F CFA</td>
+                  <td class="bold">{{$fraisTimbre}} F CFA</td>
                 </tr>
                 <tr>
                   <td>Frais d'examen de dossier</td>
                   <td class="bold">
-                    @if($demande->Categorie->code == "TH") 50000 F CFA
-                        @elseif($demande->Categorie->code == "TR1") 200000 F CFA
-                        @elseif($demande->Categorie->code == "TR2") 300000 F CFA
-                        @elseif($demande->Categorie->code == "TR3") 500000 F CFA
-                        @elseif($demande->Categorie->code == "EC") 300000 FCFA
+                    @if($demande->Categorie->code == "TH") {{$montantTH}}  F CFA
+                        @elseif($demande->Categorie->code == "TR1")  {{$montantTR1}} F CFA
+                        @elseif($demande->Categorie->code == "TR2")   {{$montantTR2}} F CFA
+                        @elseif($demande->Categorie->code == "TR3")    {{$montantTR3}} F CFA
+                        @elseif($demande->Categorie->code == "EC")      {{$montantEC}} F CFA
                     @endif
                   </td>
                 </tr>
@@ -88,18 +89,15 @@
               </tbody>
             </table><br>
             <span>Arreté la présente quittance à la somme de <b>{{$montant}} F CFA</b></span>
-            <div class="footer">
+            {{-- <div class="footer">
               <div class="footer-info">
-                {{-- <span>Arreté la présente quiittance a la somme de {{$montant}} F CFA</span> --}}
+                <span>Arreté la présente quiittance a la somme de {{$montant}} F CFA</span>
               </div>
-              <!-- <div class="footer-thanks">
-                <img
-                  src="https://github.com/anvilco/html-pdf-invoice-template/raw/main/img/heart.png"
-                  alt="heart"
-                />
-                <span>Thank you!</span>
-              </div> -->
-            </div>
+              
+              <div class="footer-thanks">
+                
+              </div>
+            </div> --}}
           </div>
     </body>
 </html>

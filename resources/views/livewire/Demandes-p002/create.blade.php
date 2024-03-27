@@ -70,11 +70,11 @@
                                          <div class="row">
                                             <div class="col-6">
                                                 <label class="fw-bold">NIP / Passeport<span style="color: red">*</span></label>
-                                                <input type="text" readonly disabled="true" class="form-control border-success" name="nip" id="nip" required=true placeholder="identité" value="{{ $nip }}" /><br />
+                                                <input type="text" readonly class="form-control border-success" name="nip" id="nip" required=true placeholder="identité" value="{{ $nip }}" /><br />
                                             </div>
                                             <div class="col-6">
                                                 <label class="fw-bold">Identité<span style="color: red">*</span></label>
-                                                <input type="text" readonly disabled="true" class="form-control border-success" name="beneficiaire" id="beneficiaire" required=true placeholder="identité" value="{{ $identite }}" /><br />
+                                                <input type="text" readonly class="form-control border-success" name="beneficiaire" id="beneficiaire" required=true placeholder="identité" value="{{ $identite }}" /><br />
                                             </div>
                                             <br />
 
@@ -588,11 +588,11 @@
                                                             <td><input id="" disabled name="recapChiffre" class="form-control border-success"></td>
                                                             <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
                                                         </tr>
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <td><label for="">Ancien agrément : </label></td>
                                                             <td><input id="" disabled name="recapAgrement" class="form-control border-success"></td>
                                                             <td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="bi bi-eye text-primary"></i></a></td>
-                                                        </tr>
+                                                        </tr> --}}
                                                         <tr>
                                                             <td><label for="">Liste matériel : </label></td>
                                                             <td><input id="" disabled name="recapMateriel" class="form-control border-success"></td>
@@ -811,7 +811,7 @@ function controlDate() {
         var rccm = $('#rccm')[0].files[0].name;
         var ifu = $('#ifu')[0].files[0].name;
         var chiffreAffaire = $('#chiffreAffaire')[0].files[0].name;
-        var agrement = $('#ancienAgrement')[0].files[0].name;
+        //var agrement = $('#ancienAgrement')[0].files[0].name;
         var materiel = $('#listeMateriel')[0].files[0].name;
         var personnel = $('#listePersonnel')[0].files[0].name;
         
@@ -837,7 +837,7 @@ function controlDate() {
         $('input[name=recapRccm]').val(rccm);
         $('input[name=recapIfu]').val(ifu);
         $('input[name=recapChiffre]').val(chiffreAffaire);
-        $('input[name=recapAgrement]').val(agrement);
+        //$('input[name=recapAgrement]').val(agrement);
         $('input[name=recapMateriel]').val(materiel);
         $('input[name=recapPersonnel]').val(personnel);
 
