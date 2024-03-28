@@ -15,7 +15,7 @@
     <section class="section dashboard">
 
         @if (Auth::user()->agent->service->libelle_court == 'LNBTP' || Auth::user()->role->libelle == 'Administration')
-            <h3> - Etude de sols et fondation  </h3>
+            <h3> - Etude de sols et fondations  </h3>
             <div class="row">
                 <!-- Left side columns -->
                 <div class="col-lg-12">
@@ -25,7 +25,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                            href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">Etude de sols et fondation</a>
+                                            href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">Etude de sols et fondations</a>
                                             <span>| <b>Total</b></span>
                                         </h5>
                                         <div class="d-flex align-items-center">
@@ -121,7 +121,7 @@
         <br>
         @if (Auth::user()->agent->service->libelle_court == 'DGESS' || Auth::user()->role->libelle == 'Administration')
             <div class="row">
-                <h3> - Agrement technique </h3>
+                <h3> - Agrément technique </h3>
                 <!-- Left side columns -->
                 <div class="col-lg-12">
                     <div class="row">
@@ -130,7 +130,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                            href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">Agrement technique </a>
+                                            href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">Agrément technique </a>
                                             <span>| <b>Total</b></span>
                                         </h5>
 
@@ -154,7 +154,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                            href="{{ route('demandes-list', ['procedure' => 'D']) }}">Agrement technique </a>
+                                            href="{{ route('demandes-list', ['procedure' => 'D']) }}">Agrément technique </a>
                                             <span>| <b>En attente</b></span>
                                         </h5>
 
@@ -178,7 +178,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                            href="{{ route('demandes-list', ['procedure' => 'V']) }}">Agrement technique</a>
+                                            href="{{ route('demandes-list', ['procedure' => 'V']) }}">Agrément technique</a>
                                             <span>| <b>Validés</b></span>
                                         </h5>
 
@@ -202,7 +202,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                            href="{{ route('demandes-list', ['procedure' => 'R']) }}">Agrement technique</a>
+                                            href="{{ route('demandes-list', ['procedure' => 'R']) }}">Agrément technique</a>
                                             <span>| <b> Rejettés</b></span>
                                         </h5>
         
@@ -225,7 +225,7 @@
                 </div><!-- End Left side columns -->
             </div>
         <br>
-            <h3> - Agrément par categorie </h3>
+            <h3> - Agrément par catégorie </h3>
             <div class="row">
                 <!-- Left side columns -->
                 <div class="col-lg-12">
@@ -235,7 +235,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                                href="#">Categorie Agrement</a>
+                                                href="#">Catégorie Agrément</a>
                                             <span>| <b>TH</b></span>
                                         </h5>
 
@@ -262,7 +262,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                                href="#">Categorie Agrement</a>
+                                                href="#">Catégorie Agrément</a>
                                             <span>| <b>TR1</b></span>
                                         </h5>
 
@@ -286,7 +286,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                                href="#">Categorie Agrement</a>
+                                                href="#">Catégorie Agrément</a>
                                             <span>| <b>TR2</b></span>
                                         </h5>
 
@@ -310,7 +310,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                                href="#">Categorie Agrement</a>
+                                                href="#">Catégorie Agrément</a>
                                             <span>| <b>TR3</b></span>
                                         </h5>
 
@@ -333,7 +333,7 @@
                                 <div class="card info-card revenue-card">
                                     <div class="card-body">
                                         <h5 class="card-title"><a
-                                                href="#">Categorie Agrement</a>
+                                                href="#">Catégorie Agrément</a>
                                             <span>| <b>EC</b></span>
                                         </h5>
 
@@ -355,6 +355,63 @@
                     </div>
                 </div><!-- End Left side columns -->
             </div>
+        <br>
+        <div class="row">
+            <h3> - Agrément technique par sexe </h3>
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+                        <!-- Revenue Card produit chimique -->
+                        <div class="col-xxl-3 col-md-6">
+                            <div class="card info-card revenue-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a
+                                        href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">Agrément technique </a>
+                                        <span>| <b>Homme</b></span>
+                                    </h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-folder"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>{{ $nbAgrementTechniqueHomme }}</h6>
+                                            {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- End Revenue Card -->
+                        <!-- Revenue Card produit chimique -->
+                        <div class="col-xxl-3 col-md-6">
+                            <div class="card info-card revenue-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a
+                                        href="{{ route('demandes-list', ['procedure' => 'D']) }}">Agrément technique </a>
+                                        <span>| <b>Femme</b></span>
+                                    </h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-folder"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>{{ $nbAgrementTechniqueFemme }}</h6>
+                                            {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- End Revenue Card -->
+                </div>
+            </div><!-- End Left side columns -->
+        </div>
         @endif 
     </section>
 @endsection

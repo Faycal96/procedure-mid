@@ -23,7 +23,7 @@
 
 
     <div class="form-group">
-        <label>Plainte lié à la procédure</label>
+        <label>Plainte liée à la procédure</label>
         <select name="procedure" id="procedure" class="form-select border-success">
         <option class="mb-3" value=""></option>
             @foreach($procedures as $proc)

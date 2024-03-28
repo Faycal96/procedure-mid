@@ -47,6 +47,9 @@ class BackendController extends Controller
             'nbAgrementTechniqueValider' => Demande::all()->where('code', "P002")->where('etat', "V")->count(),
             'nbAgrementTechniqueRejette' => Demande::all()->where('code', "P002")->where('etat', "R")->count(),
 
+            'nbAgrementTechniqueHomme' => Demande::all()->where('code', "P002")->where('sexe', "M")->count(),
+            'nbAgrementTechniqueFemme' => Demande::all()->where('code', "P002")->where('sexe', "F")->count(),
+
             'nbEtudeSol' => Demande::all()->where('code', "P001")->count(),
             'nbEtudeSolEnAttente' => Demande::all()->where('code', "P001")->where('etat', "D")->count(),
             'nbEtudeSolValider' => Demande::all()->where('code', "P001")->where('etat', "V")->count(),

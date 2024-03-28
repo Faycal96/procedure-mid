@@ -135,7 +135,7 @@
 
                                         <tr>
                                             <th scope="row">{{ $i++ }}</th>
-                                            <td>{{ $plainte->created_at->format('d/m/Y H:i:s') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($plainte->created_at)->format('d/m/Y') }}</td>
                                             <td> {{ $plainte->usager->nom.' '.$plainte->usager->prenom}}</td>
                                             <td>{{  $plainte->usager->telephone }}</td>
                                             <td>{{ $plainte->procedure }}</td>
@@ -148,7 +148,7 @@
 
                                             
                                                 <a data-toggle="modal" data-target="#signer{{ $plainte->uuid}}"
-                                                    type="button" title="Modifier l'etat de la plainte" class="btn btn-success"><i
+                                                    type="button" title="Traitement réservé à la plainte" class="btn btn-success"><i
                                                         class="bi bi-pencil-square"></i> </a>
 
 
@@ -167,7 +167,7 @@
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Date de la plainte :</b>
-                                                                        <span class="text-success">{{ $plainte->created_at}}</span>
+                                                                        <span class="text-success">{{ \Carbon\Carbon::parse($plainte->created_at)->format('d/m/Y') }}</span>
                                                                     </div>
 
                                                                     <div class="col-6">
@@ -241,7 +241,7 @@
                                                             <img src="{{ asset('backend/assets/img/valide.png') }}" 
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
-                                                            <h5 class="modal-title m-auto"> Modifier plainte </h5>
+                                                            <h5 class="modal-title m-auto"> Traitement de la plainte </h5>
                                                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close"> </button>
                                                         </div>
 
@@ -253,7 +253,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Modifier l'état de la plainte</label>
+                                                                        <label class="col-form-label">Traitement réservé à la plainte</label>
                                                                             <select class="form-select" name="etat" required>
                                                                                 <option class=""> </option>
                                                                                 @if ($plainte->etat == '')
@@ -274,7 +274,7 @@
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-warning"
                                                                         data-dismiss="modal">Non, Annuler</button>
-                                                                    <button type="submit" class="btn btn-success">Oui, Modifier</button>
+                                                                    <button type="submit" class="btn btn-success">Oui, Valider</button>
                                                                 </div>
                                                                 
                                                             </form>

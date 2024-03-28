@@ -2,10 +2,10 @@
 @section('faq')
 
 <div class="container" style="margin: 0 auto; padding: 0 auto; width: 60rem;">
-  <h2>Comment faire ma demande d'agrément technique</h2>
+  <h2>Comment faire ma demande d'agrément technique ?</h2>
   <br><br>
 
-  <h2>Comment faire ma demande d'étude de sol et de fondation</h2>
+  <h2>Comment faire ma demande d'étude de sol et de fondation ?</h2>
   
 </div>
 

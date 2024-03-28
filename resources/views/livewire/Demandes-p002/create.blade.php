@@ -82,7 +82,7 @@
                                                      style="color: red">*</span></label>
                                              <div class="col-4">
                                                  <input id="type_Demende" type="radio" value="Nouvel demande" name="objectif_demande" checked>
-                                                 <label for="typeDemende">Nouvel demande</label>
+                                                 <label for="typeDemende">Nouvelle demande</label>
                                              </div>
                                              <div class="col-4">
                                                  <input id="type_Demende" type="radio" value="Renouvellement" name="objectif_demande">
@@ -179,18 +179,32 @@
                                              </div>
                                          </div>
                                          <div class="row">
+                                            <div class="col-6">
+                                                <label class="boite_postale fw-bold">Sexe<span style="color:red">
+                                                    *</span></label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <span>Masculin</span>
+                                                        <input type="radio" name="sexe" id="sexe" class="border-success" value="M" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <span>Féminin</span>
+                                                        <input type="radio" name="sexe" id="sexe" class="border-success" value="F" />
+                                                    </div>
+                                                </div>
+                                            </div>
                                              <div class="col-6">
                                                  <label class="fw-bold">Qualité <span
                                                          style="color: red">*</span></label>
                                                  <input type="text" name="fonction_representant" id="fonction_representant" placeholder="Qualité de la personne" class="form-control border-success" required=true />
                                              </div>
-                                             <div class="col-6">
-                                                 <label class="fw-bold">Adresse <span
-                                                         style="color: red">*</span></label>
-                                                 <input type="text" name="adresse_representant" id="adresse_representant" placeholder="Adresse" class="form-control border-success" required=true/>
-                                             </div>
                                          </div>
                                          <div class="row">
+                                            <div class="col-6">
+                                                <label class="fw-bold">Adresse <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" name="adresse_representant" id="adresse_representant" placeholder="Adresse" class="form-control border-success" required=true/>
+                                            </div>
                                              <div class="col-6">
                                                  <label class="fw-bold" for="numero_cnss_entreprise">N° employeur (CNSS)<span
                                                          style="color: red">*</span></label>

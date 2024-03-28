@@ -180,8 +180,8 @@
                     @if (Auth::user()->agent->service->libelle_court == 'DGESS' || Auth::user()->role->libelle == 'Administration')
                         <li>
                             <a href="{{ route('demandes-list', ['procedure' => 'D']) }}">
-                                <i class="bi bi-circle"></i><span>Agrément technique
-                                    pour l’exécution des études, du contrôle et des travaux routiers &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Délivrance et suspension d'agrément technique
+                                    &nbsp;<span
                                         id="prog_produit_chimique" class="badge bg-warning text-white"></span>
                                 </span>
                             </a>
@@ -191,7 +191,7 @@
                     @if (Auth::user()->agent->service->libelle_court == 'LNBTP' || Auth::user()->role->libelle == 'Administration')
                         <li>
                             <a href="{{ route('demandes-list', ['procedure' => 'D']) }}">
-                                <i class="bi bi-circle"></i><span>Demande d'Etude de sols et de fondations &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Demande d'Etude de sols et fondations &nbsp;<span
                                         id="prog_agrement_technique" class="badge bg-warning text-white">
                                     </span></span>
                             </a>
@@ -206,7 +206,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
                     href="#">
-                    <i class="bi bi-person"></i><span>Utilisateur</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-person"></i><span>Utilisateurs</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
@@ -232,7 +232,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse"
                     href="#">
-                    <i class="bi bi-gear"></i><span>Paramètre</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-gear"></i><span>Paramètres</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
@@ -242,7 +242,7 @@
                     </li>
                     <li>
                         <a href="{{ route('categorie-list') }}">
-                            <i class="bi bi-circle"></i><span>Categorie</span>
+                            <i class="bi bi-circle"></i><span>Catégorie</span>
                         </a>
                     </li>
                     <li>
@@ -258,7 +258,7 @@
                     </li>
                     <li>
                         <a href="{{ route('piecejointe-list') }}">
-                            <i class="bi bi-circle"></i><span>Pieces Jointes</span>
+                            <i class="bi bi-circle"></i><span>Pièce Jointes</span>
                         </a>
                     </li>
                     <li>

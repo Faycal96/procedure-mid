@@ -132,7 +132,7 @@
 
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $plainte->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($plainte->created_at)->format('d/m/Y') }}</td>
                                         <td>{{  $plainte->subject }}</td>
                                         <td>{{ $plainte->procedure }}</td>
                                         <td><span class="badge {{ $statutColor }} "> @if($plainte->etat == "") nouveau @else {{ $plainte->etat }} @endif</span> </td>
@@ -168,7 +168,7 @@
                                                                 </div>
 
                                                                 <div class="col-6">
-                                                                    <b>Etat actuelle de la plainte :</b>
+                                                                    <b>Etat actuel de la plainte :</b>
                                                                     <span class="text-success">{{ $plainte->etat}}</span>
                                                                 </div>
                                                             </div><br>
@@ -177,12 +177,12 @@
 
                                                             <div class="row"> 
                                                                 <div class="col-6">
-                                                                    <b>Identite du plaignant : </b>
+                                                                    <b>Identité du plaignant : </b>
                                                                     <span class="text-success"> {{ $plainte->usager->nom.' '.$plainte->usager->prenom}} </span>
                                                                 </div>
 
                                                                 <div class="col-6">
-                                                                    <b>Telephone du plaignant : </b>
+                                                                    <b>Téléphone du plaignant : </b>
                                                                     <span class="text-success">{{ $plainte->usager->telephone }}</span>
                                                                 </div>
 
@@ -192,7 +192,7 @@
                                                             <div class="row">   
                                                                 
                                                                 <div class="col-6">
-                                                                    <b>Procedure :</b>
+                                                                    <b>Procédure :</b>
                                                                     <span class="text-success">{{ $plainte->procedure}}</span>
                                                                 </div>
 
@@ -210,7 +210,7 @@
                                                                 </div>
 
                                                                 <div class="col-6">
-                                                                    <b>Derniere modification </b> <br />
+                                                                    <b>Dernière modification </b> <br />
                                                                     <span class="text-success"> {{ !empty($plainte->user)? $plainte->user->name:""  }} le {{ $plainte->updated_at }}</span>
                                                                 </div>
                                                             </div>

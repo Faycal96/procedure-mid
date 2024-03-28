@@ -83,11 +83,14 @@
                                         <th scope="col">#</th>
                                         {{-- <th scope="col">Date Demande</th> --}}
                                         <th scope="col">Demandeur</th>
+                                        <th scope="col">Sexe</th>
+                                        <th scope="col">Catégorie</th>
+                                        <th scope="col">Motif</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Paiement</th>
-                                        <th scope="col">Déposé le</th>
+                                        <th scope="col">Déposé</th>
                                         <th scope="col">Etat</th>
-                                        <th scope="col">Type Demande</th>
+                                        <th scope="col">Type demande</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -161,6 +164,18 @@
                                             @endif
 
                                         </td>
+                                        <td>{{$demande->sexe}}</td>
+                                        @if($demande->procedure->code == 'P002')
+                                        <td>{{$demande->categorie->libelle}}</td>
+                                        @else
+                                        <td></td>
+                                        @endif
+                                        @if($demande->procedure->code == 'P002')
+                                        <td>{{$demande->objectif_demande}}</td>
+                                        @else
+                                        <td></td>
+                                        @endif
+                                        
                                         <td>{{ $demande->localite->libelle }}</td>
                                         {{-- <td>{{ $demande->localite->libelle }}</td> --}}
 

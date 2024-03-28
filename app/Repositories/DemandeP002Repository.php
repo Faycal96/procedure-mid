@@ -72,7 +72,8 @@ class DemandeP002Repository extends AppRepository
             'nom_representant' =>  $data["nom_representant"], 
             'prenom_representant' =>  $data["prenom_representant"], 
             'fonction_representant' =>  $data["fonction_representant"], 
-            'adresse_representant' =>  $data["adresse_representant"], 
+            'adresse_representant' =>  $data["adresse_representant"],
+            'sexe' => $data["sexe"] 
         ]);
 
         $demandeP002Var=DemandeP002::create([
