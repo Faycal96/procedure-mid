@@ -6,7 +6,7 @@
         {{ $demand['procedure'] }}
     </div>
     <div class="card-body">
-        <p>Bonjour Mme/M. <strong> {{ $demand['name']}}</strong></p>
+        <p>Bonjour M/Mme. <strong> {{ $demand['name']}}</strong></p>
         <p class="card-text">Suite à votre demande d'étude de sol en date du {{ $demand['date'] }}, Nous vous prions de trouver ci-joint notre offre commerciale.
             Nous avons étudié votre demande avec soin et nous sommes convaincus que notre structure peut répondre à vos besoins.
             En cas d'acceptation de votre part, veuillez effectuer le paiement auprès de notre guichet.

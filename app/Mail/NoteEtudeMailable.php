@@ -30,7 +30,7 @@ class NoteEtudeMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Laboratoire National du Bâtiment et des Travaux Publics',
+            subject: "LNBTP/Demande d'étude de sols et fondations",
         );
     }
 

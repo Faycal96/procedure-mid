@@ -1,11 +1,11 @@
 @extends('backend.layout.base')
 @section('title')
     <div class="pagetitle">
-        <h1>Tableau de bord</h1>
+        <h1>Statistiques</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
-                <li class="breadcrumb-item active">Tableau de Bord</li>
+                <li class="breadcrumb-item active">Statistiques</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->

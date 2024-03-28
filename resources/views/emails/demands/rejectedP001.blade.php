@@ -3,7 +3,6 @@
 @section('content')
 <div class="card text-center">
     <div class="card-header">
-        {{ $demand['procedure'] }}
     </div>
     <div class="card-body">
         <h5 class="card-title">Monsieur/Madame,</h5>

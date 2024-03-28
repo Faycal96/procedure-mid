@@ -63,7 +63,7 @@ class ProcedureSeeder extends Seeder
 
         Procedure::create([
             "libelle_court" => "DESF",
-            "libelle_long" => "Demandes d'étude de sols et de fondations",
+            "libelle_long" => "Demande d'étude de sols et fondations",
             "description" => "Description de demande d'étude de sols et de fondation",
             "img" => "img/sol1.jpg",
             "code_color" => "#f26b56",

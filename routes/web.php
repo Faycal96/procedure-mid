@@ -75,6 +75,10 @@ Route::middleware(['mustreset'])->group(function () {
         return view('faq');
     })->name('faq');
 
+    Route::get('/guide', function () {
+        return view('guide');
+    })->name('guide');
+
     Route::get('/contact', [ContactUsFormController::class, 'createForm']);
     Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 

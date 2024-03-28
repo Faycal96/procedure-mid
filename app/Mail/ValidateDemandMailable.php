@@ -27,7 +27,7 @@ class ValidateDemandMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Direction Générale des Etudes Statistiques et Sectorielles',
+            subject: 'Délivrance et suspension de l’agrément technique',
         );
     }
 

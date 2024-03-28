@@ -167,14 +167,6 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('administration') }}">
-                    <i class="bi bi-grid"></i>
-
-                    <span>Tableau de Bord</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-
-            <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#demandes-nav" data-bs-toggle="collapse"
                     href="{{ route('demandes-list', ['procedure' => 'Toutes']) }}">
                     <i class="bi bi-menu-button-wide"></i><span>Demandes</span><i
@@ -210,126 +202,130 @@
 
             </li><!-- End Components Nav -->
 
-
             @if (Auth::user()->role->libelle == 'Administration')
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
-                        href="#">
-                        <i class="bi bi-person"></i><span>Utilisateur</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('agent-list') }}">
-                                <i class="bi bi-circle"></i><span>Agents</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('usager-list') }}">
-                                <i class="bi bi-circle"></i><span>Usagers</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('user-list') }}">
-                                <i class="bi bi-circle"></i><span>Utilisateurs</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Charts Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
+                    href="#">
+                    <i class="bi bi-person"></i><span>Utilisateur</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('agent-list') }}">
+                            <i class="bi bi-circle"></i><span>Agents</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('usager-list') }}">
+                            <i class="bi bi-circle"></i><span>Usagers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user-list') }}">
+                            <i class="bi bi-circle"></i><span>Utilisateurs</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Charts Nav -->
 
 
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse"
-                        href="#">
-                        <i class="bi bi-gear"></i><span>Paramètre</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('procedure-list') }}">
-                                <i class="bi bi-circle"></i><span>Procedures</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('categorie-list') }}">
-                                <i class="bi bi-circle"></i><span>Categorie</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href=" {{ route('structure-list') }}">
-                                <i class="bi bi-circle"></i><span>Structure</span>
-                            </a>
-                        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse"
+                    href="#">
+                    <i class="bi bi-gear"></i><span>Paramètre</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('procedure-list') }}">
+                            <i class="bi bi-circle"></i><span>Procedures</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('categorie-list') }}">
+                            <i class="bi bi-circle"></i><span>Categorie</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=" {{ route('structure-list') }}">
+                            <i class="bi bi-circle"></i><span>Structure</span>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href=" {{ route('service-list') }}">
-                                <i class="bi bi-circle"></i><span>Service</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('piecejointe-list') }}">
-                                <i class="bi bi-circle"></i><span>Pieces Jointes</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('typeUsager-list') }}">
-                                <i class="bi bi-circle"></i><span>Type Usager</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('role-list') }}">
-                                <i class="bi bi-circle"></i><span>Role</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href=" {{ route('basejuridique-list') }}">
-                                <i class="bi bi-circle"></i><span>Base Juridique</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href=" {{ route('commune-list') }}">
-                                <i class="bi bi-circle"></i><span>Commune</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('province-list') }}">
-                                <i class="bi bi-circle"></i><span>Province</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('region-list') }}">
-                                <i class="bi bi-circle"></i><span>Région</span>
-                            </a>
-                        </li>
+                    <li>
+                        <a href=" {{ route('service-list') }}">
+                            <i class="bi bi-circle"></i><span>Service</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('piecejointe-list') }}">
+                            <i class="bi bi-circle"></i><span>Pieces Jointes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('typeUsager-list') }}">
+                            <i class="bi bi-circle"></i><span>Type Usager</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('role-list') }}">
+                            <i class="bi bi-circle"></i><span>Role</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=" {{ route('basejuridique-list') }}">
+                            <i class="bi bi-circle"></i><span>Base Juridique</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=" {{ route('commune-list') }}">
+                            <i class="bi bi-circle"></i><span>Commune</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('province-list') }}">
+                            <i class="bi bi-circle"></i><span>Province</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('region-list') }}">
+                            <i class="bi bi-circle"></i><span>Région</span>
+                        </a>
+                    </li>
 
 
-                    </ul>
-                </li><!-- End Icons Nav -->
+                </ul>
+            </li><!-- End Icons Nav -->
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse"
-                        href="#">
-                        <i class="bi bi-pencil-square"></i> <span>Plaintes</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="plainte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('listePlainte', ['procedure' => 'Toutes']) }}">
-                                <i class="bi bi-circle"></i><span>Liste des plaintes</span>
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </li><!-- End Charts Nav -->
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('agrement-list') }}">
+                    <i class="bi bi-grid"></i>
 
-                <li class="nav-item">
-                    <a class="nav-link " href="{{ route('agrement-list') }}">
-                        <i class="bi bi-grid"></i>
-    
-                        <span>Arrêté portant délivrance d'agrément technique</span>
+                    <span>Arrêté portant délivrance d'agrément technique</span>
+                </a>
+            </li>
+        @endif
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse"
+                href="#">
+                <i class="bi bi-pencil-square"></i> <span>Plaintes</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="plainte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('listePlainte', ['procedure' => 'Toutes']) }}">
+                        <i class="bi bi-circle"></i><span>Liste des plaintes</span>
                     </a>
                 </li>
-            @endif
-
+                
+            </ul>
+        </li><!-- End Charts Nav -->
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('administration') }}">
+                <i class="bi bi-grid"></i>
+                <span>Statistiques</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
 
 
         </ul>
