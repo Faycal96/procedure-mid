@@ -579,18 +579,18 @@
                                     @endforeach
                                     @endif
 
-                    <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
-                    <div class="row">
-                        <div class="col">
+                        <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
+                        <div class="row">
+                            <div class="col">
 
-                            @foreach ($demande->demandePiece as $chemin)
-                            <a class=" text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>
-                                    {{ $chemin->libelle }}</b></a>
-                            <br>
-                            @endforeach
+                                @foreach ($demande->demandePiece as $chemin)
+                                <a class=" text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>
+                                        {{ $chemin->libelle }}</b></a>
+                                <br>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                     <button type="button" class="btn btn-primary">Valider</button>

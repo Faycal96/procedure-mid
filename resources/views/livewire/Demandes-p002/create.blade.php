@@ -855,29 +855,6 @@ function controlDate() {
         $('input[name=recapMateriel]').val(materiel);
         $('input[name=recapPersonnel]').val(personnel);
 
-
-        /* var inputId = '#libelle_document_CV\\[\\]';
-        var libelleCv = $(inputId).val(); */
-        //alert(libelleCv);
-        /* $('input[name=recapLibelleCv[]]').val(libelleCv);
-        $('input[name=recapdocCv[]]').val(listeCv);
-
-        var file = $('#fichier_document_CV\\[\\]')[0].files[0].name; */
-        /* for (var i = 0; i < files.length; i++) {
-            alert((files[i].name);)
-            console.log("Nom du fichier:", files[i].name);
-        } */
-        
-
-        /* $("#recap_cv").append([
-             '<tr class="">',
-             '<td class="rs">' +
-             '<input type="text" name="recapLibelleCv[]" id="recapLibelleCv[]" class="form-control border-success" />' +
-             '</td>',
-             '<td class="rs"><input type="file" id="recapdocCv[]" class="border-success form-control required name="recapdocCv[]"> </td>',
-             '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowCV(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
-             '</tr>',
-         ].join()); */
         })   
     });
 
@@ -1098,40 +1075,11 @@ return;
          ].join());
      }
 
-
-
-  
-    
-
-
-    
-
-
      function addCollapseAccordion() {
-
-       
-   
-     
      test = document.getElementById("next_domaine")
-     
-  
-     
-          
-     
          dateDebut = document.getElementById('date_debut').value
          dateFin = document.getElementById('date_fin').value
       //   compareDates(dateDebut, dateFin)
-         
-     
-     
-   
-   
-   
-
-
-
-
-        
         nbrItem = document.getElementById("nbrItem");
         nbrItemValue = nbrItem.value;
         nbrItemValue = parseInt(nbrItemValue) + 1;

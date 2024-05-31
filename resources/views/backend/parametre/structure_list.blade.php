@@ -108,13 +108,8 @@
 
                                                                 </div>
                                                                 <!-- End Quill Editor Full -->
-
-
-
                                                 </div>
                                             </div>
-
-
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger"

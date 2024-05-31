@@ -102,8 +102,8 @@ class DemandeP002Controller extends Controller
            $pay->mode_paiement_id =  $idPay->uuid;
            $pay->save();
            $demande->paiement = 1;
-            $demande->save();
-            return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+           $demande->save();
+           return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
          //} else {
         //}
     }
