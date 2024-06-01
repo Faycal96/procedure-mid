@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             CategorieDemandeSeeder::class,
             PieceJointeSeeder::class,
             ProcedurePieceJointeSeeder::class,
-            MotifSeeder::class
+            MotifSeeder::class,
+            ModePaiementSeeder::class
         ]);
     }
 }
