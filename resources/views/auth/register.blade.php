@@ -91,13 +91,86 @@
       <!-- ======= Portfolio Section ======= -->
       <section id="portfolio" class="portfolio">
         <div class="container">
-            <div class="col-lg-12 d-flex justify-content-center">
+
+            <x-guest-layout>
+                <div   id="physique" style="display:block" class="col-lg-6 offset-lg-3">
+                    <i style="color: red;">Veuillez remplir bien les champs</i>
+                    <form method="POST" action="{{ route('register') }}" style="border: 1px solid #1A33FF;
+                        background: #ecf5fc; padding: 40px 50px 45px; width: 600px" >
+                        @csrf
+                            <div class="form-group mt-3">
+                                <label for="nip"> NIP / Passport</label>
+                                <input class="form-control" id="nip" type="text" name="nip"
+                                    :value="old('nip')" required autofocus autocomplete="nip" />
+                                <input-error :messages="$errors->get('nip')" class="mt-2" />
+                           </div>
+                            <div class="form-group mt-3">
+                                <label for="name">Nom</label>
+                                <input id="name" class="form-control" type="text" name="name"
+                                    :value="old('name')" required autofocus autocomplete="name" />
+                                <input-error :messages="$errors->get('name')" class="mt-2" />
+                            </div>
+    
+                            <div class="form-group mt-3">
+                                <!-- Name -->
+                                    <label for="prenom" >Prénom</label>
+                                    <input class="form-control" id="lastname" type="text" name="prenom"
+                                        :value="old('prenom')" required autofocus autocomplete="prenom" />
+                                    <input-error :messages="$errors->get('prenom')" class="mt-2" />
+                            </div>
+                            <div class="form-group mt-3">
+                                <!-- Email Address -->
+                                
+                                    <label for="email" >Email</label>
+                                    <input class="form-control" id="email" type="email" name="email"
+                                        :value="old('email')" required autocomplete="username" />
+                                    <input-error :messages="$errors->get('email')" class="mt-2" />
+                         
+                            </div>
+                            <div class="form-group mt-3">
+                                <!-- Telephone number -->
+                                    <label for="telephone" >Téléphone</label>
+                                    <input class="form-control" id="telephone" type="number"
+                                    :value="old('telephone')" name="telephone" required autocomplete="telephone" />
+                                    <input-error :messages="$errors->get('telephone')" class="mt-2" />
+                             
+                            </div>
+                            <div class="form-group mt-3">
+                                <!-- Password -->
+                                    <label for="password" >Mot de passe</label>
+                                    <input class="form-control" id="password" type="password"
+                                        name="password" required autocomplete="new-password" />
+                                    <input-error :messages="$errors->get('password')" class="mt-2" />
+                            </div>
+                            <div class="form-group mt-3">
+                                <!-- Confirm Password -->
+                                    <label for="password_confirmation" >Confirmer mot de passe</label>
+    
+                                    <input class="form-control" id="password_confirmation" type="password"
+                                        name="password_confirmation" required autocomplete="new-password" />
+                                    <input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+    
+                            </div>
+    
+                        <div class="flex items-center justify-end mt-2">
+                            <a class="underline text-sm col  text-black"
+                                href="{{ route('login') }}" style="color: black">
+                                {{ __('Déjà inscrit?') }}
+                            </a>
+                            <x-primary-button class="col">
+                                {{ __('Valider') }}
+                            </x-primary-button>
+                        </div>
+                    </form>
+                </div>
+                </x-guest-layout>
+            {{-- <div class="col-lg-12 d-flex justify-content-center">
               <ul id="portfolio-flters">
                 <li id="physiq" class="filter-active">Personne Physique</li>
                 <li id="moral" >Personne Morale</li>
               </ul>
-            </div>
-          <div class="row portfolio-container">
+            </div> --}}
+          {{-- <div class="row portfolio-container">
             <x-guest-layout>
             <div   id="physique" style="display:block" class="col-lg-6 offset-lg-3">
                 <i style="color: red;">Veuillez remplir bien les champs</i>
@@ -268,7 +341,7 @@
                 </form>
             </div>
             </x-guest-layout>
-          </div>
+          </div> --}}
         <div >
       </section><!-- End Portfolio Section -->
   
