@@ -20,17 +20,21 @@ use App\Models\CategorieDemande;
 use App\Models\ModePaiement;
 use App\Models\Paiement;
 use App\Repositories\OMRepository;
+use Illuminate\Support\Str;
+use App\Services\LigdicashService;
 
 class DemandeP002Controller extends Controller
 {
     public $repository;
     public $demandeRepositoryP002;
     public $paiementRepository;
-    public function __construct(DemandeRepository $repository, DemandeP002Repository $demandeRepositoryP002, OMRepository $paiementRepository)
+    public $ligdicashService;
+    public function __construct(DemandeRepository $repository, DemandeP002Repository $demandeRepositoryP002, OMRepository $paiementRepository, LigdicashService $ligdicashService)
     {
         $this->repository = $repository;
         $this->demandeRepositoryP002 = $demandeRepositoryP002;
         $this->paiementRepository = $paiementRepository;
+        $this->ligdicashService = $ligdicashService;
         
     }
 
@@ -53,6 +57,42 @@ class DemandeP002Controller extends Controller
             return false;
         }
         //return view('livewire.Demandesp0022.create');
+    }
+
+    public function rePaiement($uuid,$moyen){
+        $demande =  $this->repository->getById($uuid);
+        if ($demande) {
+             $pay = new Paiement();
+           $pay->demande_id = $demande->uuid;
+           $pay->code_procedure = $demande->procedure->code;
+           $idPay = ModePaiement::where("ordre","=",$moyen)->first();
+           $pay->mode_paiement_id =  $idPay->uuid;
+           $transaction_id = (string) Str::uuid();
+           $pay->ref_paiement =  $transaction_id;
+
+           $invoce = [];
+           $invoce['description'] = $demande->code;
+           $invoce['name'] = $demande->uuid;
+           $invoce['quantity'] = 1;
+           //TODO A decommenter apres test
+           //$invoce['unit_price'] = $demande->montant;
+           $invoce['unit_price'] = 10;
+           $invoce['transaction_id'] = $transaction_id;
+
+           $reponse = $this->ligdicashService->initiatePayment($invoce);
+           if($reponse->response_code == '00'){
+                $pay->token = $reponse->token;
+                $pay->status = 'pending';
+                $pay->save();
+
+                return redirect($reponse->response_text);
+           }else{
+                return redirect('/demandes-lists')->with('error', 'Le processus paiement a echoué !!');
+           }
+        }else{
+            return redirect('/demandes-lists')->with('error', 'Le processus paiement a echoué !!');
+        }
+           
     }
 
     public function store(Request $request, UserRepository $userRepository, DemandePieceRepository $demandePieceRepository, DemandeP002 $demande, OMRepository  $paiementRepository)
@@ -100,10 +140,37 @@ class DemandeP002Controller extends Controller
 
            $idPay = ModePaiement::where("ordre","=",$data["moyen"] )->first();
            $pay->mode_paiement_id =  $idPay->uuid;
-           $pay->save();
-           $demande->paiement = 1;
-           $demande->save();
-           return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+           $transaction_id = (string) Str::uuid();
+           $pay->ref_paiement =  $transaction_id;
+
+           
+
+           /* TODO appeler le service ligdicash pour recuperrer l'url de paiement*/
+
+           $invoce = [];
+           $invoce['description'] = $demande->code;
+           $invoce['name'] = $demande->uuid;
+           $invoce['quantity'] = 1;
+           //TODO A changer apres test
+           //$invoce['unit_price'] = $demande->montant;
+           $invoce['unit_price'] = 10;
+           $invoce['transaction_id'] = $transaction_id;
+
+           $reponse = $this->ligdicashService->initiatePayment($invoce);
+           //dd($reponse);
+           if($reponse->response_code == '00'){
+                $pay->token = $reponse->token;
+                $pay->status = 'pending';
+                $pay->save();
+                //$demande->paiement = 1;
+                $demande->save();
+
+                return redirect($reponse->response_text);
+           }else{
+                return $this->sendResponse();
+           }
+
+           ////return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
          //} else {
         //}
     }

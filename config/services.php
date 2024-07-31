@@ -31,4 +31,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ligdicash' => [
+        //'merchant_id' => env('LIGDICASH_MERCHANT_ID'),
+        'api_key' => env('LIGDICASH_API_KEY'),
+        'api_token' => env('LIGDICASH_API_TOKEN'),
+        'api_url' => env('LIGDICASH_API_URL'),
+        "return_url" => env('LIGDICASH_RETURN_URL'),
+        "cancel_url" =>  env('LIGDICASH_CANCEL_URL'),
+        "callback_url" => env('LIGDICASH_CALLBACK_URL'),
+
+    ],
+
 ];

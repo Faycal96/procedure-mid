@@ -22,7 +22,7 @@ class ModePaiementSeeder extends Seeder
         ]);
         ModePaiement::create([
          
-            "libelle" => "Orange",
+            "libelle" => "Ligdicash",
            
             "ordre" => 1
         ]);

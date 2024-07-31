@@ -52,7 +52,7 @@
                                      <li class="active" id="personal"><strong>Renseignement administratif</strong></li>
                                      <li id="folder"><strong>Representant</strong>
                                      </li>
-                                     <li id="folder"><strong>Pièces jointes</strong></li>
+                                     <li id="folder"><strong>Pièces jointes au format PDF</strong></li>
                                      <li id="personal"><strong>Participation effective du candidat à l'agrément</strong></li>
                                      <li id="engagement"><strong>Engagement </strong></li>
                                      <li id="engagement"><strong>Récapitulatif </strong></li>
@@ -221,7 +221,7 @@
 
                                  <fieldset>
                                      <div class="form-card">
-                                         <h2 class="fs-title">Pièces jointes</h2>
+                                         <h2 class="fs-title">Pièces jointes scannés au format PDF</h2>
 
                                          <div class="row">
                                              <div class="col-6 form-group">
@@ -245,7 +245,7 @@
                                              </div>
 
                                              <div class="col-6 form-group">
-                                                 <label class="col-form-label fw-bold">Document chiffre d'affaire<span
+                                                 <label class="col-form-label fw-bold">Document chiffre d'affaire au format PDF<span
                                                          style="color: red">*</span></label>
                                                  <input type="file" name="chiffreAffaire" id="chiffreAffaire" placeholder="Document chiffre d'affaire" class="form-control border-success" required=true/>
                                              </div>
@@ -563,7 +563,7 @@
                                         </div>
     
                                         <hr>
-                                        <h2 class="fs-title">Pieces Jointes</h2>
+                                        <h2 class="fs-title">Pieces Jointes au format PDF</h2>
                                         <div class="row">
                                             <div class="col-12">
                                                 <table
@@ -668,7 +668,7 @@
                                                      *</span></label>
                                              <div class="row">
                                                  <div class="col-3">
-                                                     <label class="fw-bold">ORANGE</label>
+                                                     <label class="fw-bold">Ligdicash</label>
                                                      <input id="radio1" type="radio" value="1"
                                                          class="checkbox" name="moyen" />
                                                  </div>
@@ -681,18 +681,19 @@
                                              </div>
                                              <br>
                                              <div class="row">
-                                                 <div id="moyenP1">
+                                                <div id="moyenP1">
                                                     <label> La somme à payer est de </label>
                                                     <strong><input for="montantTotal" name="montantTotal" disabled readonly class="form-control border-success"></input></strong><br> 
-                                                    <label>Taper *144*4*6*montant# pour obtenir le code OTP</label>
+                                                    <!-- <label>Taper *144*4*6*montant# pour obtenir le code OTP</label> -->
+                                                    <label>En cliquant sur le bouton "<b>Valider</b>" vous serez redirigé vers le site de Ligdicash afin de procéder au paiement</label>
                                                     
-                                                 </div>
-                                                 <div id="moyenP2">
+                                                </div>
+                                                <div id="moyenP2">
                                                      <label> La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour
                                                          obtenir le OTP </label>
 
-                                                 </div>
-                                                 <div class="col-6">
+                                                </div>
+                                                 <!-- <div class="col-6">
                                                      <label class="boite_postale fw-bold">Téléphone<span
                                                              style="color:red">
                                                              *</span></label>
@@ -706,12 +707,12 @@
                                                      <input type="number" name="otp" style="width: 50%;"
                                                          class="form-control border-success" placeholder="otp"
                                                          required />
-                                                 </div>
-                                             </div>
-                                         </div>
+                                                 </div> -->
+                                            </div>
+                                        </div>
                                          
 
-                                         <input type="button" name="previous"
+                                        <input type="button" name="previous"
                                              class="previous action-button-previous" value="Retour" />
                                          <input type="submit" class="next action-button" value="Valider" />
 
@@ -1279,7 +1280,7 @@ return;
          var myform = $("#msform");
 
          // window.location=url;
-         var id = $('#id').val() * 1;
+         /*var id = $('#id').val() * 1;
          if (id > 0) {
              $.ajax({
                  url: '/demandesp002-storen/' + id,
@@ -1302,7 +1303,7 @@ return;
                  },
                  error: function(data) {}
              });
-         } else {
+         } else {*/
              // let url='/demandes-lists?procedure='+$('#procedure').val();
              $.ajax({
                  url: '/demandesp002-store',
@@ -1314,15 +1315,15 @@ return;
                  dataType: "json",
                  success: function(data) {
                      if (data.status == 'success') {
-                         alert("cest ok")
-                         console.log(data.status);
+                         //alert("cest ok")
+                         //console.log(data.status);
                          (async () => {
                              await toast(
-                                 "Votre Demande à bien été Soumise et en cours de traitement !",
+                                 "Vous allez etre redirigé",
                                  'success');
                              await sleep(1000);
                              //  window.location.replace("/demandes-lists");
-                             fetch(window.location = '/demandes-lists');
+                             //fetch(window.location = '/demandes-lists');
                          })();
                          // window.location = '/demandes-lists';
                      } else {
@@ -1335,7 +1336,7 @@ return;
 
              });
          }
-     }
+     /*}*/
 
      function showErrors(data) {
          if (data && data.responseJSON && data.responseJSON.errors) {

@@ -16,6 +16,7 @@ use App\Models\Procedure;
 use App\Models\StatutDemande;
 use App\Models\Usager;
 use App\Models\User;
+use App\Models\Paiement;
 use App\Repositories\BackendRepository;
 use App\Repositories\DemandeRepository;
 use Carbon\Carbon;
@@ -27,15 +28,18 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Services\LigdicashService;
 
 class BackendController extends Controller
 {
     public $repository;
+    public $ligdicashService;
 
-    public function __construct(BackendRepository $repository)
+    public function __construct(BackendRepository $repository, LigdicashService $ligdicashService)
     {
         Carbon::setLocale('fr');
         $this->repository = $repository;
+        $this->ligdicashService = $ligdicashService;
     }
 
     public function index(BackendRepository $backendRepository)
@@ -91,8 +95,9 @@ class BackendController extends Controller
     public function listDemande(DemandeRepository $demandeRepository, Demande $demandeTest)
     {
         //dd(DB::table('demande_P001_s')->join('demandes', 'demande_P001_s.demande_id', '=', 'demandes.uuid')->orderBy('demande_P001_s.created_at')->get());
+
         $data = [
-            'demandes' => $demandeRepository->all()->sortByDesc('created_at'),
+            'demandes' =>$demandeRepository->all()->sortByDesc('created_at'),
             'statutDepose' => StatutDemande::where('etat', '=', 'D')->first()->statut,
             'statutArchive' => StatutDemande::where('etat', '=', 'A')->first()->statut,
             'statutRejete' => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -107,6 +112,8 @@ class BackendController extends Controller
             'motifsP001' => Motif::where("code", "=", "P001")->sortByAsc('ordre'),
             'motifsP002' => Motif::where("code", "=", "P002"),
             'motifs' => Motif::all(),
+
+
         ];
 
         //  dd($data['demandes'][0]->demandePiece);
@@ -290,6 +297,30 @@ class BackendController extends Controller
         $demandes = null;
         $data = [];
         $demandes = Demande::where(['usager_id' => Auth::user()->usager->uuid])->get();
+        // recuperer la liste des demandes de l'utilisateurs
+        // Verifier le statut de la demande si 0, verifier le statut de la transaction avec ligdicash
+        foreach ($demandes as $demande) {
+            if ($demande->paiement != 1) {
+                $pay = $demande->paiements()->where('status', 'completed')->count();
+                if (0 == $pay) {
+                    foreach ($demande->paiements as $paiement) {
+                        if($paiement->token != null){
+                            $transaction = $this->ligdicashService->verifyPayment($paiement->token);
+                            if ($transaction->response_code === '00' && $transaction->status === "completed") {
+                                $paiement->status = 'completed';
+                                $paiement->save();
+                                $demande->paiement = 1;
+                                $demande->save();
+                                break;
+                            }
+                        }
+                    }
+                }else{
+                    $demande->paiement = 1;
+                    $demande->save();
+                }
+            }
+        }
         //dd($demandes);
         $data = [
             'demandes' => $demandes,

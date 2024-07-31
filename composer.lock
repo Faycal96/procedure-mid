@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c62e013200853503afdba8cdd0ce483",
+    "content-hash": "1a89d0e9ef51f8b0ed727d82ad596e70",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2408,6 +2408,58 @@
                 }
             ],
             "time": "2023-10-17T14:13:20+00:00"
+        },
+        {
+            "name": "ligdicash/ligdicash",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ligdicash/ligdicash-php.git",
+                "reference": "2262b004f058365cec68efb6cab3272f2e31440c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ligdicash/ligdicash-php/zipball/2262b004f058365cec68efb6cab3272f2e31440c",
+                "reference": "2262b004f058365cec68efb6cab3272f2e31440c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.8"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Core/Defaults.php",
+                    "src/Core/Wiki.php",
+                    "src/Core/Transaction.php"
+                ],
+                "psr-4": {
+                    "Ligdicash\\": "src/"
+                },
+                "classmap": [
+                    "src/Core/Providers.php",
+                    "src/Core/Errors.php",
+                    "src/Core/Payin.php",
+                    "src/Core/Payout.php",
+                    "src/Core/Responses.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "LigdiCash",
+                    "email": "info@ligdicash.com"
+                }
+            ],
+            "description": "Librairie PHP pour manipuler l'API de paiement de LigdiCash",
+            "support": {
+                "issues": "https://github.com/Ligdicash/ligdicash-php/issues",
+                "source": "https://github.com/Ligdicash/ligdicash-php/tree/v1.0.1"
+            },
+            "time": "2024-05-29T13:51:37+00:00"
         },
         {
             "name": "livewire/livewire",
@@ -10100,5 +10152,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.6.0"
 }
