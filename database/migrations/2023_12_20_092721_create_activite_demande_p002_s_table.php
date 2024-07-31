@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("maitre_ouvrage")->nullable();
             $table->date("date_debut")->nullable();
             $table->date("date_fin")->nullable();
-            $table->unsignedBigInteger("montany_travaux")->default(0);
+            $table->unsignedBigInteger("montany_travaux")->nullable();
             $table->string("nature")->nullable();
             $table->string("condition")->nullable();
             $table->decimal("pourcentage_montant_total")->nullable();

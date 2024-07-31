@@ -105,6 +105,10 @@ class Demande extends Model
         return $this->belongsToMany(Motif::class,  'motif_demandes','demande_id','motif_id', )->withPivot("commentaire");
     }
 
+    public function paiements(){
+        return $this->hasMany(Paiement::class, 'demande_id','uuid');
+    }
+
     // public function scopeDemande($query)
     // {
     //     $procedure = Procedure::find($this->procedure_id);

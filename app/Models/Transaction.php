@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Paiement extends Model
+class Transaction extends Model
 {
     use HasFactory;
     use \Illuminate\Database\Eloquent\Concerns\HasUlids;
     use \Wildside\Userstamps\Userstamps;
     protected $primaryKey = 'uuid';
     protected $guarded = [];
-
-
-    public function demande()
-    {
-        return $this->belongsTo(Demande::class, 'demande_id', 'uuid');
-    }
+    
 }
+
+

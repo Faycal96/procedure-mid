@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+/*Route::post('/ligdicash/initiate', [PaymentController::class, 'initiatePayment']);
+Route::post('/ligdicash/callback', [PaymentController::class, 'handleCallback'])->name('ligdicash.callback');*/

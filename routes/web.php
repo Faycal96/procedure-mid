@@ -32,6 +32,10 @@ use App\Models\UploadAgrement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LigdicashController;
+use App\Http\Controllers\CallbackController;
+use App\Http\Controllers\PaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -101,6 +105,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/P002', DemandeCompP002::class)->name('demandes-p002');
     Route::post('/demandesp002-store', [DemandeP002Controller::class, 'store'])->name('demandesp002-store');
     Route::post('/demandesp002-update', [DemandeP002Controller::class, 'update'])->name('demandesp002-update');
+    Route::get('/paiement/{uuid}/{moyen}', [DemandeP002Controller::class, 'rePaiement'])->name('rePaiement');
 
     // Certificat d'exemption des emballages et sachets plastiques non biodégradables
     //administration
@@ -206,6 +211,11 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/quittance/{uuid}', [QuittanceController::class, 'index'])->name('quittance');
 
 });
+/*Route::get('/pay', [LigdicashController::class, 'initiatePayment'])->name('pay');
+Route::get('/pay/success', [CallbackController::class, 'paymentSuccess'])->name('pay.success');
+Route::get('/pay/cancel', [CallbackController::class, 'paymentCancel'])->name('pay.cancel');
+Route::post('/pay/callback', [CallbackController::class, 'paymentCallback'])->name('pay.callback');
+*/
 
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
@@ -213,4 +223,7 @@ Route::get('/procedure/modification/{id}/{procedure}', DemandeFontController::cl
 Route::get('/get-sous-domaine-by-categorie', [DemandeP002Controller::class, 'getSousDomaineByCategorie'])->name('get-sous-domaine-by-categorie');
 Route::get('/get-delete-autre-document', [DemandeP002Controller::class, 'deleteAutreDocument'])->name('get-delete-autre-document');
 
+
+
+Route::post('ligdicash-callback-mid', [PaymentController::class, 'handleCallback'])->name('ligdicash.callback');
 require __DIR__.'/auth.php';

@@ -53,11 +53,6 @@
                                 </div>
                             </div><br>
 
-
-                            
-
-                            
-
                             <div class="row">
                                 <div class="col-md-4">
                                     <label>Filtrer les demandes par état</label>
@@ -88,11 +83,14 @@
                                         <th scope="col">#</th>
                                         {{-- <th scope="col">Date Demande</th> --}}
                                         <th scope="col">Demandeur</th>
+                                        <th scope="col">Sexe</th>
+                                        <th scope="col">Catégorie</th>
+                                        <th scope="col">Motif</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Paiement</th>
-                                        <th scope="col">Déposé le</th>
+                                        <th scope="col">Déposé</th>
                                         <th scope="col">Etat</th>
-                                        <th scope="col">Type Demande</th>
+                                        <th scope="col">Type demande</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -166,6 +164,18 @@
                                             @endif
 
                                         </td>
+                                        <td>{{$demande->sexe}}</td>
+                                        @if($demande->procedure->code == 'P002')
+                                        <td>{{$demande->categorie->libelle}}</td>
+                                        @else
+                                        <td></td>
+                                        @endif
+                                        @if($demande->procedure->code == 'P002')
+                                        <td>{{$demande->objectif_demande}}</td>
+                                        @else
+                                        <td></td>
+                                        @endif
+                                        
                                         <td>{{ $demande->localite->libelle }}</td>
                                         {{-- <td>{{ $demande->localite->libelle }}</td> --}}
 
@@ -569,18 +579,18 @@
                                     @endforeach
                                     @endif
 
-                    <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
-                    <div class="row">
-                        <div class="col">
+                        <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
+                        <div class="row">
+                            <div class="col">
 
-                            @foreach ($demande->demandePiece as $chemin)
-                            <a class=" text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>
-                                    {{ $chemin->libelle }}</b></a>
-                            <br>
-                            @endforeach
+                                @foreach ($demande->demandePiece as $chemin)
+                                <a class=" text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>
+                                        {{ $chemin->libelle }}</b></a>
+                                <br>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                     <button type="button" class="btn btn-primary">Valider</button>
@@ -810,11 +820,6 @@
 
             }
            
-
-
-
-
-
             $("#min").change(function(){
                 filtre2Date(); // appel de la fonction de filtrage
                  // DataTables initialisation
@@ -829,8 +834,6 @@
                  let table = new DataTable('#example1');
                  table.draw();
             });
-
-
 
         });
 
